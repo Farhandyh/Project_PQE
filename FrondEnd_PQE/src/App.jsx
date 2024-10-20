@@ -1,19 +1,22 @@
-import { Routes } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
-import BackgroundImage from "./components/login/BackgroundImage";
+import Layout from "./components/dashboard/Layout";
+import Dashboard from "./pages/Dashboard";
+import Battery from "./pages/Battery";
 
 function App() {
   return (
     <>
-      <BackgroundImage height="100vh" width="100%">
-        {/* // flex justify-center items-center h-full digunakan untuk memusatkan <Login />secara horizontal dan vertikal. 
+      {/* // flex justify-center items-center h-full digunakan untuk memusatkan <Login />secara horizontal dan vertikal. 
             // h-full memastikan bahwa elemen div ini memenuhi tinggi layar sehingga posisi login tetap di tengah.*/}
-        <div className="flex justify-center items-center h-full ml-[47vw]">
-          {" "}
-          <Login />
-          <Routes path="login" element={<Login />}></Routes>
-        </div>
-      </BackgroundImage>
+      <Routes>
+        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/dashboard" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="battery" element={<Battery />} />
+        </Route>
+        <Route path="/" element={<Navigate to="/dashboard" />} />
+      </Routes>
     </>
   );
 }
