@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 //ICONS //
 import { LuBox, LuUser, LuMessageSquare, LuCalendar } from "react-icons/lu";
 import { FaSuitcase } from "react-icons/fa";
