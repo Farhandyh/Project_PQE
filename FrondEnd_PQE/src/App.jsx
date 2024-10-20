@@ -10,12 +10,12 @@ function App() {
       {/* // flex justify-center items-center h-full digunakan untuk memusatkan <Login />secara horizontal dan vertikal. 
             // h-full memastikan bahwa elemen div ini memenuhi tinggi layar sehingga posisi login tetap di tengah.*/}
       <Routes>
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="battery" element={<Battery />} />
         </Route>
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </>
   );
