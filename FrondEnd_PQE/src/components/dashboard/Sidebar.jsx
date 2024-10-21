@@ -12,7 +12,7 @@ const Sidebar = () => {
     setActiveLink(index);
   };
   const SIDEBAR_LINKS = [
-    { id: 1, path: "/", name: "Dashboard", icon: LuBox },
+    { id: 1, path: "/dashboard/home", name: "Dashboard", icon: LuBox },
     { id: 2, path: "/dashboard/battery", name: "Battery", icon: TbUsers },
     { id: 3, path: "/messages", name: "Messages", icon: LuMessageSquare },
     { id: 4, path: "/projects", name: "Projects", icon: FaSuitcase },
