@@ -39,7 +39,7 @@ const Sidebar = () => {
           >
             <Link
               to={link.path}
-              className="flex justify-center md:justify-start items-center md:space-x-5"
+              className="flex justify-center md:justify-start items-center md:space-x-6"
               onClick={() => handleLinkClick(index)}
             >
               <span>{link.icon()}</span>
