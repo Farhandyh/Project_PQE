@@ -7,7 +7,7 @@ const ProjetStatic = () => {
     series: [
       {
         name: "kWh Battery",
-        data: [2500, 2418, 2456, 2526, 2356, 2256],
+        data: [2500, 2418, 2456, 2526, 2356, 3500],
         color: "#1A56DB",
       },
       {
@@ -106,7 +106,7 @@ const ProjetStatic = () => {
 
   return (
     <>
-      <div className="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+      <div className="w-full bg-white rounded-xl p-4 md:p-6">
         <div className="flex justify-between">
           <div>
             <h5 className="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">
