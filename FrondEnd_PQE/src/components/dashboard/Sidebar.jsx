@@ -1,7 +1,6 @@
 //ICONS //
-import { LuBox, LuUser, LuMessageSquare, LuCalendar, LuBattery, LuLayoutDashboard, LuBatteryFull, LuHome } from "react-icons/lu";
-import { FaBatteryFull, FaCarBattery, FaChargingStation, FaSuitcase } from "react-icons/fa";
-import { TbUsers } from "react-icons/tb";
+import { LuUser, LuLayoutDashboard} from "react-icons/lu";
+import { FaBatteryFull, FaCarBattery, FaChargingStation} from "react-icons/fa";
 import { GrStorage } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -19,7 +18,7 @@ const Sidebar = () => {
     { id: 3, path: "/dashboard/battery", name: "Battery", icon: FaBatteryFull },
     { id: 4, path: "/dashboard/storage", name: "Storage", icon: GrStorage },
     { id: 5, path: "/dashboard/chargingunit", name: "Charging Unit", icon: FaChargingStation  },
-    { id: 6, path: "/testingmachine", name: "Testing Machine", icon:  FaCarBattery},
+    { id: 6, path: "/dashboard/testingmachine", name: "Testing Machine", icon:  FaCarBattery},
   ];
   return (
     <div className="w-16 md:w-56 fixed left-0 top-0 z-10 h-screen bg-red-E01414 rounded-r-3xl" style={{filter:'drop-shadow(2px , 1px, 1px, red)'}}>

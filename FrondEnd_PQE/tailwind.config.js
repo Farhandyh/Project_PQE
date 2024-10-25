@@ -9,6 +9,9 @@ export default {
           CF0920: "#CF0920",
         },
       },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'], // Menambahkan font Poppins
+      },
     },
   },
   plugins: [],
