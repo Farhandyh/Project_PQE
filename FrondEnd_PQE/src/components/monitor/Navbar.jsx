@@ -17,9 +17,9 @@ const Navbar = () => {
 
   const NAVBAR_LINKS = [
     { name: "All", icon: LuLayoutDashboard, path: "/Monitor" }, // Tambahkan path
-    { name: "Battery", icon: FaBatteryFull, path: "/MonitorBattery" }, // Tambahkan path
-    { name: "Charging", icon: FaChargingStation, path: "/charging" }, // Tambahkan path
-    { name: "Storage", icon: GrStorage, path: "/storage" }, // Tambahkan path
+    { name: "Charging", icon: FaBatteryFull, path: "/MonitorCharging" }, // Tambahkan path
+    { name: "Testing", icon: FaChargingStation, path: "/MonitorTesting" }, // Tambahkan path
+    { name: "Storage", icon: GrStorage, path: "/MonitorStorage" }, // Tambahkan path
   ];
 
   return (

@@ -1,10 +1,11 @@
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import Navbar from '../../components/monitor/Navbar';
 
 // Register the required Chart.js components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend);
 
-const MonitorBattery = () => {
+const MonitorCharging = () => {
     const lineData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [
@@ -81,6 +82,7 @@ const MonitorBattery = () => {
 
     return (
         <>
+            <Navbar/>
             <div className="flex">
                 <div className="bg-red-E01414 w-full h-72 mt-24 ml-7  rounded-2xl">
                     <h1 className="text-center mt-4 font-mono text-white text-xl font-bold flex-none">Battery Storage Monitoring</h1>
@@ -121,7 +123,7 @@ const MonitorBattery = () => {
                         <Bar data={barData} options={barOptions} />
                     </div>
                 </div>
-                <div className="bg-red-E01414 w-2/6 h-96 mt-1 mr-7 ml-3 rounded-2xl">
+                <div className="bg-red-E01414 w-2/6 h-96 mt-2 mr-7 ml-3 rounded-2xl">
                     <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">Battery Storage Monitoring</h1>
                     <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl">
                     <table className="min-w-full bg-white border border-gray-200 h-4">
@@ -147,10 +149,10 @@ const MonitorBattery = () => {
                                         1
                                     </td>
                                     <td className="px-6 text-sm font-medium text-white">
-                                        10:00 AM
+                                        10:00
                                     </td>
                                     <td className="px-6 text-sm font-medium text-white">
-                                        6:00 PM
+                                        6:00
                                     </td>
                                     <td className="px-6 text-sm font-medium text-white">
                                         Present
@@ -161,10 +163,10 @@ const MonitorBattery = () => {
                                         2
                                     </td>
                                     <td className="px-6 text-sm font-medium text-white">
-                                        11:00 AM
+                                        11:00
                                     </td>
                                     <td className="px-6 text-sm font-medium text-white">
-                                        7:00 PM
+                                        7:00
                                     </td>
                                     <td className="px-6 text-sm font-medium text-white">
                                         Late
@@ -179,4 +181,4 @@ const MonitorBattery = () => {
     );
 };
 
-export default MonitorBattery;
+export default MonitorCharging;

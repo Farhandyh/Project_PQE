@@ -1,34 +1,30 @@
-import { GoBell } from "react-icons/go";
+import { useState } from "react";
 
 const Header = () => {
+
   return (
-    <div className="flex justify-between items-center p-4 ">
+    <div className="flex justify-between items-center p-3 rounded-t-2xl bg-white">
       <div>
-        <h1 className="text-xs ">Wellcome Back!</h1>
-        <p className="text-xl font-semibold">Naufal Nazheef</p>
+        <h1 className="text-4xl ml-5 font-bold text-red-E01414">Data Battery</h1>
       </div>
-      <div className="flex items-center space-x-5">
+      <div className="flex items-center space-x-2 mr-3">
         <div className="hidden md:flex">
           <input
             type="text"
-            placeholder="Search..."
-            className="bg-indigo-100 px-4 py-2 rounded-lg focus:outline-0 focus:ring-2 focus:ring-indigo-600"
+            placeholder="Cari"
+            className="bg-gray-200 text-center w-9 h-9 rounded-full focus:w-56 focus:outline-0 focus:ring-1 focus:ring-indigo-600"
           />
         </div>
-        <div className="flex items-center space-x-5">
-          <button className="relative text-2xl text-gray-600">
-            <GoBell size={28} />
-            <span className="absolute top-0 right-0 -mt-1 flex justify-center items-center bg-indigo-600 text-white font-semibold text-[10px] w-5 h-4 rounded-full border-2 border-white">
-              9
-            </span>
+        <div className="flex items-center w-20 h-9 bg-blue-500 justify-center rounded-xl">
+          <button className="relative text-xl text-white font-semibold">
+            Cari
           </button>
-          {/* <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="" /> */}
-          <img
-            className="w-8 h-8 rounded-full border-2"
+        </div>
+        <img
+            className="w-9 h-9 rounded-full border-2"
             src="/Honda_Logo.png"
             alt=""
           />
-        </div>
       </div>
     </div>
   );

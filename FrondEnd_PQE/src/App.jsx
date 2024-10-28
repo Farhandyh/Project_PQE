@@ -9,28 +9,51 @@ import TestingMachine from "./pages/crudMachine/TestingMachine";
 import ChargingUnit from "./pages/crudCharger/ChargingUnit";
 import Navbar from "./components/monitor/Navbar";
 import Monitor from "./pages/Monitor";
-import MonitorBattery from "./pages/monitor/monitorBattery";
+import MonitorCharging from "./pages/monitor/MonitorCharging";
+import MonitorTesting from "./pages/monitor/MonitorTesting";
+import MonitorStorage from "./pages/monitor/MonitorStorage";
+import CreateBattery from "./pages/crudBattery/CreateBattery";
 
 function App() {
   return (
     <>
       {/* // flex justify-center items-center h-full digunakan untuk memusatkan <Login />secara horizontal dan vertikal. 
             // h-full memastikan bahwa elemen div ini memenuhi tinggi layar sehingga posisi login tetap di tengah.*/}
-      {/* <Routes>
+      <Routes>
+        {/* Halaman awal Monitor */}
+        <Route path="/" element={<Monitor />} />
+
+        <Route path="/monitor" element={<Monitor />} />
+        {/* Sub-halaman dalam Monitor */}
+        <Route>
+          <Route path="monitorCharging" element={<MonitorCharging />} />
+          <Route path="monitorTesting" element={<MonitorTesting />} />
+          <Route path="monitorStorage" element={<MonitorStorage />} />
+        </Route>
+
+        {/* Halaman Login */}
         <Route path="/login" element={<Login />} />
+
+        {/* Halaman Dashboard setelah login */}
         <Route path="/dashboard" element={<Layout />}>
-          <Route index element={<Dashboard />} />       
-          <Route path="home" element={<Dashboard />} />   
-          <Route path="battery" element={<Battery />} />
+          <Route index element={<Dashboard />} />
+          <Route path="home" element={<Dashboard />} />
+
+          {/* Halaman CRUD Battery */}
+          <Route path="battery" element={<Battery />}/>
+          <Route>
+            <Route path="createBattery" element={<CreateBattery />} />
+          </Route>
+
           <Route path="users" element={<Users />} />
           <Route path="chargingunit" element={<ChargingUnit />} />
           <Route path="testingmachine" element={<TestingMachine />} />
           <Route path="storage" element={<Storage />} />
         </Route>
-        <Route path="/" element={<Navigate to="/login" />} />
-      </Routes> */}
-      <MonitorBattery/>
-      {/* <Monitor/> */}
+
+        {/* Redirect ke halaman Monitor jika path tidak dikenali */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </>
   );
 }
