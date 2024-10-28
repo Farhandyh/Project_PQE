@@ -170,10 +170,7 @@ const Battery = () => {
     </div>
     {isPopupOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-1/3">
-            <button onClick={togglePopup} className="text-red-500 float-right text-xl font-bold">
-              &times;
-            </button>
+          <div className="bg-opacity-0 rounded-lg w-96 h-96">
             <CreateBattery />
           </div>
         </div>
