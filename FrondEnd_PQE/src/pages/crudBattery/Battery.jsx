@@ -81,7 +81,7 @@ const Battery = () => {
             Add New Battery
           </button>
         </div>
-      </div>
+    </div>
     <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
       <table className="w-full bg-white border border-gray-200">
         <thead>
@@ -171,7 +171,7 @@ const Battery = () => {
     {isPopupOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-opacity-0 rounded-lg w-96 h-96">
-            <CreateBattery />
+            <CreateBattery onClick={togglePopup} />
           </div>
         </div>
       )}

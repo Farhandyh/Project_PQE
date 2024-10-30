@@ -7,12 +7,10 @@ import Users from "./pages/crudUsers/Users";
 import Storage from "./pages/crudStorage/Storage";
 import TestingMachine from "./pages/crudMachine/TestingMachine";
 import ChargingUnit from "./pages/crudCharger/ChargingUnit";
-import Navbar from "./components/monitor/Navbar";
 import Monitor from "./pages/Monitor";
 import MonitorCharging from "./pages/monitor/MonitorCharging";
 import MonitorTesting from "./pages/monitor/MonitorTesting";
 import MonitorStorage from "./pages/monitor/MonitorStorage";
-import CreateBattery from "./pages/crudBattery/CreateBattery";
 
 function App() {
   return (
@@ -41,9 +39,6 @@ function App() {
 
           {/* Halaman CRUD Battery */}
           <Route path="battery" element={<Battery />}/>
-          <Route>
-            <Route path="createBattery" element={<CreateBattery />} />
-          </Route>
 
           <Route path="users" element={<Users />} />
           <Route path="chargingunit" element={<ChargingUnit />} />

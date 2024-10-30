@@ -17,7 +17,7 @@ const CreateBattery = () => {
                         <label className="block text-black ml-2 mb-1" htmlFor="battery-status">Battery Status</label>
                         <TextField id="battery-status" className="w-full mb-4" /><br />
                         <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
-                            <button className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600">
+                            <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600">
                                 Save
                             </button>
                             <button className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24">
