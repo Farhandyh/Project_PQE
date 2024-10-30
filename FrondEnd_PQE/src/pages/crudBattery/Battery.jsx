@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import CreateBattery from './CreateBattery';
+import TextField from '../../components/materialCRUD/TextField';
+import Header from '../../components/materialCRUD/Header';
 
 const getBatteries = async () => {
   const response = await fetch('http://localhost:8000/api/batteries');
@@ -27,6 +29,7 @@ const Battery = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isPopupOpen, setIsPopupOpen] = useState(false); // Status buka-tutup popup
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchBatteries = async () => {
@@ -70,6 +73,8 @@ const Battery = () => {
   };
 
   const togglePopup = () => setIsPopupOpen(!isPopupOpen); // Fungsi buka-tutup popup
+   // Toggle modal open/close
+   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   return (
     <>
@@ -77,7 +82,7 @@ const Battery = () => {
         <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
         <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
         <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
-          <button onClick={togglePopup} className="text-white bg-red-500 px-4 py-2 rounded-full">
+          <button onClick={toggleModal} className="text-white bg-red-500 px-4 py-2 rounded-full">
             Add New Battery
           </button>
         </div>
@@ -173,6 +178,38 @@ const Battery = () => {
           <div className="bg-opacity-0 rounded-lg w-96 h-96">
             <CreateBattery onClick={togglePopup} />
           </div>
+        </div>
+      )}
+
+       {/* Modal Pop-up */}
+       {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
+            {/* Form untuk Add New Battery */}
+              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+                <Header />
+                <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
+                    <form action="" className="w-full ml-11 mb-2">
+                        <label className="block text-black ml-2 mb-1 mt-3" htmlFor="id-battery">Id Battery</label>
+                        <TextField id="id-battery" className="w-full mb-4" />
+
+                        <label className="block text-black ml-2 mb-1" htmlFor="battery-capacity">Battery Capacity</label>
+                        <TextField id="battery-capacity" className="w-full mb-4" />
+
+                        <label className="block text-black ml-2 mb-1" htmlFor="battery-status">Battery Status</label>
+                        <TextField id="battery-status" className="w-full mb-4" /><br />
+                        <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
+                            <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600">
+                                Save
+                            </button>
+                            <button onClick={toggleModal} className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
         </div>
       )}
     </>
