@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import CreateBattery from './CreateBattery';
 import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
 
@@ -28,8 +27,10 @@ const Battery = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // Status buka-tutup popup
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [idBattery,setIdBattery] = useState("");
+  const [batteryCapacity,setBatteryCapacity] = useState("");
+  const [batteryStatus,setBatteryStatus] = useState("");
 
   useEffect(() => {
     const fetchBatteries = async () => {
@@ -37,14 +38,15 @@ const Battery = () => {
         const data = await getBatteries();
         setBatteries(data);
       } catch (error) {
-        setError(error.message);
+        setError("Error fetching batteries data.");
+        console.error(error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchBatteries();
   }, []);
+  
 
   if (loading) return <p className="text-center">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -72,9 +74,40 @@ const Battery = () => {
     }
   };
 
-  const togglePopup = () => setIsPopupOpen(!isPopupOpen); // Fungsi buka-tutup popup
    // Toggle modal open/close
    const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8000/api/batteries-create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "idBattery" : idBattery,
+          "batteryCapacity" : batteryCapacity,
+          "batteryStatus" : batteryStatus
+        }),
+      });
+
+      if (response.ok) {
+        alert("Data berhasil disimpan!");
+        setIdBattery("");
+        setBatteryCapacity("");
+        setBatteryStatus("");
+        toggleModal();
+      }
+       else {
+        alert("Terjadi kesalahan saat menyimpan data.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Tidak dapat terhubung ke server.");
+    }
+  };
 
   return (
     <>
@@ -173,31 +206,23 @@ const Battery = () => {
         </button>
       </div>
     </div>
-    {isPopupOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-opacity-0 rounded-lg w-96 h-96">
-            <CreateBattery onClick={togglePopup} />
-          </div>
-        </div>
-      )}
-
        {/* Modal Pop-up */}
        {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
             {/* Form untuk Add New Battery */}
-              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-80 h-full">
                 <Header />
                 <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
-                    <form action="" className="w-full ml-11 mb-2">
+                    <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
                         <label className="block text-black ml-2 mb-1 mt-3" htmlFor="id-battery">Id Battery</label>
-                        <TextField id="id-battery" className="w-full mb-4" />
+                        <TextField id="id-battery" value={idBattery} onChange={(e) => setIdBattery(e.target.value)} className="w-full mb-4" />
 
                         <label className="block text-black ml-2 mb-1" htmlFor="battery-capacity">Battery Capacity</label>
-                        <TextField id="battery-capacity" className="w-full mb-4" />
+                        <TextField id="battery-capacity" value={batteryCapacity} onChange={(e) => setBatteryCapacity(e.target.value)}  className="w-full mb-4" />
 
                         <label className="block text-black ml-2 mb-1" htmlFor="battery-status">Battery Status</label>
-                        <TextField id="battery-status" className="w-full mb-4" /><br />
+                        <TextField id="battery-status" value={batteryStatus} onChange={(e) => setBatteryStatus(e.target.value)}  className="w-full mb-4" /><br />
                         <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
                             <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600">
                                 Save
