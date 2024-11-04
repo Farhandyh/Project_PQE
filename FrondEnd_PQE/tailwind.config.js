@@ -10,7 +10,23 @@ export default {
         },
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'], // Menambahkan font Poppins
+        poppins: ["Poppins", "sans-serif"], // Menambahkan font Poppins
+      },
+      fontSize: {
+        "10px": "10px",
+        "13px": "13px",
+        "16px": "16px",
+        "17px": "17px",
+        "18px": "18px",
+        "20px": "20px",
+        "64px": "64px",
+        "88px": "88px",
+        "96px": "96px",
+      },
+      boxShadow: {
+        "custom-dark": "2px 4px 15px rgba(0, 0, 0, 0.50)", // sesuaikan ukuran dan intensitas sesuai keinginan
+        "custom-header": "0px 1px 15px rgba(0, 0, 0, 0.50)", // sesuaikan ukuran dan intensitas sesuai keinginan
+        "custom-text": "0 4px 20px rgba(0, 0, 0, 0.5)", // Sesuaikan nilai ini sesuai kebutuhan
       },
     },
   },

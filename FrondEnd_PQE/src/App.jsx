@@ -11,6 +11,7 @@ import Monitor from "./pages/Monitor";
 import MonitorCharging from "./pages/monitor/MonitorCharging";
 import MonitorTesting from "./pages/monitor/MonitorTesting";
 import MonitorStorage from "./pages/monitor/MonitorStorage";
+import LayoutMonitor from "./components/monitor/LayoutMonitor";
 
 function App() {
   return (
@@ -19,14 +20,14 @@ function App() {
             // h-full memastikan bahwa elemen div ini memenuhi tinggi layar sehingga posisi login tetap di tengah.*/}
       <Routes>
         {/* Halaman awal Monitor */}
-        <Route path="/" element={<Monitor />} />
+        <Route path="/" element={<LayoutMonitor />}>
+          <Route index element={<Monitor />} />
+          <Route path="/monitor" element={<Monitor />} />
 
-        <Route path="/monitor" element={<Monitor />} />
-        {/* Sub-halaman dalam Monitor */}
-        <Route>
-          <Route path="monitorCharging" element={<MonitorCharging />} />
-          <Route path="monitorTesting" element={<MonitorTesting />} />
-          <Route path="monitorStorage" element={<MonitorStorage />} />
+          {/* Sub-halaman dalam Monitor */}
+          <Route path="/MonitorCharging" element={<MonitorCharging />} />
+          <Route path="/MonitorTesting" element={<MonitorTesting />} />
+          <Route path="/MonitorStorage" element={<MonitorStorage />} />
         </Route>
 
         {/* Halaman Login */}
@@ -38,7 +39,7 @@ function App() {
           <Route path="home" element={<Dashboard />} />
 
           {/* Halaman CRUD Battery */}
-          <Route path="battery" element={<Battery />}/>
+          <Route path="battery" element={<Battery />} />
 
           <Route path="users" element={<Users />} />
           <Route path="chargingunit" element={<ChargingUnit />} />
