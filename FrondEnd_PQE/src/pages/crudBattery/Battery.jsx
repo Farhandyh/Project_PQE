@@ -28,6 +28,7 @@ const Battery = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [idBattery,setIdBattery] = useState("");
   const [batteryCapacity,setBatteryCapacity] = useState("");
   const [batteryStatus,setBatteryStatus] = useState("");
@@ -47,6 +48,13 @@ const Battery = () => {
     fetchBatteries();
   }, []);
   
+  // Event untuk menampilkan data row yang dipilih dalam form update
+  const handleRowClick = (batteryData) => {
+    setIdBattery(batteryData.idBattery);
+    setBatteryCapacity(batteryData.batteryCapacity);
+    setBatteryStatus(batteryData.batteryStatus);
+    setIsUpdateOpen(true);
+  };
 
   if (loading) return <p className="text-center">Loading...</p>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
@@ -76,8 +84,9 @@ const Battery = () => {
 
    // Toggle modal open/close
    const toggleModal = () => setIsModalOpen(!isModalOpen);
+   const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -99,6 +108,38 @@ const Battery = () => {
         setBatteryCapacity("");
         setBatteryStatus("");
         toggleModal();
+      }
+       else {
+        alert("Terjadi kesalahan saat menyimpan data.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Tidak dapat terhubung ke server.");
+    }
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8000/api/batteries-update", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "idBattery" : idBattery,
+          "batteryCapacity" : batteryCapacity,
+          "batteryStatus" : batteryStatus
+        }),
+      });
+
+      if (response.ok) {
+        alert("Data berhasil disimpan!");
+        setIdBattery("");
+        setBatteryCapacity("");
+        setBatteryStatus("");
+        toggleUpdate();
       }
        else {
         alert("Terjadi kesalahan saat menyimpan data.");
@@ -147,7 +188,12 @@ const Battery = () => {
                 className="py-2 px-2 border-b"
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                <a href="#" className="mr-2 mt-2 text-green-700 hover:text-red-E01414">
+                <a href="#" 
+                onClick={() => { 
+                    toggleUpdate(); 
+                    handleRowClick(battery); 
+                }}
+                className="mr-2 mt-2 text-green-700 hover:text-red-E01414">
                   <FaEdit />
                 </a>
                 <a
@@ -206,7 +252,7 @@ const Battery = () => {
         </button>
       </div>
     </div>
-       {/* Modal Pop-up */}
+       {/* Modal Pop-up Create Battery */}
        {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
@@ -228,6 +274,38 @@ const Battery = () => {
                                 Save
                             </button>
                             <button onClick={toggleModal} className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+      )}
+
+      {/* modal untuk update */}
+      {isUpdateOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
+            {/* Form untuk Add New Battery */}
+              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-80 h-full">
+                <Header />
+                <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
+                    <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
+                        <label className="block text-black ml-2 mb-1 mt-3" htmlFor="id-battery">Id Battery</label>
+                        <TextField id="id-battery" value={idBattery} onChange={(e) => setIdBattery(e.target.value)} className="w-full mb-4" />
+
+                        <label className="block text-black ml-2 mb-1" htmlFor="battery-capacity">Battery Capacity</label>
+                        <TextField id="battery-capacity" value={batteryCapacity} onChange={(e) => setBatteryCapacity(e.target.value)}  className="w-full mb-4" />
+
+                        <label className="block text-black ml-2 mb-1" htmlFor="battery-status">Battery Status</label>
+                        <TextField id="battery-status" value={batteryStatus} onChange={(e) => setBatteryStatus(e.target.value)}  className="w-full mb-4" /><br />
+                        <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
+                            <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600">
+                                Save
+                            </button>
+                            <button onClick={toggleUpdate} className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24">
                                 Cancel
                             </button>
                         </div>
