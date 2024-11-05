@@ -7,7 +7,7 @@ import Users from "./pages/crudUsers/Users";
 import Storage from "./pages/crudStorage/Storage";
 import TestingMachine from "./pages/crudMachine/TestingMachine";
 import ChargingUnit from "./pages/crudCharger/ChargingUnit";
-import Monitor from "./pages/Monitor";
+import Monitor from "./pages/monitor/MonitorAll";
 import MonitorCharging from "./pages/monitor/MonitorCharging";
 import MonitorTesting from "./pages/monitor/MonitorTesting";
 import MonitorStorage from "./pages/monitor/MonitorStorage";
