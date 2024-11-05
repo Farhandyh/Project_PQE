@@ -174,7 +174,7 @@ const Monitor = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-gray-200 bg-red-300">
+                  <tr className="border-b border-gray-200 bg-gray-EDD7D7">
                     <td className="px-6 text-sm font-poppins font-light text-black">
                       1
                     </td>
@@ -188,7 +188,7 @@ const Monitor = () => {
                       Present
                     </td>
                   </tr>
-                  <tr className="border-b border-gray-200 bg-red-300">
+                  <tr className="border-b border-gray-200 bg-gray-EDD7D7">
                     <td className="px-6 text-sm font-poppins font-light text-black">
                       2
                     </td>
@@ -202,7 +202,7 @@ const Monitor = () => {
                       Late
                     </td>
                   </tr>
-                  <tr className=" border-gray-200 bg-red-300">
+                  <tr className=" border-gray-200 bg-gray-EDD7D7">
                     <td className="px-6 text-sm font-poppins font-light text-black">
                       2
                     </td>

@@ -8,6 +8,7 @@ export default {
           E01414: "#E01414", // Warna kustom
           CF0920: "#CF0920",
         },
+        gray: { EDD7D7: "#EDD7D7" },
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"], // Menambahkan font Poppins
