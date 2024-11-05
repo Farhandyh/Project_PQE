@@ -110,8 +110,8 @@ const Monitor = () => {
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
             style={{
-              width: "20px",
-              height: "20px",
+              width: "15px",
+              height: "15px",
             }}
           ></div>
 
@@ -119,13 +119,13 @@ const Monitor = () => {
           <div
             className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
             style={{
-              width: "20px",
-              height: "20px",
+              width: "15px",
+              height: "15px",
             }}
           ></div>
 
           <img
-            className="absolute top-2 left-2 w-5 h-5"
+            className="absolute top-2  w-5 h-5"
             src="../src/assets/picture3D/human3D.png" // Pastikan jalur gambar benar
             alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
             style={{
@@ -134,13 +134,14 @@ const Monitor = () => {
               width: "160px", // Atur lebar otomatis untuk menjaga rasio
               height: "auto", // Atur tinggi otomatis untuk menjaga rasio
               objectFit: "cover", // Menjaga rasio aspek gambar
+              left: "-15px", // Geser lebih ke kiri
             }}
           />
 
           <h1 className="text-center mt-2 font-poppins text-white text-16px font-black">
             Battery Storage Monitoring
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-3xl shadow-lg">
+          <div className="bg-white w-6/6 h-56 mr-5 mt-2 ml-5 rounded-3xl shadow-lg">
             <div className="flex flex-col items-end mr-8">
               {/* Tambahkan margin untuk jarak antara gambar dan teks */}
               <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-5">
@@ -152,7 +153,10 @@ const Monitor = () => {
             </div>
 
             <div>
-              <table className=" text-center bg-white h-2 -mt-5 rounded-3xl overflow-hidden mx-auto">
+              <h2 className="font-poppins font-bold text-16px -mt-6 text-red-800 text-left ml-2">
+                Battery In/Out Log:
+              </h2>
+              <table className=" text-center bg-white h-2 rounded-2xl overflow-hidden mx-auto">
                 <thead>
                   <tr>
                     <th className="bg-red-700 text-center text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white">
@@ -223,8 +227,8 @@ const Monitor = () => {
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
             style={{
-              width: "20px",
-              height: "20px",
+              width: "15px",
+              height: "15px",
             }}
           ></div>
 
@@ -232,8 +236,8 @@ const Monitor = () => {
           <div
             className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
             style={{
-              width: "20px",
-              height: "20px",
+              width: "15px",
+              height: "15px",
             }}
           ></div>
 
@@ -252,8 +256,8 @@ const Monitor = () => {
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
             style={{
-              width: "20px",
-              height: "20px",
+              width: "15px",
+              height: "15px",
             }}
           ></div>
 
@@ -261,8 +265,8 @@ const Monitor = () => {
           <div
             className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
             style={{
-              width: "20px",
-              height: "20px",
+              width: "15px",
+              height: "15px",
             }}
           ></div>
 
@@ -274,11 +278,53 @@ const Monitor = () => {
           </div>
         </div>
 
-        <div className="bg-red-E01414 w-2/6 h-72 mt-12 mr-7 ml-7 rounded-2xl shadow-custom-dark">
-          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-            Battery Storage Monitoring
-          </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl"></div>
+        <div className="flex relative">
+          <img
+            className="left-5 mt-4 w-5 h-5 z-10 gambar-shadow-custom"
+            src="../src/assets/picture3D/BatteryMonitorAll3D.png" // Pastikan jalur gambar benar
+            alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+            style={{
+              maxHeight: "330px", // Tinggi maksimum gambar
+              maxWidth: "300px", // Lebar maksimum gambar
+              width: "300px", // Atur lebar otomatis untuk menjaga rasio
+              height: "350px", // Atur tinggi otomatis untuk menjaga rasio
+              objectFit: "cover", // Menjaga rasio aspek gambar
+            }}
+          />
+
+          <div className="absolute left-44">
+            <div className="bg-red-E01414 w-[400px] h-32 mt-12 mr-7 ml-12 rounded-2xl shadow-custom-dark relative">
+              {/* Lingkaran di kiri atas */}
+              <div
+                className="absolute top-2 right-3 bg-white rounded-full"
+                style={{
+                  width: "15px",
+                  height: "15px",
+                }}
+              ></div>
+
+              <h1 className="text-center mt-2 font-poppins text-white text-16px font-black">
+                kWh Used Today
+              </h1>
+              <div className="bg-white w-[90%] h-20 mx-5 mt-2 rounded-2xl"></div>
+            </div>
+
+            <div className="bg-red-E01414 w-[400px] h-32 mt-5 mr-7 ml-12 rounded-2xl shadow-custom-dark relative">
+              {/* Lingkaran di kanan atas */}
+              <div
+                className="absolute top-2 right-3 bg-white rounded-full"
+                style={{
+                  width: "15px",
+                  height: "15px",
+                }}
+              ></div>
+
+              <h1 className="text-center mt-2 font-poppins text-white text-16px font-black">
+                Battery Charging Today
+              </h1>
+              <div className="bg-white w-[90%] h-20 mx-5 mt-2 rounded-2xl"></div>
+            </div>
+          </div>
         </div>
       </div>
     </>

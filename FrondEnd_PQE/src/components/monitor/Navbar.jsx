@@ -33,7 +33,7 @@ const Navbar = () => {
           Battery Monitoring
         </h1>
         {/* Navigation Links */}
-        <ul className="flex space-x-2 md:space-x-6 text-red-600">
+        <ul className="flex ml-auto mr-5 space-x-2 md:space-x-6 text-red-600">
           {NAVBAR_LINKS.map((link) => (
             <li
               key={link.id}
