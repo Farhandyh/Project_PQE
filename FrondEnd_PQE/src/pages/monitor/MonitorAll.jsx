@@ -10,10 +10,10 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import Navbar from "../components/monitor/Navbar";
+import Navbar from "../../components/monitor/Navbar";
 
-import "../index.css";
-import Image3D from "../components/dashboard/image/Image3D";
+import "../../index.css";
+import Image3D from "../../components/dashboard/image/Image3D";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -105,32 +105,50 @@ const Monitor = () => {
   return (
     <>
       <div className="flex">
-        <div className="bg-red-E01414 w-2/6 h-72 mt-24 ml-7 rounded-2xl shadow-custom-dark">
+        <div className="bg-red-E01414 w-2/6 h-72 mt-24 ml-7 rounded-2xl shadow-custom-dark relative">
+          {/* Lingkaran di kiri atas */}
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "20px",
+              height: "20px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "20px",
+              height: "20px",
+            }}
+          ></div>
+
+          <img
+            className="absolute top-2 left-2 w-5 h-5"
+            src="../src/assets/picture3D/human3D.png" // Pastikan jalur gambar benar
+            alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+            style={{
+              maxHeight: "150px", // Tinggi maksimum gambar
+              maxWidth: "200px", // Lebar maksimum gambar
+              width: "160px", // Atur lebar otomatis untuk menjaga rasio
+              height: "auto", // Atur tinggi otomatis untuk menjaga rasio
+              objectFit: "cover", // Menjaga rasio aspek gambar
+            }}
+          />
+
           <h1 className="text-center mt-2 font-poppins text-white text-16px font-black">
             Battery Storage Monitoring
           </h1>
           <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-3xl shadow-lg">
-            <div className="flex items-start mb-3">
-              <img
-                src="../src/assets/picture3D/human3D.png" // Pastikan jalur gambar benar
-                alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-                style={{
-                  maxHeight: "120px", // Tinggi maksimum gambar
-                  maxWidth: "150px", // Lebar maksimum gambar
-                  width: "140px", // Atur lebar otomatis untuk menjaga rasio
-                  height: "auto", // Atur tinggi otomatis untuk menjaga rasio
-                  objectFit: "cover", // Menjaga rasio aspek gambar
-                }}
-              />
-              <div className="flex flex-col items-end">
-                {/* Tambahkan margin untuk jarak antara gambar dan teks */}
-                <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-5">
-                  Actual Battery
-                </h2>
-                <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
-                  036
-                </h1>
-              </div>
+            <div className="flex flex-col items-end mr-8">
+              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-5">
+                Actual Battery
+              </h2>
+              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                036
+              </h1>
             </div>
 
             <div>
@@ -200,22 +218,58 @@ const Monitor = () => {
           </div>
         </div>
 
-        <div className="bg-red-E01414 w-full h-72 mt-24 ml-7 rounded-2xl mr-7 shadow-custom-dark">
-          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+        <div className="bg-red-E01414 w-full h-72 mt-24 ml-7 rounded-2xl mr-7 shadow-custom-dark relative">
+          {/* Lingkaran di kiri atas */}
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "20px",
+              height: "20px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "20px",
+              height: "20px",
+            }}
+          ></div>
+
+          <h1 className="text-center mt-2 font-poppins text-white text-xl font-black">
             Battery Charging Line Chart
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl flex items-center justify-center">
+          <div className="bg-white w-6/6 h-3/4 mr-5 mt-3 ml-5 rounded-2xl flex items-center justify-center">
             <Line data={lineData} options={lineOptions} />
           </div>
         </div>
       </div>
 
       <div className="flex">
-        <div className="bg-red-E01414 w-full h-72 mt-12 ml-7 rounded-2xl shadow-custom-dark">
-          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+        <div className="bg-red-E01414 w-[55%] h-72 mt-12 ml-7 rounded-2xl shadow-custom-dark relative">
+          {/* Lingkaran di kiri atas */}
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "20px",
+              height: "20px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "20px",
+              height: "20px",
+            }}
+          ></div>
+
+          <h1 className="text-center mt-2 font-poppins text-white text-xl font-black">
             Battery Testing Stacked Bar Chart
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl flex items-center justify-center">
+          <div className="bg-white w-6/6 h-3/4 mr-5 mt-4 ml-5 rounded-2xl flex items-center justify-center">
             <Bar data={barData} options={barOptions} />
           </div>
         </div>
