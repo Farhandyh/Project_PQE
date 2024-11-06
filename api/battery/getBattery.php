@@ -1,4 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin: *'); // Izinkan semua asal
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS'); // Metode yang diizinkan
+header('Access-Control-Allow-Headers: Content-Type'); // Header yang diizinkan
 include_once '../../controllers/battery/batteryController.php';
 
 $controller = new BatteryController();
