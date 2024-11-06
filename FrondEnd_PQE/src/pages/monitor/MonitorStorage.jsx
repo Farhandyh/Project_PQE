@@ -102,43 +102,54 @@ const MonitorStorage = () => {
   return (
     <>
       <div className="flex">
-        <div className="bg-red-E01414 w-full h-72 mt-24 ml-7  rounded-2xl">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold flex-none">
-            Battery Storage Monitoring
+        <div className="bg-red-E01414 w-1/3 h-48 mt-24 ml-7 rounded-2xl">
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Total Battery
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-5 mt-2 ml-4 rounded-2xl"></div>
+            <div className="bg-white w-[397px] h-[126px] mt-2 ml-3 rounded-2xl"></div>
           </div>
         </div>
-        <div className="bg-red-E01414 w-5/6 h-72 mt-24 ml-7 rounded-2xl mr-7">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
-            Battery Line Chart
+        <div className="bg-red-E01414 w-1/3 h-48 mt-24 ml-7 rounded-2xl">
+        <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Battery in storage
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-10 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
+          <div className="bg-white w-[397px] h-[126px] mt-2 ml-3 rounded-2xl"></div>
+          </div>
+        </div>
+          <div className="bg-red-E01414 w-1/3 h-48 mt-24 ml-7 mr-2 rounded-2xl">
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Battery in use
+          </h1>
+          <div className="flex h-full">
+          <div className="bg-white w-[397px] h-[126px] mt-2 ml-3 rounded-2xl"></div>
           </div>
         </div>
       </div>
-      <div className="flex">
-        <div className="bg-red-E01414 w-full h-80 mt-12 ml-7 rounded-2xl">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
-            Battery Testing Stacked Bar Chart
+      {/* Bagan atas */}
+      <div className="flex justify-end">
+        <div className="bg-red-E01414 w-1/3 h-48 mt-3 ml-7 mr-2 rounded-2xl">
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Battery in storage
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl flex items-center justify-center">
-            <Bar data={barData} options={barOptions} />
+          <div className="flex h-full">
+          <div className="bg-white w-[425px] h-[126px] mt-2 ml-3 rounded-2xl">
+            
+
           </div>
         </div>
-        <div className="bg-red-E01414 w-2/6 h-96 mt-2 mr-7 ml-3 rounded-2xl">
+      </div>
+        
+
+      </div>
+      <div className="flex justify-end">
+        <div className="bg-red-E01414 w-3/6 h-52 mt-2 mr-2 ml-3 rounded-2xl">
           <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
             Battery Storage Monitoring
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl">
-            <table className="min-w-full bg-white border border-gray-200 h-4">
+          <div className="bg-white w-6/6 h-32 mr-5 mt-2 ml-5 rounded-2xl">
+            <table className="min-w-full bg-white border border-gray-200 h-4 rounded-lg">
               <thead>
                 <tr>
                   <th className="px-6 bg-red-700 text-left text-xs font-semibold text-white uppercase tracking-wider border-b border-gray-200">
