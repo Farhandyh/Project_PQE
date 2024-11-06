@@ -217,7 +217,7 @@ const MonitorStorage = () => {
       {/* END */}
       <div className="flex flex-col items-end">
             <img
-              className="absolute top-72 left-12 w-5 h-12 z-10 gambar-shadow-custom"
+              className="absolute top-64 left-12 w-5 h-12 z-10 gambar-shadow-custom"
               src="../src/assets/picture3D/Suitcase.png" // Pastikan jalur gambar benar
               alt="3D batteryStorage" // Tambahkan deskripsi alternatif untuk aksesibilitas
               style={{

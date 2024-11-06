@@ -101,21 +101,24 @@ const MonitorTesting = () => {
 
   return (
     <>
-      <div className="flex justify-flex">
+      <div className="flex flex-col">
+        <div className="relative flex justify-end">
           <img
-              className="w-1/6 h-48 z-10 mt-24 gambar-shadow-custom"
-              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
-              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-              style={{
-                maxHeight: "400px", // Tinggi maksimum gambar
-                maxWidth: "500px", // Lebar maksimum gambar
-                width: "300px", // Atur lebar otomatis untuk menjaga rasio
-                height: "380px", // Atur tinggi otomatis untuk menjaga rasio
-                objectFit: "cover", // Menjaga rasio aspek gambar
+            className="absolute z-10 mt-24 gambar-shadow-custom"
+            src="../src/assets/picture3D/BatteryTesting1.png" // Pastikan jalur gambar benar
+            alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+            style={{
+              maxHeight: "350px", // Tinggi maksimum gambar
+              maxWidth: "350px", // Lebar maksimum gambar
+              width: "350px", // Atur lebar otomatis untuk menjaga rasio
+              height: "350px", // Atur tinggi otomatis untuk menjaga rasio
+              objectFit: "cover", // Menjaga rasio aspek gambar
+              left: "50px"
               }}
-            />
-        <div className="bg-red-E01414 w-4/6 h-80 mt-24 ml-7 rounded-2xl relative">
-          <div
+          />
+          <div className="bg-red-E01414 w-3/4 h-80 mt-24 mr-3 rounded-2xl relative">
+            {/* Lingkaran di kiri atas */}
+            <div
               className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
               style={{
                 width: "15px",
@@ -132,25 +135,83 @@ const MonitorTesting = () => {
               }}
             ></div>
             <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-              Total Battery
+            Battery Testing Stacked Bar Chart
             </h1>
             <div className="flex h-full">
-              <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
-              <img
-              className="left-5  w-5 h-5 z-10 gambar-shadow-custom"
-              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
-              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-              style={{
-                maxHeight: "120px", // Tinggi maksimum gambar
-                maxWidth: "100px", // Lebar maksimum gambar
-                width: "300px", // Atur lebar otomatis untuk menjaga rasio
-                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
-                objectFit: "cover", // Menjaga rasio aspek gambar
-              }}
-            />
+              <div className="bg-white w-full h-64 mt-2 ml-3 mr-3 rounded-2xl">
               </div>
             </div>
           </div>
+        </div>  
+
+        <div className="relative flex gap-4 justify-start">
+          <img
+            className="absolute z-10 mt-16 gambar-shadow-custom"
+            src="../src/assets/picture3D/BatteryTestinng2.png" // Pastikan jalur gambar benar
+            alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+            style={{
+              maxHeight: "250px", // Tinggi maksimum gambar
+              maxWidth: "250px", // Lebar maksimum gambar
+              width: "320px", // Atur lebar otomatis untuk menjaga rasio
+              height: "250px", // Atur tinggi otomatis untuk menjaga rasio
+              objectFit: "cover", // Menjaga rasio aspek gambar
+              left: "1250px"
+              }}
+          />
+          <div className="bg-red-E01414 w-3/6 h-64 mt-4 mr-8 ml-3 rounded-2xl relative">
+            {/* Lingkaran di kiri atas */}
+            <div
+              className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+
+            {/* Lingkaran di kanan atas */}
+            <div
+              className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+            <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Battery Testing: kWh Graph
+            </h1>
+            <div className="flex h-full">
+              <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-red-E01414 w-2/6 h-64 mt-4 mr-3 rounded-2xl relative">
+            {/* Lingkaran di kiri atas */}
+            <div
+              className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+
+            {/* Lingkaran di kanan atas */}
+            <div
+              className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+            <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Peformance Health
+            </h1>
+            <div className="flex h-full">
+              <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
+              </div>
+            </div>
+          </div>
+        </div>  
       </div>
     </>
   );
