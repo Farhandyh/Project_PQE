@@ -33,18 +33,19 @@ const Battery = () => {
   const [batteryCapacity,setBatteryCapacity] = useState("");
   const [batteryStatus,setBatteryStatus] = useState("");
 
+  const fetchBatteries = async () => {
+    try {
+      const data = await getBatteries();
+      setBatteries(data);
+    } catch (error) {
+      setError("Error fetching batteries data.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchBatteries = async () => {
-      try {
-        const data = await getBatteries();
-        setBatteries(data);
-      } catch (error) {
-        setError("Error fetching batteries data.");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchBatteries();
   }, []);
   
@@ -107,6 +108,7 @@ const Battery = () => {
         setIdBattery("");
         setBatteryCapacity("");
         setBatteryStatus("");
+        fetchBatteries();
         toggleModal();
       }
        else {
