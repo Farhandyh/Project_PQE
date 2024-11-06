@@ -8,6 +8,7 @@ export default {
           E01414: "#E01414", // Warna kustom
           CF0920: "#CF0920",
         },
+        gray: { EDD7D7: "#EDD7D7" },
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"], // Menambahkan font Poppins
@@ -27,6 +28,7 @@ export default {
         "custom-dark": "2px 4px 15px rgba(0, 0, 0, 0.50)", // sesuaikan ukuran dan intensitas sesuai keinginan
         "custom-header": "0px 1px 15px rgba(0, 0, 0, 0.50)", // sesuaikan ukuran dan intensitas sesuai keinginan
         "custom-text": "0 4px 20px rgba(0, 0, 0, 0.5)", // Sesuaikan nilai ini sesuai kebutuhan
+        "custom-3D": "0 4px 20px rgba(0, 0, 0, 0.5)", // Sesuaikan nilai ini sesuai kebutuhan
       },
     },
   },

@@ -101,39 +101,104 @@ const MonitorCharging = () => {
 
   return (
     <>
-      <div className="flex">
-        <div className="bg-red-E01414 w-full h-72 mt-24 ml-7 rounded-2xl shadow-custom-dark">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold flex-none">
-            Battery Storage Monitoring
+      <div className="flex mt-24">
+        <div className=" bg-red-E01414 w-[100%] h-64 ml-7 rounded-2xl shadow-custom-dark relative">
+          {/* Lingkaran di kiri atas */}
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+          <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold flex-none">
+            Outdoor Station
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-5 mt-2 ml-4 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-5 rounded-2xl"></div>
           </div>
         </div>
-        <div className="bg-red-E01414 w-5/6 h-72 mt-24 ml-7 rounded-2xl mr-7">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
-            Battery Line Chart
+        <img
+          className=" mt-7 w-5 h-5 z-10 gambar-shadow-custom"
+          src="../src/assets/picture3D/LeafChargingMonitor.png" // Pastikan jalur gambar benar
+          alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+          style={{
+            maxHeight: "200px", // Tinggi maksimum gambar
+            maxWidth: "300px", // Lebar maksimum gambar
+            width: "300px", // Atur lebar otomatis untuk menjaga rasio
+            height: "350px", // Atur tinggi otomatis untuk menjaga rasio
+            objectFit: "cover", // Menjaga rasio aspek gambar
+          }}
+        />
+        <div className="bg-red-E01414 w-[80%] h-64 rounded-2xl mr-7 shadow-custom-dark relative">
+          {/* Lingkaran di kiri atas */}
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+          <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold">
+            Indoor Station
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-10 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-5 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-3 rounded-2xl"></div>
           </div>
         </div>
       </div>
 
       <div className="flex">
-        <div className="bg-red-E01414 w-full h-80 mt-12 ml-7 rounded-2xl shadow-custom-dark">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
-            Battery Testing Stacked Bar Chart
+        <div className="bg-red-E01414 w-full h-72 mt-20 ml-7 rounded-2xl mr-7 shadow-custom-dark relative">
+          {/* Lingkaran di kiri atas */}
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          <h1 className="text-center mt-2 font-poppins text-white text-xl font-black">
+            Battery Charging Line Chart
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl flex items-center justify-center">
-            <Bar data={barData} options={barOptions} />
+          <div className="bg-white w-6/6 h-3/4 mr-5 mt-3 ml-5 rounded-2xl flex items-center justify-center">
+            <Line data={lineData} options={lineOptions} />
           </div>
         </div>
+
         <div className="bg-red-E01414 w-2/6 h-96 mt-2 mr-7 ml-3 rounded-2xl">
           <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
             Battery Storage Monitoring

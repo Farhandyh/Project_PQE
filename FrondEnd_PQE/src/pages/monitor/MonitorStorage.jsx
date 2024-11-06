@@ -101,55 +101,51 @@ const MonitorStorage = () => {
 
   return (
     <>
-      <div className="flex">
-        <div className="bg-red-E01414 w-1/3 h-48 mt-24 ml-7 rounded-2xl">
+      <div className="flex mr-3">
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl">
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Total Battery
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-[397px] h-[126px] mt-2 ml-3 rounded-2xl"></div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl"></div>
           </div>
         </div>
-        <div className="bg-red-E01414 w-1/3 h-48 mt-24 ml-7 rounded-2xl">
-        <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl">
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Battery in storage
           </h1>
           <div className="flex h-full">
-          <div className="bg-white w-[397px] h-[126px] mt-2 ml-3 rounded-2xl"></div>
+          <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl"></div>
           </div>
         </div>
-          <div className="bg-red-E01414 w-1/3 h-48 mt-24 ml-7 mr-2 rounded-2xl">
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl">
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Battery in use
           </h1>
           <div className="flex h-full">
-          <div className="bg-white w-[397px] h-[126px] mt-2 ml-3 rounded-2xl"></div>
+          <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl"></div>
           </div>
         </div>
       </div>
-      {/* Bagan atas */}
+      {/* END */}
       <div className="flex justify-end">
-        <div className="bg-red-E01414 w-1/3 h-48 mt-3 ml-7 mr-2 rounded-2xl">
+        <div className="bg-red-E01414 w-3/6 h-48 mt-3 ml-7 mr-2 rounded-2xl">
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Battery in storage
           </h1>
           <div className="flex h-full">
-          <div className="bg-white w-[425px] h-[126px] mt-2 ml-3 rounded-2xl">
-            
-
+          <div className="bg-white w-full h-32 mt-2 ml-3  mr-3 rounded-2xl">
           </div>
         </div>
       </div>
-        
-
       </div>
       <div className="flex justify-end">
         <div className="bg-red-E01414 w-3/6 h-52 mt-2 mr-2 ml-3 rounded-2xl">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Battery Storage Monitoring
           </h1>
           <div className="bg-white w-6/6 h-32 mr-5 mt-2 ml-5 rounded-2xl">
-            <table className="min-w-full bg-white border border-gray-200 h-4 rounded-lg">
+            <table className="w-full bg-white border border-gray-200 h-4 rounded-2xl overflow-hidden mt-2">
               <thead>
                 <tr>
                   <th className="px-6 bg-red-700 text-left text-xs font-semibold text-white uppercase tracking-wider border-b border-gray-200">
@@ -183,7 +179,7 @@ const MonitorStorage = () => {
                 </tr>
               </tbody>
             </table>
-          </div>
+            </div>
         </div>
       </div>
     </>
