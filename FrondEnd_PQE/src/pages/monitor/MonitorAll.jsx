@@ -11,7 +11,6 @@ import {
   Legend,
 } from "chart.js";
 import Navbar from "../../components/monitor/Navbar";
-
 import "../../index.css";
 import Image3D from "../../components/dashboard/image/Image3D";
 
