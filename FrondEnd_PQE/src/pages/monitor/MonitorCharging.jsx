@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import Navbar from "../../components/monitor/Navbar";
+import { useState } from "react";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -25,6 +25,20 @@ ChartJS.register(
 );
 
 const MonitorCharging = () => {
+  const [attendanceData, setAttendanceData] = useState([
+    { id: 1, timeIn: "10:00", timeOut: "6:00", status: "Present" },
+    { id: 2, timeIn: "11:00", timeOut: "7:00", status: "Late" },
+    { id: 3, timeIn: "9:30", timeOut: "5:30", status: "Present" },
+    { id: 4, timeIn: "8:45", timeOut: "4:45", status: "Present" },
+    { id: 5, timeIn: "10:15", timeOut: "6:15", status: "Late" },
+    { id: 6, timeIn: "9:00", timeOut: "5:00", status: "Present" },
+    { id: 7, timeIn: "10:30", timeOut: "6:30", status: "Late" },
+    { id: 8, timeIn: "8:00", timeOut: "4:00", status: "Present" },
+    { id: 9, timeIn: "9:15", timeOut: "5:15", status: "Present" },
+    { id: 10, timeIn: "10:45", timeOut: "6:45", status: "Late" },
+    { id: 11, timeIn: "8:30", timeOut: "4:30", status: "Present" },
+  ]);
+
   const lineData = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
@@ -247,62 +261,25 @@ const MonitorCharging = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b border-gray-200 bg-gray-EDD7D7">
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    1
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    10:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    6:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    Present
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200 bg-gray-EDD7D7">
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    2
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    11:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    7:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    Late
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200 bg-gray-EDD7D7">
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    3
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    11:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    7:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    Late
-                  </td>
-                </tr>
-                <tr className="border-b border-gray-200 bg-gray-EDD7D7">
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    4
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    11:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    7:00
-                  </td>
-                  <td className="px-6 text-sm font-poppins font-light text-black">
-                    Late
-                  </td>
-                </tr>
+                {attendanceData.map((entry) => (
+                  <tr
+                    key={entry.id}
+                    className="border-b border-gray-200 bg-gray-EDD7D7"
+                  >
+                    <td className="px-6 text-sm font-poppins font-light text-black">
+                      {entry.id}
+                    </td>
+                    <td className="px-6 text-sm font-poppins font-light text-black">
+                      {entry.timeIn}
+                    </td>
+                    <td className="px-6 text-sm font-poppins font-light text-black">
+                      {entry.timeOut}
+                    </td>
+                    <td className="px-6 text-sm font-poppins font-light text-black">
+                      {entry.status}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
