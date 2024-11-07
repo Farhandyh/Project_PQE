@@ -101,44 +101,191 @@ const MonitorStorage = () => {
 
   return (
     <>
-      <div className="flex">
-        <div className="bg-red-E01414 w-full h-72 mt-24 ml-7  rounded-2xl">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold flex-none">
-            Battery Storage Monitoring
+      <div className="flex mr-3">
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl relative">
+        <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Total Battery
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-5 mt-2 ml-4 rounded-2xl"></div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <img
+            className="left-5  w-5 h-5 z-10 gambar-shadow-custom"
+            src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+            alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+            style={{
+              maxHeight: "120px", // Tinggi maksimum gambar
+              maxWidth: "100px", // Lebar maksimum gambar
+              width: "300px", // Atur lebar otomatis untuk menjaga rasio
+              height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+              objectFit: "cover", // Menjaga rasio aspek gambar
+            }}
+          />
+            </div>
           </div>
         </div>
-        <div className="bg-red-E01414 w-5/6 h-72 mt-24 ml-7 rounded-2xl mr-7">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
-            Battery Line Chart
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl relative">
+        <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Battery in storage
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-10 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
-            <div className="bg-white w-44 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
+          <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <img
+              className="left-5  w-5 h-5 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxHeight: "120px", // Tinggi maksimum gambar
+                maxWidth: "100px", // Lebar maksimum gambar
+                width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+          </div>
+          </div>
+        </div>
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl relative">
+        <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            Battery in use
+          </h1>
+          <div className="flex h-full">
+          <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <img
+              className="left-5  w-5 h-5 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxHeight: "120px", // Tinggi maksimum gambar
+                maxWidth: "100px", // Lebar maksimum gambar
+                width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+          </div>
           </div>
         </div>
       </div>
-      <div className="flex">
-        <div className="bg-red-E01414 w-full h-80 mt-12 ml-7 rounded-2xl">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
-            Battery Testing Stacked Bar Chart
-          </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl flex items-center justify-center">
-            <Bar data={barData} options={barOptions} />
+      {/* END */}
+      <div className="flex flex-col items-end">
+            <img
+              className="absolute top-64 left-12 w-5 h-12 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/Suitcase.png" // Pastikan jalur gambar benar
+              alt="3D batteryStorage" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxWidth: "440px", // Lebar maksimum gambar
+                width: "750px", // Atur lebar otomatis untuk menjaga rasio
+                height: "490px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+        <div className="bg-red-E01414 w-3/6 h-48 mt-3 ml-7 mr-2 rounded-2xl relative">
+          <div
+              className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+
+            {/* Lingkaran di kanan atas */}
+            <div
+              className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+            <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+              Battery on storage
+            </h1>
+            <div className="flex h-full">
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <img
+              className="absolute left-5 bottom-1 w-5 h-5 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryMonitorAll3D.png" // Pastikan jalur gambar benar
+              alt="3D batteryStorage" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxWidth: "150px", // Lebar maksimum gambar
+                width: "350px", // Atur lebar otomatis untuk menjaga rasio
+                height: "180px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+            </div>
           </div>
         </div>
-        <div className="bg-red-E01414 w-2/6 h-96 mt-2 mr-7 ml-3 rounded-2xl">
-          <h1 className="text-center mt-4 font-mono text-white text-xl font-bold">
+
+        <div className="bg-red-E01414 w-4/6 h-52 mt-3 mr-2 ml-3 rounded-2xl relative">
+         <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Battery Storage Monitoring
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-2 ml-5 rounded-2xl">
-            <table className="min-w-full bg-white border border-gray-200 h-4">
+          <div className="bg-white w-6/6 h-32 mr-5 mt- ml-5 rounded-2xl">
+            <table className="w-full bg-white border border-gray-200 h-4 rounded-2xl overflow-hidden mt-2">
               <thead>
                 <tr>
                   <th className="px-6 bg-red-700 text-left text-xs font-semibold text-white uppercase tracking-wider border-b border-gray-200">
@@ -172,7 +319,7 @@ const MonitorStorage = () => {
                 </tr>
               </tbody>
             </table>
-          </div>
+            </div>
         </div>
       </div>
     </>
