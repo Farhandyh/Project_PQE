@@ -36,7 +36,8 @@ const Login = () => {
         </div>
         <div className="relative">
           <div className="bg-slate-300 border-slate-400 rounded-md p-8 backdrop-filter backdrop-blur-sm bg-opacity-0 mt-48 ml-20 ">
-            <h1 className="text-red-E01414 text-3xl mb-20 ml-2 font-bold font-sans">Astra Honda Motor</h1>
+            <h1 className="text-red-E01414 text-3xl ml-2 font-bold font-sans">Astra Honda Motor</h1>
+            <hr className="w-28" />
             <form action="">
               <h1 className="text-4xl text-white font-bold text-center mb-6"></h1>
               <div className="relative my-4">

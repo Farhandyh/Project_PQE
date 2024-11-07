@@ -36,18 +36,19 @@ const Users = () => {
   const [email,setEmail] = useState("");
   const [role,setRole] = useState("");
 
+  const fetchUsers = async () => {
+    try {
+      const data = await getUsers();
+      setUsers(data);
+    } catch (error) {
+      setError("Error fetching users data.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await getUsers();
-        setUsers(data);
-      } catch (error) {
-        setError("Error fetching users data.");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchUsers();
   }, []);
   
@@ -118,6 +119,7 @@ const Users = () => {
         setPassword("");
         setEmail("");
         setRole("");
+        fetchUsers();
         toggleModal();
       }
        else {
@@ -156,6 +158,7 @@ const Users = () => {
         setPassword("");
         setEmail("");
         setRole("");
+        fetchUsers();
         toggleUpdate();
       }
        else {

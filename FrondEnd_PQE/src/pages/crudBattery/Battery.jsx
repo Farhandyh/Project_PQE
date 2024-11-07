@@ -141,6 +141,7 @@ const Battery = () => {
         setIdBattery("");
         setBatteryCapacity("");
         setBatteryStatus("");
+        fetchBatteries();
         toggleUpdate();
       }
        else {

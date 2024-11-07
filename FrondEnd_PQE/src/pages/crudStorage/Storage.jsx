@@ -33,18 +33,19 @@ const Storage = () => {
   const [rackCapacity,setRackCapacity] = useState("");
   const [rackStatus,setRackStatus] = useState("");
 
+  const fetchRacks = async () => {
+    try {
+      const data = await getRacks();
+      setRacks(data);
+    } catch (error) {
+      setError("Error fetching racks data.");
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   useEffect(() => {
-    const fetchRacks = async () => {
-      try {
-        const data = await getRacks();
-        setRacks(data);
-      } catch (error) {
-        setError("Error fetching racks data.");
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchRacks();
   }, []);
   
@@ -107,6 +108,7 @@ const Storage = () => {
         setIdRack("");
         setRackCapacity("");
         setRackStatus("");
+        fetchRacks();
         toggleModal();
       }
        else {
@@ -139,6 +141,7 @@ const Storage = () => {
         setIdRack("");
         setRackCapacity("");
         setRackStatus("");
+        fetchRacks();
         toggleUpdate();
       }
        else {
