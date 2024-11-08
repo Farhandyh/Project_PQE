@@ -102,49 +102,231 @@ const MonitorStorage = () => {
   return (
     <>
       <div className="flex mr-3">
-        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl">
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl relative">
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Total Battery
           </h1>
+
+          <img
+              className="absolute mt-2 left-8 w-5 h-5 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxHeight: "120px", // Tinggi maksimum gambar
+                maxWidth: "100px", // Lebar maksimum gambar
+                width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+
           <div className="flex h-full">
-            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl"></div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <div className="flex flex-col items-end mr-32">
+              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
+                Battery Availability
+              </h2>
+              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                036
+              </h1>
+            </div>
+            </div>
           </div>
         </div>
-        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl">
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl relative">
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-            Battery in storage
+            Total Battery
           </h1>
+
+          <img
+              className="absolute mt-2 left-8 w-5 h-5 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxHeight: "120px", // Tinggi maksimum gambar
+                maxWidth: "100px", // Lebar maksimum gambar
+                width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+
           <div className="flex h-full">
-          <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl"></div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <div className="flex flex-col items-end mr-32">
+              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
+                Battery Availability
+              </h2>
+              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                026
+              </h1>
+            </div>
+            </div>
           </div>
         </div>
-        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl">
+        <div className="bg-red-E01414 w-2/6 h-48 mt-24 ml-7 rounded-2xl relative">
+          <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-            Battery in use
+            Total Battery
           </h1>
+
+          <img
+              className="absolute mt-2 left-8 w-5 h-5 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxHeight: "120px", // Tinggi maksimum gambar
+                maxWidth: "100px", // Lebar maksimum gambar
+                width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+
           <div className="flex h-full">
-          <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl"></div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <div className="flex flex-col items-end mr-32">
+              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
+                Battery Availability
+              </h2>
+              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                010
+              </h1>
+            </div>
+            </div>
           </div>
         </div>
       </div>
       {/* END */}
-      <div className="flex justify-end">
-        <div className="bg-red-E01414 w-3/6 h-48 mt-3 ml-7 mr-2 rounded-2xl">
-          <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-            Battery in storage
-          </h1>
-          <div className="flex h-full">
-          <div className="bg-white w-full h-32 mt-2 ml-3  mr-3 rounded-2xl">
+      <div className="flex flex-col items-end">
+            <img
+              className="absolute top-64 left-12 w-5 h-12 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/Suitcase.png" // Pastikan jalur gambar benar
+              alt="3D batteryStorage" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxWidth: "440px", // Lebar maksimum gambar
+                width: "750px", // Atur lebar otomatis untuk menjaga rasio
+                height: "490px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+        <div className="bg-red-E01414 w-3/6 h-48 mt-3 ml-7 mr-2 rounded-2xl relative">
+          <div
+              className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+
+            {/* Lingkaran di kanan atas */}
+            <div
+              className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+            <img
+              className="absolute left-5 bottom-1 w-5 h-5 z-10 gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryMonitorAll3D.png" // Pastikan jalur gambar benar
+              alt="3D batteryStorage" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                maxWidth: "150px", // Lebar maksimum gambar
+                width: "350px", // Atur lebar otomatis untuk menjaga rasio
+                height: "180px", // Atur tinggi otomatis untuk menjaga rasio
+                objectFit: "cover", // Menjaga rasio aspek gambar
+              }}
+            />
+            <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+              Battery on storage
+            </h1>
+            <div className="flex h-full">
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
+            <div className="flex flex-col items-end mr-64">
+              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
+                Battery Availability
+              </h2>
+              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                036
+              </h1>
+            </div>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
-      <div className="flex justify-end">
-        <div className="bg-red-E01414 w-3/6 h-52 mt-2 mr-2 ml-3 rounded-2xl">
+
+        <div className="bg-red-E01414 w-4/6 h-52 mt-3 mr-2 ml-3 rounded-2xl relative">
+         <div
+            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
+
+          {/* Lingkaran di kanan atas */}
+          <div
+            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+            style={{
+              width: "15px",
+              height: "15px",
+            }}
+          ></div>
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Battery Storage Monitoring
           </h1>
-          <div className="bg-white w-6/6 h-32 mr-5 mt-2 ml-5 rounded-2xl">
+          <div className="bg-white w-6/6 h-32 mr-5 mt- ml-5 rounded-2xl">
             <table className="w-full bg-white border border-gray-200 h-4 rounded-2xl overflow-hidden mt-2">
               <thead>
                 <tr>
