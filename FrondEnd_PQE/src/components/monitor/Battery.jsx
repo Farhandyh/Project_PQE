@@ -21,9 +21,9 @@ const Battery = ({ batteryLevel, charging }) => {
     <section className="flex items-center justify-center">
       <div className="relative w-full h-52 bg-container p-6 rounded-3xl grid grid-cols-2">
         <div>
-          <p className="mb-2 text-sm text-white">Battery</p>
-          <h1 className="text-biggest text-white">{batteryLevel}%</h1>
-          <p className="absolute bottom-4 flex items-center gap-2 text-xs text-white">
+          <p className="mb-2 text-sm text-black">Battery</p>
+          <h1 className="text-biggest text-black">{batteryLevel}%</h1>
+          <p className="absolute bottom-4 flex items-center gap-2 text-xs text-black">
             {statusText} {charging ? <RiFlashlightLine /> : <RiPlugLine />}
           </p>
         </div>

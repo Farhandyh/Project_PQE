@@ -9,7 +9,7 @@ export default {
           CF0920: "#CF0920",
         },
         gray: { EDD7D7: "#EDD7D7" },
-        container: "hsl(0, 0%, 9%)",
+        container: "hsl(0, 0%, 100%)",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"], // Menambahkan font Poppins
