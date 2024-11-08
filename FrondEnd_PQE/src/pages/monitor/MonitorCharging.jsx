@@ -139,16 +139,16 @@ const MonitorCharging = () => {
             Outdoor Station
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl">
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
               <Battery batteryLevel="60" charging="" />
             </div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl">
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
               <Battery batteryLevel="40" charging="charging" />
             </div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl">
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
               <Battery batteryLevel="19" charging="charging" />
             </div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-5 rounded-3xl">
+            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
               <Battery batteryLevel="87" charging="" />
             </div>
           </div>
@@ -193,13 +193,13 @@ const MonitorCharging = () => {
             Indoor Station
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-5 rounded-3xl">
+            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
               <Battery batteryLevel="33" charging="" />
             </div>
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-3 rounded-3xl">
+            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-3 rounded-3xl p-1 flex flex-col items-center">
               <Battery batteryLevel="7" charging="charging" />
             </div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-3 rounded-3xl">
+            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-3 rounded-3xl p-1 flex flex-col items-center">
               <Battery batteryLevel="54" charging="" />
             </div>
           </div>
