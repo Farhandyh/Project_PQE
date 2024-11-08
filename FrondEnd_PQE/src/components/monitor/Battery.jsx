@@ -29,7 +29,7 @@ const Battery = ({ batteryLevel, charging }) => {
             {statusText} {charging ? <RiFlashlightLine /> : <RiPlugLine />}
           </p>
         </div>
-        <div className="relative w-16 h-36 bg-containerCapsul shadow-battery-inner rounded-full self-end ml-auto transform translate-y-[-15%] ">
+        <div className="relative w-16 h-36 bg-container shadow-battery-inner rounded-full self-end ml-auto transform translate-y-[-15%] ">
           <div className="absolute inset-0 rounded-full overflow-hidden">
             <div
               className={`absolute bottom-0 left-0 right-0 ${gradientClass} ${animatedClass} shadow-liquid transition-all duration-300`}
