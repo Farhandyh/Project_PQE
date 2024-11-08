@@ -11,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import { useState } from "react";
+import Battery from "../../components/monitor/Battery";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -36,7 +37,6 @@ const MonitorCharging = () => {
     { id: 8, timeIn: "8:00", timeOut: "4:00", status: "Present" },
     { id: 9, timeIn: "9:15", timeOut: "5:15", status: "Present" },
     { id: 10, timeIn: "10:45", timeOut: "6:45", status: "Late" },
-    { id: 11, timeIn: "8:30", timeOut: "4:30", status: "Present" },
   ]);
 
   const lineData = {
@@ -117,7 +117,7 @@ const MonitorCharging = () => {
     <>
       <div className="flex mt-24 relative">
         {/* Box Outdoor Station */}
-        <div className="bg-red-E01414 w-[80%] h-64 ml-7 rounded-2xl shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-[80%] h-72 ml-7 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -139,10 +139,18 @@ const MonitorCharging = () => {
             Outdoor Station
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-5 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl">
+              <Battery batteryLevel="60" charging="" />
+            </div>
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl">
+              <Battery batteryLevel="40" charging="charging" />
+            </div>
+            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-2xl">
+              <Battery batteryLevel="19" charging="charging" />
+            </div>
+            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-5 rounded-2xl">
+              <Battery batteryLevel="87" charging="" />
+            </div>
           </div>
         </div>
 
@@ -163,7 +171,7 @@ const MonitorCharging = () => {
         </div>
 
         {/* Box Indoor Station */}
-        <div className="bg-red-E01414 w-[80%] h-64 rounded-2xl ml-36 mr-12 shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-[80%] h-72 rounded-2xl ml-36 mr-12 shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -185,15 +193,21 @@ const MonitorCharging = () => {
             Indoor Station
           </h1>
           <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-5 rounded-2xl"></div>
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-3 rounded-2xl"></div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-3 rounded-2xl"></div>
+            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-5 rounded-2xl">
+              <Battery batteryLevel="33" charging="" />
+            </div>
+            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-3 rounded-2xl">
+              <Battery batteryLevel="7" charging="charging" />
+            </div>
+            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-3 rounded-2xl">
+              <Battery batteryLevel="54" charging="" />
+            </div>
           </div>
         </div>
       </div>
 
       <div className="flex">
-        <div className="bg-red-E01414 w-[65%] h-80 mt-12 ml-7 rounded-2xl mr-7 shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-[65%] h-80 mt-5 ml-7 rounded-2xl mr-7 shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -220,7 +234,7 @@ const MonitorCharging = () => {
           </div>
         </div>
 
-        <div className="bg-red-E01414 w-2/6 h-[350px] mt-5 mr-11 rounded-2xl relative shadow-custom-dark">
+        <div className="bg-red-E01414 w-2/6 h-[320px] mt-5 mr-11 rounded-2xl relative shadow-custom-dark">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -242,7 +256,7 @@ const MonitorCharging = () => {
           <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold">
             Log in/Out Charging
           </h1>
-          <div className="bg-white w-6/6 h-72 mr-5 mt-2 ml-5 rounded-2xl relative">
+          <div className="bg-white w-6/6 h-[265px] mr-5 mt-2 ml-5 rounded-2xl relative">
             <table className="absolute top-2 left-0 right-0 w-[95%] text-center bg-white rounded-2xl overflow-hidden mx-auto h-2">
               <thead>
                 <tr>
