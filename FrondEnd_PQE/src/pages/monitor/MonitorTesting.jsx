@@ -25,79 +25,98 @@ ChartJS.register(
 );
 
 const MonitorTesting = () => {
-  const lineData = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        label: "Battery Usage (kWh)",
-        data: [12, 19, 3, 5, 2, 3],
-        fill: false,
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)",
-        tension: 0.1,
-      },
-    ],
-  };
+    const data = {
+      labels: ['C', 'D', 'A', 'F', 'E', 'G', 'B', 'J', 'I', 'H'], // Replace with your battery labels
+      datasets: [
+        {
+          label: '1 hour',
+          data: [50, 40, 60, 30, 40, 50, 70, 20, 30, 40], // Adjust your data accordingly
+          backgroundColor: 'rgba(0, 123, 255, 0.8)', // Blue color
+        },
+        {
+          label: '1.5 hours',
+          data: [40, 30, 50, 20, 30, 40, 60, 15, 25, 35], // Adjust your data accordingly
+          backgroundColor: 'rgba(255, 99, 132, 0.8)', // Red color
+        },
+        {
+          label: '2 hours',
+          data: [30, 25, 45, 15, 20, 35, 55, 10, 20, 30], // Adjust your data accordingly
+          backgroundColor: 'rgba(75, 192, 192, 0.8)', // Green color
+        },
+        {
+          label: '2.5 hours',
+          data: [20, 15, 35, 10, 15, 25, 40, 8, 15, 20], // Adjust your data accordingly
+          backgroundColor: 'rgba(153, 102, 255, 0.8)', // Purple color
+        },
+        {
+          label: '3 hours',
+          data: [10, 10, 25, 5, 10, 20, 30, 5, 10, 15], // Adjust your data accordingly
+          backgroundColor: 'rgba(255, 206, 86, 0.8)', // Yellow color
+        },
+      ],
+    };
 
-  const lineOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Battery Usage Over Time",
-      },
-    },
-  };
+    const kwhGraph = {
+      labels: ['A', 'B', 'C'],
+      datasets: [
+        {
+          label: 'Energi Terpakai (kWh)',
+          data: [20, 40, 100],
+          backgroundColor: ['purple', 'orange', 'blue'],
+        },
+      ],
+    };
 
-  // Data for the Stacked Bar Chart
-  const barData = {
-    labels: ["January", "February", "March", "April", "May", "June"],
-    datasets: [
-      {
-        label: "Charging",
-        data: [5, 10, 3, 4, 2, 5],
-        backgroundColor: "rgba(75, 192, 192, 0.6)",
+    const kwhGraphOptions = {
+      indexAxis: 'y', // Display bars horizontally
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Energi Terpakai (kWh)',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Waktu Pemakaian (jam)',
+          },
+        },
       },
-      {
-        label: "Discharging",
-        data: [3, 5, 2, 3, 1, 2],
-        backgroundColor: "rgba(255, 99, 132, 0.6)",
-      },
-      {
-        label: "Idle",
-        data: [4, 7, 1, 2, 3, 4],
-        backgroundColor: "rgba(255, 206, 86, 0.6)",
-      },
-    ],
-  };
+    };
 
-  const barOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: "top",
+    const options = {
+      indexAxis: 'y', // Display bars horizontally
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Battery Usage by Time (hours)',
+        },
       },
-      title: {
-        display: true,
-        text: "Battery Status Over Time",
+      scales: {
+        x: {
+          stacked: true,
+          title: {
+            display: true,
+            text: 'Energy Used (kWh)',
+          },
+        },
+        y: {
+          stacked: true,
+          title: {
+            display: true,
+            text: 'Battery',
+          },
+        },
       },
-    },
-    scales: {
-      y: {
-        stacked: true, // Set stacked to true
-      },
-      x: {
-        stacked: true, // Set stacked to true
-      },
-    },
-  };
+    };
 
   return (
     <>
@@ -139,6 +158,7 @@ const MonitorTesting = () => {
             </h1>
             <div className="flex h-full">
               <div className="bg-white w-full h-64 mt-2 ml-3 mr-3 rounded-2xl">
+                <Bar data={data} options={options}/>
               </div>
             </div>
           </div>
@@ -181,6 +201,7 @@ const MonitorTesting = () => {
             </h1>
             <div className="flex h-full">
               <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
+                <Bar data={kwhGraph} options={kwhGraphOptions} />;
               </div>
             </div>
           </div>
