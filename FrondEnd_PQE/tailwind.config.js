@@ -10,6 +10,7 @@ export default {
         },
         gray: { EDD7D7: "#EDD7D7" },
         container: "hsl(0, 0%, 100%)",
+        containerCapsul: "hsl(0, 40%, 87%)",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"], // Menambahkan font Poppins
@@ -38,7 +39,7 @@ export default {
         "custom-text": "0 4px 20px rgba(0, 0, 0, 0.5)", // Sesuaikan nilai ini sesuai kebutuhan
         "custom-3D": "0 4px 20px rgba(0, 0, 0, 0.5)", // Sesuaikan nilai ini sesuai kebutuhan
         "battery-inner":
-          "inset 20px 0 48px hsl(0, 0%, 16%), inset -4px 12px 48px hsl(0, 0%, 56%)",
+          "inset 20px 0 48px hsl(0, 100%, 20%), inset -4px 12px 48px hsl(0, 100%, 45%)",
         liquid:
           "inset -10px 0 12px rgba(0,0,0,0.1), inset 12px 0 12px rgba(0,0,0,0.15)",
       },
