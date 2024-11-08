@@ -260,7 +260,7 @@ const Battery = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
             {/* Form untuk Add New Battery */}
-              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-80 h-full">
+              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
                 <Header />
                 <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
                     <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
@@ -292,7 +292,7 @@ const Battery = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
             {/* Form untuk Add New Battery */}
-              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-80 h-full">
+              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
                 <Header />
                 <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
                     <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
