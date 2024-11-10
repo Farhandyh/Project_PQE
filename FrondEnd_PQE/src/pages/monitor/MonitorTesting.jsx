@@ -11,6 +11,7 @@ import {
   Legend,
 } from "chart.js";
 import Navbar from "../../components/monitor/Navbar";
+import Testing from "../../components/monitor/Testing";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -57,12 +58,32 @@ const MonitorTesting = () => {
     };
 
     const kwhGraph = {
-      labels: ['A', 'B', 'C'],
+      labels: ['A', 'B', 'C'],  // Replace with your actual battery labels
       datasets: [
         {
-          label: 'Energi Terpakai (kWh)',
-          data: [20, 40, 100],
-          backgroundColor: ['purple', 'orange', 'blue'],
+          label: '1 H',
+          data: [50, 70, 30],  // Sample data for 1 hour usage, adjust accordingly
+          backgroundColor: '#0052cc',
+        },
+        {
+          label: '1.5 H',
+          data: [30, 50, 20],  // Sample data for 1.5 hours usage, adjust accordingly
+          backgroundColor: '#0080ff',
+        },
+        {
+          label: '2 H',
+          data: [20, 40, 10],  // Sample data for 2 hours usage, adjust accordingly
+          backgroundColor: '#8a2be2',
+        },
+        {
+          label: '2.5 H',
+          data: [10, 30, 5],  // Sample data for 2.5 hours usage, adjust accordingly
+          backgroundColor: '#ff4500',
+        },
+        {
+          label: '3 H',
+          data: [5, 20, 15],  // Sample data for 3 hours usage, adjust accordingly
+          backgroundColor: '#ff1493',
         },
       ],
     };
@@ -81,7 +102,7 @@ const MonitorTesting = () => {
         y: {
           title: {
             display: true,
-            text: 'Waktu Pemakaian (jam)',
+            text: 'Battery',
           },
         },
       },
@@ -208,29 +229,53 @@ const MonitorTesting = () => {
 
           <div className="bg-red-E01414 w-2/6 h-64 mt-4 mr-3 rounded-2xl relative">
             {/* Lingkaran di kiri atas */}
-            <div
-              className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-              style={{
-                width: "15px",
-                height: "15px",
-              }}
-            ></div>
+              <div
+                className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+                style={{
+                  width: "15px",
+                  height: "15px",
+                }}
+              ></div>
 
-            {/* Lingkaran di kanan atas */}
-            <div
-              className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-              style={{
-                width: "15px",
-                height: "15px",
-              }}
-            ></div>
-            <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-            Peformance Health
-            </h1>
-            <div className="flex h-full">
-              <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
+              {/* Lingkaran di kanan atas */}
+              <div
+                className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+                style={{
+                  width: "15px",
+                  height: "15px",
+                }}
+              ></div>
+              <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+              Peformance Health
+              </h1>
+              <div className="flex h-full">
+                <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
+                  <Testing batteryLevel="12" />   
+                  <div className="flex h-full">
+                    <img
+                      className="absolute z-20 bottom-8"
+                      src="../src/assets/picture3D/HealthMonitoring.png" // Pastikan jalur gambar benar
+                      alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+                      style={{
+                        maxHeight: "300px", // Tinggi maksimum gambar
+                        maxWidth: "50px", // Lebar maksimum gambar
+                        width: "20px", // Atur lebar otomatis untuk menjaga rasio
+                        height: "140px", // Atur tinggi otomatis untuk menjaga rasio
+                        objectFit: "cover", // Menjaga rasio aspek gambar
+                        left: "190px"
+                        }}
+                    />
+
+                    <div className="absolute z-20 bottom-7 ml-56 font-Poppins">
+                      <p className="mb-2">Max performance</p>
+                      <p className="mb-2">Stable performance</p>
+                      <p className="mb-2">Good performance</p>
+                      <p className="mb-2">Declining performance</p>
+                      <p className="mb-0">Low battery</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
           </div>
         </div>  
       </div>
