@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import TextField from '../../components/materialCRUD/TextField';
-import Header from '../../components/materialCRUD/Header';
+import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import TextField from "../../components/materialCRUD/TextField";
+import Header from "../../components/materialCRUD/Header";
 
 const getUsers = async () => {
-  const response = await fetch('http://localhost:8000/api/users');
+  const response = await fetch("http://localhost:8000/api/users");
   if (!response.ok) {
-    throw new Error('Failed to fetch users');
+    throw new Error("Failed to fetch users");
   }
   const data = await response.json();
   return data;
 };
 
 const deleteUsers = async (idUsers) => {
-  const response = await fetch(`http://localhost:8000/api/users-destroy/${idUsers}`, {
-    method: 'DELETE',
-  });
+  const response = await fetch(
+    `http://localhost:8000/api/users-destroy/${idUsers}`,
+    {
+      method: "DELETE",
+    }
+  );
   if (!response.ok) {
-    throw new Error('Failed to delete users');
+    throw new Error("Failed to delete users");
   }
   return await response.json();
 };
@@ -29,12 +32,12 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idUsers,setIdUsers] = useState("");
-  const [name,setName] = useState("");
-  const [username,setUsername] = useState("");
-  const [password,setPassword] = useState("");
-  const [email,setEmail] = useState("");
-  const [role,setRole] = useState("");
+  const [idUsers, setIdUsers] = useState("");
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
 
   const fetchUsers = async () => {
     try {
@@ -51,7 +54,7 @@ const Users = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-  
+
   const handleRowClick = (usersData) => {
     setIdUsers(usersData.idUsers);
     setName(usersData.name);
@@ -88,9 +91,9 @@ const Users = () => {
     }
   };
 
-   // Toggle modal open/close
-   const toggleModal = () => setIsModalOpen(!isModalOpen);
-   const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
+  // Toggle modal open/close
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,12 +105,12 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUsers" : idUsers,
-          "name" : name,
-          "username" : username,
-          "password" : password,
-          "email" : email,
-          "role" : role,
+          idUsers: idUsers,
+          name: name,
+          username: username,
+          password: password,
+          email: email,
+          role: role,
         }),
       });
 
@@ -121,8 +124,7 @@ const Users = () => {
         setRole("");
         fetchUsers();
         toggleModal();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -141,12 +143,12 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUsers" : idUsers,
-          "name" : name,
-          "username" : username,
-          "password" : password,
-          "email" : email,
-          "role" : role,
+          idUsers: idUsers,
+          name: name,
+          username: username,
+          password: password,
+          email: email,
+          role: role,
         }),
       });
 
@@ -160,8 +162,7 @@ const Users = () => {
         setRole("");
         fetchUsers();
         toggleUpdate();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -173,6 +174,7 @@ const Users = () => {
   return (
     <>
       <div className="mt-4 mb-4 ml-36 flex">
+<<<<<<< HEAD
         <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex flex-col justify-center items-center">
           <h3 className="font-poppins text-40px text-red-600 text-center mt-5">
             Total User
@@ -183,6 +185,61 @@ const Users = () => {
         </div>
 
         <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
+=======
+        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-16 shadow-lg">
+          {/* Gambar di sebelah kiri */}
+          <img
+            src="../src/assets/menuCRUD/user.png"
+            alt="User Icon"
+            className="w-12 h-12 mr-4"
+          />
+
+          {/* Bagian teks */}
+          <div className="flex flex-col justify-center">
+            <h3 className="font-poppins text-sm text-red-600 text-center mb-1">
+              Total User
+            </h3>
+            <h1 className="font-poppins text-shadow-custom font-extrabold text-5xl text-red-600 text-center">
+              036
+            </h1>
+          </div>
+        </div>
+
+        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-12 shadow-lg">
+          {/* Bagian Kiri - Dropdown untuk Status dan Role */}
+          <div className="flex flex-col space-y-4 flex-grow">
+            {/* Dropdown Status */}
+            <div className="flex items-center space-x-2">
+              <label className="text-gray-600 text-sm font-poppins">
+                Status
+              </label>
+              <select className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+                <option value="suspended">Suspended</option>
+              </select>
+            </div>
+
+            {/* Dropdown Role */}
+            <div className="flex items-center space-x-2">
+              <label className="text-gray-600 text-sm font-poppins">Role</label>
+              <select className="bg-green-500 text-white px-4 py-1 rounded-lg focus:outline-none">
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+                <option value="guest">Guest</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Gambar di sebelah kanan */}
+          <img
+            src="../src/assets/menuCRUD/filter.png"
+            alt="Icon"
+            className="w-20 h-20 ml-4"
+          />
+        </div>
+
+>>>>>>> 64ff90fc7cbc5e2f24234231820e74268bbebdf1
         <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
           <button
             onClick={toggleModal}
@@ -310,7 +367,11 @@ const Users = () => {
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
             {/* Form untuk Add New Users */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+<<<<<<< HEAD
               <Header  />
+=======
+              <Header />
+>>>>>>> 64ff90fc7cbc5e2f24234231820e74268bbebdf1
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-5/6 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
                   <label
