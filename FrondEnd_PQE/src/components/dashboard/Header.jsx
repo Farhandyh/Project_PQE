@@ -3,7 +3,7 @@ import { useState } from "react";
 const Header = () => {
 
   return (
-    <div className="flex justify-between items-center p-3 rounded-t-2xl bg-white">
+    <div className="flex justify-between items-center p-3 bg-white shadow-md z-0">
       <div>
         <h1 className="text-4xl ml-5 font-bold text-red-E01414">Data Battery</h1>
       </div>

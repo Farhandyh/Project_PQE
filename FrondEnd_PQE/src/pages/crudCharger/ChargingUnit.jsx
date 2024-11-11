@@ -155,135 +155,195 @@ const ChargingUnit = () => {
 
   return (
     <>
-    <div className="mt-4 mb-4 ml-36 flex">
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
+      <div className="mt-4 mb-4 ml-36 flex">
+        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex flex-col justify-center items-center">
+          <h3 className="font-poppins text-40px text-red-600 text-center mt-5">
+            Total Charging unit
+          </h3>
+          <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-600 text-center">
+            036
+          </h1>
+        </div>
         <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
         <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
-          <button onClick={toggleModal} className="text-white bg-red-500 px-4 py-2 rounded-full">
+          <button
+            onClick={toggleModal}
+            className="text-white bg-red-500 px-4 py-2 rounded-full"
+          >
             Add New Charger
           </button>
         </div>
-    </div>
-    <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
-      <table className="w-full bg-white border border-gray-200">
-        <thead>
-          <tr className="bg-red-E01414 text-white">
-            <th className="py-2 px-2 border-b border-r border-gray-300">NO</th>
-            <th className="py-2 px-2 border-b border-r border-gray-300">Capacity</th>
-            <th className="py-2 px-2 border-b border-r border-gray-300">Status</th>
-            <th className="py-2 px-2 border-b">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentUnits.map((ChargingUnit, index) => (
-            <tr
-              key={ChargingUnit.idUnitCharge}
-              className={`text-center ${index % 2 === 1 ? "bg-pink-100" : ""}`}
-            >
-              <td className="py-2 px-2 border-b">
-                {(currentPage - 1) * itemsPerPage + index + 1}
-              </td>
-              <td className="py-2 px-2 border-b">{ChargingUnit.unitLocation}</td>
-              <td className="py-2 px-2 border-b">
-                {ChargingUnit.unitStatus === 1 ? "Active" : "Non-Active"}
-              </td>
-              <td
-                className="py-2 px-2 border-b"
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <a href="#" 
-                onClick={() => { 
-                    toggleUpdate(); 
-                    handleRowClick(battery); 
-                }}
-                className="mr-2 mt-2 text-green-700 hover:text-red-E01414">
-                  <FaEdit />
-                </a>
-                <a
-                  href="#"
-                  onClick={() => handleDelete(ChargingUnit.idUnitCharge)}
-                  className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                >
-                  <FaTrashAlt />
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div className="flex justify-left mt-2">
-        {/* Tombol Previous */}
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-        >
-          &lt;
-        </button>
-
-        {/* Tombol halaman dinamis */}
-        {Array.from({ length: 3 }, (_, index) => {
-          // Hitung halaman mulai berdasarkan halaman saat ini
-          let pageNumber = currentPage + index;
-
-          // Pastikan halaman tidak di luar batas 1 dan totalPages
-          if (pageNumber == 1) pageNumber = 1;
-
-          return (
-            pageNumber <= totalPages && (
-              <button
-                key={pageNumber}
-                onClick={() => handlePageChange(pageNumber)}
-                className={`px-3 py-1 mx-1 ${
-                  currentPage === pageNumber ? "bg-red-E01414 text-white" : "bg-gray-200"
-                } rounded-md`}
-              >
-                {pageNumber}
-              </button>
-            )
-          );
-        })}
-
-        {/* Tombol Next */}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-        >
-          &gt;
-        </button>
       </div>
-    </div>
-       {/* Modal Pop-up Create Charger */}
-       {isModalOpen && (
+      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
+        <table className="w-full bg-white border border-gray-200">
+          <thead>
+            <tr className="bg-red-E01414 text-white">
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                NO
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Capacity
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Status
+              </th>
+              <th className="py-2 px-2 border-b">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentUnits.map((ChargingUnit, index) => (
+              <tr
+                key={ChargingUnit.idUnitCharge}
+                className={`text-center ${index % 2 === 1 ? "" : ""}`}
+                style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
+              >
+                <td className="py-2 px-2 border-b">
+                  {(currentPage - 1) * itemsPerPage + index + 1}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {ChargingUnit.unitLocation}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {ChargingUnit.unitStatus === 1 ? "Active" : "Non-Active"}
+                </td>
+                <td
+                  className="py-2 px-2 border-b"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <a
+                    href="#"
+                    onClick={() => {
+                      toggleUpdate();
+                      handleRowClick(battery);
+                    }}
+                    className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                  >
+                    <FaEdit />
+                  </a>
+                  <a
+                    href="#"
+                    onClick={() => handleDelete(ChargingUnit.idUnitCharge)}
+                    className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                  >
+                    <FaTrashAlt />
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div className="flex justify-left mt-2">
+          {/* Tombol Previous */}
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+          >
+            &lt;
+          </button>
+
+          {/* Tombol halaman dinamis */}
+          {Array.from({ length: 3 }, (_, index) => {
+            // Hitung halaman mulai berdasarkan halaman saat ini
+            let pageNumber = currentPage + index;
+
+            // Pastikan halaman tidak di luar batas 1 dan totalPages
+            if (pageNumber == 1) pageNumber = 1;
+
+            return (
+              pageNumber <= totalPages && (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageChange(pageNumber)}
+                  className={`px-3 py-1 mx-1 ${
+                    currentPage === pageNumber
+                      ? "bg-red-E01414 text-white"
+                      : "bg-gray-200"
+                  } rounded-md`}
+                >
+                  {pageNumber}
+                </button>
+              )
+            );
+          })}
+
+          {/* Tombol Next */}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+          >
+            &gt;
+          </button>
+        </div>
+      </div>
+      {/* Modal Pop-up Create Charger */}
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
             {/* Form untuk Add New Charger */}
-              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
-                <Header />
-                <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
-                    <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
-                        <label className="block text-black ml-2 mb-1 mt-3" htmlFor="id-unit">Id Charging Unit</label>
-                        <TextField id="id-unit" value={idUnitCharge} onChange={(e) => setIdUnitCharge(e.target.value)} className="w-full mb-4" />
+            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+              <Header />
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
+                <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
+                  <label
+                    className="block text-black ml-2 mb-1 mt-3"
+                    htmlFor="id-unit"
+                  >
+                    Id Charging Unit
+                  </label>
+                  <TextField
+                    id="id-unit"
+                    value={idUnitCharge}
+                    onChange={(e) => setIdUnitCharge(e.target.value)}
+                    className="w-full mb-4"
+                  />
 
-                        <label className="block text-black ml-2 mb-1" htmlFor="unit-location">Unit Location</label>
-                        <TextField id="unit-location" value={unitLocation} onChange={(e) => setUnitLocation(e.target.value)}  className="w-full mb-4" />
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="unit-location"
+                  >
+                    Unit Location
+                  </label>
+                  <TextField
+                    id="unit-location"
+                    value={unitLocation}
+                    onChange={(e) => setUnitLocation(e.target.value)}
+                    className="w-full mb-4"
+                  />
 
-                        <label className="block text-black ml-2 mb-1" htmlFor="unit-status">Unit Status</label>
-                        <TextField id="unit-status" value={unitStatus} onChange={(e) => setUnitStatus(e.target.value)}  className="w-full mb-4" /><br />
-                        <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
-                            <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600">
-                                Save
-                            </button>
-                            <button onClick={toggleModal} className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="unit-status"
+                  >
+                    Unit Status
+                  </label>
+                  <TextField
+                    id="unit-status"
+                    value={unitStatus}
+                    onChange={(e) => setUnitStatus(e.target.value)}
+                    className="w-full mb-4"
+                  />
+                  <br />
+                  <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={toggleModal}
+                      className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
+          </div>
         </div>
       )}
 
@@ -292,30 +352,67 @@ const ChargingUnit = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
             {/* Form untuk Add New Battery */}
-              <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
-                <Header />
-                <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
+            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+              <Header />
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
                 <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
-                        <label className="block text-black ml-2 mb-1 mt-3" htmlFor="id-unit">Id Charging Unit</label>
-                        <TextField id="id-unit" value={idUnitCharge} onChange={(e) => setIdUnitCharge(e.target.value)} className="w-full mb-4" />
+                  <label
+                    className="block text-black ml-2 mb-1 mt-3"
+                    htmlFor="id-unit"
+                  >
+                    Id Charging Unit
+                  </label>
+                  <TextField
+                    id="id-unit"
+                    value={idUnitCharge}
+                    onChange={(e) => setIdUnitCharge(e.target.value)}
+                    className="w-full mb-4"
+                  />
 
-                        <label className="block text-black ml-2 mb-1" htmlFor="unit-location">Unit Location</label>
-                        <TextField id="unit-location" value={unitLocation} onChange={(e) => setUnitLocation(e.target.value)}  className="w-full mb-4" />
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="unit-location"
+                  >
+                    Unit Location
+                  </label>
+                  <TextField
+                    id="unit-location"
+                    value={unitLocation}
+                    onChange={(e) => setUnitLocation(e.target.value)}
+                    className="w-full mb-4"
+                  />
 
-                        <label className="block text-black ml-2 mb-1" htmlFor="unit-status">Unit Status</label>
-                        <TextField id="unit-status" value={unitStatus} onChange={(e) => setUnitStatus(e.target.value)}  className="w-full mb-4" /><br />
-                        <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
-                            <button type="submit" className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600">
-                                Save
-                            </button>
-                            <button onClick={toggleUpdate} className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="unit-status"
+                  >
+                    Unit Status
+                  </label>
+                  <TextField
+                    id="unit-status"
+                    value={unitStatus}
+                    onChange={(e) => setUnitStatus(e.target.value)}
+                    className="w-full mb-4"
+                  />
+                  <br />
+                  <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
+                    <button
+                      type="submit"
+                      className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600"
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={toggleUpdate}
+                      className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
+          </div>
         </div>
       )}
     </>
