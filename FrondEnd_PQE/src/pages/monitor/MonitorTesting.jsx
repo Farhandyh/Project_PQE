@@ -1,4 +1,4 @@
-import { Line, Bar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -142,21 +142,20 @@ const MonitorTesting = () => {
   return (
     <>
       <div className="flex flex-col">
-        <div className="relative flex justify-end">
-          <img
-            className="absolute z-10 mt-24 gambar-shadow-custom"
-            src="../src/assets/picture3D/BatteryTesting1.png" // Pastikan jalur gambar benar
-            alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-            style={{
-              maxHeight: "350px", // Tinggi maksimum gambar
-              maxWidth: "350px", // Lebar maksimum gambar
-              width: "350px", // Atur lebar otomatis untuk menjaga rasio
-              height: "350px", // Atur tinggi otomatis untuk menjaga rasio
-              objectFit: "cover", // Menjaga rasio aspek gambar
-              left: "50px"
+        <div className="relative flex justify-end h-80">
+          <div className="absolute z-5 w-1/4 h-full mt-24 relative flex justify-center items-center">
+            <img
+              className="absolute gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryTesting1.png"
+              alt="3D Human"
+              style={{
+                width: "auto",    
+                height: "auto",    
+                objectFit: "cover",
               }}
-          />
-          <div className="bg-red-E01414 w-3/4 h-80 mt-24 mr-3 rounded-2xl relative">
+            />
+          </div>
+          <div className="bg-red-E01414 w-3/4 h-full mt-24 mr-3 rounded-2xl relative">
             {/* Lingkaran di kiri atas */}
             <div
               className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -185,21 +184,9 @@ const MonitorTesting = () => {
           </div>
         </div>  
 
-        <div className="relative flex gap-4 justify-start">
-          <img
-            className="absolute z-10 mt-16 gambar-shadow-custom"
-            src="../src/assets/picture3D/BatteryTestinng2.png" // Pastikan jalur gambar benar
-            alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-            style={{
-              maxHeight: "250px", // Tinggi maksimum gambar
-              maxWidth: "250px", // Lebar maksimum gambar
-              width: "320px", // Atur lebar otomatis untuk menjaga rasio
-              height: "250px", // Atur tinggi otomatis untuk menjaga rasio
-              objectFit: "cover", // Menjaga rasio aspek gambar
-              left: "1250px"
-              }}
-          />
-          <div className="bg-red-E01414 w-3/6 h-64 mt-4 mr-8 ml-3 rounded-2xl relative">
+        <div className="relative flex gap-4 h-64 mt-32 mr-3">
+          
+          <div className="bg-red-E01414 w-3/6 ml-3 rounded-2xl relative">
             {/* Lingkaran di kiri atas */}
             <div
               className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -221,61 +208,82 @@ const MonitorTesting = () => {
             Battery Testing: kWh Graph
             </h1>
             <div className="flex h-full">
-              <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
-                <Bar data={kwhGraph} options={kwhGraphOptions} />;
+            <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
+                <Bar data={kwhGraph} options={kwhGraphOptions} />
               </div>
             </div>
           </div>
 
-          <div className="bg-red-E01414 w-2/6 h-64 mt-4 mr-3 rounded-2xl relative">
+          <div className="bg-red-E01414 w-2/6 h-full rounded-2xl relative">
             {/* Lingkaran di kiri atas */}
-              <div
-                className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-                style={{
-                  width: "15px",
-                  height: "15px",
-                }}
-              ></div>
+            <div
+              className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
 
-              {/* Lingkaran di kanan atas */}
-              <div
-                className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-                style={{
-                  width: "15px",
-                  height: "15px",
-                }}
-              ></div>
-              <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
+            {/* Lingkaran di kanan atas */}
+            <div
+              className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
+              style={{
+                width: "15px",
+                height: "15px",
+              }}
+            ></div>
+            <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
               Peformance Health
-              </h1>
-              <div className="flex h-full">
-                <div className="bg-white w-full h-48 mt-2 ml-3 mr-3 rounded-2xl">
-                  <Testing batteryLevel="12" />   
-                  <div className="flex h-full">
-                    <img
-                      className="absolute z-20 bottom-8"
-                      src="../src/assets/picture3D/HealthMonitoring.png" // Pastikan jalur gambar benar
-                      alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-                      style={{
-                        maxHeight: "300px", // Tinggi maksimum gambar
-                        maxWidth: "50px", // Lebar maksimum gambar
-                        width: "20px", // Atur lebar otomatis untuk menjaga rasio
-                        height: "140px", // Atur tinggi otomatis untuk menjaga rasio
-                        objectFit: "cover", // Menjaga rasio aspek gambar
-                        left: "190px"
-                        }}
-                    />
-
-                    <div className="absolute z-20 bottom-7 ml-56 font-Poppins">
-                      <p className="mb-2">Max performance</p>
-                      <p className="mb-2">Stable performance</p>
-                      <p className="mb-2">Good performance</p>
-                      <p className="mb-2">Declining performance</p>
-                      <p className="mb-0">Low battery</p>
-                    </div>
-                  </div>
-                </div>
+            </h1>
+            <div className="flex h-full">
+            <div className="bg-white w-full h-48 mt-2 ml-3 mr-4  overflow-hidden rounded-2xl flex ">
+            <div className="flex justify-center item-center h-full">
+              {/* Komponen pertama - Testing */}
+              <div className="w-1/6 h-full flex items-start mt-0">
+                <Testing batteryLevel="12" />
               </div>
+
+              {/* Komponen kedua - Gambar */}
+              <div className="w-1/3 h-full flex item-center justify-center mt-4">
+                <img
+                  className="z-30"
+                  src="../src/assets/picture3D/HealthMonitoring.png"
+                  alt="3D Human"
+                  style={{
+                    maxHeight: "80%",   // Menyesuaikan tinggi kontainer
+                    maxWidth: "80%",     // Menghindari overflow lebar
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+
+              {/* Komponen ketiga - Teks */}
+              <div className="w-1/3 h-full flex flex-col justify-center text-left font-Poppins text-xs sm:text-sm md:text-base mr-4 ">
+                <p className="mb-2">Max performance</p>
+                <p className="mb-2">Stable performance</p>
+                <p className="mb-2">Good performance</p>
+                <p className="mb-2">Declining performance</p>
+                <p className="mb-0">Low battery</p>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          </div>
+
+          <div className="absolute z-5 w-1/6 h-full mt-8 relative">
+            <img
+              className=" gambar-shadow-custom"
+              src="../src/assets/picture3D/BatteryTestinng2.png" // Pastikan jalur gambar benar
+              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+              style={{
+                width: "100%",       // Lebar responsif mengikuti container
+                height: "auto",       // Menjaga rasio aspek gambar
+                maxWidth: "400px",    // Lebar maksimum untuk batas responsif
+                maxHeight: "400px",   // Tinggi maksimum untuk batas responsif
+                objectFit: "cover",   // Menjaga rasio aspek gambar
+                }}
+              />
           </div>
         </div>  
       </div>
