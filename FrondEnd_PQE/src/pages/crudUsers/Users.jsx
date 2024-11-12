@@ -174,7 +174,6 @@ const Users = () => {
   return (
     <>
       <div className="mt-4 mb-4 ml-36 flex">
-<<<<<<< HEAD
         <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex flex-col justify-center items-center">
           <h3 className="font-poppins text-40px text-red-600 text-center mt-5">
             Total User
@@ -185,61 +184,6 @@ const Users = () => {
         </div>
 
         <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
-=======
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-16 shadow-lg">
-          {/* Gambar di sebelah kiri */}
-          <img
-            src="../src/assets/menuCRUD/user.png"
-            alt="User Icon"
-            className="w-12 h-12 mr-4"
-          />
-
-          {/* Bagian teks */}
-          <div className="flex flex-col justify-center">
-            <h3 className="font-poppins text-sm text-red-600 text-center mb-1">
-              Total User
-            </h3>
-            <h1 className="font-poppins text-shadow-custom font-extrabold text-5xl text-red-600 text-center">
-              036
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-12 shadow-lg">
-          {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-          <div className="flex flex-col space-y-4 flex-grow">
-            {/* Dropdown Status */}
-            <div className="flex items-center space-x-2">
-              <label className="text-gray-600 text-sm font-poppins">
-                Status
-              </label>
-              <select className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
-              </select>
-            </div>
-
-            {/* Dropdown Role */}
-            <div className="flex items-center space-x-2">
-              <label className="text-gray-600 text-sm font-poppins">Role</label>
-              <select className="bg-green-500 text-white px-4 py-1 rounded-lg focus:outline-none">
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-                <option value="guest">Guest</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Gambar di sebelah kanan */}
-          <img
-            src="../src/assets/menuCRUD/filter.png"
-            alt="Icon"
-            className="w-20 h-20 ml-4"
-          />
-        </div>
-
->>>>>>> 64ff90fc7cbc5e2f24234231820e74268bbebdf1
         <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
           <button
             onClick={toggleModal}
@@ -367,11 +311,7 @@ const Users = () => {
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
             {/* Form untuk Add New Users */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
-<<<<<<< HEAD
               <Header  />
-=======
-              <Header />
->>>>>>> 64ff90fc7cbc5e2f24234231820e74268bbebdf1
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-5/6 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
                   <label
