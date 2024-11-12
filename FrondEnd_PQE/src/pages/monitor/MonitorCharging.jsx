@@ -115,47 +115,32 @@ const MonitorCharging = () => {
 
   return (
     <>
-      <div className="flex mt-24 relative">
+      <div className="flex flex-col lg:flex-row justify-center mt-24 relative">
         {/* Box Outdoor Station */}
-        <div className="bg-red-E01414 w-[80%] h-72 ml-7 rounded-2xl shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full lg:w-[80%] h-auto lg:h-72 min-h-[300px] px-5 py-5 mt-7 lg:mt-0 lg:px-10 lg:py-5 mx-5 lg:ml-7 rounded-2xl shadow-custom-dark relative mb-10 lg:mb-0">
           {/* Lingkaran di kiri atas */}
           <div
-            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 left-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-
           {/* Lingkaran di kanan atas */}
           <div
-            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 right-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-          <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold">
+          <h1 className=" text-center lg:-mt-2 lg:mb-4 font-poppins text-white text-xl font-bold">
             Outdoor Station
           </h1>
-          <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="60" charging="" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="40" charging="charging" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="19" charging="charging" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="87" charging="" />
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 lg:grid lg:grid-cols-4 lg:gap-4 ">
+            <Battery batteryLevel="60" charging="" />
+            <Battery batteryLevel="40" charging="charging" />
+            <Battery batteryLevel="19" charging="charging" />
+            <Battery batteryLevel="87" charging="" />
           </div>
         </div>
 
         {/* Gambar 3D */}
-        <div className="absolute mt-10 left-[56%] transform -translate-x-1/2 z-20">
+        <div className="absolute mt-10 left-1/2 transform -translate-x-1/2 z-20">
           <img
             className="gambar-shadow-custom1"
             src="../src/assets/picture3D/LeafChargingMonitor.png" // Pastikan jalur gambar benar
@@ -171,37 +156,24 @@ const MonitorCharging = () => {
         </div>
 
         {/* Box Indoor Station */}
-        <div className="bg-red-E01414 w-[80%] h-72 rounded-2xl ml-36 mr-12 shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full lg:w-[70%] h-auto lg:h-72 min-h-[300px] px-5 py-5 lg:px-10 lg:py-5 mx-5 lg:ml-20 lg:mr-10 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
-            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 left-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-
           {/* Lingkaran di kanan atas */}
           <div
-            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 right-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-          <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold">
+          <h1 className="text-center font-poppins lg:-mt-2 lg:mb-4 text-white text-xl font-bold">
             Indoor Station
           </h1>
-          <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="33" charging="" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-3 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="7" charging="charging" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-3 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="54" charging="" />
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 lg:grid lg:grid-cols-3 lg:gap-4">
+            <Battery batteryLevel="33" charging="" />
+            <Battery batteryLevel="7" charging="charging" />
+            <Battery batteryLevel="54" charging="" />
           </div>
         </div>
       </div>
