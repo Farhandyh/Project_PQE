@@ -258,7 +258,7 @@ const MonitorStorage = () => {
               style={{
                 maxWidth: "440px", // Lebar maksimum gambar
                 width: "750px", // Atur lebar otomatis untuk menjaga rasio
-                height: "490px", // Atur tinggi otomatis untuk menjaga rasio
+                height: "480px", // Atur tinggi otomatis untuk menjaga rasio
                 objectFit: "cover", // Menjaga rasio aspek gambar
               }}
             />

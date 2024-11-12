@@ -38,7 +38,7 @@ const Sidebar = () => {
   return (
     <div
       className="w-16 md:w-56 fixed left-0 top-0 z-10 h-screen bg-red-E01414 rounded-r-3xl"
-      style={{ filter: "drop-shadow(2px , 1px, 1px, red)" }}
+      style={{ boxShadow: "4px 0 10px rgba(0, 0, 0, 0.3)" }}
     >
       {/* { Logo } */}
       <div className="left-0 top-0 h-32 bg-white rounded-tr-3xl">
