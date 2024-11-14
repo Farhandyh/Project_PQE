@@ -287,9 +287,9 @@ const Monitor = () => {
 
         {/* Card 4 */}
 
-        <div className="flex w-full max-w-xl h-80 mt-0 md:-mt-6 relative">
+        <div className="flex w-full max-w-xl h-80 mt-0 md:-mt-6 lg:-mt-2 relative">
           <img
-            className="mt-14 md:mt-28 z-10 gambar-shadow-custom  max-h-[220px] max-w-[180px] w-auto h-auto object-cover
+            className="mt-14 md:mt-28 lg:mt-8 z-10 gambar-shadow-custom max-h-[220px] max-w-[180px] w-auto h-auto object-cover
                md:max-h-[200px] md:max-w-[180px]
                lg:max-h-[330px] lg:max-w-[300px]"
             src="../src/assets/picture3D/BatteryMonitorAll3D.png" // Pastikan jalur gambar benar
