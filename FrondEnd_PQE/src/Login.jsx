@@ -45,7 +45,7 @@ const Login = () => {
     <div className="flex h-screen">
       <div className="w-full bg-white h-full flex">
         <div
-          className="w-7/12 bg-red-E01414 h-full shadow-custom-dark flex p-5"
+          className="w-6/12 bg-red-E01414 h-full shadow-custom-dark flex p-5"
           style={{ clipPath: "polygon(95% 0, 0 0, 0 100%, 70% 100%)" }}
         >
           <div className="text-white font-extrabold font-sans">O</div>
@@ -53,8 +53,13 @@ const Login = () => {
             Ensure quality optimize energy, maintain your battery performance with AHM
           </h1>
         </div>
+        <img
+            src="src/assets/picture3D/LogoBatteryLogin3D.png"
+            alt="logo"
+            className="absolute left-1/4 ml-64 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/5 h-auto z-20"
+        />
         <div className="relative">
-          <div className="bg-slate-300 border-slate-400 rounded-md p-8 backdrop-filter backdrop-blur-sm bg-opacity-0 mt-20 ml-20 ">
+          <div className="bg-slate-300 border-slate-400 rounded-md p-8 backdrop-filter backdrop-blur-sm bg-opacity-0 mt-20 ml-52 ">
             <img
               src="/Honda_Logo.png"
               alt="logo"
