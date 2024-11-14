@@ -3,6 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      height: {
+        85: "21.25rem",
+        93: "23.25rem", // h-93 = 23.25rem (372px)
+        94: "23.5rem", // h-94 = 23.5rem (376px)
+      },
       colors: {
         red: {
           E01414: "#E01414", // Warna kustom
