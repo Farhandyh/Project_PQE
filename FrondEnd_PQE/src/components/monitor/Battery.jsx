@@ -2,7 +2,7 @@ import { RiFlashlightLine, RiPlugLine } from "react-icons/ri";
 
 const Battery = ({ batteryLevel, charging }) => {
   const statusText = charging ? "Charging" : "Not Charging";
-  const gradientClass =
+    const gradientClass =
     batteryLevel <= 20
       ? "bg-gradient-red"
       : batteryLevel <= 40
