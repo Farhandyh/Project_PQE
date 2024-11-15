@@ -45,7 +45,7 @@ const Sidebar = () => {
       {/* Scrollable Menu Links */}
       <div className="mt-6 space-y-6 text-white pt-8 px-4 overflow-y-auto h-[calc(100vh-10rem)]"> {/* Set the height here */}
         <ul className="space-y-6">
-          {SIDEBAR_LINKS.slice(0, 6).map((link, index) => ( // Show only first 6 items
+          {SIDEBAR_LINKS.slice(0, 7).map((link, index) => ( // Show only first 6 items
             <li
               key={index}
               className={`font-medium rounded-md py-2 px-5 hover:bg-white hover:text-red-E01414 ${

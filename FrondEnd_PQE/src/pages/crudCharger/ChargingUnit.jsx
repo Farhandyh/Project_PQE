@@ -30,6 +30,10 @@ const ChargingUnit = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [idUnitCharge,setIdUnitCharge] = useState("");
+  const [unitName,setUnitName] = useState("");
+  const [noSeriUnit,setNoSeriUnit] = useState("");
+  const [averageChargingTime,setAverageChargingTime] = useState("");
+  const [connectorTypeUnit,setConnectorType] = useState("");
   const [unitLocation,setUnitLocation] = useState("");
   const [unitStatus,setUnitStatus] = useState("");
 
@@ -52,6 +56,10 @@ const ChargingUnit = () => {
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (chargingUnit) => {
     setIdUnitCharge(chargingUnit.idUnitCharge);
+    setUnitName(chargingUnit.unitName);
+    setNoSeriUnit(chargingUnit.noSeriUnit);
+    setAverageChargingTime(chargingUnit.averageChargingTime);
+    setConnectorType(chargingUnit.connectorType);
     setUnitLocation(chargingUnit.unitLocation);
     setUnitStatus(chargingUnit.unitStatus);
     setIsUpdateOpen(true);
@@ -227,6 +235,18 @@ const ChargingUnit = () => {
                 NO
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
+                Unit Name
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Seri Unit
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Charging Time
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Connector Type
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
                 Capacity
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
@@ -244,6 +264,18 @@ const ChargingUnit = () => {
               >
                 <td className="py-2 px-2 border-b">
                   {(currentPage - 1) * itemsPerPage + index + 1}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {ChargingUnit.unitName}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {ChargingUnit.noSeriUnit}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {ChargingUnit.averageChargingTime}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {ChargingUnit.connectorTypeUnit}
                 </td>
                 <td className="py-2 px-2 border-b">
                   {ChargingUnit.unitLocation}

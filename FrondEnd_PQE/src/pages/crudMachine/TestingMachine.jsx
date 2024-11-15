@@ -32,7 +32,11 @@ const TestingMachine = () => {
   const [idMachine,setIdMachine] = useState("");
   const [machineName,setMachineName] = useState("");
   const [machineType,setMachineType] = useState("");
+  const [noSeriMachine,setNoSeriMachine] = useState("");
+  const [arusMaxMachine,setArusMaxMachine] = useState("");
+  const [ServiceLifeMachine,setServiceLifeMachine] = useState("");
   const [machineStatus,setMachineStatus] = useState("");
+  const [voltMaxMachine,setVoltMaxMachine] = useState("");
 
   const fetchMachines = async () => {
     try {
@@ -55,7 +59,11 @@ const TestingMachine = () => {
     setIdMachine(machineData.idMachine);
     setMachineName(machineData.machineName);
     setMachineType(machineData.machineType);
+    setNoSeriMachine(machineData.machineType);
+    setArusMaxMachine(machineData.machineType);
+    setServiceLifeMachine(machineData.machineType);
     setMachineStatus(machineData.machineStatus);
+    setVoltMaxMachine(machineData.machineStatus);
     setIsUpdateOpen(true);
   };
 
@@ -239,7 +247,19 @@ const TestingMachine = () => {
                 Machine Type
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
+                No Seri
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Arus Max
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Service Life
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
                 Machine Status
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Volt Max
               </th>
               <th className="py-2 px-2 border-b">Action</th>
             </tr>
@@ -256,9 +276,13 @@ const TestingMachine = () => {
                 </td>
                 <td className="py-2 px-2 border-b">{machine.machineName}</td>
                 <td className="py-2 px-2 border-b">{machine.machineType}</td>
+                <td className="py-2 px-2 border-b">{machine.noSeriMachine}</td>
+                <td className="py-2 px-2 border-b">{machine.arusMaxMachine}</td>
+                <td className="py-2 px-2 border-b">{machine.serviceLifeMachine}</td>
                 <td className="py-2 px-2 border-b">
                   {machine.machineStatus === 1 ? "Active" : "Non-Active"}
                 </td>
+                <td className="py-2 px-2 border-b">{machine.voltMaxMachine}</td>
                 <td
                   className="py-2 px-2 border-b"
                   style={{ display: "flex", justifyContent: "center" }}

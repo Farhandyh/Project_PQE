@@ -53,13 +53,16 @@ const Login = () => {
             Ensure quality optimize energy, maintain your battery performance with AHM
           </h1>
         </div>
+        
+        {/* Logo 3D akan disembunyikan pada layar kecil */}
         <img
-            src="src/assets/picture3D/LogoBatteryLogin3D.png"
-            alt="logo"
-            className="absolute left-1/4 ml-64 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/5 h-auto z-20"
+          src="src/assets/picture3D/LogoBatteryLogin3D.png"
+          alt="logo"
+          className="absolute left-1/4 ml-64 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/5 h-auto z-20 hidden md:block" // Sembunyikan pada layar kecil
         />
-        <div className="relative">
-          <div className="bg-slate-300 border-slate-400 rounded-md p-8 backdrop-filter backdrop-blur-sm bg-opacity-0 mt-20 ml-52 ">
+
+        <div className="relative w-full md:w-5/12 lg:w-4/12 xl:w-3/12 mt-20 mx-auto"> {/* Sesuaikan lebar form */}
+          <div className="bg-slate-300 border-slate-400 rounded-md p-8 backdrop-filter backdrop-blur-sm bg-opacity-0">
             <img
               src="/Honda_Logo.png"
               alt="logo"
@@ -72,7 +75,7 @@ const Login = () => {
               <div className="relative my-4">
                 <input
                   type="text"
-                  className="block w-72 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-E01414 peer"
+                  className="block w-full py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-E01414 peer"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)} // Update state
                   placeholder=" "
@@ -86,7 +89,7 @@ const Login = () => {
               <div className="relative my-4">
                 <input
                   type="password"
-                  className="block w-72 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-E01414 peer"
+                  className="block w-full py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-E01414 peer"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)} // Update state
                   placeholder=" "

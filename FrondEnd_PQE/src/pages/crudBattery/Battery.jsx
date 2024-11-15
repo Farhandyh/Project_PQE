@@ -30,6 +30,11 @@ const Battery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [idBattery,setIdBattery] = useState("");
+  const [noSeriBattery,setNoSeriBattery] = useState("");
+  const [batteryMerk,setBatteryMerk] = useState("");
+  const [batteryModel,setBatteryModel] = useState("");
+  const [batteryDayaMax,setBatteryDayaMax] = useState("");
+  const [batteryChargingTime,setBatteryChargingTime] = useState("");
   const [batteryCapacity,setBatteryCapacity] = useState("");
   const [batteryStatus,setBatteryStatus] = useState("");
 
@@ -52,6 +57,11 @@ const Battery = () => {
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (batteryData) => {
     setIdBattery(batteryData.idBattery);
+    setNoSeriBattery(batteryData.noSeriBattery);
+    setBatteryMerk(batteryData.batteryMerk);
+    setBatteryModel(batteryData.batteryModel);
+    setBatteryDayaMax(batteryData.batteryDayaMax);
+    setBatteryChargingTime(batteryData.batteryChargingTime);
     setBatteryCapacity(batteryData.batteryCapacity);
     setBatteryStatus(batteryData.batteryStatus);
     setIsUpdateOpen(true);
@@ -83,9 +93,9 @@ const Battery = () => {
     }
   };
 
-   // Toggle modal open/close
-   const toggleModal = () => setIsModalOpen(!isModalOpen);
-   const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
+  // Toggle modal open/close
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -226,6 +236,21 @@ const Battery = () => {
                 NO
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
+                Seri Battery
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Merk
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Model
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Daya Max
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Charging Time
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
                 Capacity
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
@@ -243,6 +268,21 @@ const Battery = () => {
               >
                 <td className="py-2 px-2 border-b">
                   {(currentPage - 1) * itemsPerPage + index + 1}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {battery.noSeriBattery}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {battery.batteryMerk}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {battery.batteryModel}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {battery.batteryDayaMax}
+                </td>
+                <td className="py-2 px-2 border-b">
+                  {battery.batteryChargingTime}
                 </td>
                 <td className="py-2 px-2 border-b">
                   {battery.batteryCapacity}

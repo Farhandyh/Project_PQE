@@ -30,6 +30,9 @@ const Storage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [idRack,setIdRack] = useState("");
+  const [rackName,setRackName] = useState("");
+  const [rackMaterial,setRackMaterial] = useState("");
+  const [weightMaxRack,setWeightMaxRack] = useState("");
   const [rackCapacity,setRackCapacity] = useState("");
   const [rackStatus,setRackStatus] = useState("");
 
@@ -52,6 +55,9 @@ const Storage = () => {
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (rackData) => {
     setIdRack(rackData.idRack);
+    setRackName(rackData.rackName);
+    setRackMaterial(rackData.rackMaterial);
+    setWeightMaxRack(rackData.weightMaxRack);
     setRackCapacity(rackData.rackCapacity);
     setRackStatus(rackData.rackStatus);
     setIsUpdateOpen(true);
@@ -227,6 +233,15 @@ const Storage = () => {
                 NO
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
+                Rack Name
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Rack Material
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Weight Max
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
                 Capacity
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
@@ -245,6 +260,9 @@ const Storage = () => {
                 <td className="py-2 px-2 border-b">
                   {(currentPage - 1) * itemsPerPage + index + 1}
                 </td>
+                <td className="py-2 px-2 border-b">{rack.rackName}</td>
+                <td className="py-2 px-2 border-b">{rack.rackMaterial}</td>
+                <td className="py-2 px-2 border-b">{rack.weightMaxRack}</td>
                 <td className="py-2 px-2 border-b">{rack.rackCapacity}</td>
                 <td className="py-2 px-2 border-b">
                   {rack.rackStatus === 1 ? "Active" : "Non-Active"}
