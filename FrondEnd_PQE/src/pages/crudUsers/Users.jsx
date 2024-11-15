@@ -434,7 +434,7 @@ const Users = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-center mt-4 space-x-4">
+                  <div className="flex justify-center mt-10 space-x-10">
                     <button
                       type="submit"
                       className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
@@ -455,105 +455,100 @@ const Users = () => {
         </div>
       )}
 
-
       {/* modal untuk update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk Add New Battery */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+          <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
+            {/* Form for Add New Users */}
+            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-5/6 mt-5 mb-6">
-                <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
-                  <label
-                    className="block text-black ml-2 mb-1 mt-3"
-                    htmlFor="id-users"
-                  >
-                    Id Users
-                  </label>
-                  <TextField
-                    id="id-users"
-                    value={idUsers}
-                    onChange={(e) => setIdUsers(e.target.value)}
-                    className="w-full mb-4"
-                  />
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
+                <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
+                  <div className="flex space-x-6">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-users">
+                        Id Users
+                      </label>
+                      <TextField
+                        id="id-users"
+                        value={idUsers}
+                        onChange={(e) => setIdUsers(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="users-name">
+                        Name
+                      </label>
+                      <TextField
+                        id="users-name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
 
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="users-name"
-                  >
-                    Name
-                  </label>
-                  <TextField
-                    id="users-name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full mb-4"
-                  />
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="users-username">
+                        Username
+                      </label>
+                      <TextField
+                        id="users-username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="users-password">
+                        Password
+                      </label>
+                      <TextField
+                        id="users-password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
 
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="users-username"
-                  >
-                    Username
-                  </label>
-                  <TextField
-                    id="users-username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="w-full mb-4"
-                  />
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="users-email">
+                        Email
+                      </label>
+                      <TextField
+                        id="users-email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="users-role">
+                        Role
+                      </label>
+                      <TextField
+                        id="users-role"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
 
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="users-password"
-                  >
-                    Password
-                  </label>
-                  <TextField
-                    id="users-password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full mb-4"
-                  />
-
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="users-email"
-                  >
-                    Email
-                  </label>
-                  <TextField
-                    id="users-email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full mb-4"
-                  />
-
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="users-role"
-                  >
-                    Role
-                  </label>
-                  <TextField
-                    id="users-role"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="w-full mb-4"
-                  />
-                  <br />
-
-                  <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
+                  <div className="flex justify-center mt-10 space-x-10">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleUpdate}
-                      className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24"
+                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
                     >
                       Cancel
                     </button>
