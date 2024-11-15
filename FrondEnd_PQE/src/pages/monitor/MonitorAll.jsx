@@ -102,9 +102,9 @@ const Monitor = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-4">
-        <div className="bg-red-E01414 w-full max-w-md h-auto mt-32 sm:mt-32 lg:mt-24 ml-5 p-4 rounded-2xl shadow-custom-dark relative">
+    <div className="flex flex-col">
+      <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-0 md:ml-7">
+        <div className="bg-red-E01414 w-full max-w-md h-auto mt-32 sm:mt-32 lg:mt-24 ml-5 lg:ml-0 p-4 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 bg-white rounded-full"
@@ -121,7 +121,7 @@ const Monitor = () => {
               height: "15px",
             }}
           ></div>
-          <h1 className="text-center font-poppins text-white text-lg font-black">
+          <h1 className="text-center font-poppins text-white text-lg md:text-16px font-black">
             Battery Storage Monitoring
           </h1>
           <div className="bg-white w-full h-auto p-3 mt-2 rounded-3xl shadow-lg">
@@ -230,7 +230,7 @@ const Monitor = () => {
           </div>
         </div>
 
-        <div className="bg-red-E01414 w-full max-w-100 h-72 mt-4 sm:mt-32 lg:mt-24 ml-5 rounded-2xl mr-7 shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full max-w-100 h-85 mt-4 sm:mt-32 lg:mt-24 ml-5 rounded-2xl mr-7 shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -247,7 +247,7 @@ const Monitor = () => {
               height: "15px",
             }}
           ></div>
-          <h1 className="text-center mt-2 font-poppins text-white text-xl font-black">
+          <h1 className="text-center mt-2 font-poppins text-white text-xl md:text-16px font-black">
             Battery Charging Line Chart
           </h1>
           <div className="bg-white w-6/6 h-3/4 mr-5 mt-3 ml-5 rounded-2xl flex items-center justify-center">
@@ -258,7 +258,7 @@ const Monitor = () => {
 
       <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-4">
         {/* Card 3 */}
-        <div className="bg-red-E01414 w-full max-w-4xl h-72 mt-4 sm:mt-20 lg:mt-10 ml-5 lg:ml-0 p-4 rounded-2xl shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full max-w-4xl h-72 mt-4 sm:mt-20 md:mt-6 lg:mt-10 ml-5 lg:ml-0 p-4 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
@@ -277,8 +277,8 @@ const Monitor = () => {
             }}
           ></div>
 
-          <h1 className="text-center items-start -mt-2 font-poppins text-white text-xl font-black">
-            Battery Testing Stacked Bar Chart
+          <h1 className="text-center items-start -mt-2 font-poppins text-white text-xl md:text-16px font-black">
+            Battery Testing Bar Chart
           </h1>
           <div className="bg-white w-6/6 h-5/6 mr-5 mt-4 ml-5 rounded-2xl flex items-center justify-center">
             <Bar data={barData} options={barOptions} />
@@ -286,22 +286,18 @@ const Monitor = () => {
         </div>
 
         {/* Card 4 */}
-        <div className="flex w-full max-w-xl h-80 relative">
+
+        <div className="flex w-full max-w-xl h-80 mt-0 md:-mt-6 lg:-mt-2 relative">
           <img
-            className="left-5 mt-14 w-5 h-5 z-10 gambar-shadow-custom"
+            className="mt-14 md:mt-28 lg:mt-8 z-10 gambar-shadow-custom max-h-[220px] max-w-[180px] w-auto h-auto object-cover
+               md:max-h-[200px] md:max-w-[180px]
+               lg:max-h-[330px] lg:max-w-[300px]"
             src="../src/assets/picture3D/BatteryMonitorAll3D.png" // Pastikan jalur gambar benar
             alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-            style={{
-              maxHeight: "330px", // Tinggi maksimum gambar
-              maxWidth: "300px", // Lebar maksimum gambar
-              width: "100%", // Lebar gambar 100% dari kontainer
-              height: "auto", // Tinggi otomatis untuk menjaga rasio
-              objectFit: "cover", // Menjaga rasio aspek gambar
-            }}
           />
 
-          <div className="absolute left-44 sm:left-24 md:left-32 lg:left-40">
-            <div className="bg-red-E01414 w-[90%] sm:w-[110%] lg:w-[130%] h-32 mt-12 mr-7 ml-12 rounded-2xl shadow-custom-dark relative">
+          <div className="absolute left-24 sm:left-24 md:left-32 lg:left-36">
+            <div className="bg-red-E01414 w-[100%] sm:w-[110%] lg:w-[135%] h-32 mt-12 mr-7 ml-12 md:ml-0 lg:ml-12 rounded-2xl shadow-custom-dark relative">
               {/* Lingkaran di kiri atas */}
               <div
                 className="absolute top-2 right-3 bg-white rounded-full"
@@ -311,13 +307,13 @@ const Monitor = () => {
                 }}
               ></div>
 
-              <h1 className="text-center mt-2 font-poppins text-white text-16px font-black">
+              <h1 className="text-center mt-2 font-poppins text-white text-16px md:text-16px lg:text-16px font-black">
                 kWh Used Today
               </h1>
               <div className="bg-white w-[90%] h-20 mx-5 mt-2 rounded-2xl"></div>
             </div>
 
-            <div className="bg-red-E01414 w-[90%] sm:w-[110%] md:w-[110%] lg:w-[130%] h-32 mt-5 mr-7 ml-12 rounded-2xl shadow-custom-dark relative">
+            <div className="bg-red-E01414 w-[100%] sm:w-[110%] md:w-[110%] lg:w-[135%] h-32 mt-5 mr-7 ml-12 md:ml-0 lg:ml-12 rounded-2xl shadow-custom-dark relative">
               {/* Lingkaran di kanan atas */}
               <div
                 className="absolute top-2 right-3 bg-white rounded-full"
@@ -327,7 +323,7 @@ const Monitor = () => {
                 }}
               ></div>
 
-              <h1 className="text-center mt-2 font-poppins text-white text-16px font-black">
+              <h1 className="text-center mt-2 font-poppins text-white text-16px md:text-16px lg:text-16px font-black">
                 Battery Charging Today
               </h1>
               <div className="bg-white w-[90%] h-20 mx-5 mt-2 rounded-2xl"></div>
@@ -335,7 +331,7 @@ const Monitor = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

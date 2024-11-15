@@ -3,6 +3,21 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      height: {
+        66: "17.0rem",
+        67: "17.50rem",
+        68: "18.0rem",
+        85: "21.25rem",
+        93: "23.25rem", // h-93 = 23.25rem (372px)
+        94: "23.5rem", // h-94 = 23.5rem (376px)
+      },
+      width: {
+        "full-5": "calc(100% - 5rem)", // Full width dikurangi 5rem (80px)
+        "full-4": "calc(100% - 4rem)", // Full width dikurangi 4rem (80px)
+        "full-3": "calc(100% - 3rem)", // Full width dikurangi 3rem (80px)
+        "full-2": "calc(100% - 2rem)", // Full width dikurangi 2rem (80px)
+        "full-1": "calc(100% - 1rem)", // Full width dikurangi 1rem (80px)
+      },
       colors: {
         red: {
           E01414: "#E01414", // Warna kustom
@@ -66,6 +81,18 @@ export default {
       animation: {
         charging: "charging 1.2s infinite alternate",
         "low-battery": "low-battery 1.2s infinite alternate",
+      },
+      screens: {
+        "custom-portrait": {
+          raw: "(max-width: 810px) and (orientation: portrait)",
+        },
+        "custom-landscape": {
+          raw: "(max-width: 1080px) and (orientation: landscape)",
+        },
+        "custom-lg": { raw: "(max-width: 1080px) and (min-width: 810px)" }, // Resolusi 1080x810
+        "custom-lg-potrait": {
+          raw: "(max-width: 810px) and (min-width: 1080px)",
+        }, // Resolusi 1080x810
       },
     },
   },
