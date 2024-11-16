@@ -71,7 +71,7 @@ const Sidebar = () => {
         <img
           src="/Honda_Logo.png"
           alt="logo"
-          className="pt-8 px-4 mb-10 ml-7 w-40 hidden md:flex"
+          className="pt-8 px-4 mt-10 ml-7 w-40 hidden md:flex"
         />
         <img
           src="/Honda_Logo.png"
