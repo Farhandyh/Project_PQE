@@ -63,7 +63,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="w-16 md:w-56 fixed left-0 top-0 z-10 h-screen bg-red-E01414 rounded-r-3xl"
+      className="w-56 md:w-56 fixed left-0 top-0 z-10 h-screen bg-red-E01414 rounded-r-3xl"
       style={{ boxShadow: "4px 0 10px rgba(0, 0, 0, 0.3)" }}
     >
       {/* Logo */}
@@ -76,7 +76,7 @@ const Sidebar = () => {
         <img
           src="/Honda_Logo.png"
           alt="logo"
-          className="pt-8 px-4 mb-10 ml-7 w-8 flex md:hidden"
+          className="pt-8 px-4 mt-10 ml-7 w-40 flex md:hidden"
         />
       </div>
 
@@ -87,7 +87,7 @@ const Sidebar = () => {
             <li key={index}>
               <Link
                 to={link.path}
-                className={`flex items-center justify-center md:justify-start md:space-x-6 transition-all duration-300 ${
+                className={`flex items-center justify-start space-x-6 transition-all duration-300 ${
                   activeLink === link.id
                     ? "text-red-E01414 bg-white rounded-full"
                     : "hover:bg-white hover:text-red-E01414 hover:rounded-full"
@@ -103,7 +103,8 @@ const Sidebar = () => {
                 >
                   {link.icon()}
                 </span>
-                <span className="hidden md:flex text-sm">{link.name}</span>
+                {/* Teks tetap terlihat pada layar kecil maupun besar */}
+                <span className="text-sm">{link.name}</span>
               </Link>
             </li>
           ))}
@@ -111,33 +112,29 @@ const Sidebar = () => {
           {/* Dropdown Menu */}
           <li>
             <div
-              className="flex items-center justify-center md:justify-start md:space-x-6 cursor-pointer hover:bg-white hover:text-red-600 hover:rounded-full transition-all duration-300 border-b-2 border-transparent hover:border-red-600"
+              className="flex items-center justify-start space-x-6 cursor-pointer hover:bg-white hover:text-red-600 hover:rounded-full transition-all duration-300 border-b-2 border-transparent hover:border-red-600"
               onClick={toggleDropdown}
             >
               <span className="flex items-center justify-center w-10 h-10 bg-white text-red-600 rounded-full">
                 {FaCarBattery()}
               </span>
-              <span className="hidden md:flex text-sm font-semibold">
-                Machine
-              </span>
-              <span className="hidden md:flex">
+              <span className="text-sm font-semibold">Machine</span>
+              <span>
                 {isDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
               </span>
             </div>
             {isDropdownOpen && (
               <ul className="ml-8 mt-2 space-y-2 relative">
-                {/* Garis vertikal putih */}
                 <div className="absolute top-0 left-[-16px] h-full border-l-2 border-white"></div>
 
                 <div className="pt-2">
                   {SIDEBAR_LINKS.slice(4, 6).map((link, index) => (
                     <li key={index} className="relative">
-                      {/* Garis horizontal yang terhubung ke icon submenu */}
                       <div className="absolute top-0 left-[-16px] h-full w-[calc(100%+16px)] border-t-2 border-white"></div>
 
                       <Link
                         to={link.path}
-                        className={`flex items-center justify-center md:justify-start md:space-x-6 transition-all duration-300 ${
+                        className={`flex items-center justify-start space-x-2 transition-all duration-300 ${
                           activeLink === link.id
                             ? "text-red-600 bg-white rounded-full"
                             : "hover:bg-white hover:text-red-600 hover:rounded-full"
@@ -153,9 +150,7 @@ const Sidebar = () => {
                         >
                           {link.icon()}
                         </span>
-                        <span className="hidden md:flex text-sm">
-                          {link.name}
-                        </span>
+                        <span className="text-sm">{link.name}</span>
                       </Link>
                     </li>
                   ))}
@@ -168,7 +163,7 @@ const Sidebar = () => {
             <li key={index}>
               <Link
                 to={link.path}
-                className={`flex items-center justify-center md:justify-start md:space-x-6 transition-all duration-300 ${
+                className={`flex items-center justify-start space-x-6 transition-all duration-300 ${
                   activeLink === link.id
                     ? "text-red-E01414 bg-white rounded-full"
                     : "hover:bg-white hover:text-red-E01414 hover:rounded-full"
@@ -184,7 +179,7 @@ const Sidebar = () => {
                 >
                   {link.icon()}
                 </span>
-                <span className="hidden md:flex text-sm">{link.name}</span>
+                <span className="text-sm">{link.name}</span>
               </Link>
             </li>
           ))}
@@ -196,7 +191,7 @@ const Sidebar = () => {
         <div className="w-full absolute bottom-5 left-0 px-4 py-2 cursor-pointer text-center">
           <p className="flex items-center space-x-2 text-s text-white font-bold py-2 px-5 hover:bg-white rounded-full hover:text-red-E01414">
             <HiOutlineLogin />
-            <span className="hidden md:inline">Log Out</span>
+            <span>Log Out</span>
           </p>
         </div>
       </Link>
