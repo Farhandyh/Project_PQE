@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { useState } from "react";
 import Battery from "../../components/monitor/Battery";
+import "../../styleCss/MonitorCharging.css";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -115,49 +116,34 @@ const MonitorCharging = () => {
 
   return (
     <>
-      <div className="flex mt-24 relative">
+      <div className="flex flex-col custom-lg:flex-col lg:flex-row justify-center mt-16 lg:mt-24 relative">
         {/* Box Outdoor Station */}
-        <div className="bg-red-E01414 w-[80%] h-72 ml-7 rounded-2xl shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full lg:w-[80%] h-auto lg:h-72 min-h-[300px] px-5 py-5 mt-7 custom-lg:w-full-3 lg:mt-0 lg:px-10 lg:py-5 mx-5 lg:ml-7 rounded-2xl shadow-custom-dark relative mb-10 lg:mb-0">
           {/* Lingkaran di kiri atas */}
           <div
-            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 left-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-
           {/* Lingkaran di kanan atas */}
           <div
-            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 right-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-          <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold">
+          <h1 className=" text-center lg:-mt-2 lg:mb-4 font-poppins text-white text-xl font-bold">
             Outdoor Station
           </h1>
-          <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="60" charging="" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="40" charging="charging" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-1 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="19" charging="charging" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="87" charging="" />
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 lg:grid lg:grid-cols-4 lg:gap-4 ">
+            <Battery batteryLevel="60" charging="" />
+            <Battery batteryLevel="40" charging="charging" />
+            <Battery batteryLevel="19" charging="charging" />
+            <Battery batteryLevel="87" charging="" />
           </div>
         </div>
 
         {/* Gambar 3D */}
-        <div className="absolute mt-10 left-[56%] transform -translate-x-1/2 z-20">
+        <div className="absolute mt-10 left-[calc(50%-(-40px))] lg:left-[calc(50%-(-40px))] transform -translate-x-1/2 z-20  hidden lg:block">
           <img
-            className="gambar-shadow-custom1"
+            className="gambar-shadow-custom1 hidden lg:block custom-portrait:hidden custom-landscape:hidden"
             src="../src/assets/picture3D/LeafChargingMonitor.png" // Pastikan jalur gambar benar
             alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
             style={{
@@ -171,131 +157,101 @@ const MonitorCharging = () => {
         </div>
 
         {/* Box Indoor Station */}
-        <div className="bg-red-E01414 w-[80%] h-72 rounded-2xl ml-36 mr-12 shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full lg:w-[70%] h-auto lg:h-72 min-h-[300px] px-5 py-5 lg:px-10 lg:py-5 mx-5 lg:ml-20 custom-lg:w-full-3 custom-lg:ml-7 custom-lg:mt-5 lg:mr-10 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
-            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 left-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-
           {/* Lingkaran di kanan atas */}
           <div
-            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
+            className="absolute top-2 right-3 bg-white rounded-full"
+            style={{ width: "15px", height: "15px" }}
           ></div>
-          <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold">
+          <h1 className="text-center font-poppins lg:-mt-2 lg:mb-4 text-white text-xl font-bold">
             Indoor Station
           </h1>
-          <div className="flex h-full">
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-5 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="33" charging="" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-3 mt-2 ml-3 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="7" charging="charging" />
-            </div>
-            <div className="bg-white w-40 h-3/4 mr-5 mt-2 ml-3 rounded-3xl p-1 flex flex-col items-center">
-              <Battery batteryLevel="54" charging="" />
-            </div>
+          <div className="flex flex-wrap justify-center gap-4 lg:grid lg:grid-cols-3 lg:gap-4">
+            <Battery batteryLevel="33" charging="" />
+            <Battery batteryLevel="7" charging="charging" />
+            <Battery batteryLevel="54" charging="" />
           </div>
         </div>
       </div>
 
-      <div className="flex">
-        <div className="bg-red-E01414 w-[65%] h-80 mt-5 ml-7 rounded-2xl mr-7 shadow-custom-dark relative">
+      <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-between ml-5 lg:ml-0 custom-landscape:ml-0 items-start gap-4">
+        {/* Chart Container */}
+        <div className="bg-red-E01414 w-full max-w-4xl h-auto custom-lg:h-[100%] mt-5 lg:ml-7 custom-lg:max-w-2xl p-4 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
-          <div
-            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
-          ></div>
-
+          <div className="absolute top-2 left-3 w-4 h-4 bg-white rounded-full"></div>
           {/* Lingkaran di kanan atas */}
-          <div
-            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
-          ></div>
+          <div className="absolute top-2 right-3 w-4 h-4 bg-white rounded-full"></div>
 
-          <h1 className="text-center mt-2 font-poppins text-white text-xl font-black">
+          {/* Judul */}
+          <h1 className="text-center mt-2 lg:-mt-2 font-poppins text-white text-base md:text-lg lg:text-xl font-black">
             Battery Charging Line Chart
           </h1>
-          <div className="bg-white w-6/6 h-3/4 mr-5 mt-3 ml-5 rounded-2xl flex items-center justify-center">
+
+          {/* Chart */}
+          <div className="bg-white w-full h-[300px] custom-landscape:h-[90%]  lg:h-68 mt-3 mx-auto px-4 py-2 rounded-2xl flex items-center justify-center">
             <Line data={lineData} options={lineOptions} />
           </div>
         </div>
 
-        <div className="bg-red-E01414 w-2/6 h-[320px] mt-5 mr-11 rounded-2xl relative shadow-custom-dark">
+        {/* Log Container */}
+        <div className="bg-red-E01414 w-full lg:w-2/6 custom-lg:mr-5 h-auto custom-lg:h-[340px] lg:h-[350px] mt-5 lg:mr-11 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
-          <div
-            className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
-          ></div>
-
+          <div className="absolute top-2 left-3 w-4 h-4 bg-white rounded-full"></div>
           {/* Lingkaran di kanan atas */}
-          <div
-            className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"
-            style={{
-              width: "15px",
-              height: "15px",
-            }}
-          ></div>
+          <div className="absolute top-2 right-3 w-4 h-4 bg-white rounded-full"></div>
 
-          <h1 className="text-center mt-2 font-poppins text-white text-xl font-bold">
+          {/* Judul */}
+          <h1 className="text-center mt-2 font-poppins text-white text-base md:text-lg lg:text-xl font-bold">
             Log in/Out Charging
           </h1>
-          <div className="bg-white w-6/6 h-[265px] mr-5 mt-2 ml-5 rounded-2xl relative">
-            <table className="absolute top-2 left-0 right-0 w-[95%] text-center bg-white rounded-2xl overflow-hidden mx-auto h-2">
-              <thead>
-                <tr>
-                  <th className="px-6 bg-red-700  text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-gray-200">
-                    No
-                  </th>
-                  <th className="px-6 bg-red-700  text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-gray-200">
-                    Time In
-                  </th>
-                  <th className="px-6 bg-red-700  text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-gray-200">
-                    Time Out
-                  </th>
-                  <th className="px-6 bg-red-700  text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-gray-200">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {attendanceData.map((entry) => (
-                  <tr
-                    key={entry.id}
-                    className="border-b border-gray-200 bg-gray-EDD7D7"
-                  >
-                    <td className="px-6 text-sm font-poppins font-light text-black">
-                      {entry.id}
-                    </td>
-                    <td className="px-6 text-sm font-poppins font-light text-black">
-                      {entry.timeIn}
-                    </td>
-                    <td className="px-6 text-sm font-poppins font-light text-black">
-                      {entry.timeOut}
-                    </td>
-                    <td className="px-6 text-sm font-poppins font-light text-black">
-                      {entry.status}
-                    </td>
+
+          <div className="bg-white w-[90%] custom-landscape:w-[85%] h-auto mx-auto mt-2 rounded-3xl shadow-lg">
+            <div className="overflow-x-auto">
+              <table className="w-full text-center bg-white rounded-2xl overflow-hidden">
+                <thead>
+                  <tr>
+                    <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
+                      No
+                    </th>
+                    <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
+                      Time In
+                    </th>
+                    <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
+                      Time Out
+                    </th>
+                    <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
+                      Status
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {attendanceData.map((entry) => (
+                    <tr
+                      key={entry.id}
+                      className="border-b border-gray-200 bg-gray-100"
+                    >
+                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                        {entry.id}
+                      </td>
+                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                        {entry.timeIn}
+                      </td>
+                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                        {entry.timeOut}
+                      </td>
+                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                        {entry.status}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

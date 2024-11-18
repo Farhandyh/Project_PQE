@@ -1,0 +1,24 @@
+/* Menambahkan scrollbar tipis */
+.scrollable-menu {
+  max-height: 350px; /* Sesuaikan tinggi dengan kebutuhan */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Menampilkan scrollbar dengan ukuran lebih tipis */
+.scrollable-menu::-webkit-scrollbar {
+  width: 6px; /* Mengatur lebar scrollbar menjadi tipis */
+  height: 6px; /* Mengatur tinggi scrollbar horizontal (jika ada) */
+}
+
+/* Mengubah gaya scrollbar */
+.scrollable-menu::-webkit-scrollbar-thumb {
+  background-color: #ffffff; /* Warna scrollbar putih */
+  border-radius: 10px; /* Membuat sudut scrollbar lebih bulat */
+}
+
+/* Gaya untuk scrollbar pada browser Firefox */
+.scrollable-menu {
+  scrollbar-width: thin; /* Mengatur lebar scrollbar menjadi tipis */
+  scrollbar-color: #ffffff transparent; /* Warna scrollbar putih */
+}

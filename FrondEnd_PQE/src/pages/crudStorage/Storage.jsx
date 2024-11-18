@@ -30,6 +30,9 @@ const Storage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
   const [idRack,setIdRack] = useState("");
+  const [rackName,setRackName] = useState("");
+  const [rackMaterial,setRackMaterial] = useState("");
+  const [weightMaxRack,setWeightMaxRack] = useState("");
   const [rackCapacity,setRackCapacity] = useState("");
   const [rackStatus,setRackStatus] = useState("");
 
@@ -52,6 +55,9 @@ const Storage = () => {
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (rackData) => {
     setIdRack(rackData.idRack);
+    setRackName(rackData.rackName);
+    setRackMaterial(rackData.rackMaterial);
+    setWeightMaxRack(rackData.weightMaxRack);
     setRackCapacity(rackData.rackCapacity);
     setRackStatus(rackData.rackStatus);
     setIsUpdateOpen(true);
@@ -156,34 +162,38 @@ const Storage = () => {
   return (
     <>
       <div className="mt-4 mb-4 ml-36 flex">
+<<<<<<< HEAD
         <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-16 shadow-lg">
+=======
+        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
+>>>>>>> main
           {/* Gambar di sebelah kiri */}
           <img
             src="../src/assets/menuCRUD/storage.png"
             alt="Storage Icon"
-            className="w-12 h-12 mr-4"
+            className="w-36 h-auto"
           />
 
           {/* Bagian teks */}
           <div className="flex flex-col justify-center">
-            <h3 className="font-poppins text-sm text-red-600 text-center mb-1">
-              Total Storage
+            <h3 className="font-poppins text-2xl font-semibold text-red-600 text-center mb-1">
+              Storage
             </h3>
-            <h1 className="font-poppins text-shadow-custom font-extrabold text-5xl text-red-600 text-center">
+            <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl text-red-600 text-center">
               036
             </h1>
           </div>
         </div>
 
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-12 shadow-lg">
+        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
           {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-          <div className="flex flex-col space-y-4 flex-grow">
+          <div className="flex flex-col space-y-3">
             {/* Dropdown Status */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-7">
               <label className="text-gray-600 text-sm font-poppins">
                 Status
               </label>
-              <select className="bg-red-500 text-white px-4 py-1 rounded-lg focus:outline-none">
+              <select className="bg-red-500 text-white px-2 py-1 w-28 text-center rounded-lg focus:outline-none">
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
                 <option value="suspended">Suspended</option>
@@ -191,9 +201,11 @@ const Storage = () => {
             </div>
 
             {/* Dropdown Role */}
-            <div className="flex items-center space-x-2">
-              <label className="text-gray-600 text-sm font-poppins">Capacity</label>
-              <select className="bg-green-500 text-white px-4 py-1 rounded-lg focus:outline-none">
+            <div className="flex items-center space-x-3">
+              <label className="text-gray-600 text-sm font-poppins">
+                Capacity
+              </label>
+              <select className="bg-green-500 text-white px-2 w-28 text-center py-1 rounded-lg focus:outline-none">
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
                 <option value="guest">Guest</option>
@@ -205,7 +217,7 @@ const Storage = () => {
           <img
             src="../src/assets/menuCRUD/filter.png"
             alt="Icon"
-            className="w-20 h-20 ml-4"
+            className="w-32 h-auto ml-4"
           />
         </div>
         <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
@@ -223,6 +235,15 @@ const Storage = () => {
             <tr className="bg-red-E01414 text-white">
               <th className="py-2 px-2 border-b border-r border-gray-300">
                 NO
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Rack Name
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Rack Material
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Weight Max
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
                 Capacity
@@ -243,6 +264,9 @@ const Storage = () => {
                 <td className="py-2 px-2 border-b">
                   {(currentPage - 1) * itemsPerPage + index + 1}
                 </td>
+                <td className="py-2 px-2 border-b">{rack.rackName}</td>
+                <td className="py-2 px-2 border-b">{rack.rackMaterial}</td>
+                <td className="py-2 px-2 border-b">{rack.weightMaxRack}</td>
                 <td className="py-2 px-2 border-b">{rack.rackCapacity}</td>
                 <td className="py-2 px-2 border-b">
                   {rack.rackStatus === 1 ? "Active" : "Non-Active"}

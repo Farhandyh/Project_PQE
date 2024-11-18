@@ -108,7 +108,7 @@ const MonitorStorage = () => {
             style={{
               width: "15px",
               height: "15px",
-            }}
+              }}
           ></div>
 
           {/* Lingkaran di kanan atas */}
@@ -122,31 +122,32 @@ const MonitorStorage = () => {
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
             Total Battery
           </h1>
-
-          <img
-              className="absolute mt-2 left-8 w-5 h-5 z-10 gambar-shadow-custom"
-              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
-              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-              style={{
-                maxHeight: "120px", // Tinggi maksimum gambar
-                maxWidth: "100px", // Lebar maksimum gambar
-                width: "300px", // Atur lebar otomatis untuk menjaga rasio
-                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
-                objectFit: "cover", // Menjaga rasio aspek gambar
-              }}
-            />
-
           <div className="flex h-full">
-            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
-            <div className="flex flex-col items-end mr-32">
-              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
-              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
-                Battery Availability
-              </h2>
-              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
-                036
-              </h1>
-            </div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl overflow-hidden">
+              <div className="flex justify-between">
+                <img
+                  className=" left-8 w-1/2 h-full z-10 gambar-shadow-custom"
+                  src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+                  alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+                  style={{
+                    maxHeight: "120px", // Tinggi maksimum gambar
+                    maxWidth: "100px", // Lebar maksimum gambar
+                    width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                    height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                    objectFit: "cover", // Menjaga rasio aspek gambar
+                  }}
+                />
+
+                <div className="flex flex-col items-start mr-3 mt-2 h-full">
+                  {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+                  <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
+                    Battery Availability
+                  </h2>
+                  <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                    026
+                  </h1>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -156,7 +157,7 @@ const MonitorStorage = () => {
             style={{
               width: "15px",
               height: "15px",
-            }}
+              }}
           ></div>
 
           {/* Lingkaran di kanan atas */}
@@ -168,33 +169,34 @@ const MonitorStorage = () => {
             }}
           ></div>
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-            Total Battery
+            Battery In Storage
           </h1>
-
-          <img
-              className="absolute mt-2 left-8 w-5 h-5 z-10 gambar-shadow-custom"
-              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
-              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-              style={{
-                maxHeight: "120px", // Tinggi maksimum gambar
-                maxWidth: "100px", // Lebar maksimum gambar
-                width: "300px", // Atur lebar otomatis untuk menjaga rasio
-                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
-                objectFit: "cover", // Menjaga rasio aspek gambar
-              }}
-            />
-
           <div className="flex h-full">
-            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
-            <div className="flex flex-col items-end mr-32">
-              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
-              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
-                Battery Availability
-              </h2>
-              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
-                026
-              </h1>
-            </div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl overflow-hidden">
+              <div className="flex justify-between">
+                <img
+                  className=" left-8 w-1/2 h-full z-10 gambar-shadow-custom"
+                  src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+                  alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+                  style={{
+                    maxHeight: "120px", // Tinggi maksimum gambar
+                    maxWidth: "100px", // Lebar maksimum gambar
+                    width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                    height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                    objectFit: "cover", // Menjaga rasio aspek gambar
+                  }}
+                />
+
+                <div className="flex flex-col items-start mr-3 mt-2 h-full">
+                  {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+                  <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
+                    Battery Availability
+                  </h2>
+                  <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                    026
+                  </h1>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -204,7 +206,7 @@ const MonitorStorage = () => {
             style={{
               width: "15px",
               height: "15px",
-            }}
+              }}
           ></div>
 
           {/* Lingkaran di kanan atas */}
@@ -216,33 +218,33 @@ const MonitorStorage = () => {
             }}
           ></div>
           <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-            Total Battery
+            Battery In Use
           </h1>
-
-          <img
-              className="absolute mt-2 left-8 w-5 h-5 z-10 gambar-shadow-custom"
-              src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
-              alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
-              style={{
-                maxHeight: "120px", // Tinggi maksimum gambar
-                maxWidth: "100px", // Lebar maksimum gambar
-                width: "300px", // Atur lebar otomatis untuk menjaga rasio
-                height: "150px", // Atur tinggi otomatis untuk menjaga rasio
-                objectFit: "cover", // Menjaga rasio aspek gambar
-              }}
-            />
-
           <div className="flex h-full">
-            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
-            <div className="flex flex-col items-end mr-32">
-              {/* Tambahkan margin untuk jarak antara gambar dan teks */}
-              <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
-                Battery Availability
-              </h2>
-              <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
-                010
-              </h1>
-            </div>
+            <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl overflow-hidden">
+              <div className="flex justify-between">
+                <img
+                  className=" left-8 w-1/2 h-full z-10 gambar-shadow-custom"
+                  src="../src/assets/picture3D/BatteryStorage3.png" // Pastikan jalur gambar benar
+                  alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
+                  style={{
+                    maxHeight: "120px", // Tinggi maksimum gambar
+                    maxWidth: "100px", // Lebar maksimum gambar
+                    width: "300px", // Atur lebar otomatis untuk menjaga rasio
+                    height: "150px", // Atur tinggi otomatis untuk menjaga rasio
+                    objectFit: "cover", // Menjaga rasio aspek gambar
+                  }}
+                />
+                <div className="flex flex-col items-start mr-3 mt-2 h-full">
+                  {/* Tambahkan margin untuk jarak antara gambar dan teks */}
+                  <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
+                    Battery Availability
+                  </h2>
+                  <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
+                    026
+                  </h1>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -289,17 +291,17 @@ const MonitorStorage = () => {
               }}
             />
             <h1 className="text-center mt-4 font-poppins text-white text-xl font-black">
-              Battery on storage
+              Storang Space
             </h1>
             <div className="flex h-full">
             <div className="bg-white w-full h-32 mt-2 ml-3 mr-3 rounded-2xl">
             <div className="flex flex-col items-end mr-64">
               {/* Tambahkan margin untuk jarak antara gambar dan teks */}
               <h2 className="font-poppins font-extrabold text-16px text-red-800 text-right mr-2">
-                Battery Availability
+                Space Availability
               </h2>
               <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-800 text-right">
-                036
+                014
               </h1>
             </div>
             </div>

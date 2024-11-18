@@ -5,74 +5,87 @@ import { useState } from "react";
 
 const Login = () => {
   console.log("Login component rendered");
-  const navigate = useNavigate(); // Tambahkan useNavigate
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await fetch('http://localhost:8000/api/login', {
+      const response = await fetch("http://localhost:8000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }), // Data login dalam format JSON
+        body: JSON.stringify({ username, password }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Login failed");
       }
-  
-      const data = await response.json(); // Mendapatkan data JSON dari response
+
+      const data = await response.json();
       console.log("Login successful:", data);
-  
-      // Cek role dan navigasi ke halaman yang sesuai
+
       if (data.role === "2") {
         navigate("/dashboard");
       } else {
         navigate("/monitor");
       }
-  
     } catch (error) {
       console.error("Error saat login:", error.message);
       alert("Username atau password salah!");
     }
-  };  
+  };
 
   return (
-    <div className="flex h-screen">
-      <div className="w-full bg-white h-full flex">
+    <div className="flex min-h-screen bg-white">
+      <div className="w-full bg-white h-full flex flex-grow sm:bg-white sm:h-auto">
+        {/* Sidebar for larger screens */}
         <div
-          className="w-7/12 bg-red-E01414 h-full shadow-custom-dark flex p-5"
+          className="w-6/12 bg-red-E01414 h-full shadow-custom-dark flex p-5 hidden sm:flex"
           style={{ clipPath: "polygon(95% 0, 0 0, 0 100%, 70% 100%)" }}
         >
           <div className="text-white font-extrabold font-sans">O</div>
           <h1 className="text-white font-sans font-medium ml-2 max-w-md">
-            Ensure quality optimize energy, maintain your battery performance with AHM
+            Ensure quality optimize energy, maintain your battery performance
+            with AHM
           </h1>
         </div>
-        <div className="relative">
-          <div className="bg-slate-300 border-slate-400 rounded-md p-8 backdrop-filter backdrop-blur-sm bg-opacity-0 mt-20 ml-20 ">
+
+        {/* Logo Image for larger screens */}
+        <img
+          src="src/assets/picture3D/LogoBatteryLogin3D.png"
+          alt="logo"
+          className="absolute left-1/4 ml-60 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2/5 h-auto z-20 sm:w-1/3 md:w-1/4 lg:w-1/4 xl:w-1/4 2xl:w-1/3 md:ml-36 lg:ml-52 xl:ml-56 2xl:ml-64 hidden md:block"
+        />
+
+        {/* Form Container */}
+        <div className="relative w-full md:w-5/12 lg:w-4/12 xl:w-3/12 mt-24 mx-auto">
+          <div className="bg-slate-300 border-slate-400 rounded-md p-8 backdrop-filter backdrop-blur-sm bg-opacity-0">
+            {/* Honda Logo */}
             <img
               src="/Honda_Logo.png"
               alt="logo"
-              className="ml-7 w-56 h-auto mb-3 hidden md:flex"
+              className="w-56 h-auto mx-auto hidden md:flex"
             />
-            <h1 className="text-red-E01414 text-3xl ml-2 font-bold font-sans">Astra Honda Motor</h1>
-            <hr className="w-32 border-red-E01414 border-t-2 mx-auto mb-14" />
+            <h1 className="text-red-600 text-3xl mt-5 font-bold font-sans text-center">
+              Astra Honda Motor
+            </h1>
+            <hr className="w-32 border-red-600 border-t-2 mx-auto mb-14" />
+
+            {/* Login Form */}
             <form onSubmit={handleLogin}>
-              <h1 className="text-4xl text-white font-bold text-center mb-6"></h1>
               <div className="relative my-4">
                 <input
                   type="text"
-                  className="block w-72 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-E01414 peer"
+                  className="block w-full py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-600 peer"
                   value={username}
-                  onChange={(e) => setUsername(e.target.value)} // Update state
+                  onChange={(e) => setUsername(e.target.value)}
                   placeholder=" "
                 />
-                <label className="absolute text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:text-red-E01414 peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0">
+                <label className="absolute text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:text-red-600 peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0">
                   Username
                 </label>
                 <BiUser className="absolute top-4 right-4 text-black" />
@@ -81,12 +94,12 @@ const Login = () => {
               <div className="relative my-4">
                 <input
                   type="password"
-                  className="block w-72 py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-E01414 peer"
+                  className="block w-full py-2.5 px-0 text-sm text-gray-700 bg-transparent border-0 border-b-2 border-black appearance-none focus:outline-none focus:ring-0 focus:border-red-600 peer"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Update state
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder=" "
                 />
-                <label className="absolute text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:text-red-E01414 peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0">
+                <label className="absolute text-gray-700 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] left-0 peer-focus:text-red-600 peer-focus:scale-75 peer-focus:-translate-y-6 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0">
                   Password
                 </label>
                 <AiOutlineLock className="absolute top-4 right-4 text-black" />
