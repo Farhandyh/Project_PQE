@@ -1,0 +1,11 @@
+/* Gambar yang akan disembunyikan pada layar kecil */
+.hide-on-small {
+  display: block; /* Default untuk desktop */
+}
+
+/* Gambar akan disembunyikan pada layar dengan ukuran kurang dari 1024px */
+@media (max-width: 1024px) {
+  .hide-on-small {
+    display: none;
+  }
+}
