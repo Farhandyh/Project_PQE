@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { useState } from "react";
 import Battery from "../../components/monitor/Battery";
+import "../../styleCss/MonitorCharging.css";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -115,9 +116,9 @@ const MonitorCharging = () => {
 
   return (
     <>
-      <div className="flex flex-col lg:flex-row justify-center mt-24 relative">
+      <div className="flex flex-col custom-lg:flex-col lg:flex-row justify-center mt-16 lg:mt-24 relative">
         {/* Box Outdoor Station */}
-        <div className="bg-red-E01414 w-full lg:w-[80%] h-auto lg:h-72 min-h-[300px] px-5 py-5 mt-7 lg:mt-0 lg:px-10 lg:py-5 mx-5 lg:ml-7 rounded-2xl shadow-custom-dark relative mb-10 lg:mb-0">
+        <div className="bg-red-E01414 w-full lg:w-[80%] h-auto lg:h-72 min-h-[300px] px-5 py-5 mt-7 custom-lg:w-full-3 lg:mt-0 lg:px-10 lg:py-5 mx-5 lg:ml-7 rounded-2xl shadow-custom-dark relative mb-10 lg:mb-0">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 bg-white rounded-full"
@@ -140,10 +141,9 @@ const MonitorCharging = () => {
         </div>
 
         {/* Gambar 3D */}
-        <div className="absolute mt-10 left-[calc(50%-(-40px))] lg:left-[calc(50%-(-40px))] transform -translate-x-1/2 z-20">
-          {" "}
+        <div className="absolute mt-10 left-[calc(50%-(-40px))] lg:left-[calc(50%-(-40px))] transform -translate-x-1/2 z-20  hidden lg:block">
           <img
-            className="gambar-shadow-custom1"
+            className="gambar-shadow-custom1 hidden lg:block custom-portrait:hidden custom-landscape:hidden"
             src="../src/assets/picture3D/LeafChargingMonitor.png" // Pastikan jalur gambar benar
             alt="3D Human" // Tambahkan deskripsi alternatif untuk aksesibilitas
             style={{
@@ -157,7 +157,7 @@ const MonitorCharging = () => {
         </div>
 
         {/* Box Indoor Station */}
-        <div className="bg-red-E01414 w-full lg:w-[70%] h-auto lg:h-72 min-h-[300px] px-5 py-5 lg:px-10 lg:py-5 mx-5 lg:ml-20 lg:mr-10 rounded-2xl shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full lg:w-[70%] h-auto lg:h-72 min-h-[300px] px-5 py-5 lg:px-10 lg:py-5 mx-5 lg:ml-20 custom-lg:w-full-3 custom-lg:ml-7 custom-lg:mt-5 lg:mr-10 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div
             className="absolute top-2 left-3 bg-white rounded-full"
@@ -179,27 +179,27 @@ const MonitorCharging = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-between items-start gap-4">
+      <div className="flex flex-wrap lg:flex-nowrap justify-center lg:justify-between ml-5 lg:ml-0 custom-landscape:ml-0 items-start gap-4">
         {/* Chart Container */}
-        <div className="bg-red-E01414 w-full max-w-4xl h-auto lg:h-80 mt-5 lg:ml-7 p-4 rounded-2xl shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full max-w-4xl h-auto custom-lg:h-[100%] mt-5 lg:ml-7 custom-lg:max-w-2xl p-4 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div className="absolute top-2 left-3 w-4 h-4 bg-white rounded-full"></div>
           {/* Lingkaran di kanan atas */}
           <div className="absolute top-2 right-3 w-4 h-4 bg-white rounded-full"></div>
 
           {/* Judul */}
-          <h1 className="text-center mt-2 font-poppins text-white text-base md:text-lg lg:text-xl font-black">
+          <h1 className="text-center mt-2 lg:-mt-2 font-poppins text-white text-base md:text-lg lg:text-xl font-black">
             Battery Charging Line Chart
           </h1>
 
           {/* Chart */}
-          <div className="bg-white w-full h-[300px] lg:h-3/4 mt-3 mx-auto px-4 py-2 rounded-2xl flex items-center justify-center">
+          <div className="bg-white w-full h-[300px] custom-landscape:h-[90%]  lg:h-68 mt-3 mx-auto px-4 py-2 rounded-2xl flex items-center justify-center">
             <Line data={lineData} options={lineOptions} />
           </div>
         </div>
 
         {/* Log Container */}
-        <div className="bg-red-E01414 w-full lg:w-2/6 h-auto lg:h-[350px] mt-5 lg:mr-11 rounded-2xl shadow-custom-dark relative">
+        <div className="bg-red-E01414 w-full lg:w-2/6 custom-lg:mr-5 h-auto custom-lg:h-[340px] lg:h-[350px] mt-5 lg:mr-11 rounded-2xl shadow-custom-dark relative">
           {/* Lingkaran di kiri atas */}
           <div className="absolute top-2 left-3 w-4 h-4 bg-white rounded-full"></div>
           {/* Lingkaran di kanan atas */}
@@ -210,7 +210,7 @@ const MonitorCharging = () => {
             Log in/Out Charging
           </h1>
 
-          <div className="bg-white w-[90%] h-auto ml-7 mt-2 rounded-3xl shadow-lg">
+          <div className="bg-white w-[90%] custom-landscape:w-[85%] h-auto mx-auto mt-2 rounded-3xl shadow-lg">
             <div className="overflow-x-auto">
               <table className="w-full text-center bg-white rounded-2xl overflow-hidden">
                 <thead>
