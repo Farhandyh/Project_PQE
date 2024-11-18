@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 const ClientCard = ({ client }) => {
   return (
     <div className="p-6 bg-white rounded-xl space-y-4">
