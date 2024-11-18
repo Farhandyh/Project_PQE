@@ -174,18 +174,6 @@ const Users = () => {
   return (
     <>
       <div className="mt-4 mb-4 ml-36 flex">
-<<<<<<< HEAD
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex flex-col justify-center items-center">
-          <h3 className="font-poppins text-40px text-red-600 text-center mt-5">
-            Total User
-          </h3>
-          <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-600 text-center">
-            036
-          </h1>
-        </div>
-
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
-=======
         <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
           {/* Gambar di sebelah kiri */}
           <img
@@ -241,7 +229,6 @@ const Users = () => {
           />
         </div>
 
->>>>>>> main
         <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
           <button
             onClick={toggleModal}
@@ -366,26 +353,6 @@ const Users = () => {
       {/* Modal Pop-up Create Users */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-<<<<<<< HEAD
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk Add New Users */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
-              <Header  />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-5/6 mt-5 mb-6">
-                <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
-                  <label
-                    className="block text-black ml-2 mb-1 mt-3"
-                    htmlFor="id-users"
-                  >
-                    Id Users
-                  </label>
-                  <TextField
-                    id="id-users"
-                    value={idUsers}
-                    onChange={(e) => setIdUsers(e.target.value)}
-                    className="w-full mb-4"
-                  />
-=======
           <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
             {/* Form for Add New Users */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
@@ -416,7 +383,6 @@ const Users = () => {
                       />
                     </div>
                   </div>
->>>>>>> main
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">

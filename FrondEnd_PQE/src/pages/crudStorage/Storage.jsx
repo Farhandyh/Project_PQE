@@ -162,11 +162,7 @@ const Storage = () => {
   return (
     <>
       <div className="mt-4 mb-4 ml-36 flex">
-<<<<<<< HEAD
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-16 shadow-lg">
-=======
         <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
->>>>>>> main
           {/* Gambar di sebelah kiri */}
           <img
             src="../src/assets/menuCRUD/storage.png"

@@ -170,17 +170,6 @@ const TestingMachine = () => {
   return (
     <>
       <div className="mt-4 mb-4 ml-36 flex">
-<<<<<<< HEAD
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex flex-col justify-center items-center">
-          <h3 className="font-poppins text-40px text-red-600 text-center mt-5">
-            Total Machine test
-          </h3>
-          <h1 className="font-poppins text-shadow-custom font-extrabold -mt-6 text-88px text-red-600 text-center">
-            036
-          </h1>
-        </div>
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32"></div>
-=======
         <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
           {/* Gambar di sebelah kiri */}
           <img
@@ -235,7 +224,6 @@ const TestingMachine = () => {
             className="w-32 h-auto ml-4"
           />
         </div>
->>>>>>> main
         <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
           <button
             onClick={toggleModal}
