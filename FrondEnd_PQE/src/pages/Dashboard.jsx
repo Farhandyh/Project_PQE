@@ -137,6 +137,30 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <LineChart />
           <CategoryDistributionChart />
+          <Bar
+            data={{
+              labels: sourceData.map((data) => data.label),
+              datasets: [
+                {
+                  label: "Count",
+                  data: sourceData.map((data) => data.value),
+                  backgroundColor: [
+                    "rgba(43, 63, 229, 0.8)",
+                    "rgba(250, 192, 19, 0.8)",
+                    "rgba(253, 135, 135, 0.8)",
+                  ],
+                  borderRadius: 5,
+                },
+              ],
+            }}
+            options={{
+              plugins: {
+                title: {
+                  text: "Revenue Source",
+                },
+              },
+            }}
+          />
         </div>
       </div>
 
