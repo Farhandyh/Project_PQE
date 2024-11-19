@@ -3,63 +3,57 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
 
-const getRacks = async () => {
-  const response = await fetch('http://localhost:8000/api/racks');
+const getTesting = async () => {
+  const response = await fetch('http://localhost:8000/api/testingMachine');
   if (!response.ok) {
-    throw new Error('Failed to fetch racks');
+    throw new Error('Failed to fetch batteries');
   }
   const data = await response.json();
   return data;
 };
 
-const deleteRacks = async (idRack) => {
-  const response = await fetch(`http://localhost:8000/api/racks-destroy/${idRack}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) {
-    throw new Error('Failed to delete rack');
-  }
-  return await response.json();
-};
-
-const Storage = () => {
-  const [racks, setRacks] = useState([]);
+const Testing = () => {
+  const [machines, setMachines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idRack,setIdRack] = useState("");
-  const [rackName,setRackName] = useState("");
-  const [rackMaterial,setRackMaterial] = useState("");
-  const [weightMaxRack,setWeightMaxRack] = useState("");
-  const [rackCapacity,setRackCapacity] = useState("");
-  const [rackStatus,setRackStatus] = useState("");
+  const [idMachine,setIdMachine] = useState("");
+  const [machineName,setMachineName] = useState("");
+  const [machineType,setMachineType] = useState("");
+  const [noSeriMachine,setNoSeriMachine] = useState("");
+  const [arusMaxMachine,setArusMaxMachine] = useState("");
+  const [serviceLifeMachine,setServiceLifeMachine] = useState("");
+  const [machineStatus,setMachineStatus] = useState("");
+  const [voltMaxMachine,setVoltMaxMachine] = useState("");
 
-  const fetchRacks = async () => {
+  const fetchMachines = async () => {
     try {
-      const data = await getRacks();
-      setRacks(data);
+      const data = await getMachines();
+      setMachines(data);
     } catch (error) {
-      setError("Error fetching racks data.");
+      setError("Error fetching machines data.");
       console.error(error);
     } finally {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
-    fetchRacks();
+    fetchMachines();
   }, []);
   
   // Event untuk menampilkan data row yang dipilih dalam form update
-  const handleRowClick = (rackData) => {
-    setIdRack(rackData.idRack);
-    setRackName(rackData.rackName);
-    setRackMaterial(rackData.rackMaterial);
-    setWeightMaxRack(rackData.weightMaxRack);
-    setRackCapacity(rackData.rackCapacity);
-    setRackStatus(rackData.rackStatus);
+  const handleRowClick = (machineData) => {
+    setIdMachine(machineData.idMachine);
+    setMachineName(machineData.machineName);
+    setMachineType(machineData.machineType);
+    setNoSeriMachine(machineData.machineType);
+    setArusMaxMachine(machineData.machineType);
+    setServiceLifeMachine(machineData.machineType);
+    setMachineStatus(machineData.machineStatus);
+    setVoltMaxMachine(machineData.machineStatus);
     setIsUpdateOpen(true);
   };
 
@@ -67,9 +61,9 @@ const Storage = () => {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const itemsPerPage = 10;
-  const totalPages = Math.ceil(racks.length / itemsPerPage);
+  const totalPages = Math.ceil(machines.length / itemsPerPage);
 
-  const currentRacks = racks.slice(
+  const currentMachines = machines.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -78,16 +72,6 @@ const Storage = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDelete = async (idRack) => {
-    try {
-      await deleteRacks(idRack);
-      setRacks((prevRacks) =>
-        prevRacks.filter((rack) => rack.idRack !== idRack)
-      );
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
    // Toggle modal open/close
    const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -97,24 +81,34 @@ const Storage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/racks-create", {
+      const response = await fetch("http://localhost:8000/api/testingMachine-create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idRack" : idRack,
-          "rackCapacity" : rackCapacity,
-          "rackStatus" : rackStatus
+          "idMachine" : idMachine,
+          "machineName" : machineName,
+          "machineType" : machineType,
+          "noSeriMachine" : noSeriMachine,
+          "arusMaxMachine" : arusMaxMachine,
+          "serviceLifeMachine" : serviceLifeMachine,
+          "machineStatus" : machineStatus,
+          "voltMaxMachine" : voltMaxMachine
         }),
       });
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
-        setIdRack("");
-        setRackCapacity("");
-        setRackStatus("");
-        fetchRacks();
+        setIdMachine("");
+        setMachineName("");
+        setMachineType("");
+        setNoSeriMachine("");
+        setArusMaxMachine("");
+        setServiceLifeMachine("");
+        setMachineStatus("");
+        setVoltMaxMachine("");
+        fetchMachines();
         toggleModal();
       }
        else {
@@ -130,24 +124,34 @@ const Storage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/racks-update", {
+      const response = await fetch("http://localhost:8000/api/testingMachine-update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idRack" : idRack,
-          "rackCapacity" : rackCapacity,
-          "rackStatus" : rackStatus
+          "idMachine" : idMachine,
+          "machineName" : machineName,
+          "machineType" : machineType,
+          "noSeriMachine" : noSeriMachine,
+          "arusMaxMachine" : arusMaxMachine,
+          "serviceLifeMachine" : serviceLifeMachine,
+          "machineStatus" : machineStatus,
+          "voltMaxMachine" : voltMaxMachine
         }),
       });
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
-        setIdRack("");
-        setRackCapacity("");
-        setRackStatus("");
-        fetchRacks();
+        setIdMachine("");
+        setMachineName("");
+        setMachineType("");
+        setNoSeriMachine("");
+        setArusMaxMachine("");
+        setServiceLifeMachine("");
+        setMachineStatus("");
+        setVoltMaxMachine("");
+        fetchMachines();
         toggleUpdate();
       }
        else {
@@ -165,15 +169,15 @@ const Storage = () => {
         <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
           {/* Gambar di sebelah kiri */}
           <img
-            src="../src/assets/menuCRUD/storage.png"
-            alt="Storage Icon"
+            src="../src/assets/menuCRUD/machine.png"
+            alt="Machine Test Icon"
             className="w-36 h-auto"
           />
 
           {/* Bagian teks */}
           <div className="flex flex-col justify-center">
             <h3 className="font-poppins text-2xl font-semibold text-red-600 text-center mb-1">
-              Storage
+              Machine
             </h3>
             <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl text-red-600 text-center">
               036
@@ -221,7 +225,7 @@ const Storage = () => {
             onClick={toggleModal}
             className="text-white bg-red-500 px-4 py-2 rounded-full"
           >
-            Add New Rack
+            Add New Machine
           </button>
         </div>
       </div>
@@ -233,40 +237,48 @@ const Storage = () => {
                 NO
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Rack Name
+                Machine Name
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Rack Material
+                Machine Type
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Weight Max
+                No Seri
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Capacity
+                Arus Max
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Status
+                Service Life
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Machine Status
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Volt Max
               </th>
               <th className="py-2 px-2 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
-            {currentRacks.map((rack, index) => (
+            {currentMachines.map((machine, index) => (
               <tr
-                key={rack.idRack}
+                key={machine.idMachine}
                 className={`text-center ${index % 2 === 1 ? "" : ""}`}
                 style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
               >
                 <td className="py-2 px-2 border-b">
                   {(currentPage - 1) * itemsPerPage + index + 1}
                 </td>
-                <td className="py-2 px-2 border-b">{rack.rackName}</td>
-                <td className="py-2 px-2 border-b">{rack.rackMaterial}</td>
-                <td className="py-2 px-2 border-b">{rack.weightMaxRack}</td>
-                <td className="py-2 px-2 border-b">{rack.rackCapacity}</td>
+                <td className="py-2 px-2 border-b">{machine.machineName}</td>
+                <td className="py-2 px-2 border-b">{machine.machineType}</td>
+                <td className="py-2 px-2 border-b">{machine.noSeriMachine}</td>
+                <td className="py-2 px-2 border-b">{machine.arusMaxMachine}</td>
+                <td className="py-2 px-2 border-b">{machine.serviceLifeMachine}</td>
                 <td className="py-2 px-2 border-b">
-                  {rack.rackStatus === 1 ? "Active" : "Non-Active"}
+                  {machine.machineStatus === 1 ? "Active" : "Non-Active"}
                 </td>
+                <td className="py-2 px-2 border-b">{machine.voltMaxMachine}</td>
                 <td
                   className="py-2 px-2 border-b"
                   style={{ display: "flex", justifyContent: "center" }}
@@ -275,7 +287,7 @@ const Storage = () => {
                     href="#"
                     onClick={() => {
                       toggleUpdate();
-                      handleRowClick(rack);
+                      handleRowClick(machine);
                     }}
                     className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
                   >
@@ -283,7 +295,7 @@ const Storage = () => {
                   </a>
                   <a
                     href="#"
-                    onClick={() => handleDelete(rack.idRack)}
+                    onClick={() => handleDelete(machine.idMachine)}
                     className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
                   >
                     <FaTrashAlt />
@@ -339,51 +351,64 @@ const Storage = () => {
           </button>
         </div>
       </div>
-      {/* Modal Pop-up Create Rack */}
+      {/* Modal Pop-up Create Machines */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk Add New Rack */}
+            {/* Form untuk Add New Machine */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-80 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
                   <label
                     className="block text-black ml-2 mb-1 mt-3"
-                    htmlFor="id-rack"
+                    htmlFor="id-machine"
                   >
-                    Id Rack
+                    Id Machine
                   </label>
                   <TextField
-                    id="id-rack"
-                    value={idRack}
-                    onChange={(e) => setIdRack(e.target.value)}
+                    id="id-Machine"
+                    value={idMachine}
+                    onChange={(e) => setIdMachine(e.target.value)}
                     className="w-full mb-4"
                   />
 
                   <label
                     className="block text-black ml-2 mb-1"
-                    htmlFor="rack-capacity"
+                    htmlFor="machine-name"
                   >
-                    Rack Capacity
+                    Machine Name
                   </label>
                   <TextField
-                    id="rack-capacity"
-                    value={rackCapacity}
-                    onChange={(e) => setRackCapacity(e.target.value)}
+                    id="machine-name"
+                    value={machineName}
+                    onChange={(e) => setMachineName(e.target.value)}
                     className="w-full mb-4"
                   />
 
                   <label
                     className="block text-black ml-2 mb-1"
-                    htmlFor="rack-status"
+                    htmlFor="machine-type"
                   >
-                    Rack Status
+                    Machine Type
                   </label>
                   <TextField
-                    id="rack-status"
-                    value={rackStatus}
-                    onChange={(e) => setRackStatus(e.target.value)}
+                    id="machine-type"
+                    value={machineType}
+                    onChange={(e) => setMachineType(e.target.value)}
+                    className="w-full mb-4"
+                  />
+
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="machine-status"
+                  >
+                    Machine Status
+                  </label>
+                  <TextField
+                    id="machine-status"
+                    value={machineStatus}
+                    onChange={(e) => setMachineStatus(e.target.value)}
                     className="w-full mb-4"
                   />
                   <br />
@@ -412,47 +437,60 @@ const Storage = () => {
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk update New Rack */}
+            {/* Form untuk upadate Machine */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-80 mt-5 mb-6">
                 <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
                   <label
                     className="block text-black ml-2 mb-1 mt-3"
-                    htmlFor="id-rack"
+                    htmlFor="id-machine"
                   >
-                    Id Rack
+                    Id Machine
                   </label>
                   <TextField
-                    id="id-Rack"
-                    value={idRack}
-                    onChange={(e) => setIdRack(e.target.value)}
+                    id="id-Machine"
+                    value={idMachine}
+                    onChange={(e) => setIdMachine(e.target.value)}
                     className="w-full mb-4"
                   />
 
                   <label
                     className="block text-black ml-2 mb-1"
-                    htmlFor="rack-capacity"
+                    htmlFor="machine-name"
                   >
-                    Rack Capacity
+                    Machine Name
                   </label>
                   <TextField
-                    id="rack-capacity"
-                    value={rackCapacity}
-                    onChange={(e) => setRackCapacity(e.target.value)}
+                    id="machine-name"
+                    value={machineName}
+                    onChange={(e) => setMachineName(e.target.value)}
                     className="w-full mb-4"
                   />
 
                   <label
                     className="block text-black ml-2 mb-1"
-                    htmlFor="rack-status"
+                    htmlFor="machine-type"
                   >
-                    Rack Status
+                    Machine Type
                   </label>
                   <TextField
-                    id="rack-status"
-                    value={rackStatus}
-                    onChange={(e) => setRackStatus(e.target.value)}
+                    id="machine-type"
+                    value={machineType}
+                    onChange={(e) => setMachineType(e.target.value)}
+                    className="w-full mb-4"
+                  />
+
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="machine-status"
+                  >
+                    Machine Status
+                  </label>
+                  <TextField
+                    id="machine-status"
+                    value={machineStatus}
+                    onChange={(e) => setMachineStatus(e.target.value)}
                     className="w-full mb-4"
                   />
                   <br />
@@ -464,7 +502,7 @@ const Storage = () => {
                       Save
                     </button>
                     <button
-                      onClick={toggleUpdate}
+                      onClick={toggleModal}
                       className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24"
                     >
                       Cancel
@@ -480,4 +518,4 @@ const Storage = () => {
   );
 };
 
-export default Storage;
+export default Testing;

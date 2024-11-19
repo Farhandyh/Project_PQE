@@ -108,6 +108,11 @@ const Battery = () => {
         },
         body: JSON.stringify({
           "idBattery" : idBattery,
+          "noSeriBattery" : noSeriBattery,
+          "batteryMerk" : batteryMerk,
+          "batteryModel" : batteryModel,
+          "batteryDayaMax" : batteryDayaMax,
+          "batteryChargingTime" : batteryChargingTime,
           "batteryCapacity" : batteryCapacity,
           "batteryStatus" : batteryStatus
         }),
@@ -116,6 +121,11 @@ const Battery = () => {
       if (response.ok) {
         alert("Data berhasil disimpan!");
         setIdBattery("");
+        setNoSeriBattery("");
+        setBatteryMerk("");
+        setBatteryModel("");
+        setBatteryDayaMax("");
+        setBatteryChargingTime("");
         setBatteryCapacity("");
         setBatteryStatus("");
         fetchBatteries();
@@ -141,6 +151,11 @@ const Battery = () => {
         },
         body: JSON.stringify({
           "idBattery" : idBattery,
+          "noSeriBattery" : noSeriBattery,
+          "batteryMerk" : batteryMerk,
+          "batteryModel" : batteryModel,
+          "batteryDayaMax" : batteryDayaMax,
+          "batteryChargingTime" : batteryChargingTime,
           "batteryCapacity" : batteryCapacity,
           "batteryStatus" : batteryStatus
         }),
@@ -149,6 +164,11 @@ const Battery = () => {
       if (response.ok) {
         alert("Data berhasil disimpan!");
         setIdBattery("");
+        setNoSeriBattery("");
+        setBatteryMerk("");
+        setBatteryModel("");
+        setBatteryDayaMax("");
+        setBatteryChargingTime("");
         setBatteryCapacity("");
         setBatteryStatus("");
         fetchBatteries();
@@ -365,61 +385,122 @@ const Battery = () => {
       {/* Modal Pop-up Create Battery */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk Add New Battery */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+          <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
+            {/* Form for Add New Battery */}
+            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
-                <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
-                  <label
-                    className="block text-black ml-2 mb-1 mt-3"
-                    htmlFor="id-battery"
-                  >
-                    Id Battery
-                  </label>
-                  <TextField
-                    id="id-battery"
-                    value={idBattery}
-                    onChange={(e) => setIdBattery(e.target.value)}
-                    className="w-full mb-4"
-                  />
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
+                <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
+                  <div className="flex space-x-6">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-battery">
+                        Id Battery
+                      </label>
+                      <TextField
+                        id="id-battery"
+                        value={idBattery}
+                        onChange={(e) => setIdBattery(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="seri-battery">
+                        Seri Battery
+                      </label>
+                      <TextField
+                        id="seri-battery"
+                        value={noSeriBattery}
+                        onChange={(e) => setNoSeriBattery(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
 
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="battery-capacity"
-                  >
-                    Battery Capacity
-                  </label>
-                  <TextField
-                    id="battery-capacity"
-                    value={batteryCapacity}
-                    onChange={(e) => setBatteryCapacity(e.target.value)}
-                    className="w-full mb-4"
-                  />
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-merk">
+                        Merk
+                      </label>
+                      <TextField
+                        id="battery-merk"
+                        value={batteryMerk}
+                        onChange={(e) => setBatteryMerk(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-model">
+                        Model
+                      </label>
+                      <TextField
+                        id="battery-model"
+                        value={batteryModel}
+                        onChange={(e) => setBatteryModel(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
 
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="battery-status"
-                  >
-                    Battery Status
-                  </label>
-                  <TextField
-                    id="battery-status"
-                    value={batteryStatus}
-                    onChange={(e) => setBatteryStatus(e.target.value)}
-                    className="w-full mb-4"
-                  />
-                  <br />
-                  <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="daya-max">
+                        Daya Max
+                      </label>
+                      <TextField
+                        id="daya-max"
+                        value={batteryDayaMax}
+                        onChange={(e) => setBatteryDayaMax(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="charging-time">
+                        Charging Time
+                      </label>
+                      <TextField
+                        id="charging-time"
+                        value={batteryChargingTime}
+                        onChange={(e) => setBatteryChargingTime(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-capacity">
+                        Capacity
+                      </label>
+                      <TextField
+                        id="battery-capacity"
+                        value={batteryCapacity}
+                        onChange={(e) => setBatteryCapacity(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-status">
+                        Status
+                      </label>
+                      <TextField
+                        id="battery-status"
+                        value={batteryStatus}
+                        onChange={(e) => setBatteryStatus(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center mt-10 space-x-10">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleModal}
-                      className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24"
+                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
                     >
                       Cancel
                     </button>
@@ -434,61 +515,122 @@ const Battery = () => {
       {/* modal untuk update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk Add New Battery */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+          <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
+            {/* Form for Add New Battery */}
+            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-72 mt-5 mb-6">
-                <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
-                  <label
-                    className="block text-black ml-2 mb-1 mt-3"
-                    htmlFor="id-battery"
-                  >
-                    Id Battery
-                  </label>
-                  <TextField
-                    id="id-battery"
-                    value={idBattery}
-                    onChange={(e) => setIdBattery(e.target.value)}
-                    className="w-full mb-4"
-                  />
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
+                <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
+                  <div className="flex space-x-6">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-battery">
+                        Id Battery
+                      </label>
+                      <TextField
+                        id="id-battery"
+                        value={idBattery}
+                        onChange={(e) => setIdBattery(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="seri-battery">
+                        Seri Battery
+                      </label>
+                      <TextField
+                        id="seri-battery"
+                        value={noSeriBattery}
+                        onChange={(e) => setNoSeriBattery(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
 
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="battery-capacity"
-                  >
-                    Battery Capacity
-                  </label>
-                  <TextField
-                    id="battery-capacity"
-                    value={batteryCapacity}
-                    onChange={(e) => setBatteryCapacity(e.target.value)}
-                    className="w-full mb-4"
-                  />
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-merk">
+                        Merk
+                      </label>
+                      <TextField
+                        id="battery-merk"
+                        value={batteryMerk}
+                        onChange={(e) => setBatteryMerk(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-model">
+                        Model
+                      </label>
+                      <TextField
+                        id="battery-model"
+                        value={batteryModel}
+                        onChange={(e) => setBatteryModel(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
 
-                  <label
-                    className="block text-black ml-2 mb-1"
-                    htmlFor="battery-status"
-                  >
-                    Battery Status
-                  </label>
-                  <TextField
-                    id="battery-status"
-                    value={batteryStatus}
-                    onChange={(e) => setBatteryStatus(e.target.value)}
-                    className="w-full mb-4"
-                  />
-                  <br />
-                  <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 mt-2">
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="daya-max">
+                        Daya Max
+                      </label>
+                      <TextField
+                        id="daya-max"
+                        value={batteryDayaMax}
+                        onChange={(e) => setBatteryDayaMax(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="charging-time">
+                        Charging Time
+                      </label>
+                      <TextField
+                        id="charging-time"
+                        value={batteryChargingTime}
+                        onChange={(e) => setBatteryChargingTime(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-capacity">
+                        Capacity
+                      </label>
+                      <TextField
+                        id="battery-capacity"
+                        value={batteryCapacity}
+                        onChange={(e) => setBatteryCapacity(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="battery-status">
+                        Status
+                      </label>
+                      <TextField
+                        id="battery-status"
+                        value={batteryStatus}
+                        onChange={(e) => setBatteryStatus(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center mt-10 space-x-10">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleUpdate}
-                      className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24"
+                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
                     >
                       Cancel
                     </button>

@@ -34,7 +34,7 @@ const TestingMachine = () => {
   const [machineType,setMachineType] = useState("");
   const [noSeriMachine,setNoSeriMachine] = useState("");
   const [arusMaxMachine,setArusMaxMachine] = useState("");
-  const [ServiceLifeMachine,setServiceLifeMachine] = useState("");
+  const [serviceLifeMachine,setServiceLifeMachine] = useState("");
   const [machineStatus,setMachineStatus] = useState("");
   const [voltMaxMachine,setVoltMaxMachine] = useState("");
 
@@ -110,7 +110,11 @@ const TestingMachine = () => {
           "idMachine" : idMachine,
           "machineName" : machineName,
           "machineType" : machineType,
-          "machineStatus" : machineStatus
+          "noSeriMachine" : noSeriMachine,
+          "arusMaxMachine" : arusMaxMachine,
+          "serviceLifeMachine" : serviceLifeMachine,
+          "machineStatus" : machineStatus,
+          "voltMaxMachine" : voltMaxMachine
         }),
       });
 
@@ -119,7 +123,11 @@ const TestingMachine = () => {
         setIdMachine("");
         setMachineName("");
         setMachineType("");
+        setNoSeriMachine("");
+        setArusMaxMachine("");
+        setServiceLifeMachine("");
         setMachineStatus("");
+        setVoltMaxMachine("");
         fetchMachines();
         toggleModal();
       }
@@ -145,7 +153,11 @@ const TestingMachine = () => {
           "idMachine" : idMachine,
           "machineName" : machineName,
           "machineType" : machineType,
-          "machineStatus" : machineStatus
+          "noSeriMachine" : noSeriMachine,
+          "arusMaxMachine" : arusMaxMachine,
+          "serviceLifeMachine" : serviceLifeMachine,
+          "machineStatus" : machineStatus,
+          "voltMaxMachine" : voltMaxMachine
         }),
       });
 
@@ -154,7 +166,11 @@ const TestingMachine = () => {
         setIdMachine("");
         setMachineName("");
         setMachineType("");
+        setNoSeriMachine("");
+        setArusMaxMachine("");
+        setServiceLifeMachine("");
         setMachineStatus("");
+        setVoltMaxMachine("");
         fetchMachines();
         toggleUpdate();
       }
