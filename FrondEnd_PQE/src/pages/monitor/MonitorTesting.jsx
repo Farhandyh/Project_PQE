@@ -25,7 +25,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
+    
 const MonitorTesting = () => {
   const data = {
     labels: ["C", "D", "A", "F", "E", "G", "B", "J", "I", "H"], // Replace with your battery labels
@@ -164,7 +164,7 @@ const MonitorTesting = () => {
               Battery Testing Stacked Bar Chart
             </h1>
             <div className="flex h-auto lg:h-full">
-              <div className="bg-white w-full h-64 mt-2 mx-3 rounded-2xl">
+              <div className="bg-white w-full h-64 mt-2 mx-3 mr-3 rounded-2xl">
                 <Bar data={data} options={options} />
               </div>
             </div>
@@ -174,14 +174,16 @@ const MonitorTesting = () => {
         {/* Section Bawah */}
         <div className="relative flex flex-col lg:flex-row gap-8 lg:gap-4 mt-12 lg:mt-32">
           {/* Graph kiri */}
-          <div className="bg-red-E01414 w-full lg:w-3/6 rounded-2xl relative p-4">
+          <div className="bg-red-E01414 w-full lg:w-3/4 h-auto lg:h-full rounded-2xl relative p-4 ml-4">
             <div className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"></div>
             <div className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"></div>
             <h1 className="text-center font-poppins text-white text-lg lg:text-xl font-black">
               Battery Testing: kWh Graph
             </h1>
-            <div className="bg-white w-full h-48 mt-2 rounded-2xl">
-              <Bar data={kwhGraph} options={kwhGraphOptions} />
+            <div className="flex h-auto lg:h-full">
+              <div className="bg-white w-full h-48 mt-2 rounded-2xl">
+                <Bar data={kwhGraph} options={kwhGraphOptions} />
+              </div>
             </div>
           </div>
 
