@@ -26,6 +26,7 @@ const Storage = () => {
   const [timeIn,setTimeIn] = useState("");
   const [timeOut,setTimeOut] = useState("");
   const [batteryStatus,setBatteryStatus] = useState("");
+  const [date,setDate] = useState("");
 
   const fetchStorage = async () => {
     try {
@@ -52,6 +53,7 @@ const Storage = () => {
     setTimeIn(storageData.timeIn);
     setTimeOut(storageData.timeOut);
     setBatteryStatus(storageData.batteryStatus);
+    setDate(storageData.date);
     setIsUpdateOpen(true);
   };
 
@@ -90,7 +92,8 @@ const Storage = () => {
           "idRack" : idRack,
           "timeIn" : timeIn,
           "timeOut" : timeOut,
-          "batteryStatus" : batteryStatus
+          "batteryStatus" : batteryStatus,
+          "date" : date
         }),
       });
 
@@ -103,6 +106,7 @@ const Storage = () => {
         setTimeIn("");
         setTimeOut("");
         setBatteryStatus("");
+        setDate("");
         fetchStorage();
         toggleModal();
       }
@@ -131,7 +135,8 @@ const Storage = () => {
           "idRack" : idRack,
           "timeIn" : timeIn,
           "timeOut" : timeOut,
-          "batteryStatus" : batteryStatus
+          "batteryStatus" : batteryStatus,
+          "date" : date
         }),
       });
 
@@ -144,6 +149,7 @@ const Storage = () => {
         setTimeIn("");
         setTimeOut("");
         setBatteryStatus("");
+        setDate("");
         fetchStorage();
         toggleUpdate();
       }
@@ -247,6 +253,9 @@ const Storage = () => {
               <th className="py-2 px-2 border-b border-r border-gray-300">
                 Battery Status
               </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Date
+              </th>
               <th className="py-2 px-2 border-b">Action</th>
             </tr>
           </thead>
@@ -268,6 +277,7 @@ const Storage = () => {
                 <td className="py-2 px-2 border-b">
                   {storage.batteryStatus === 1 ? "Active" : "Non-Active"}
                 </td>
+                <td className="py-2 px-2 border-b">{storage.date}</td>
                 <td
                   className="py-2 px-2 border-b"
                   style={{ display: "flex", justifyContent: "center" }}
@@ -426,6 +436,17 @@ const Storage = () => {
                         id="battery-status"
                         value={batteryStatus}
                         onChange={(e) => setBatteryStatus(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="date">
+                        Date
+                      </label>
+                      <TextField
+                        id="date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
