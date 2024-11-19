@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import Platforms from "../components/dashboard/Platforms";
 import ProjetStatic from "../components/dashboard/ProjectStatic";
 import ProjectCard from "../components/dashboard/cardDashboard/ProjectCard";
