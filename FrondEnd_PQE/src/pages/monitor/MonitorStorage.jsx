@@ -41,11 +41,11 @@ const MonitorStorage = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top', // Posisikan legend di atas
-        align: 'start',  // Pastikan labelnya horizontal
+        position: 'top', 
+        align: 'start', 
         labels: {
-          boxWidth: 20,  // Lebar kotak warna di legend
-          padding: 15,   // Jarak antar label
+          boxWidth: 20, 
+          padding: 15,  
         },
       },
     },
