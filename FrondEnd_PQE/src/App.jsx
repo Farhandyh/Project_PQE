@@ -4,7 +4,6 @@ import Layout from "./components/dashboard/Layout";
 import Dashboard from "./pages/Dashboard";
 import Battery from "./pages/crudBattery/Battery";
 import Users from "./pages/crudUsers/Users";
-import Storage from "./pages/crudStorage/Storage";
 import TestingMachine from "./pages/crudMachine/TestingMachine";
 import ChargingUnit from "./pages/crudCharger/ChargingUnit";
 import Monitor from "./pages/monitor/MonitorAll";
@@ -12,6 +11,8 @@ import MonitorCharging from "./pages/monitor/MonitorCharging";
 import MonitorTesting from "./pages/monitor/MonitorTesting";
 import MonitorStorage from "./pages/monitor/MonitorStorage";
 import LayoutMonitor from "./components/monitor/LayoutMonitor";
+import Rack from "./pages/crudStorage/Rack";
+import Storage from "./pages/transaction/storage";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="users" element={<Users />} />
           <Route path="chargingunit" element={<ChargingUnit />} />
           <Route path="testingmachine" element={<TestingMachine />} />
+          <Route path="rack" element={<Rack />} />
           <Route path="storage" element={<Storage />} />
         </Route>
 

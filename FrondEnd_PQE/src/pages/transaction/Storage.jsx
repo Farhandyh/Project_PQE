@@ -3,8 +3,8 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
 
-const getRacks = async () => {
-  const response = await fetch('http://localhost:8000/api/racks');
+const getStorage = async () => {
+  const response = await fetch('http://localhost:8000/api/storage');
   if (!response.ok) {
     throw new Error('Failed to fetch racks');
   }
@@ -12,34 +12,25 @@ const getRacks = async () => {
   return data;
 };
 
-const deleteRacks = async (idRack) => {
-  const response = await fetch(`http://localhost:8000/api/racks-destroy/${idRack}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) {
-    throw new Error('Failed to delete rack');
-  }
-  return await response.json();
-};
-
 const Storage = () => {
-  const [racks, setRacks] = useState([]);
+  const [storage, setStorage] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+  const [idStorage,setIdStorage] = useState("");
+  const [idUsers,setIdUsers] = useState("");
+  const [idBattery,setIdBattery] = useState("");
   const [idRack,setIdRack] = useState("");
-  const [rackName,setRackName] = useState("");
-  const [rackMaterial,setRackMaterial] = useState("");
-  const [weightMaxRack,setWeightMaxRack] = useState("");
-  const [rackCapacity,setRackCapacity] = useState("");
-  const [rackStatus,setRackStatus] = useState("");
+  const [timeIn,setTimeIn] = useState("");
+  const [timeOut,setTimeOut] = useState("");
+  const [batteryStatus,setBatteryStatus] = useState("");
 
-  const fetchRacks = async () => {
+  const fetchStorage = async () => {
     try {
-      const data = await getRacks();
-      setRacks(data);
+      const data = await getStorage();
+      setStorage(data);
     } catch (error) {
       setError("Error fetching racks data.");
       console.error(error);
@@ -49,17 +40,18 @@ const Storage = () => {
   };
   
   useEffect(() => {
-    fetchRacks();
+    fetchStorage();
   }, []);
   
   // Event untuk menampilkan data row yang dipilih dalam form update
-  const handleRowClick = (rackData) => {
-    setIdRack(rackData.idRack);
-    setRackName(rackData.rackName);
-    setRackMaterial(rackData.rackMaterial);
-    setWeightMaxRack(rackData.weightMaxRack);
-    setRackCapacity(rackData.rackCapacity);
-    setRackStatus(rackData.rackStatus);
+  const handleRowClick = (storageData) => {
+    setIdStorage(storageData.idStorage);
+    setIdUsers(storageData.idUsers);
+    setIdBattery(storageData.idBattery);
+    setIdRack(storageData.idRack);
+    setTimeIn(storageData.timeIn);
+    setTimeOut(storageData.timeOut);
+    setBatteryStatus(storageData.batteryStatus);
     setIsUpdateOpen(true);
   };
 
@@ -67,26 +59,15 @@ const Storage = () => {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const itemsPerPage = 10;
-  const totalPages = Math.ceil(racks.length / itemsPerPage);
+  const totalPages = Math.ceil(storage.length / itemsPerPage);
 
-  const currentRacks = racks.slice(
+  const currentStorage = storage.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
-  };
-
-  const handleDelete = async (idRack) => {
-    try {
-      await deleteRacks(idRack);
-      setRacks((prevRacks) =>
-        prevRacks.filter((rack) => rack.idRack !== idRack)
-      );
-    } catch (error) {
-      setError(error.message);
-    }
   };
 
    // Toggle modal open/close
@@ -97,24 +78,32 @@ const Storage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/racks-create", {
+      const response = await fetch("http://localhost:8000/api/storage-create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          "idStorage" : idStorage,
+          "idUsers" : idUsers,
+          "idBattery" : idBattery,
           "idRack" : idRack,
-          "rackCapacity" : rackCapacity,
-          "rackStatus" : rackStatus
+          "timeIn" : timeIn,
+          "timeOut" : timeOut,
+          "batteryStatus" : batteryStatus
         }),
       });
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
+        setIdStorage("");
+        setIdUsers("");
+        setIdBattery("");
         setIdRack("");
-        setRackCapacity("");
-        setRackStatus("");
-        fetchRacks();
+        setTimeIn("");
+        setTimeOut("");
+        setBatteryStatus("");
+        fetchStorage();
         toggleModal();
       }
        else {
@@ -130,24 +119,32 @@ const Storage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/racks-update", {
+      const response = await fetch("http://localhost:8000/api/storage-update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          "idStorage" : idStorage,
+          "idUsers" : idUsers,
+          "idBattery" : idBattery,
           "idRack" : idRack,
-          "rackCapacity" : rackCapacity,
-          "rackStatus" : rackStatus
+          "timeIn" : timeIn,
+          "timeOut" : timeOut,
+          "batteryStatus" : batteryStatus
         }),
       });
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
+        ssetIdStorage("");
+        setIdUsers("");
+        setIdBattery("");
         setIdRack("");
-        setRackCapacity("");
-        setRackStatus("");
-        fetchRacks();
+        setTimeIn("");
+        setTimeOut("");
+        setBatteryStatus("");
+        fetchStorage();
         toggleUpdate();
       }
        else {
@@ -221,7 +218,7 @@ const Storage = () => {
             onClick={toggleModal}
             className="text-white bg-red-500 px-4 py-2 rounded-full"
           >
-            Add New Rack
+            Store Battery
           </button>
         </div>
       </div>
@@ -233,39 +230,43 @@ const Storage = () => {
                 NO
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Rack Name
+                Id User
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Rack Material
+                Id Battery
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Weight Max
+                Id Rack
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Capacity
+                Time In
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Status
+                Time Out
+              </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Battery Status
               </th>
               <th className="py-2 px-2 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
-            {currentRacks.map((rack, index) => (
+            {currentStorage.map((storage, index) => (
               <tr
-                key={rack.idRack}
+                key={storage.idStorage}
                 className={`text-center ${index % 2 === 1 ? "" : ""}`}
                 style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
               >
                 <td className="py-2 px-2 border-b">
                   {(currentPage - 1) * itemsPerPage + index + 1}
                 </td>
-                <td className="py-2 px-2 border-b">{rack.rackName}</td>
-                <td className="py-2 px-2 border-b">{rack.rackMaterial}</td>
-                <td className="py-2 px-2 border-b">{rack.weightMaxRack}</td>
-                <td className="py-2 px-2 border-b">{rack.rackCapacity}</td>
+                <td className="py-2 px-2 border-b">{storage.idUsers}</td>
+                <td className="py-2 px-2 border-b">{storage.idBattery}</td>
+                <td className="py-2 px-2 border-b">{storage.idRack}</td>
+                <td className="py-2 px-2 border-b">{storage.timeIn}</td>
+                <td className="py-2 px-2 border-b">{storage.timeOut}</td>
                 <td className="py-2 px-2 border-b">
-                  {rack.rackStatus === 1 ? "Active" : "Non-Active"}
+                  {storage.batteryStatus === 1 ? "Active" : "Non-Active"}
                 </td>
                 <td
                   className="py-2 px-2 border-b"
@@ -275,18 +276,11 @@ const Storage = () => {
                     href="#"
                     onClick={() => {
                       toggleUpdate();
-                      handleRowClick(rack);
+                      handleRowClick(storage);
                     }}
                     className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
                   >
                     <FaEdit />
-                  </a>
-                  <a
-                    href="#"
-                    onClick={() => handleDelete(rack.idRack)}
-                    className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                  >
-                    <FaTrashAlt />
                   </a>
                 </td>
               </tr>
@@ -343,12 +337,48 @@ const Storage = () => {
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
-            {/* Form for Add New Rack */}
+            {/* Form for Store Battery */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
                   <div className="flex space-x-6">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-storage">
+                        Id Storage
+                      </label>
+                      <TextField
+                        id="id-storage"
+                        value={idStorage}
+                        onChange={(e) => setIdStorage(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-users">
+                        Id Users
+                      </label>
+                      <TextField
+                        id="id-users"
+                        value={idUsers}
+                        onChange={(e) => setIdUsers(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-battery">
+                        Id Battery
+                      </label>
+                      <TextField
+                        id="id-battery"
+                        value={idBattery}
+                        onChange={(e) => setIdBattery(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
                     <div className="flex flex-col w-1/2">
                       <label className="block text-black mb-1" htmlFor="id-rack">
                         Id Rack
@@ -360,14 +390,28 @@ const Storage = () => {
                         className="w-full mb-4"
                       />
                     </div>
+                  </div>
+
+                  <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-name">
-                        Rack Name
+                      <label className="block text-black mb-1" htmlFor="time-in">
+                        Time In
                       </label>
                       <TextField
-                        id="rack-name"
-                        value={rackName}
-                        onChange={(e) => setRackName(e.target.value)}
+                        id="time-in"
+                        value={timeIn}
+                        onChange={(e) => setTimeIn(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="time-out">
+                        Time Out
+                      </label>
+                      <TextField
+                        id="time-out"
+                        value={timeOut}
+                        onChange={(e) => setTimeOut(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
@@ -375,49 +419,13 @@ const Storage = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-material">
-                        Material
+                      <label className="block text-black mb-1" htmlFor="battery-status">
+                        Battery Status
                       </label>
                       <TextField
-                        id="rack-material"
-                        value={rackMaterial}
-                        onChange={(e) => setRackMaterial(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="weight-max">
-                        Weight Max
-                      </label>
-                      <TextField
-                        id="weight-max"
-                        value={weightMaxRack}
-                        onChange={(e) => setWeightMaxRack(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-capacity">
-                        Capacity
-                      </label>
-                      <TextField
-                        id="rack-capacity"
-                        value={rackCapacity}
-                        onChange={(e) => setRackCapacity(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-status">
-                        Status
-                      </label>
-                      <TextField
-                        id="rack-status"
-                        value={rackStatus}
-                        onChange={(e) => setRackStatus(e.target.value)}
+                        id="battery-status"
+                        value={batteryStatus}
+                        onChange={(e) => setBatteryStatus(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
@@ -448,12 +456,48 @@ const Storage = () => {
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
-            {/* Form for Add New Rack */}
+            {/* Form for update trasaction */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
-                <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
+              <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
                   <div className="flex space-x-6">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-storage">
+                        Id Storage
+                      </label>
+                      <TextField
+                        id="id-storage"
+                        value={idStorage}
+                        onChange={(e) => setIdStorage(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-users">
+                        Id Users
+                      </label>
+                      <TextField
+                        id="id-users"
+                        value={idUsers}
+                        onChange={(e) => setIdUsers(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-battery">
+                        Id Battery
+                      </label>
+                      <TextField
+                        id="id-battery"
+                        value={idBattery}
+                        onChange={(e) => setIdBattery(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
                     <div className="flex flex-col w-1/2">
                       <label className="block text-black mb-1" htmlFor="id-rack">
                         Id Rack
@@ -465,14 +509,28 @@ const Storage = () => {
                         className="w-full mb-4"
                       />
                     </div>
+                  </div>
+
+                  <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-name">
-                        Rack Name
+                      <label className="block text-black mb-1" htmlFor="time-in">
+                        Time In
                       </label>
                       <TextField
-                        id="rack-name"
-                        value={rackName}
-                        onChange={(e) => setRackName(e.target.value)}
+                        id="time-in"
+                        value={timeIn}
+                        onChange={(e) => setTimeIn(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="time-out">
+                        Time Out
+                      </label>
+                      <TextField
+                        id="time-out"
+                        value={timeOut}
+                        onChange={(e) => setTimeOut(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
@@ -480,49 +538,13 @@ const Storage = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-material">
-                        Material
+                      <label className="block text-black mb-1" htmlFor="battery-status">
+                        Battery Status
                       </label>
                       <TextField
-                        id="rack-material"
-                        value={rackMaterial}
-                        onChange={(e) => setRackMaterial(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="weight-max">
-                        Weight Max
-                      </label>
-                      <TextField
-                        id="weight-max"
-                        value={weightMaxRack}
-                        onChange={(e) => setWeightMaxRack(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-capacity">
-                        Capacity
-                      </label>
-                      <TextField
-                        id="rack-capacity"
-                        value={rackCapacity}
-                        onChange={(e) => setRackCapacity(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-status">
-                        Status
-                      </label>
-                      <TextField
-                        id="rack-status"
-                        value={rackStatus}
-                        onChange={(e) => setRackStatus(e.target.value)}
+                        id="battery-status"
+                        value={batteryStatus}
+                        onChange={(e) => setBatteryStatus(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>

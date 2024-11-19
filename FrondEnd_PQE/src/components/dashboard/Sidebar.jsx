@@ -28,7 +28,7 @@ const Sidebar = () => {
     },
     { id: 2, path: "/dashboard/users", name: "Users", icon: LuUser },
     { id: 3, path: "/dashboard/battery", name: "Battery", icon: FaBatteryFull },
-    { id: 4, path: "/dashboard/storage", name: "Storage", icon: GrStorage },
+    { id: 4, path: "/dashboard/rack", name: "Rack", icon: GrStorage },
     {
       id: 5,
       path: "/dashboard/chargingunit",
@@ -49,13 +49,13 @@ const Sidebar = () => {
     },
     {
       id: 8,
-      path: "/dashboard/testing",
+      path: "/dashboard/users",
       name: "Testing Info",
       icon: FaCarBattery,
     },
     {
       id: 9,
-      path: "/dashboard/storageinfo",
+      path: "/dashboard/storage",
       name: "Storage Info",
       icon: GrStorage,
     },

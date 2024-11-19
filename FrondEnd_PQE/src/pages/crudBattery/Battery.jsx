@@ -108,6 +108,11 @@ const Battery = () => {
         },
         body: JSON.stringify({
           "idBattery" : idBattery,
+          "noSeriBattery" : noSeriBattery,
+          "batteryMerk" : batteryMerk,
+          "batteryModel" : batteryModel,
+          "batteryDayaMax" : batteryDayaMax,
+          "batteryChargingTime" : batteryChargingTime,
           "batteryCapacity" : batteryCapacity,
           "batteryStatus" : batteryStatus
         }),
@@ -116,6 +121,11 @@ const Battery = () => {
       if (response.ok) {
         alert("Data berhasil disimpan!");
         setIdBattery("");
+        setNoSeriBattery("");
+        setBatteryMerk("");
+        setBatteryModel("");
+        setBatteryDayaMax("");
+        setBatteryChargingTime("");
         setBatteryCapacity("");
         setBatteryStatus("");
         fetchBatteries();
@@ -141,6 +151,11 @@ const Battery = () => {
         },
         body: JSON.stringify({
           "idBattery" : idBattery,
+          "noSeriBattery" : noSeriBattery,
+          "batteryMerk" : batteryMerk,
+          "batteryModel" : batteryModel,
+          "batteryDayaMax" : batteryDayaMax,
+          "batteryChargingTime" : batteryChargingTime,
           "batteryCapacity" : batteryCapacity,
           "batteryStatus" : batteryStatus
         }),
@@ -149,6 +164,11 @@ const Battery = () => {
       if (response.ok) {
         alert("Data berhasil disimpan!");
         setIdBattery("");
+        setNoSeriBattery("");
+        setBatteryMerk("");
+        setBatteryModel("");
+        setBatteryDayaMax("");
+        setBatteryChargingTime("");
         setBatteryCapacity("");
         setBatteryStatus("");
         fetchBatteries();

@@ -3,7 +3,7 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
 
-const getMachines = async () => {
+const getTesting = async () => {
   const response = await fetch('http://localhost:8000/api/testingMachine');
   if (!response.ok) {
     throw new Error('Failed to fetch batteries');
@@ -12,17 +12,7 @@ const getMachines = async () => {
   return data;
 };
 
-const deleteMachine = async (idMachine) => {
-  const response = await fetch(`http://localhost:8000/api/testingMachine-destroy/${idMachine}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) {
-    throw new Error('Failed to delete machine');
-  }
-  return await response.json();
-};
-
-const TestingMachine = () => {
+const Testing = () => {
   const [machines, setMachines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -82,16 +72,6 @@ const TestingMachine = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDelete = async (idMachine) => {
-    try {
-      await deleteMachine(idMachine);
-      setMachines((prevMachine) =>
-        prevMachine.filter((machine) => machine.idMachine !== idMachine)
-      );
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
    // Toggle modal open/close
    const toggleModal = () => setIsModalOpen(!isModalOpen);
@@ -538,4 +518,4 @@ const TestingMachine = () => {
   );
 };
 
-export default TestingMachine;
+export default Testing;
