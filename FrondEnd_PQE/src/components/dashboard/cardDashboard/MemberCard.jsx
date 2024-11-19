@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { FaChevronRight } from "react-icons/fa";
 
 const MemberCard = ({ member }) => {

@@ -1,10 +1,19 @@
-/* eslint-disable react/jsx-key */
 import Platforms from "../components/dashboard/Platforms";
 import ProjetStatic from "../components/dashboard/ProjectStatic";
 import ProjectCard from "../components/dashboard/cardDashboard/ProjectCard";
 import ClientCard from "../components/dashboard/cardDashboard/ClientCard";
 import MemberCard from "../components/dashboard/cardDashboard/MemberCard";
+import { Chart as ChartJS, defaults } from "chart.js/auto";
 
+import { motion } from "framer-motion";
+import { FiZap, FiShoppingBag, FiUsers, FiBarChart2 } from "react-icons/fi";
+import { Bar, Doughnut, Line } from "react-chartjs-2";
+import revenueData from "../dataDummy/revenueData.json";
+
+import "../styleCss/DashboardHome/DashboardHome.css";
+import StatCard from "../components/common/StatCard";
+import LineChart from "../components/dashboardHome/LineChart";
+import CategoryDistributionChart from "../components/dashboardHome/CategoryDistributionChart";
 const projects = [
   {
     name: "Website Redesign",
@@ -82,11 +91,52 @@ const members = [
 const Dashboard = () => {
   return (
     <div className="p-5">
-      <div className="grid md:grid-cols-2 xl:grid-cols-2 gap-4">
-        <ProjetStatic />
-        <Platforms />
-        <ProjetStatic />
-        <Platforms />
+      <div className="max-w-full mx-auto px-4 lg:px-8">
+        {/* STATS */}
+        <motion.div
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+            <StatCard
+              name="Total Sales"
+              icon={FiZap}
+              value="$12,345"
+              color="#6366F1"
+            />
+          </div>
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+            <StatCard
+              name="New Users"
+              icon={FiUsers}
+              value="1,234"
+              color="#8B5CF6"
+            />
+          </div>
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+            <StatCard
+              name="Total Products"
+              icon={FiShoppingBag}
+              value="567"
+              color="#EC4899"
+            />
+          </div>
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+            <StatCard
+              name="Conversion Rate"
+              icon={FiBarChart2}
+              value="12.5%"
+              color="#10B981"
+            />
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <LineChart />
+          <CategoryDistributionChart />
+        </div>
       </div>
 
       <div>
