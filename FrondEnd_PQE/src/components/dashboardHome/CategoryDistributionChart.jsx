@@ -31,6 +31,7 @@ const CategoryDistributionChart = () => {
 
   const chartOptions = {
     responsive: true,
+    maintainAspectRatio: false, // Agar grafik tidak memaksakan rasio tetap
     plugins: {
       tooltip: {
         backgroundColor: "rgba(31, 41, 55, 0.8)",
@@ -68,11 +69,11 @@ const CategoryDistributionChart = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.0 }}
     >
-      <div className="text-center">
-        <h2 className="text-lg font-medium mb-4 text-red-E01414">
+      <div className="text-center w-full">
+        <h2 className="text-lg text-left font-medium mb-4 text-red-E01414">
           Status Charging
         </h2>
-        <div className="h-80 w-80">
+        <div className="h-80 w-full">
           <Pie data={chartData} options={chartOptions} />
         </div>
       </div>

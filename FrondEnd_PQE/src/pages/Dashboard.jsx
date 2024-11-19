@@ -10,11 +10,13 @@ import { motion } from "framer-motion";
 import { FiZap, FiShoppingBag, FiUsers, FiBarChart2 } from "react-icons/fi";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
 import revenueData from "../dataDummy/revenueData.json";
+import sourceData from "../dataDummy/sourceData.json";
 
 import "../styleCss/DashboardHome/DashboardHome.css";
 import StatCard from "../components/common/StatCard";
 import LineChart from "../components/dashboardHome/LineChart";
 import CategoryDistributionChart from "../components/dashboardHome/CategoryDistributionChart";
+import BarChart from "../components/dashboardHome/BarChart";
 const projects = [
   {
     name: "Website Redesign",
@@ -100,7 +102,7 @@ const Dashboard = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
               name="Total Sales"
               icon={FiZap}
@@ -108,7 +110,7 @@ const Dashboard = () => {
               color="#6366F1"
             />
           </div>
-          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
               name="New Users"
               icon={FiUsers}
@@ -116,7 +118,7 @@ const Dashboard = () => {
               color="#8B5CF6"
             />
           </div>
-          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
               name="Total Products"
               icon={FiShoppingBag}
@@ -124,7 +126,7 @@ const Dashboard = () => {
               color="#EC4899"
             />
           </div>
-          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md">
+          <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
               name="Conversion Rate"
               icon={FiBarChart2}
@@ -135,66 +137,15 @@ const Dashboard = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <LineChart />
-          <CategoryDistributionChart />
-          <Bar
-            data={{
-              labels: sourceData.map((data) => data.label),
-              datasets: [
-                {
-                  label: "Count",
-                  data: sourceData.map((data) => data.value),
-                  backgroundColor: [
-                    "rgba(43, 63, 229, 0.8)",
-                    "rgba(250, 192, 19, 0.8)",
-                    "rgba(253, 135, 135, 0.8)",
-                  ],
-                  borderRadius: 5,
-                },
-              ],
-            }}
-            options={{
-              plugins: {
-                title: {
-                  text: "Revenue Source",
-                },
-              },
-            }}
-          />
-        </div>
-      </div>
-
-      <div>
-        <div className="flex justify-between items-center py-4">
-          <h1 className="text-lg font-semibold">Current Projects</h1>
-          <p className="text-sm underline text-indigo-600">See All</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-          {projects &&
-            projects.map((project) => <ProjectCard project={project} />)}
-        </div>
-      </div>
-
-      <div>
-        <div className="flex justify-between items-center py-4">
-          <h1 className="text-lg font-semibold">Current Clients</h1>
-          <p className="text-sm underline text-indigo-600">See All</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-          {clients && clients.map((client) => <ClientCard client={client} />)}
-        </div>
-      </div>
-
-      <div>
-        <div className="flex justify-between items-center py-4">
-          <h1 className="text-lg font-semibold">Members</h1>
-          <p className="text-sm underline text-indigo-600">See All</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-          {members && members.map((member) => <MemberCard member={member} />)}
+          <div className="w-full">
+            <BarChart sourceData={sourceData} />
+          </div>
+          <div className="w-full">
+            <CategoryDistributionChart />
+          </div>
+          <div className="lg:col-span-2 w-full">
+            <LineChart revenueData={revenueData} />
+          </div>
         </div>
       </div>
     </div>
