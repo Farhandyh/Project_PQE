@@ -174,7 +174,7 @@ const MonitorTesting = () => {
         {/* Section Bawah */}
         <div className="relative flex flex-col lg:flex-row gap-8 lg:gap-4 mt-12 lg:mt-32">
           {/* Graph kiri */}
-          <div className="bg-red-E01414 w-full lg:w-3/4 h-auto lg:h-full rounded-2xl relative p-4">
+          <div className="bg-red-E01414 w-full lg:w-3/4 h-auto lg:h-full rounded-2xl relative p-4 ml-4">
             <div className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"></div>
             <div className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"></div>
             <h1 className="text-center font-poppins text-white text-lg lg:text-xl font-black">
@@ -185,7 +185,7 @@ const MonitorTesting = () => {
                 <Bar data={kwhGraph} options={kwhGraphOptions} />
               </div>
             </div>
-          </div>    
+          </div>
 
           {/* Performance Health */}
           <div className="bg-red-E01414 w-full lg:w-2/6 h-auto lg:h-full rounded-2xl relative p-4">
