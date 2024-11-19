@@ -16,7 +16,7 @@ const Sidebar = () => {
   };
 
   const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsDropdownOpen((prevState) => !prevState);
   };
 
   const SIDEBAR_LINKS = [
@@ -112,49 +112,46 @@ const Sidebar = () => {
           {/* Dropdown Menu */}
           <li>
             <div
-              className="flex items-center justify-start space-x-6 cursor-pointer hover:bg-white hover:text-red-600 hover:rounded-full transition-all duration-300 border-b-2 border-transparent hover:border-red-600"
+              className="flex items-center space-x-9 p-2 rounded-lg cursor-pointer hover:bg-white hover:text-red-E01414 transition-all duration-300"
               onClick={toggleDropdown}
             >
-              <span className="flex items-center justify-center w-10 h-10 bg-white text-red-600 rounded-full">
-                {FaCarBattery()}
+              <span className="text-xl">
+                {React.createElement(FaCarBattery)}
               </span>
-              <span className="text-sm font-semibold">Machine</span>
+              <span className="text-sm">Machine</span>
               <span>
                 {isDropdownOpen ? <FiChevronUp /> : <FiChevronDown />}
               </span>
             </div>
             {isDropdownOpen && (
-              <ul className="ml-8 mt-2 space-y-2 relative">
-                <div className="absolute top-0 left-[-16px] h-full border-l-2 border-white"></div>
+              <ul className="mt-2 ml-6 space-y-2 relative">
+                {/* Garis Vertikal */}
+                <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-white"></div>
 
-                <div className="pt-2">
-                  {SIDEBAR_LINKS.slice(4, 6).map((link, index) => (
-                    <li key={index} className="relative">
-                      <div className="absolute top-0 left-[-16px] h-full w-[calc(100%+16px)] border-t-2 border-white"></div>
+                {SIDEBAR_LINKS.slice(4, 6).map((link, index) => (
+                  <li
+                    key={link.id}
+                    className="flex items-center space-x-4 relative"
+                  >
+                    {/* Garis Horizontal */}
+                    <div className="absolute left-2 top-1/2 w-4 h-0.5 bg-white transform -translate-y-1/2"></div>
 
-                      <Link
-                        to={link.path}
-                        className={`flex items-center justify-start space-x-2 transition-all duration-300 ${
-                          activeLink === link.id
-                            ? "text-red-600 bg-white rounded-full"
-                            : "hover:bg-white hover:text-red-600 hover:rounded-full"
-                        }`}
-                        onClick={() => handleLinkClick(link.id)}
-                      >
-                        <span
-                          className={`flex items-center justify-center w-10 h-10 transition-all duration-300 ${
-                            activeLink === link.id
-                              ? "bg-white text-red-600 rounded-full"
-                              : "hover:bg-white hover:text-red-600 hover:rounded-full"
-                          }`}
-                        >
-                          {link.icon()}
-                        </span>
-                        <span className="text-sm">{link.name}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </div>
+                    <Link
+                      to={link.path}
+                      className={`flex items-center space-x-4 p-2 rounded-lg transition-all duration-300 ${
+                        activeLink === link.id
+                          ? "bg-white text-red-E01414"
+                          : "hover:bg-white hover:text-red-E01414"
+                      }`}
+                      onClick={() => handleLinkClick(link.id)}
+                    >
+                      <span className="text-xl">
+                        {React.createElement(link.icon)}
+                      </span>
+                      <span className="text-sm">{link.name}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
