@@ -23,7 +23,7 @@ export default {
           E01414: "#E01414", // Warna kustom
           CF0920: "#CF0920",
         },
-        gray: { EDD7D7: "#EDD7D7" },
+        gray: { EDD7D7: "#EDD7D7", F5F5F5: "#F5F5F5" },
         container: "hsl(0, 0%, 100%)",
         containerCapsul: "hsl(0, 40%, 87%)",
       },
