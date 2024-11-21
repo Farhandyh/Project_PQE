@@ -11,20 +11,20 @@ const OptionStorage = () => {
                     to="/dashboard/storage-checkIn" // Ganti dengan route yang sesuai
                     className="block w-3/4 bg-white text-red-600 font-semibold text-center py-3 my-4 mt-6 rounded-lg hover:bg-red-100 transition duration-200"
                     >
-                    CheckIn
+                    Check In
                     </Link>
-                    <a
-                    href=""
-                    className="block w-3/4 bg-white text-red-600 font-semibold text-center py-3 my-4 rounded-lg hover:bg-red-100 transition duration-200"
+                    <Link
+                    to="/dashboard/storage-checkOut" // Ganti dengan route yang sesuai
+                    className="block w-3/4 bg-white text-red-600 font-semibold text-center py-3 my-4 mt-6 rounded-lg hover:bg-red-100 transition duration-200"
                     >
-                    CheckOut
-                    </a>
-                    <a
-                    href=""
-                    className="block w-3/4 bg-white text-red-600 font-semibold text-center py-3 my-4 rounded-lg hover:bg-red-100 transition duration-200"
+                    Check Out
+                    </Link>
+                    <Link
+                    to="/dashboard/storage-history" // Ganti dengan route yang sesuai
+                    className="block w-3/4 bg-white text-red-600 font-semibold text-center py-3 my-4 mt-6 rounded-lg hover:bg-red-100 transition duration-200"
                     >
                     History
-                    </a>
+                    </Link>
                 </div>
             </div>
         </>

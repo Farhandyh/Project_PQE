@@ -43,13 +43,13 @@ const Sidebar = () => {
     },
     {
       id: 7,
-      path: "/dashboard/users",
+      path: "/dashboard/charging",
       name: "Charging Info",
       icon: FaChargingStation,
     },
     {
       id: 8,
-      path: "/dashboard/users",
+      path: "/dashboard/testing",
       name: "Testing Info",
       icon: FaCarBattery,
     },

@@ -6,7 +6,7 @@ import Header from '../../components/materialCRUD/Header';
 const getMachines = async () => {
   const response = await fetch('http://localhost:8000/api/testingMachine');
   if (!response.ok) {
-    throw new Error('Failed to fetch batteries');
+    throw new Error('Failed to fetch machine');
   }
   const data = await response.json();
   return data;
