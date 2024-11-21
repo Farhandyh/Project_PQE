@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import TextField from '../../components/materialCRUD/TextField';
-import Header from '../../components/materialCRUD/Header';
+import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import TextField from "../../components/materialCRUD/TextField";
+import Header from "../../components/materialCRUD/Header";
 
 const getBatteries = async () => {
-  const response = await fetch('http://localhost:8000/api/batteries');
+  const response = await fetch("http://localhost:8000/api/batteries");
   if (!response.ok) {
-    throw new Error('Failed to fetch batteries');
+    throw new Error("Failed to fetch batteries");
   }
   const data = await response.json();
   return data;
 };
 
 const deleteBattery = async (idBattery) => {
-  const response = await fetch(`http://localhost:8000/api/batteries-destroy/${idBattery}`, {
-    method: 'DELETE',
-  });
+  const response = await fetch(
+    `http://localhost:8000/api/batteries-destroy/${idBattery}`,
+    {
+      method: "DELETE",
+    }
+  );
   if (!response.ok) {
-    throw new Error('Failed to delete battery');
+    throw new Error("Failed to delete battery");
   }
   return await response.json();
 };
@@ -29,14 +32,14 @@ const Battery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idBattery,setIdBattery] = useState("");
-  const [noSeriBattery,setNoSeriBattery] = useState("");
-  const [batteryMerk,setBatteryMerk] = useState("");
-  const [batteryModel,setBatteryModel] = useState("");
-  const [batteryDayaMax,setBatteryDayaMax] = useState("");
-  const [batteryChargingTime,setBatteryChargingTime] = useState("");
-  const [batteryCapacity,setBatteryCapacity] = useState("");
-  const [batteryStatus,setBatteryStatus] = useState("");
+  const [idBattery, setIdBattery] = useState("");
+  const [noSeriBattery, setNoSeriBattery] = useState("");
+  const [batteryMerk, setBatteryMerk] = useState("");
+  const [batteryModel, setBatteryModel] = useState("");
+  const [batteryDayaMax, setBatteryDayaMax] = useState("");
+  const [batteryChargingTime, setBatteryChargingTime] = useState("");
+  const [batteryCapacity, setBatteryCapacity] = useState("");
+  const [batteryStatus, setBatteryStatus] = useState("");
 
   const fetchBatteries = async () => {
     try {
@@ -53,7 +56,7 @@ const Battery = () => {
   useEffect(() => {
     fetchBatteries();
   }, []);
-  
+
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (batteryData) => {
     setIdBattery(batteryData.idBattery);
@@ -67,8 +70,8 @@ const Battery = () => {
     setIsUpdateOpen(true);
   };
 
-  if (loading) return <p className="text-center">Loading...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  // if (loading) return <p className="text-center">Loading...</p>;
+  // if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const itemsPerPage = 10;
   const totalPages = Math.ceil(batteries.length / itemsPerPage);
@@ -101,22 +104,25 @@ const Battery = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/batteries-create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "idBattery" : idBattery,
-          "noSeriBattery" : noSeriBattery,
-          "batteryMerk" : batteryMerk,
-          "batteryModel" : batteryModel,
-          "batteryDayaMax" : batteryDayaMax,
-          "batteryChargingTime" : batteryChargingTime,
-          "batteryCapacity" : batteryCapacity,
-          "batteryStatus" : batteryStatus
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/batteries-create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idBattery: idBattery,
+            noSeriBattery: noSeriBattery,
+            batteryMerk: batteryMerk,
+            batteryModel: batteryModel,
+            batteryDayaMax: batteryDayaMax,
+            batteryChargingTime: batteryChargingTime,
+            batteryCapacity: batteryCapacity,
+            batteryStatus: batteryStatus,
+          }),
+        }
+      );
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
@@ -130,8 +136,7 @@ const Battery = () => {
         setBatteryStatus("");
         fetchBatteries();
         toggleModal();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -144,22 +149,25 @@ const Battery = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/batteries-update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "idBattery" : idBattery,
-          "noSeriBattery" : noSeriBattery,
-          "batteryMerk" : batteryMerk,
-          "batteryModel" : batteryModel,
-          "batteryDayaMax" : batteryDayaMax,
-          "batteryChargingTime" : batteryChargingTime,
-          "batteryCapacity" : batteryCapacity,
-          "batteryStatus" : batteryStatus
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/batteries-update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idBattery: idBattery,
+            noSeriBattery: noSeriBattery,
+            batteryMerk: batteryMerk,
+            batteryModel: batteryModel,
+            batteryDayaMax: batteryDayaMax,
+            batteryChargingTime: batteryChargingTime,
+            batteryCapacity: batteryCapacity,
+            batteryStatus: batteryStatus,
+          }),
+        }
+      );
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
@@ -173,8 +181,7 @@ const Battery = () => {
         setBatteryStatus("");
         fetchBatteries();
         toggleUpdate();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -289,18 +296,10 @@ const Battery = () => {
                 <td className="py-2 px-2 border-b">
                   {(currentPage - 1) * itemsPerPage + index + 1}
                 </td>
-                <td className="py-2 px-2 border-b">
-                  {battery.noSeriBattery}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {battery.batteryMerk}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {battery.batteryModel}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {battery.batteryDayaMax}
-                </td>
+                <td className="py-2 px-2 border-b">{battery.noSeriBattery}</td>
+                <td className="py-2 px-2 border-b">{battery.batteryMerk}</td>
+                <td className="py-2 px-2 border-b">{battery.batteryModel}</td>
+                <td className="py-2 px-2 border-b">{battery.batteryDayaMax}</td>
                 <td className="py-2 px-2 border-b">
                   {battery.batteryChargingTime}
                 </td>
@@ -393,7 +392,10 @@ const Battery = () => {
                 <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
                   <div className="flex space-x-6">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-battery">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-battery"
+                      >
                         Id Battery
                       </label>
                       <TextField
@@ -404,7 +406,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="seri-battery">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="seri-battery"
+                      >
                         Seri Battery
                       </label>
                       <TextField
@@ -418,7 +423,10 @@ const Battery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-merk">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-merk"
+                      >
                         Merk
                       </label>
                       <TextField
@@ -429,7 +437,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-model">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-model"
+                      >
                         Model
                       </label>
                       <TextField
@@ -443,7 +454,10 @@ const Battery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="daya-max">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="daya-max"
+                      >
                         Daya Max
                       </label>
                       <TextField
@@ -454,7 +468,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="charging-time">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="charging-time"
+                      >
                         Charging Time
                       </label>
                       <TextField
@@ -468,7 +485,10 @@ const Battery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-capacity">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-capacity"
+                      >
                         Capacity
                       </label>
                       <TextField
@@ -479,7 +499,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-status">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-status"
+                      >
                         Status
                       </label>
                       <TextField
@@ -523,7 +546,10 @@ const Battery = () => {
                 <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
                   <div className="flex space-x-6">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-battery">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-battery"
+                      >
                         Id Battery
                       </label>
                       <TextField
@@ -534,7 +560,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="seri-battery">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="seri-battery"
+                      >
                         Seri Battery
                       </label>
                       <TextField
@@ -548,7 +577,10 @@ const Battery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-merk">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-merk"
+                      >
                         Merk
                       </label>
                       <TextField
@@ -559,7 +591,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-model">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-model"
+                      >
                         Model
                       </label>
                       <TextField
@@ -573,7 +608,10 @@ const Battery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="daya-max">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="daya-max"
+                      >
                         Daya Max
                       </label>
                       <TextField
@@ -584,7 +622,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="charging-time">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="charging-time"
+                      >
                         Charging Time
                       </label>
                       <TextField
@@ -598,7 +639,10 @@ const Battery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-capacity">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-capacity"
+                      >
                         Capacity
                       </label>
                       <TextField
@@ -609,7 +653,10 @@ const Battery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="battery-status">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="battery-status"
+                      >
                         Status
                       </label>
                       <TextField

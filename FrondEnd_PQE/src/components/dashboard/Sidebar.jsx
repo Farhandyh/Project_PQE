@@ -6,7 +6,12 @@ import { GrStorage } from "react-icons/gr";
 import { HiOutlineLogin } from "react-icons/hi";
 import { BsBatteryCharging } from "react-icons/bs";
 import { TbBrandSpeedtest } from "react-icons/tb";
-import { TbHomeBolt } from "react-icons/tb";
+import {
+  TbHomeBolt,
+  TbHomeStats,
+  TbHomeDown,
+  TbHomeSignal,
+} from "react-icons/tb";
 import { GrVirtualMachine } from "react-icons/gr";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import "../../styleCss/SideBar/SideBarCss.css";
@@ -66,19 +71,19 @@ const Sidebar = () => {
       id: 9,
       path: "/dashboard/storage",
       name: "Check-In",
-      icon: TbHomeBolt,
+      icon: TbHomeStats,
     },
     {
       id: 10,
       path: "/dashboard/storage",
       name: "Check-Out",
-      icon: TbHomeBolt,
+      icon: TbHomeDown,
     },
     {
       id: 11,
       path: "/dashboard/storage",
       name: "History",
-      icon: TbHomeBolt,
+      icon: TbHomeSignal,
     },
   ];
 
