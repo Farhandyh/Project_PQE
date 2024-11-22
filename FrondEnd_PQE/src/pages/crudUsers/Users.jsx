@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import TextField from "../../components/materialCRUD/TextField";
 import Header from "../../components/materialCRUD/Header";
-import Swal from 'sweetalert2'
 
 const getUsers = async () => {
   const response = await fetch("http://localhost:8000/api/users");
@@ -55,7 +54,7 @@ const Users = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-  
+
   const handleRowClick = (usersData) => {
     setIdUsers(usersData.idUsers);
     setName(usersData.name);
@@ -116,6 +115,7 @@ const Users = () => {
       });
 
       if (response.ok) {
+        alert("Data Berhasil Disimpan!");
         setIdUsers("");
         setName("");
         setUsername("");
@@ -124,13 +124,6 @@ const Users = () => {
         setRole("");
         fetchUsers();
         toggleModal();
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Save Users Success!",
-          showConfirmButton: false,
-          timer: 1500
-        });
       } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
@@ -160,6 +153,7 @@ const Users = () => {
       });
 
       if (response.ok) {
+        alert("Data Berhasil Disimpan!");
         setIdUsers("");
         setName("");
         setUsername("");
@@ -168,13 +162,6 @@ const Users = () => {
         setRole("");
         fetchUsers();
         toggleUpdate();
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Update Users Success!",
-          showConfirmButton: false,
-          timer: 1500
-        });
       } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
