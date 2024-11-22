@@ -54,7 +54,7 @@ const Users = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-
+  
   const handleRowClick = (usersData) => {
     setIdUsers(usersData.idUsers);
     setName(usersData.name);
@@ -115,7 +115,6 @@ const Users = () => {
       });
 
       if (response.ok) {
-        alert("Data berhasil disimpan!");
         setIdUsers("");
         setName("");
         setUsername("");
@@ -153,7 +152,6 @@ const Users = () => {
       });
 
       if (response.ok) {
-        alert("Data berhasil disimpan!");
         setIdUsers("");
         setName("");
         setUsername("");
