@@ -3,8 +3,8 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
 
-const getUnits = async () => {
-  const response = await fetch('http://localhost:8000/api/units');
+const getDataCharging = async () => {
+  const response = await fetch('http://localhost:8000/api/charging');
   if (!response.ok) {
     throw new Error('Failed to fetch units charging');
   }
@@ -12,37 +12,29 @@ const getUnits = async () => {
   return data;
 };
 
-const deleteUnit = async (idUnitCharge) => {
-  const response = await fetch(`http://localhost:8000/api/batteries-destroy/${idUnitCharge}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) {
-    throw new Error('Failed to delete unit charging');
-  }
-  return await response.json();
-};
-
 const ChargingBattery = () => {
-  const [chargingUnit, setChargingUnit] = useState([]);
+  const [chargingBattery, setChargingBattery] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idUnitCharge,setIdUnitCharge] = useState("");
-  const [unitName,setUnitName] = useState("");
-  const [noSeriUnit,setNoSeriUnit] = useState("");
-  const [averageChargingTime,setAverageChargingTime] = useState("");
-  const [connectorTypeUnit,setConnectorType] = useState("");
-  const [unitLocation,setUnitLocation] = useState("");
-  const [unitStatus,setUnitStatus] = useState("");
+  const [idCharging,setIdCharging] = useState("");
+  const [idUsers,setIdUsers] = useState("");
+  const [idBattery,setIdBattery] = useState("");
+  const [idUnitCharge,setIdUnitCharge] = useState("");;
+  const [noMotor,setNoMotor] = useState("");
+  const [dateCharging,setDateCharging] = useState("");
+  const [startTime,setStartTime] = useState("");
+  const [finishTime,setFinishTime] = useState("");
+  const [kWhUsed,setkWhUsed] = useState("");
 
-  const fetchUnits = async () => {
+  const fetchDataCharging = async () => {
     try {
-      const data = await getUnits();
-      setChargingUnit(data);
+      const data = await getDataCharging();
+      setChargingBattery(data);
     } catch (error) {
-      setError("Error fetching units charging data.");
+      setError("Error fetching charging data.");
       console.error(error);
     } finally {
       setLoading(false);
@@ -50,18 +42,20 @@ const ChargingBattery = () => {
   };
 
   useEffect(() => {
-    fetchUnits();
+    fetchDataCharging();
   }, []);
   
   // Event untuk menampilkan data row yang dipilih dalam form update
-  const handleRowClick = (chargingUnit) => {
-    setIdUnitCharge(chargingUnit.idUnitCharge);
-    setUnitName(chargingUnit.unitName);
-    setNoSeriUnit(chargingUnit.noSeriUnit);
-    setAverageChargingTime(chargingUnit.averageChargingTime);
-    setConnectorType(chargingUnit.connectorTypeUnit);
-    setUnitLocation(chargingUnit.unitLocation);
-    setUnitStatus(chargingUnit.unitStatus);
+  const handleRowClick = (chargingBattery) => {
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString('en-US', { hour12: false }); // Format: HH:mm:ss
+    const formattedDate = now.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
+
+    setIdCharging(chargingBattery.idCharging);
+    setIdUsers(chargingBattery.idUsers);
+    setIdBattery(chargingBattery.idBattery);
+    setDateCharging(formattedDate);
+    setFinishTime(formattedTime);
     setIsUpdateOpen(true);
   };
 
@@ -69,9 +63,9 @@ const ChargingBattery = () => {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const itemsPerPage = 10;
-  const totalPages = Math.ceil(chargingUnit.length / itemsPerPage);
+  const totalPages = Math.ceil(chargingBattery.length / itemsPerPage);
 
-  const currentUnits = chargingUnit.slice(
+  const currentData = chargingBattery.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
@@ -80,51 +74,49 @@ const ChargingBattery = () => {
     setCurrentPage(pageNumber);
   };
 
-  const handleDelete = async (idUnitCharge) => {
-    try {
-      await deleteUnits(idUnitCharge);
-      setChargingUnit((prevUnits) =>
-        prevUnits.filter((ChargingUnit) => ChargingUnit.idUnitCharge !== idUnitCharge)
-      );
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
-   // Toggle modal open/close
-   const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const toggleModal = () =>{
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString('en-US', { hour12: false }); // Format: HH:mm:ss
+    const formattedDate = now.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
+    
+    setDateCharging(formattedDate);
+    setStartTime(formattedTime);
+    setIsModalOpen(!isModalOpen);
+   };
+
    const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/units-create", {
+      const response = await fetch("http://localhost:8000/api/charging-create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          "idCharging" : idCharging,
+          "idUsers" : idUsers,
+          "idBattery" : idBattery,
           "idUnitCharge" : idUnitCharge,
-          "unitName" : unitName,
-          "noSeriUnit" : noSeriUnit,
-          "averageChargingTime" : averageChargingTime,
-          "connectorTypeUnit" : connectorTypeUnit,
-          "unitLocation" : unitLocation,
-          "unitStatus" : unitStatus
+          "noMotor" : noMotor,
+          "dateCharging" : dateCharging,
+          "startTime" : startTime,
         }),
       });
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
+        setIdCharging("");
+        setIdUsers("");
+        setIdBattery("");
         setIdUnitCharge("");
-        setUnitName("");
-        setNoSeriUnit("");
-        setAverageChargingTime("");
-        setConnectorType("");
-        setUnitLocation("");
-        setUnitStatus("");
-        fetchUnits();
+        setNoMotor("");
+        setDateCharging("");
+        setStartTime("");
+        fetchDataCharging();
         toggleModal();
       }
        else {
@@ -140,32 +132,28 @@ const ChargingBattery = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/batteries-update", {
+      const response = await fetch("http://localhost:8000/api/charging-update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUnitCharge" : idUnitCharge,
-          "unitName" : unitName,
-          "noSeriUnit" : noSeriUnit,
-          "averageChargingTime" : averageChargingTime,
-          "connectorTypeUnit" : connectorTypeUnit,
-          "unitLocation" : unitLocation,
-          "unitStatus" : unitStatus
+          "idCharging" : idCharging,
+          "idUsers" : idUsers,
+          "idBattery" : idBattery,
+          "kWhUsed" : kWhUsed,
+          "finishTime" : finishTime,
         }),
       });
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
-        setIdUnitCharge("");
-        setUnitName("");
-        setNoSeriUnit("");
-        setAverageChargingTime("");
-        setConnectorType("");
-        setUnitLocation("");
-        setUnitStatus("");
-        fetchUnits();
+        setIdCharging("");
+        setIdUsers("");
+        setIdBattery("");
+        setkWhUsed("");
+        setFinishTime("");
+        fetchDataCharging();
         toggleUpdate();
       }
        else {
@@ -188,38 +176,61 @@ const ChargingBattery = () => {
         <div className="bg-white rounded-2xl w-2/6 h-48 flex items-center p-2 shadow-lg">
         </div>
       </div>
-      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
-        <table className="w-full bg-white border border-gray-200">
+      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pb-5 pr-10 bg-white">
+        <div className="flex justify-between items-center">
+            <button
+                onClick={toggleModal}
+                className="text-white bg-red-500 px-4 py-2 rounded-full"
+            >
+            Testing Battery
+           </button>   
+            <div className="flex space-x-2">
+              <input
+                type="text"
+                placeholder="Searching...."
+                className="bg-white border-red-E01414 border text-center mt-5 w-96 h-7 rounded-lg"
+              />
+              <div className="w-28 h-7 bg-red-E01414 justify-center rounded-lg mt-5">
+                <select className="bg-red-E01414 text-white text-xl font-semibold rounded-lg w-full h-full">
+                  <option value="" disabled selected className="text-center">Filter</option>
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </select>
+              </div>
+          </div>
+        </div>
+        <table className="w-full bg-white border border-gray-200 mt-5">
           <thead>
             <tr className="bg-red-E01414 text-white">
               <th className="py-2 px-2 border-b border-r border-gray-300">
                 NO
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Unit Name
+                Date
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Seri Unit
+                No Motor
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Charging Time
+                Start Time
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Connector Type
+                Finish Time
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Location
+                Duration
               </th>
               <th className="py-2 px-2 border-b border-r border-gray-300">
-                Status
+                kWh Used
               </th>
               <th className="py-2 px-2 border-b">Action</th>
             </tr>
           </thead>
           <tbody>
-            {currentUnits.map((ChargingUnit, index) => (
+            {currentData.map((ChargingBattery, index) => (
               <tr
-                key={ChargingUnit.idUnitCharge}
+                key={ChargingBattery.idCharging}
                 className={`text-center ${index % 2 === 1 ? "" : ""}`}
                 style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
               >
@@ -227,22 +238,22 @@ const ChargingBattery = () => {
                   {(currentPage - 1) * itemsPerPage + index + 1}
                 </td>
                 <td className="py-2 px-2 border-b">
-                  {ChargingUnit.unitName}
+                  {ChargingBattery.dateCharging}
                 </td>
                 <td className="py-2 px-2 border-b">
-                  {ChargingUnit.noSeriUnit}
+                  {ChargingBattery.noMotor}
                 </td>
                 <td className="py-2 px-2 border-b">
-                  {ChargingUnit.averageChargingTime}
+                  {ChargingBattery.startTime}
                 </td>
                 <td className="py-2 px-2 border-b">
-                  {ChargingUnit.connectorTypeUnit}
+                  {ChargingBattery.finishTime}
                 </td>
                 <td className="py-2 px-2 border-b">
-                  {ChargingUnit.unitLocation}
+                  {ChargingBattery.chargingDuration}
                 </td>
                 <td className="py-2 px-2 border-b">
-                  {ChargingUnit.unitStatus === 1 ? "Active" : "Non-Active"}
+                  {ChargingBattery.kWhUsed}
                 </td>
                 <td
                   className="py-2 px-2 border-b"
@@ -252,18 +263,11 @@ const ChargingBattery = () => {
                     href="#"
                     onClick={() => {
                       toggleUpdate();
-                      handleRowClick(ChargingUnit);
+                      handleRowClick(ChargingBattery);
                     }}
                     className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
                   >
                     <FaEdit />
-                  </a>
-                  <a
-                    href="#"
-                    onClick={() => handleDelete(ChargingUnit.idUnitCharge)}
-                    className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                  >
-                    <FaTrashAlt />
                   </a>
                 </td>
               </tr>
@@ -316,104 +320,103 @@ const ChargingBattery = () => {
           </button>
         </div>
       </div>
-      {/* Modal Pop-up Create Charger */}
+
+      {/* Modal Pop-up Create Charging Data */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
-            {/* Form for Add New Charger */}
+            {/* Form for Add New Charging Data */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
-                <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
+              <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
                   <div className="flex space-x-6">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-unit">
-                        Id Unit
+                      <label className="block text-black mb-1" htmlFor="id-charging">
+                        Charging ID
                       </label>
                       <TextField
-                        id="id-unit"
+                        id="id-charging"
+                        value={idCharging}
+                        onChange={(e) => setIdCharging(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-users">
+                        Users ID
+                      </label>
+                      <TextField
+                        id="id-users"
+                        value={idUsers}
+                        onChange={(e) => setIdUsers(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-battery">
+                        Battery ID
+                      </label>
+                      <TextField
+                        id="id-battery"
+                        value={idBattery}
+                        onChange={(e) => setIdBattery(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col w-1/2">
+                      <label className="block text-black mb-1" htmlFor="id-charger">
+                        Charger ID
+                      </label>
+                      <TextField
+                        id="id-charger"
                         value={idUnitCharge}
                         onChange={(e) => setIdUnitCharge(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-name">
-                        Unit Name
-                      </label>
-                      <TextField
-                        id="unit-name"
-                        value={unitName}
-                        onChange={(e) => setUnitName(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
                   </div>
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="seri-unit">
-                        Seri Unit
+                      <label className="block text-black mb-1" htmlFor="date-charging">
+                        Date Charging
                       </label>
                       <TextField
-                        id="seri-unit"
-                        value={noSeriUnit}
-                        onChange={(e) => setNoSeriUnit(e.target.value)}
+                        id="date-charging"
+                        value={dateCharging}
+                        onChange={(e) => setDateCharging(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="charging-time">
-                        Charging Time
+                      <label className="block text-black mb-1" htmlFor="no-motor">
+                        No Motor
                       </label>
                       <TextField
-                        id="charging-time"
-                        value={averageChargingTime}
-                        onChange={(e) => setAverageChargingTime(e.target.value)}
+                        id="no-motor"
+                        value={noMotor}
+                        onChange={(e) => setNoMotor(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
                   </div>
-
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="connector-type">
-                        Connector
+                      <label className="block text-black mb-1" htmlFor="start-time">
+                        Start Time
                       </label>
                       <TextField
-                        id="connector-type"
-                        value={connectorTypeUnit}
-                        onChange={(e) => setConnectorType(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-location">
-                        Unit Location
-                      </label>
-                      <TextField
-                        id="unit-location"
-                        value={unitLocation}
-                        onChange={(e) => setUnitLocation(e.target.value)}
+                        id="start-time"
+                        value={startTime}
+                        onChange={(e) => setStartTime(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
                   </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-status">
-                        Unit Status
-                      </label>
-                      <TextField
-                        id="unit-status"
-                        value={unitStatus}
-                        onChange={(e) => setUnitStatus(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
-
                   <div className="flex justify-center mt-10 space-x-10">
                     <button
                       type="submit"
@@ -439,110 +442,74 @@ const ChargingBattery = () => {
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
-            {/* Form for Add New Charger */}
+            {/* Form for update charging */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
-                <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
-                  <div className="flex space-x-6">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-unit">
-                        Id Unit
-                      </label>
-                      <TextField
-                        id="id-unit"
-                        value={idUnitCharge}
-                        onChange={(e) => setIdUnitCharge(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-name">
-                        Unit Name
-                      </label>
-                      <TextField
-                        id="unit-name"
-                        value={unitName}
-                        onChange={(e) => setUnitName(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
+              <form onSubmit={handleUpdate} className="w-full ml-11 mr-4 mb-2">
+                  <label
+                    className="block text-black ml-2 mb-1 mt-1"
+                    htmlFor="id-battery"
+                  >
+                    Battery ID
+                  </label>
+                  <TextField
+                    id="id-battery"
+                    value={idBattery}
+                    onChange={(e) => setIdBattery(e.target.value)}
+                    className="w-full mb-4"
+                  />
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="seri-unit">
-                        Seri Unit
-                      </label>
-                      <TextField
-                        id="seri-unit"
-                        value={noSeriUnit}
-                        onChange={(e) => setNoSeriUnit(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="charging-time">
-                        Charging Time
-                      </label>
-                      <TextField
-                        id="charging-time"
-                        value={averageChargingTime}
-                        onChange={(e) => setAverageChargingTime(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
+                  <TextField
+                    id="id-users"
+                    value={idUsers}
+                    className="w-full mb-4"
+                    hidden
+                  />
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="connector-type">
-                        Connector
-                      </label>
-                      <TextField
-                        id="connector-type"
-                        value={connectorTypeUnit}
-                        onChange={(e) => setConnectorType(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-location">
-                        Unit Location
-                      </label>
-                      <TextField
-                        id="unit-location"
-                        value={unitLocation}
-                        onChange={(e) => setUnitLocation(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
+                  <TextField
+                    id="id-charging"
+                    value={idCharging}
+                    className="w-full mb-4"
+                    hidden
+                  />
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-status">
-                        Unit Status
-                      </label>
-                      <TextField
-                        id="unit-status"
-                        value={unitStatus}
-                        onChange={(e) => setUnitStatus(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="kWh-used"
+                  >
+                    kWh Used
+                  </label>
+                  <TextField
+                    id="kWh-used"
+                    value={kWhUsed}
+                    onChange={(e) => setkWhUsed(e.target.value)}
+                    className="w-full mb-4"
+                  />
 
-                  <div className="flex justify-center mt-10 space-x-10">
+                  <label
+                    className="block text-black ml-2 mb-1"
+                    htmlFor="finish-time"
+                  >
+                    Finish Time
+                  </label>
+                  <TextField
+                    id="finish-time"
+                    value={finishTime}
+                    onChange={(e) => setFinishTime(e.target.value)}
+                    className="w-full mb-4"
+                  />
+                  <br />
+                  <div className="rounded-b-3xl w-52 h-11 flex items-center px-2 py-3 ml-4 mt-4">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                      className="bg-blue-500 text-white px-4 py-1 rounded-md mr-2 hover:bg-blue-600"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleUpdate}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                      className="bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 ml-24"
                     >
                       Cancel
                     </button>

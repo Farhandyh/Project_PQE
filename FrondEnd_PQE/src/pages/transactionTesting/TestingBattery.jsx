@@ -220,6 +220,9 @@ const TestingBattery = () => {
               <th className="py-2 px-2 border-b border-r border-gray-300">
                 Time Finish
               </th>
+              <th className="py-2 px-2 border-b border-r border-gray-300">
+                Duration
+              </th>
               <th className="py-2 px-2 border-b">Action</th>
             </tr>
           </thead>
@@ -240,6 +243,7 @@ const TestingBattery = () => {
                 <td className="py-2 px-2 border-b">{testing.kWhUsed}</td>
                 <td className="py-2 px-2 border-b">{testing.timeStart}</td>
                 <td className="py-2 px-2 border-b">{testing.timeFinish}</td>
+                <td className="py-2 px-2 border-b">{testing.testingDuration}</td>
                 <td
                   className="py-2 px-2 border-b"
                   style={{ display: "flex", justifyContent: "center" }}
