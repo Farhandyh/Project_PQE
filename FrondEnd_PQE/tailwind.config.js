@@ -17,11 +17,17 @@ export default {
         "full-3": "calc(100% - 3rem)", // Full width dikurangi 3rem (80px)
         "full-2": "calc(100% - 2rem)", // Full width dikurangi 2rem (80px)
         "full-1": "calc(100% - 1rem)", // Full width dikurangi 1rem (80px)
+        "full+1": "calc(100% + 1rem)", // Full width dikurangi 1rem (80px)
+        "full+2": "calc(100% + 2rem)", // Full width dikurangi 1rem (80px)
+        "full+3": "calc(100% + 3rem)", // Full width dikurangi 1rem (80px)
+        "full+4": "calc(100% + 4rem)", // Full width dikurangi 1rem (80px)
+        "full+5": "calc(100% + 5rem)", // Full width dikurangi 1rem (80px)
       },
       colors: {
         red: {
           E01414: "#E01414", // Warna kustom
           CF0920: "#CF0920",
+          F81A1B: "#F81A1B",
         },
         gray: { EDD7D7: "#EDD7D7", F5F5F5: "#F5F5F5" },
         container: "hsl(0, 0%, 100%)",
