@@ -22,6 +22,11 @@ export default {
         "full+3": "calc(100% + 3rem)", // Full width dikurangi 1rem (80px)
         "full+4": "calc(100% + 4rem)", // Full width dikurangi 1rem (80px)
         "full+5": "calc(100% + 5rem)", // Full width dikurangi 1rem (80px)
+        full150: "calc(150%)",
+        full140: "calc(140%)",
+        full130: "calc(130%)",
+        full120: "calc(120%)",
+        full110: "calc(110%)",
       },
       colors: {
         red: {

@@ -1,10 +1,19 @@
 import React from "react";
 
-const Dropdown = ({ label, options, className, onChange, value }) => {
+const Dropdown = ({
+  label,
+  options,
+  className,
+  onChange,
+  value,
+  classStyle,
+}) => {
   return (
     <div className="flex flex-col">
       {/* Label di atas dropdown */}
-      <label className="text-gray-700 text-sm font-poppins font-semibold mb-0.5">
+      <label
+        className={`text-gray-700 text-sm font-poppins font-semibold mb-0.5 ${classStyle}`}
+      >
         {label}
       </label>
       <select

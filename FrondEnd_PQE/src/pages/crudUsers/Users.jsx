@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import TextField from "../../components/materialCRUD/TextField";
 import Header from "../../components/materialCRUD/Header";
@@ -192,10 +193,16 @@ const Users = () => {
 
   return (
     <>
-      <div className="">
-        <div className="mt-4 mb-4 max-w-7xl mx-auto flex flex-wrap justify-center">
+      <div className="p-5 max-w-full mx-auto px-4 md:px-20 lg:px-32">
+        {/* STATS */}
+        <motion.div
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
           {/* Card Users */}
-          <div className="bg-white mr-8 mb-4 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around items-center p-6 shadow-lg border border-gray-700">
             {/* Gambar di sebelah kiri */}
             <img
               src="../src/assets/menuCRUD/user.png"
@@ -208,16 +215,16 @@ const Users = () => {
               <h3 className="font-poppins text-lg md:text-2xl text-red-600 text-center font-semibold mb-1">
                 Users
               </h3>
-              <h1 className="font-poppins text-shadow-custom font-extrabold text-4xl md:text-7xl text-red-600 text-center">
+              <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl md:text-7xl text-red-600 text-center">
                 036
               </h1>
             </div>
           </div>
 
           {/* Card Filter */}
-          <div className="bg-white mr-8 mb-4 rounded-2xl w-80 h-32 flex flex-col md:flex-row md:justify-around p-2 shadow-lg">
+          <div className=" col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around shadow-lg border border-gray-700">
             {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 ">
               {/* Dropdown Status */}
               <Dropdown
                 label="Status"
@@ -226,7 +233,8 @@ const Users = () => {
                   { value: "inactive", label: "Inactive" },
                   { value: "suspended", label: "Suspended" },
                 ]}
-                className="bg-red-F81A1B text-white w-full"
+                className="bg-red-F81A1B text-white w-full+2 lg:w-full+3"
+                classStyle=""
                 onChange={handleStatusChange}
                 value={selectedCapacity}
               />
@@ -239,7 +247,7 @@ const Users = () => {
                   { value: "user", label: "User" },
                   { value: "guest", label: "Guest" },
                 ]}
-                className="bg-green-500 text-white w-full"
+                className="bg-green-500 text-white w-full+2 lg:w-full+3"
                 onChange={handleCapacityChange}
                 value={selectedCapacity}
               />
@@ -249,22 +257,20 @@ const Users = () => {
             <img
               src="../src/assets/menuCRUD/filter.png"
               alt="Icon"
-              className="w-20 md:w-32 h-auto mt-4 md:-mt-5 ml-0"
+              className="w-auto md:w-32 h-auto mt-4 md:-mt-5 md:h-36 md:ml-5"
             />
           </div>
 
           {/* Card Add New Users */}
-          <div className="flex flex-col items-center">
-            {/* Contoh penggunaan komponen */}
-            <ImageButton
-              imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
-              imgAlt="User Icon"
-              buttonLabel="Add New Users"
-              onClick={toggleModal}
-              buttonClass="" // Tambahan styling jika dibutuhkan
-            />
-          </div>
-        </div>
+          <ImageButton
+            imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
+            imgAlt="User Icon"
+            buttonLabel="Add New Users"
+            onClick={toggleModal}
+            divClass="col-span-1 p-6 border border-gray-700"
+            buttonClass="" // Tambahan styling jika dibutuhkan
+          />
+        </motion.div>
 
         <div className="container max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 md:pl-10 md:pr-10 bg-white rounded-2xl">
           {/* Table */}
@@ -378,6 +384,7 @@ const Users = () => {
           </div>
         </div>
       </div>
+
       {/* Modal Pop-up Create Users */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
