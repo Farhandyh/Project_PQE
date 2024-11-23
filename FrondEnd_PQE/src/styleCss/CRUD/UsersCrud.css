@@ -1,0 +1,13 @@
+/* CSS untuk mengatur scrollbar */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 8px; /* Mengatur tinggi scrollbar horizontal */
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: black; /* Memberikan warna hitam pada scrollbar */
+  border-radius: 10px; /* Menambahkan border radius agar lebih halus */
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: #000000; /* Memberikan warna latar belakang pada track scrollbar */
+}

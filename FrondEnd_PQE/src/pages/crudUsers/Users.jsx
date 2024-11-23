@@ -5,6 +5,7 @@ import TextField from "../../components/materialCRUD/TextField";
 import Header from "../../components/materialCRUD/Header";
 import Dropdown from "../../components/materialCRUD/Dropdown";
 import ImageButton from "../../components/materialCRUD/ImageButton";
+import "../../styleCss/CRUD/UsersCrud.css";
 
 const getUsers = async () => {
   const response = await fetch("http://localhost:8000/api/users");
@@ -193,7 +194,7 @@ const Users = () => {
 
   return (
     <>
-      <div className="p-5 max-w-full mx-auto px-4 md:px-20 lg:px-32">
+      <div className="p-5 mx-auto px-4 md:px-20  lg:px-32">
         {/* STATS */}
         <motion.div
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
@@ -272,73 +273,75 @@ const Users = () => {
           />
         </motion.div>
 
-        <div className="container max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 md:pl-10 md:pr-10 bg-white rounded-2xl">
-          {/* Table */}
-          <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
-            <thead>
-              <tr className="bg-red-E01414 text-white">
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  NO
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Name
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Username
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Password
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Email
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Role
-                </th>
-                <th className="py-2 px-2 border-b">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentUsers.map((users, index) => (
-                <tr
-                  key={users.idUsers}
-                  className={`text-center ${
-                    index % 2 === 1 ? "bg-gray-100" : ""
-                  }`}
-                >
-                  <td className="py-2 px-2 border-b">
-                    {(currentPage - 1) * itemsPerPage + index + 1}
-                  </td>
-                  <td className="py-2 px-2 border-b">{users.name}</td>
-                  <td className="py-2 px-2 border-b">{users.username}</td>
-                  <td className="py-2 px-2 border-b">{users.password}</td>
-                  <td className="py-2 px-2 border-b">{users.email}</td>
-                  <td className="py-2 px-2 border-b">{users.role}</td>
-                  <td className="py-2 px-2 border-b">
-                    <div className="flex justify-center">
-                      <a
-                        href="#"
-                        onClick={() => {
-                          toggleUpdate();
-                          handleRowClick(users);
-                        }}
-                        className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                      >
-                        <FaEdit />
-                      </a>
-                      <a
-                        href="#"
-                        onClick={() => handleDelete(users.idUsers)}
-                        className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                      >
-                        <FaTrashAlt />
-                      </a>
-                    </div>
-                  </td>
+        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+          {/* Table Wrapper */}
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[800px] bg-white border border-gray-200 text-sm md:text-base">
+              <thead>
+                <tr className="bg-red-E01414 text-white">
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    NO
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Name
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Username
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Password
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Email
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Role
+                  </th>
+                  <th className="py-2 px-2 border-b">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentUsers.map((users, index) => (
+                  <tr
+                    key={users.idUsers}
+                    className={`text-center ${
+                      index % 2 === 1 ? "bg-gray-100" : ""
+                    }`}
+                  >
+                    <td className="py-2 px-2 border-b">
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td className="py-2 px-2 border-b">{users.name}</td>
+                    <td className="py-2 px-2 border-b">{users.username}</td>
+                    <td className="py-2 px-2 border-b">{users.password}</td>
+                    <td className="py-2 px-2 border-b">{users.email}</td>
+                    <td className="py-2 px-2 border-b">{users.role}</td>
+                    <td className="py-2 px-2 border-b">
+                      <div className="flex justify-center">
+                        <a
+                          href="#"
+                          onClick={() => {
+                            toggleUpdate();
+                            handleRowClick(users);
+                          }}
+                          className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                        >
+                          <FaEdit />
+                        </a>
+                        <a
+                          href="#"
+                          onClick={() => handleDelete(users.idUsers)}
+                          className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                        >
+                          <FaTrashAlt />
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           {/* Pagination */}
           <div className="flex justify-center mt-4 flex-wrap">
