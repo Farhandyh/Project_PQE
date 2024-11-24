@@ -237,7 +237,7 @@ const Users = () => {
                 className="bg-red-F81A1B text-white w-full+2 lg:w-full+3"
                 classStyle=""
                 onChange={handleStatusChange}
-                value={selectedCapacity}
+                value={selectedStatus}
               />
 
               {/* Dropdown Capacity */}
@@ -308,7 +308,7 @@ const Users = () => {
                       index % 2 === 1 ? "bg-gray-100" : ""
                     }`}
                   >
-                    <td className="py-2 px-2 border-b">
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
                       {(currentPage - 1) * itemsPerPage + index + 1}
                     </td>
                     <td className="py-2 px-2 border-b whitespace-nowrap">

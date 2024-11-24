@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import TextField from "../../components/materialCRUD/TextField";
 import Header from "../../components/materialCRUD/Header";
+import { motion } from "framer-motion";
+import Dropdown from "../../components/materialCRUD/Dropdown";
+import ImageButton from "../../components/materialCRUD/ImageButton";
 
 const getBatteries = async () => {
   const response = await fetch("http://localhost:8000/api/batteries");
@@ -40,6 +43,11 @@ const Battery = () => {
   const [batteryChargingTime, setBatteryChargingTime] = useState("");
   const [batteryCapacity, setBatteryCapacity] = useState("");
   const [batteryStatus, setBatteryStatus] = useState("");
+
+  //Use State Filter
+  // Handler untuk dropdown Capacity
+  const [selectedMerk, setSelectedMerk] = useState("active"); // Default Merk
+  const [selectedModel, setSelectedModel] = useState("admin"); // Default Model
 
   const fetchBatteries = async () => {
     try {
@@ -190,197 +198,234 @@ const Battery = () => {
     }
   };
 
+  // Handler untuk dropdown Merk
+  const handleMerkChange = (event) => {
+    setSelectedMerk(event.target.value);
+  };
+
+  // Handler untuk dropdown Model
+  const handleModelChange = (event) => {
+    setSelectedModel(event.target.value);
+  };
+
   return (
     <>
-      <div className="mt-4 mb-4 ml-36 flex">
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Gambar di sebelah kiri */}
-          <img
-            src="../src/assets/menuCRUD/battery.png"
-            alt="Battery Icon"
-            className="w-36 h-auto"
-          />
-          {/* Bagian teks */}
-          <div className="flex flex-col justify-center">
-            <h3 className="font-poppins text-2xl font-semibold text-red-600 text-center mb-1">
-              Battery
-            </h3>
-            <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl text-red-600 text-center">
-              036
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-          <div className="flex flex-col space-y-3">
-            {/* Dropdown Status */}
-            <div className="flex items-center space-x-7">
-              <label className="text-gray-600 text-sm font-poppins">
-                Status
-              </label>
-              <select className="bg-red-500 text-white px-2 py-1 w-28 text-center rounded-lg focus:outline-none">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
-              </select>
-            </div>
-
-            {/* Dropdown Role */}
-            <div className="flex items-center space-x-3">
-              <label className="text-gray-600 text-sm font-poppins">
-                Capacity
-              </label>
-              <select className="bg-green-500 text-white px-2 w-28 text-center py-1 rounded-lg focus:outline-none">
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-                <option value="guest">Guest</option>
-              </select>
+      <div className="p-5 mx-auto px-4 md:px-20  lg:px-32">
+        {/* STATS */}
+        <motion.div
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around items-center p-6 shadow-lg border border-gray-700">
+            {/* Gambar di sebelah kiri */}
+            <img
+              src="../src/assets/menuCRUD/battery.png"
+              alt="Battery Icon"
+              className="w-36 h-auto"
+            />
+            {/* Bagian teks */}
+            <div className="flex flex-col justify-center">
+              <h3 className="font-poppins text-lg md:text-2xl text-red-600 text-center font-semibold mb-1">
+                Battery
+              </h3>
+              <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl md:text-7xl text-red-600 text-center">
+                036
+              </h1>
             </div>
           </div>
 
-          {/* Gambar di sebelah kanan */}
-          <img
-            src="../src/assets/menuCRUD/filter.png"
-            alt="Icon"
-            className="w-32 h-auto ml-4"
-          />
-        </div>
-        <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
-          <button
+          {/* Card Filter */}
+          <div className=" col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around shadow-lg border border-gray-700">
+            {/* Bagian Kiri - Dropdown untuk Status dan Role */}
+            <div className="flex flex-col space-y-2 ">
+              {/* Dropdown Status */}
+              <Dropdown
+                label="Merk"
+                options={[
+                  { value: "active", label: "Active" },
+                  { value: "inactive", label: "Inactive" },
+                  { value: "suspended", label: "Suspended" },
+                ]}
+                className="bg-red-F81A1B text-white w-full+2 lg:w-full+3"
+                classStyle=""
+                onChange={handleMerkChange}
+                value={selectedMerk}
+              />
+
+              {/* Dropdown Capacity */}
+              <Dropdown
+                label="Model"
+                options={[
+                  { value: "admin", label: "Admin" },
+                  { value: "user", label: "User" },
+                  { value: "guest", label: "Guest" },
+                ]}
+                className="bg-green-500 text-white w-full+2 lg:w-full+3"
+                onChange={handleModelChange}
+                value={selectedModel}
+              />
+            </div>
+
+            {/* Gambar di sebelah kanan */}
+            <img
+              src="../src/assets/menuCRUD/filter.png"
+              alt="Icon"
+              className="w-auto md:w-32 h-auto mt-4 md:-mt-5 md:h-36 md:ml-5"
+            />
+          </div>
+
+          {/* Card Add New Users */}
+          <ImageButton
+            imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
+            imgAlt="User Icon"
+            buttonLabel="Add New Battery"
             onClick={toggleModal}
-            className="text-white bg-red-500 px-4 py-2 rounded-full"
-          >
-            Add New Battery
-          </button>
-        </div>
-      </div>
-      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
-        <table className="w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-red-E01414 text-white">
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                NO
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Seri Battery
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Merk
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Model
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Daya Max
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Charging Time
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Capacity
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Status
-              </th>
-              <th className="py-2 px-2 border-b">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentBatteries.map((battery, index) => (
-              <tr
-                key={battery.idBattery}
-                className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-              >
-                <td className="py-2 px-2 border-b">
-                  {(currentPage - 1) * itemsPerPage + index + 1}
-                </td>
-                <td className="py-2 px-2 border-b">{battery.noSeriBattery}</td>
-                <td className="py-2 px-2 border-b">{battery.batteryMerk}</td>
-                <td className="py-2 px-2 border-b">{battery.batteryModel}</td>
-                <td className="py-2 px-2 border-b">{battery.batteryDayaMax}</td>
-                <td className="py-2 px-2 border-b">
-                  {battery.batteryChargingTime}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {battery.batteryCapacity}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {battery.batteryStatus === 1 ? "Active" : "Non-Active"}
-                </td>
-                <td
-                  className="py-2 px-2 border-b"
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <a
-                    href="#"
-                    onClick={() => {
-                      toggleUpdate();
-                      handleRowClick(battery);
+            divClass="col-span-1 p-6 border border-gray-700"
+            buttonClass="" // Tambahan styling jika dibutuhkan
+          />
+        </motion.div>
+        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+          <div className="overflow-auto rounded-lg shadow-custom-header">
+            <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
+              <thead className="tracking-wide text-center">
+                <tr className="bg-red-E01414 text-white">
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    NO
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Seri Battery
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Merk
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Model
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Daya Max
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Charging Time
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Capacity
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                    Status
+                  </th>
+                  <th className="py-2 px-2 border-b">Action</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {currentBatteries.map((battery, index) => (
+                  <tr
+                    key={battery.idBattery}
+                    className={`text-center ${index % 2 === 1 ? "" : ""}`}
+                    style={{
+                      backgroundColor: index % 2 === 1 ? "#EDD7D7" : "",
                     }}
-                    className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
                   >
-                    <FaEdit />
-                  </a>
-                  <a
-                    href="#"
-                    onClick={() => handleDelete(battery.idBattery)}
-                    className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {battery.noSeriBattery}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {battery.batteryMerk}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {battery.batteryModel}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {battery.batteryDayaMax}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {battery.batteryChargingTime}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {battery.batteryCapacity}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {battery.batteryStatus === 1 ? "Active" : "Non-Active"}
+                    </td>
+                    <td
+                      className="py-2 px-2 border-b whitespace-nowrap"
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <a
+                        href="#"
+                        onClick={() => {
+                          toggleUpdate();
+                          handleRowClick(battery);
+                        }}
+                        className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                      >
+                        <FaEdit />
+                      </a>
+                      <a
+                        href="#"
+                        onClick={() => handleDelete(battery.idBattery)}
+                        className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                      >
+                        <FaTrashAlt />
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="flex justify-left mt-2">
+            {/* Tombol Previous */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+            >
+              &lt;
+            </button>
+
+            {/* Tombol halaman dinamis */}
+            {Array.from({ length: 3 }, (_, index) => {
+              // Hitung halaman mulai berdasarkan halaman saat ini
+              let pageNumber = currentPage + index;
+
+              // Pastikan halaman tidak di luar batas 1 dan totalPages
+              if (pageNumber == 1) pageNumber = 1;
+
+              return (
+                pageNumber <= totalPages && (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={`px-3 py-1 mx-1 ${
+                      currentPage === pageNumber
+                        ? "bg-red-E01414 text-white"
+                        : "bg-gray-200"
+                    } rounded-md`}
                   >
-                    <FaTrashAlt />
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    {pageNumber}
+                  </button>
+                )
+              );
+            })}
 
-        <div className="flex justify-left mt-2">
-          {/* Tombol Previous */}
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &lt;
-          </button>
-
-          {/* Tombol halaman dinamis */}
-          {Array.from({ length: 3 }, (_, index) => {
-            // Hitung halaman mulai berdasarkan halaman saat ini
-            let pageNumber = currentPage + index;
-
-            // Pastikan halaman tidak di luar batas 1 dan totalPages
-            if (pageNumber == 1) pageNumber = 1;
-
-            return (
-              pageNumber <= totalPages && (
-                <button
-                  key={pageNumber}
-                  onClick={() => handlePageChange(pageNumber)}
-                  className={`px-3 py-1 mx-1 ${
-                    currentPage === pageNumber
-                      ? "bg-red-E01414 text-white"
-                      : "bg-gray-200"
-                  } rounded-md`}
-                >
-                  {pageNumber}
-                </button>
-              )
-            );
-          })}
-
-          {/* Tombol Next */}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &gt;
-          </button>
+            {/* Tombol Next */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+            >
+              &gt;
+            </button>
+          </div>
         </div>
       </div>
+
       {/* Modal Pop-up Create Battery */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
