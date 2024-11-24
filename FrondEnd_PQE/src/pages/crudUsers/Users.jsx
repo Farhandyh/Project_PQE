@@ -275,9 +275,9 @@ const Users = () => {
 
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           {/* Table Wrapper */}
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[800px] bg-white border border-gray-200 text-sm md:text-base">
-              <thead>
+          <div className="overflow-auto rounded-lg shadow-custom-header">
+            <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
+              <thead className="tracking-wide text-center">
                 <tr className="bg-red-E01414 text-white">
                   <th className="py-2 px-2 border-b border-r border-gray-300">
                     NO
@@ -300,7 +300,7 @@ const Users = () => {
                   <th className="py-2 px-2 border-b">Action</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-gray-100">
                 {currentUsers.map((users, index) => (
                   <tr
                     key={users.idUsers}
@@ -311,12 +311,22 @@ const Users = () => {
                     <td className="py-2 px-2 border-b">
                       {(currentPage - 1) * itemsPerPage + index + 1}
                     </td>
-                    <td className="py-2 px-2 border-b">{users.name}</td>
-                    <td className="py-2 px-2 border-b">{users.username}</td>
-                    <td className="py-2 px-2 border-b">{users.password}</td>
-                    <td className="py-2 px-2 border-b">{users.email}</td>
-                    <td className="py-2 px-2 border-b">{users.role}</td>
-                    <td className="py-2 px-2 border-b">
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {users.name}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {users.username}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {users.password}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {users.email}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {users.role}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
                       <div className="flex justify-center">
                         <a
                           href="#"
