@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { motion } from "framer-motion";
+import Dropdown from "../../components/materialCRUD/Dropdown";
 import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
+import ImageButton from "../../components/materialCRUD/ImageButton";
 
 const getMachines = async () => {
   const response = await fetch('http://localhost:8000/api/testingMachine');
@@ -38,6 +41,10 @@ const TestingMachine = () => {
   const [machineStatus,setMachineStatus] = useState("");
   const [voltMaxMachine,setVoltMaxMachine] = useState("");
 
+  // Handler untuk dropdown Capacity
+  const [selectedStatus, setSelectedStatus] = useState("active"); // Default status
+  const [selectedType, setSelectedType] = useState("all"); // Default capacity
+
   const fetchMachines = async () => {
     try {
       const data = await getMachines();
@@ -49,6 +56,7 @@ const TestingMachine = () => {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchMachines();
@@ -67,8 +75,8 @@ const TestingMachine = () => {
     setIsUpdateOpen(true);
   };
 
-  if (loading) return <p className="text-center">Loading...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+ // if (loading) return <p className="text-center">Loading...</p>;
+ // if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const itemsPerPage = 10;
   const totalPages = Math.ceil(machines.length / itemsPerPage);
@@ -183,202 +191,226 @@ const TestingMachine = () => {
     }
   };
 
+    // Handler untuk dropdown Status
+    const handleStatusChange = (event) => {
+      setSelectedStatus(event.target.value);
+    };
+  
+    // Handler untuk dropdown Capacity
+    const handleTypeChange = (event) => {
+      setSelectedType(event.target.value);
+    };
+
   return (
     <>
-      <div className="mt-4 mb-4 ml-36 flex">
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Gambar di sebelah kiri */}
-          <img
-            src="../src/assets/menuCRUD/machine.png"
-            alt="Machine Test Icon"
-            className="w-36 h-auto"
-          />
+      <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
+        {/* STATS */}
+        <motion.div
+            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+        
+          {/* Card Machine */}
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around items-center p-6 shadow-lg border border-gray-700">
+            {/* Gambar di sebelah kiri */}
+            <img
+              src="../src/assets/menuCRUD/machine.png"
+              alt="Machine Icon"
+              className="w-20 md:w-36 h-auto"
+            />
 
-          {/* Bagian teks */}
-          <div className="flex flex-col justify-center">
-            <h3 className="font-poppins text-2xl font-semibold text-red-600 text-center mb-1">
-              Machine
-            </h3>
-            <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl text-red-600 text-center">
-              036
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-          <div className="flex flex-col space-y-3">
-            {/* Dropdown Status */}
-            <div className="flex items-center space-x-7">
-              <label className="text-gray-600 text-sm font-poppins">
-                Status
-              </label>
-              <select className="bg-red-500 text-white px-2 py-1 w-28 text-center rounded-lg focus:outline-none">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
-              </select>
-            </div>
-
-            {/* Dropdown Role */}
-            <div className="flex items-center space-x-3">
-              <label className="text-gray-600 text-sm font-poppins">
-                Capacity
-              </label>
-              <select className="bg-green-500 text-white px-2 w-28 text-center py-1 rounded-lg focus:outline-none">
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-                <option value="guest">Guest</option>
-              </select>
+            {/* Bagian teks */}
+            <div className="flex flex-col justify-center">
+              <h3 className="font-poppins text-lg md:text-2xl text-red-600 text-center font-semibold mb-1">
+                Machine
+              </h3>
+              <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl md:text-7xl text-red-600 text-center">
+                036
+              </h1>
             </div>
           </div>
 
-          {/* Gambar di sebelah kanan */}
-          <img
-            src="../src/assets/menuCRUD/filter.png"
-            alt="Icon"
-            className="w-32 h-auto ml-4"
-          />
-        </div>
-        <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
-          <button
+          {/* Card Filter */}
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around shadow-lg border border-gray-700">
+            {/* Bagian Kiri - Dropdown untuk Status dan Role */}
+            <div className="flex flex-col space-y-2 w-full px-4">
+              {/* Dropdown Status */}
+              <div className="flex flex-col w-full">
+                <label className="text-gray-700 text-sm font-semibold text-left">Status</label>
+                <Dropdown
+                  options={[
+                    { value: "active", label: "Active" },
+                    { value: "inactive", label: "Inactive" },
+                    { value: "suspended", label: "Suspended" },
+                  ]}
+                  className="bg-red-F81A1B text-white w-full"
+                  onChange={handleStatusChange}
+                  value={selectedStatus}
+                />
+              </div>
+
+              {/* Dropdown Material */}
+              <div className="flex flex-col w-full">
+                <label className="text-gray-700 text-sm font-semibold text-left">Type</label>
+                <Dropdown
+                  options={[
+                    { value: "Type1", label: "Type 1" },
+                    { value: "Type2", label: "Type 2" },
+                    { value: "Type3", label: "Type 3" },
+                  ]}
+                  className="bg-green-500 text-white w-full"
+                  onChange={handleTypeChange}
+                  value={selectedType}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Card Add New Machine */}
+          <ImageButton
+            imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
+            imgAlt="Machine Icon"
+            buttonLabel="Add New Machine"
             onClick={toggleModal}
-            className="text-white bg-red-500 px-4 py-2 rounded-full"
-          >
-            Add New Machine
-          </button>
-        </div>
-      </div>
-      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
-        <table className="w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-red-E01414 text-white">
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                NO
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Machine Name
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Machine Type
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                No Seri
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Arus Max
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Service Life
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Machine Status
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Volt Max
-              </th>
-              <th className="py-2 px-2 border-b">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentMachines.map((machine, index) => (
-              <tr
-                key={machine.idMachine}
-                className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
+            divClass="col-span-1 p-6 border border-gray-700"
+            buttonClass="" // Tambahan styling jika dibutuhkan
+          />
+        </motion.div>
+        
+        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+          <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
+            <table className="w-full bg-white border border-gray-200">
+                  <thead>
+                    <tr className="bg-red-E01414 text-white">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        NO
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Machine Name
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Machine Type
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        No Seri
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Arus Max
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Service Life
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Machine Status
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Volt Max
+                      </th>
+                      <th className="py-2 px-2 border-b tracking-wide">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody  className="divide-y divide-gray-100">
+                    {currentMachines.map((machine, index) => (
+                      <tr
+                        key={machine.idMachine}
+                        className={`text-center ${index % 2 === 1 ? "" : ""}`}
+                      >
+                        <td className="py-2 px-2 border-b">
+                          {(currentPage - 1) * itemsPerPage + index + 1}
+                        </td>
+                        <td className="py-2 px-2 border-b">{machine.machineName}</td>
+                        <td className="py-2 px-2 border-b">{machine.machineType}</td>
+                        <td className="py-2 px-2 border-b">{machine.noSeriMachine}</td>
+                        <td className="py-2 px-2 border-b">{machine.arusMaxMachine}</td>
+                        <td className="py-2 px-2 border-b">{machine.serviceLifeMachine}</td>
+                        <td className="py-2 px-2 border-b">
+                          {machine.machineStatus === 1 ? "Active" : "Non-Active"}
+                        </td>
+                        <td className="py-2 px-2 border-b">{machine.voltMaxMachine}</td>
+                        <td
+                          className="py-2 px-2 border-b"
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <a
+                            href="#"
+                            onClick={() => {
+                              toggleUpdate();
+                              handleRowClick(machine);
+                            }}
+                            className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                          >
+                            <FaEdit />
+                          </a>
+                          <a
+                            href="#"
+                            onClick={() => handleDelete(machine.idMachine)}
+                            className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                          >
+                            <FaTrashAlt />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+            </table>
+          </div>
+            
+          <div className="flex justify-center mt-4 flex-wrap">
+              {/* Tombol Previous */}
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
               >
-                <td className="py-2 px-2 border-b">
-                  {(currentPage - 1) * itemsPerPage + index + 1}
-                </td>
-                <td className="py-2 px-2 border-b">{machine.machineName}</td>
-                <td className="py-2 px-2 border-b">{machine.machineType}</td>
-                <td className="py-2 px-2 border-b">{machine.noSeriMachine}</td>
-                <td className="py-2 px-2 border-b">{machine.arusMaxMachine}</td>
-                <td className="py-2 px-2 border-b">{machine.serviceLifeMachine}</td>
-                <td className="py-2 px-2 border-b">
-                  {machine.machineStatus === 1 ? "Active" : "Non-Active"}
-                </td>
-                <td className="py-2 px-2 border-b">{machine.voltMaxMachine}</td>
-                <td
-                  className="py-2 px-2 border-b"
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <a
-                    href="#"
-                    onClick={() => {
-                      toggleUpdate();
-                      handleRowClick(machine);
-                    }}
-                    className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                  >
-                    <FaEdit />
-                  </a>
-                  <a
-                    href="#"
-                    onClick={() => handleDelete(machine.idMachine)}
-                    className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                  >
-                    <FaTrashAlt />
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                &lt;
+              </button>
 
-        <div className="flex justify-left mt-2">
-          {/* Tombol Previous */}
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &lt;
-          </button>
+              {/* Tombol halaman dinamis */}
+              {Array.from({ length: 3 }, (_, index) => {
 
-          {/* Tombol halaman dinamis */}
-          {Array.from({ length: 3 }, (_, index) => {
-            // Hitung halaman mulai berdasarkan halaman saat ini
-            let pageNumber = currentPage + index;
+                let pageNumber = currentPage + index;
 
-            // Pastikan halaman tidak di luar batas 1 dan totalPages
-            if (pageNumber == 1) pageNumber = 1;
+                if (pageNumber == 1) pageNumber = 1;
 
-            return (
-              pageNumber <= totalPages && (
-                <button
-                  key={pageNumber}
-                  onClick={() => handlePageChange(pageNumber)}
-                  className={`px-3 py-1 mx-1 ${
-                    currentPage === pageNumber
-                      ? "bg-red-E01414 text-white"
-                      : "bg-gray-200"
-                  } rounded-md`}
-                >
-                  {pageNumber}
-                </button>
-              )
-            );
-          })}
+                return (
+                  pageNumber <= totalPages && (
+                    <button
+                      key={pageNumber}
+                      onClick={() => handlePageChange(pageNumber)}
+                      className={`px-3 py-1 mx-1 ${
+                        currentPage === pageNumber
+                          ? "bg-red-E01414 text-white"
+                          : "bg-gray-200"
+                      } rounded-md`}
+                    >
+                      {pageNumber}
+                    </button>
+                  )
+                );
+              })}
 
-          {/* Tombol Next */}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &gt;
-          </button>
+              {/* Tombol Next */}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+              >
+                &gt;
+              </button>
+          </div>
         </div>
       </div>
+      
       {/* Modal Pop-up Create Machines */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
+          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6 sm:h-[30rem] relative">
             {/* Form untuk Add New Machine */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-80 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-94 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
                   <label
                     className="block text-black ml-2 mb-1 mt-3"
@@ -456,11 +488,11 @@ const TestingMachine = () => {
       {/* modal untuk update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk upadate Machine */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+        <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6 sm:h-[30rem] relative">
+          {/* Form untuk Add New Machine */}
+          <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-80 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-94 mt-5 mb-6">
                 <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
                   <label
                     className="block text-black ml-2 mb-1 mt-3"
