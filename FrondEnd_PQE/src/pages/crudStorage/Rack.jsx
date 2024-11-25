@@ -271,11 +271,8 @@ const Rack = () => {
         </motion.div>
     
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
-          {/* Table Wrapper */}
-          <div className="overflow-x-auto max-w-[22rem] sm:max-w-[42rem] md:max-w-full rounded-lg shadow border border-red-500">
-            <div className="inline-block min-w-full">
-              <div className="overflow-hidden">
-                <table className="w-full bg-white border border-gray-200">
+          <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
+            <table className="w-full bg-white border border-gray-200">
                   <thead>
                     <tr className="bg-red-E01414 text-white">
                       <th className="py-1 px-2 border-b border-r border-gray-300">
@@ -341,9 +338,7 @@ const Rack = () => {
                       </tr>
                     ))}
                   </tbody>
-                </table>
-                </div>
-            </div>
+            </table>
           </div>
 
           {/* Pagination */}
