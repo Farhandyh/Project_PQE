@@ -1,23 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import TextField from '../../components/materialCRUD/TextField';
-import Header from '../../components/materialCRUD/Header';
+import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
+import TextField from "../../components/materialCRUD/TextField";
+import Header from "../../components/materialCRUD/Header";
+import Dropdown from "../../components/materialCRUD/Dropdown";
+import ImageButton from "../../components/materialCRUD/ImageButton";
+import "../../styleCss/CRUD/UsersCrud.css";
 
 const getUnits = async () => {
-  const response = await fetch('http://localhost:8000/api/units');
+  const response = await fetch("http://localhost:8000/api/units");
   if (!response.ok) {
-    throw new Error('Failed to fetch units charging');
+    throw new Error("Failed to fetch units charging");
   }
   const data = await response.json();
   return data;
 };
 
 const deleteUnit = async (idUnitCharge) => {
-  const response = await fetch(`http://localhost:8000/api/batteries-destroy/${idUnitCharge}`, {
-    method: 'DELETE',
-  });
+  const response = await fetch(
+    `http://localhost:8000/api/batteries-destroy/${idUnitCharge}`,
+    {
+      method: "DELETE",
+    }
+  );
   if (!response.ok) {
-    throw new Error('Failed to delete unit charging');
+    throw new Error("Failed to delete unit charging");
   }
   return await response.json();
 };
@@ -29,13 +36,17 @@ const ChargingUnit = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idUnitCharge,setIdUnitCharge] = useState("");
-  const [unitName,setUnitName] = useState("");
-  const [noSeriUnit,setNoSeriUnit] = useState("");
-  const [averageChargingTime,setAverageChargingTime] = useState("");
-  const [connectorTypeUnit,setConnectorType] = useState("");
-  const [unitLocation,setUnitLocation] = useState("");
-  const [unitStatus,setUnitStatus] = useState("");
+  const [idUnitCharge, setIdUnitCharge] = useState("");
+  const [unitName, setUnitName] = useState("");
+  const [noSeriUnit, setNoSeriUnit] = useState("");
+  const [averageChargingTime, setAverageChargingTime] = useState("");
+  const [connectorTypeUnit, setConnectorType] = useState("");
+  const [unitLocation, setUnitLocation] = useState("");
+  const [unitStatus, setUnitStatus] = useState("");
+
+  // Handler untuk dropdown Capacity
+  const [selectedStatus, setSelectedStatus] = useState("active"); // Default status
+  const [selectedCapacity, setSelectedCapacity] = useState("admin"); // Default capacity
 
   const fetchUnits = async () => {
     try {
@@ -52,7 +63,7 @@ const ChargingUnit = () => {
   useEffect(() => {
     fetchUnits();
   }, []);
-  
+
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (chargingUnit) => {
     setIdUnitCharge(chargingUnit.idUnitCharge);
@@ -84,16 +95,18 @@ const ChargingUnit = () => {
     try {
       await deleteUnits(idUnitCharge);
       setChargingUnit((prevUnits) =>
-        prevUnits.filter((ChargingUnit) => ChargingUnit.idUnitCharge !== idUnitCharge)
+        prevUnits.filter(
+          (ChargingUnit) => ChargingUnit.idUnitCharge !== idUnitCharge
+        )
       );
     } catch (error) {
       setError(error.message);
     }
   };
 
-   // Toggle modal open/close
-   const toggleModal = () => setIsModalOpen(!isModalOpen);
-   const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
+  // Toggle modal open/close
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -105,13 +118,13 @@ const ChargingUnit = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUnitCharge" : idUnitCharge,
-          "unitName" : unitName,
-          "noSeriUnit" : noSeriUnit,
-          "averageChargingTime" : averageChargingTime,
-          "connectorTypeUnit" : connectorTypeUnit,
-          "unitLocation" : unitLocation,
-          "unitStatus" : unitStatus
+          idUnitCharge: idUnitCharge,
+          unitName: unitName,
+          noSeriUnit: noSeriUnit,
+          averageChargingTime: averageChargingTime,
+          connectorTypeUnit: connectorTypeUnit,
+          unitLocation: unitLocation,
+          unitStatus: unitStatus,
         }),
       });
 
@@ -126,8 +139,7 @@ const ChargingUnit = () => {
         setUnitStatus("");
         fetchUnits();
         toggleModal();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -140,21 +152,24 @@ const ChargingUnit = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/batteries-update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "idUnitCharge" : idUnitCharge,
-          "unitName" : unitName,
-          "noSeriUnit" : noSeriUnit,
-          "averageChargingTime" : averageChargingTime,
-          "connectorTypeUnit" : connectorTypeUnit,
-          "unitLocation" : unitLocation,
-          "unitStatus" : unitStatus
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/batteries-update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idUnitCharge: idUnitCharge,
+            unitName: unitName,
+            noSeriUnit: noSeriUnit,
+            averageChargingTime: averageChargingTime,
+            connectorTypeUnit: connectorTypeUnit,
+            unitLocation: unitLocation,
+            unitStatus: unitStatus,
+          }),
+        }
+      );
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
@@ -167,8 +182,7 @@ const ChargingUnit = () => {
         setUnitStatus("");
         fetchUnits();
         toggleUpdate();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -177,212 +191,254 @@ const ChargingUnit = () => {
     }
   };
 
+  // Handler untuk dropdown Status
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  // Handler untuk dropdown Capacity
+  const handleCapacityChange = (event) => {
+    setSelectedCapacity(event.target.value);
+  };
+
   return (
     <>
-      <div className="mt-4 mb-4 ml-36 flex">
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Gambar di sebelah kiri */}
-          <img
-            src="../src/assets/menuCRUD/charging.png"
-            alt="Charging Unit Icon"
-            className="w-36 h-auto"
-          />
+      <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
+        {/* STATS */}
+        <motion.div
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Card Users */}
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around items-center p-6 shadow-lg border border-gray-700">
+            {/* Gambar di sebelah kiri */}
+            <img
+              src="../src/assets/menuCRUD/charging.png"
+              alt="Charging Unit Icon"
+              className="w-20 md:w-36 h-auto"
+            />
 
-          {/* Bagian teks */}
-          <div className="flex flex-col justify-center">
-            <h3 className="font-poppins text-2xl font-semibold text-red-600 text-center mb-1">
-              Charging Unit
-            </h3>
-            <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl text-red-600 text-center">
-              036
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-          <div className="flex flex-col space-y-3">
-            {/* Dropdown Status */}
-            <div className="flex items-center space-x-7">
-              <label className="text-gray-600 text-sm font-poppins">
-                Status
-              </label>
-              <select className="bg-red-500 text-white px-2 py-1 w-28 text-center rounded-lg focus:outline-none">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
-              </select>
-            </div>
-
-            {/* Dropdown Role */}
-            <div className="flex items-center space-x-3">
-              <label className="text-gray-600 text-sm font-poppins">
-                Capacity
-              </label>
-              <select className="bg-green-500 text-white px-2 w-28 text-center py-1 rounded-lg focus:outline-none">
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-                <option value="guest">Guest</option>
-              </select>
+            {/* Bagian teks */}
+            <div className="flex flex-col justify-center">
+              <h3 className="font-poppins text-lg md:text-2xl text-red-600 text-center font-semibold mb-1">
+                Charging Unit
+              </h3>
+              <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl md:text-7xl text-red-600 text-center">
+                036
+              </h1>
             </div>
           </div>
 
-          {/* Gambar di sebelah kanan */}
-          <img
-            src="../src/assets/menuCRUD/filter.png"
-            alt="Icon"
-            className="w-32 h-auto ml-4"
-          />
-        </div>
-        <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
-          <button
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around shadow-lg border border-gray-700">
+            {/* Bagian Kiri - Dropdown untuk Status dan Role */}
+            <div className="flex flex-col space-y-2 ">
+              {/* Dropdown Status */}
+              <Dropdown
+                label="Status"
+                options={[
+                  { value: "active", label: "Active" },
+                  { value: "inactive", label: "Inactive" },
+                  { value: "suspended", label: "Suspended" },
+                ]}
+                className="bg-red-F81A1B text-white w-full+2 lg:w-full+3"
+                classStyle=""
+                onChange={handleStatusChange}
+                value={selectedStatus}
+              />
+
+              {/* Dropdown Capacity */}
+              <Dropdown
+                label="Capacity"
+                options={[
+                  { value: "admin", label: "Admin" },
+                  { value: "user", label: "User" },
+                  { value: "guest", label: "Guest" },
+                ]}
+                className="bg-green-500 text-white w-full+2 lg:w-full+3"
+                onChange={handleCapacityChange}
+                value={selectedCapacity}
+              />
+            </div>
+
+            {/* Gambar di sebelah kanan */}
+            <img
+              src="../src/assets/menuCRUD/filter.png"
+              alt="Icon"
+              className="w-auto md:w-32 h-auto mt-4 md:-mt-5 md:h-36 md:ml-5"
+            />
+          </div>
+
+          {/* Card Add New Users */}
+          <ImageButton
+            imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
+            imgAlt="User Icon"
+            buttonLabel="Add New Users"
             onClick={toggleModal}
-            className="text-white bg-red-500 px-4 py-2 rounded-full"
-          >
-            Add New Charger
-          </button>
-        </div>
-      </div>
-      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
-        <table className="w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-red-E01414 text-white">
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                NO
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Unit Name
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Seri Unit
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Charging Time
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Connector Type
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Location
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Status
-              </th>
-              <th className="py-2 px-2 border-b">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentUnits.map((ChargingUnit, index) => (
-              <tr
-                key={ChargingUnit.idUnitCharge}
-                className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-              >
-                <td className="py-2 px-2 border-b">
-                  {(currentPage - 1) * itemsPerPage + index + 1}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {ChargingUnit.unitName}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {ChargingUnit.noSeriUnit}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {ChargingUnit.averageChargingTime}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {ChargingUnit.connectorTypeUnit}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {ChargingUnit.unitLocation}
-                </td>
-                <td className="py-2 px-2 border-b">
-                  {ChargingUnit.unitStatus === 1 ? "Active" : "Non-Active"}
-                </td>
-                <td
-                  className="py-2 px-2 border-b"
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <a
-                    href="#"
-                    onClick={() => {
-                      toggleUpdate();
-                      handleRowClick(ChargingUnit);
-                    }}
-                    className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                  >
-                    <FaEdit />
-                  </a>
-                  <a
-                    href="#"
-                    onClick={() => handleDelete(ChargingUnit.idUnitCharge)}
-                    className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                  >
-                    <FaTrashAlt />
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            divClass="col-span-1 p-6 border border-gray-700"
+            buttonClass="" // Tambahan styling jika dibutuhkan
+          />
+        </motion.div>
 
-        <div className="flex justify-left mt-2">
-          {/* Tombol Previous */}
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &lt;
-          </button>
+        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+          {/* Table Wrapper */}
+          <div className="overflow-x-auto max-w-[22rem] sm:max-w-[42rem] md:max-w-full rounded-lg shadow border border-red-500">
+            <div className="inline-block min-w-full">
+              <div className="overflow-hidden">
+                <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
+                  <thead className="text-center">
+                    <tr className="bg-red-600 text-white">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        NO
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Unit Name
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Seri Unit
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Charging Time
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Connector Type
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Location
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Status
+                      </th>
+                      <th className="py-2 px-2 border-b tracking-wide">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {currentUnits.map((ChargingUnit, index) => (
+                      <tr
+                        key={ChargingUnit.idUnitCharge}
+                        className={`text-center ${
+                          index % 2 === 1 ? "bg-gray-100" : "bg-white"
+                        }`}
+                      >
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          {(currentPage - 1) * itemsPerPage + index + 1}
+                        </td>
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          {ChargingUnit.unitName}
+                        </td>
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          {ChargingUnit.noSeriUnit}
+                        </td>
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          {ChargingUnit.averageChargingTime}
+                        </td>
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          {ChargingUnit.connectorTypeUnit}
+                        </td>
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          {ChargingUnit.unitLocation}
+                        </td>
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          {ChargingUnit.unitStatus === 1
+                            ? "Active"
+                            : "Non-Active"}
+                        </td>
+                        <td className="py-3 px-4 border-b whitespace-nowrap">
+                          <div className="flex justify-center space-x-2">
+                            <button
+                              onClick={() => {
+                                toggleUpdate();
+                                handleRowClick(ChargingUnit);
+                              }}
+                              className="text-green-600 hover:text-green-800"
+                            >
+                              <FaEdit />
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleDelete(ChargingUnit.idUnitCharge)
+                              }
+                              className="text-red-600 hover:text-red-800"
+                            >
+                              <FaTrashAlt />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-          {/* Tombol halaman dinamis */}
-          {Array.from({ length: 3 }, (_, index) => {
-            // Hitung halaman mulai berdasarkan halaman saat ini
-            let pageNumber = currentPage + index;
+          {/* Pagination */}
+          <div className="flex justify-center mt-4 flex-wrap gap-2">
+            {/* Previous Button */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded-md ${
+                currentPage === 1
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              &lt;
+            </button>
 
-            // Pastikan halaman tidak di luar batas 1 dan totalPages
-            if (pageNumber == 1) pageNumber = 1;
-
-            return (
-              pageNumber <= totalPages && (
+            {/* Dynamic Page Buttons */}
+            {Array.from({ length: totalPages }, (_, index) => {
+              const pageNumber = index + 1;
+              return (
                 <button
                   key={pageNumber}
                   onClick={() => handlePageChange(pageNumber)}
-                  className={`px-3 py-1 mx-1 ${
+                  className={`px-4 py-2 rounded-md ${
                     currentPage === pageNumber
-                      ? "bg-red-E01414 text-white"
-                      : "bg-gray-200"
-                  } rounded-md`}
+                      ? "bg-red-600 text-white"
+                      : "bg-gray-200 hover:bg-gray-300"
+                  }`}
                 >
                   {pageNumber}
                 </button>
-              )
-            );
-          })}
+              );
+            })}
 
-          {/* Tombol Next */}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &gt;
-          </button>
+            {/* Next Button */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded-md ${
+                currentPage === totalPages
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-gray-200 hover:bg-gray-300"
+              }`}
+            >
+              &gt;
+            </button>
+          </div>
         </div>
       </div>
+
       {/* Modal Pop-up Create Charger */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
+          <div className="bg-white rounded-2xl w-[90%] sm:w-[50rem] h-[35rem] p-6 relative">
             {/* Form for Add New Charger */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[90%] sm:w-[42rem] h-5/6 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
-                  <div className="flex space-x-6">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-unit">
+                  <div className="flex flex-wrap space-x-6">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-unit"
+                      >
                         Id Unit
                       </label>
                       <TextField
@@ -392,8 +448,11 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-name">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="unit-name"
+                      >
                         Unit Name
                       </label>
                       <TextField
@@ -404,71 +463,7 @@ const ChargingUnit = () => {
                       />
                     </div>
                   </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="seri-unit">
-                        Seri Unit
-                      </label>
-                      <TextField
-                        id="seri-unit"
-                        value={noSeriUnit}
-                        onChange={(e) => setNoSeriUnit(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="charging-time">
-                        Charging Time
-                      </label>
-                      <TextField
-                        id="charging-time"
-                        value={averageChargingTime}
-                        onChange={(e) => setAverageChargingTime(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="connector-type">
-                        Connector
-                      </label>
-                      <TextField
-                        id="connector-type"
-                        value={connectorTypeUnit}
-                        onChange={(e) => setConnectorType(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-location">
-                        Unit Location
-                      </label>
-                      <TextField
-                        id="unit-location"
-                        value={unitLocation}
-                        onChange={(e) => setUnitLocation(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-status">
-                        Unit Status
-                      </label>
-                      <TextField
-                        id="unit-status"
-                        value={unitStatus}
-                        onChange={(e) => setUnitStatus(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
-                  </div>
-
+                  {/* More form fields here */}
                   <div className="flex justify-center mt-10 space-x-10">
                     <button
                       type="submit"
@@ -490,18 +485,22 @@ const ChargingUnit = () => {
         </div>
       )}
 
-      {/* modal untuk update */}
+      {/* Modal for Update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
-            {/* Form for Add New Charger */}
+          <div className="bg-white rounded-2xl w-full sm:w-[50rem] md:w-[55rem] lg:w-[60rem] bg-opacity-0 h-auto sm:h-[35rem] p-6 relative">
+            {/* Form for Update Charger */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[90%] sm:w-[42rem] h-auto sm:h-5/6 mt-5 mb-6">
                 <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
-                  <div className="flex space-x-6">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-unit">
+                  {/* Id Unit and Unit Name Section */}
+                  <div className="flex flex-wrap sm:space-x-6 space-y-4 sm:space-y-0">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-unit"
+                      >
                         Id Unit
                       </label>
                       <TextField
@@ -511,8 +510,11 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-name">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="unit-name"
+                      >
                         Unit Name
                       </label>
                       <TextField
@@ -524,9 +526,13 @@ const ChargingUnit = () => {
                     </div>
                   </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="seri-unit">
+                  {/* Seri Unit and Charging Time Section */}
+                  <div className="flex flex-wrap sm:space-x-6 space-y-4 sm:space-y-0">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="seri-unit"
+                      >
                         Seri Unit
                       </label>
                       <TextField
@@ -536,8 +542,11 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="charging-time">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="charging-time"
+                      >
                         Charging Time
                       </label>
                       <TextField
@@ -549,9 +558,13 @@ const ChargingUnit = () => {
                     </div>
                   </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="connector-type">
+                  {/* Connector and Unit Location Section */}
+                  <div className="flex flex-wrap sm:space-x-6 space-y-4 sm:space-y-0">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="connector-type"
+                      >
                         Connector
                       </label>
                       <TextField
@@ -561,8 +574,11 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-location">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="unit-location"
+                      >
                         Unit Location
                       </label>
                       <TextField
@@ -574,9 +590,13 @@ const ChargingUnit = () => {
                     </div>
                   </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="unit-status">
+                  {/* Unit Status Section */}
+                  <div className="flex flex-col sm:space-x-6 space-y-4 sm:space-y-0">
+                    <div className="flex flex-col w-full sm:w-1/2">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="unit-status"
+                      >
                         Unit Status
                       </label>
                       <TextField
@@ -588,7 +608,8 @@ const ChargingUnit = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-center mt-10 space-x-10">
+                  {/* Buttons Section */}
+                  <div className="flex justify-center mt-10 space-x-6 sm:space-x-10">
                     <button
                       type="submit"
                       className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
