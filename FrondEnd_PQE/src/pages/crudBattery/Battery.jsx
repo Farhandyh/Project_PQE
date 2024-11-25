@@ -288,7 +288,7 @@ const Battery = () => {
         </motion.div>
 
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
-          <div className="overflow-x-auto rounded-lg  max-w-[22rem] sm:max-w-[42rem] md:max-w-full shadow">
+          <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
             <table className="w-full bg-white text-sm md:text-base">
               <thead className="text-center">
                 <tr className="bg-red-E01414 text-white">

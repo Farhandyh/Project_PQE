@@ -217,7 +217,7 @@ const ChargingUnit = () => {
             <img
               src="../src/assets/menuCRUD/charging.png"
               alt="Charging Unit Icon"
-              className="w-20 md:w-36 h-auto"
+              className="w-36 h-auto"
             />
 
             {/* Bagian teks */}
@@ -283,109 +283,103 @@ const ChargingUnit = () => {
 
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           {/* Table Wrapper */}
-          <div className="overflow-x-auto max-w-[22rem] sm:max-w-[42rem] md:max-w-full rounded-lg shadow border border-red-500">
-            <div className="inline-block min-w-full">
-              <div className="overflow-hidden">
-                <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
-                  <thead className="text-center">
-                    <tr className="bg-red-600 text-white">
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        NO
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Unit Name
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Seri Unit
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Charging Time
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Connector Type
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Location
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Status
-                      </th>
-                      <th className="py-2 px-2 border-b tracking-wide">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    {currentUnits.map((ChargingUnit, index) => (
-                      <tr
-                        key={ChargingUnit.idUnitCharge}
-                        className={`text-center ${
-                          index % 2 === 1 ? "bg-gray-100" : "bg-white"
-                        }`}
-                      >
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          {(currentPage - 1) * itemsPerPage + index + 1}
-                        </td>
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          {ChargingUnit.unitName}
-                        </td>
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          {ChargingUnit.noSeriUnit}
-                        </td>
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          {ChargingUnit.averageChargingTime}
-                        </td>
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          {ChargingUnit.connectorTypeUnit}
-                        </td>
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          {ChargingUnit.unitLocation}
-                        </td>
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          {ChargingUnit.unitStatus === 1
-                            ? "Active"
-                            : "Non-Active"}
-                        </td>
-                        <td className="py-3 px-4 border-b whitespace-nowrap">
-                          <div className="flex justify-center space-x-2">
-                            <button
-                              onClick={() => {
-                                toggleUpdate();
-                                handleRowClick(ChargingUnit);
-                              }}
-                              className="text-green-600 hover:text-green-800"
-                            >
-                              <FaEdit />
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleDelete(ChargingUnit.idUnitCharge)
-                              }
-                              className="text-red-600 hover:text-red-800"
-                            >
-                              <FaTrashAlt />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div className="overflow-x-auto max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full rounded-lg shadow">
+            <table className="w-full bg-white text-sm md:text-base">
+              <thead className="text-center">
+                <tr className="bg-red-600 text-white">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    NO
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Unit Name
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Seri Unit
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Charging Time
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Connector Type
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Location
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Status
+                  </th>
+                  <th className="py-2 px-2 border-b tracking-wide whitespace-nowrap">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {currentUnits.map((ChargingUnit, index) => (
+                  <tr
+                    key={ChargingUnit.idUnitCharge}
+                    className={`text-center ${
+                      index % 2 === 1 ? "bg-gray-100" : "bg-white"
+                    }`}
+                  >
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      {ChargingUnit.unitName}
+                    </td>
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      {ChargingUnit.noSeriUnit}
+                    </td>
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      {ChargingUnit.averageChargingTime}
+                    </td>
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      {ChargingUnit.connectorTypeUnit}
+                    </td>
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      {ChargingUnit.unitLocation}
+                    </td>
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      {ChargingUnit.unitStatus === 1 ? "Active" : "Non-Active"}
+                    </td>
+                    <td className="py-3 px-4 border-b whitespace-nowrap">
+                      <div className="flex justify-center space-x-2">
+                        <button
+                          onClick={() => {
+                            toggleUpdate();
+                            handleRowClick(ChargingUnit);
+                          }}
+                          className="text-green-600 hover:text-green-800"
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleDelete(ChargingUnit.idUnitCharge)
+                          }
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          <FaTrashAlt />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center mt-4 flex-wrap gap-2">
+          <div className="flex justify-left mt-4 flex-wrap">
             {/* Previous Button */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className={`px-4 py-2 rounded-md ${
+              className={`px-3 py-1 mx-1 rounded-md ${
                 currentPage === 1
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-gray-200 hover:bg-gray-300"
-              }`}
+              } [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]`}
             >
               &lt;
             </button>
@@ -397,7 +391,7 @@ const ChargingUnit = () => {
                 <button
                   key={pageNumber}
                   onClick={() => handlePageChange(pageNumber)}
-                  className={`px-4 py-2 rounded-md ${
+                  className={`px-3 py-1 mx-1 rounded-md ${
                     currentPage === pageNumber
                       ? "bg-red-600 text-white"
                       : "bg-gray-200 hover:bg-gray-300"
@@ -412,11 +406,11 @@ const ChargingUnit = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className={`px-4 py-2 rounded-md ${
+              className={`px-3 py-1 mx-1 rounded-md ${
                 currentPage === totalPages
                   ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                   : "bg-gray-200 hover:bg-gray-300"
-              }`}
+              } [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]`}
             >
               &gt;
             </button>

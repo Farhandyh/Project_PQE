@@ -208,7 +208,7 @@ const Users = () => {
             <img
               src="../src/assets/menuCRUD/user.png"
               alt="User Icon"
-              className="w-20 md:w-36 h-auto"
+              className="w-36 h-auto"
             />
 
             {/* Bagian teks */}
@@ -275,7 +275,7 @@ const Users = () => {
 
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           {/* Table Wrapper */}
-          <div className="overflow-x-auto max-w-[22rem] sm:max-w-[42rem] md:max-w-full rounded-lg shadow ">
+          <div className="overflow-x-auto max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full rounded-lg shadow ">
             <table className="w-full bg-white text-sm md:text-base">
               <thead className=" text-center">
                 <tr className="bg-red-E01414 text-white">
