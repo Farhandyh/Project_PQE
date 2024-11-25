@@ -233,43 +233,39 @@ const TestingMachine = () => {
           </div>
 
           {/* Card Filter */}
-          <div className=" col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around shadow-lg border border-gray-700">
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around shadow-lg border border-gray-700">
             {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-            <div className="flex flex-col space-y-2 ">
+            <div className="flex flex-col space-y-2 w-full px-4">
               {/* Dropdown Status */}
-              <Dropdown
-                label="Status"
-                options={[
-                  { value: "active", label: "Active" },
-                  { value: "inactive", label: "Inactive" },
-                  { value: "suspended", label: "Suspended" },
-                ]}
-                className="bg-red-F81A1B text-white w-full+2 lg:w-full+3"
-                classStyle=""
-                onChange={handleStatusChange}
-                value={selectedStatus}
-              />
+              <div className="flex flex-col w-full">
+                <label className="text-gray-700 text-sm font-semibold text-left">Status</label>
+                <Dropdown
+                  options={[
+                    { value: "active", label: "Active" },
+                    { value: "inactive", label: "Inactive" },
+                    { value: "suspended", label: "Suspended" },
+                  ]}
+                  className="bg-red-F81A1B text-white w-full"
+                  onChange={handleStatusChange}
+                  value={selectedStatus}
+                />
+              </div>
 
               {/* Dropdown Material */}
-              <Dropdown
-                label="Type"
-                options={[
-                  { value: "Type1", label: "Type 1" },
-                  { value: "Type2", label: "Type 2" },
-                  { value: "Type3", label: "Type 3" },
-                ]}
-                className="bg-green-500 text-white w-full+2 lg:w-full+3"
-                onChange={handleTypeChange}
-                value={selectedType}
-              />
+              <div className="flex flex-col w-full">
+                <label className="text-gray-700 text-sm font-semibold text-left">Type</label>
+                <Dropdown
+                  options={[
+                    { value: "Type1", label: "Type 1" },
+                    { value: "Type2", label: "Type 2" },
+                    { value: "Type3", label: "Type 3" },
+                  ]}
+                  className="bg-green-500 text-white w-full"
+                  onChange={handleTypeChange}
+                  value={selectedType}
+                />
+              </div>
             </div>
-
-            {/* Gambar di sebelah kanan */}
-            <img
-              src="../src/assets/menuCRUD/power.png"
-              alt="Icon"
-              className="w-auto md:w-32 h-auto mt-4 md:-mt-5 md:h-36 md:ml-5"
-            />
           </div>
 
           {/* Card Add New Machine */}
@@ -373,10 +369,9 @@ const TestingMachine = () => {
 
               {/* Tombol halaman dinamis */}
               {Array.from({ length: 3 }, (_, index) => {
-                // Hitung halaman mulai berdasarkan halaman saat ini
+
                 let pageNumber = currentPage + index;
 
-                // Pastikan halaman tidak di luar batas 1 dan totalPages
                 if (pageNumber == 1) pageNumber = 1;
 
                 return (
@@ -411,11 +406,11 @@ const TestingMachine = () => {
       {/* Modal Pop-up Create Machines */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6 relative">
+          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6 sm:h-[30rem] relative">
             {/* Form untuk Add New Machine */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-80 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-94 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
                   <label
                     className="block text-black ml-2 mb-1 mt-3"
@@ -493,11 +488,11 @@ const TestingMachine = () => {
       {/* modal untuk update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6  relative">
-            {/* Form untuk upadate Machine */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
+        <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6 sm:h-[30rem] relative">
+          {/* Form untuk Add New Machine */}
+          <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-80 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-94 mt-5 mb-6">
                 <form onSubmit={handleUpdate} className="w-full ml-11 mb-2">
                   <label
                     className="block text-black ml-2 mb-1 mt-3"
