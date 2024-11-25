@@ -1,0 +1,25 @@
+.alive {
+  box-shadow: 0 10px 0 #7f1d1d;
+  position: relative; /* Agar tombol tetap berada di bawah gambar */
+  z-index: 1; /* Tombol berada di bawah gambar */
+}
+
+.alive:active {
+  box-shadow: 0 5px 0 #7f1d1d;
+  transform: translateY(5px);
+  z-index: 0; /* Agar tombol tetap di bawah gambar saat aktif */
+}
+
+img {
+  z-index: 2;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
