@@ -1,185 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { motion } from "framer-motion";
 import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
-
-// const getRacks = async () => {
-//   const response = await fetch('http://localhost:8000/api/racks');
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch racks');
-//   }
-//   const data = await response.json();
-//   return data;
-// };
+import Dropdown from "../../components/materialCRUD/Dropdown";
+import ImageButton from "../../components/materialCRUD/ImageButton";
 
 const getRacks = async () => {
-  // Data statis sebagai pengganti API
-  const data = [
-    {
-      idRack: "1",
-      rackName: "Rack A",
-      rackMaterial: "Steel",
-      weightMaxRack: 200,
-      rackCapacity: 50,
-      rackStatus: 1,
-    },
-    {
-      idRack: "2",
-      rackName: "Rack B",
-      rackMaterial: "Aluminum",
-      weightMaxRack: 150,
-      rackCapacity: 30,
-      rackStatus: 0,
-    },
-    {
-      idRack: "3",
-      rackName: "Rack C",
-      rackMaterial: "Wood",
-      weightMaxRack: 100,
-      rackCapacity: 20,
-      rackStatus: 1,
-    },
-    {
-      idRack: "4",
-      rackName: "Rack D",
-      rackMaterial: "Plastic",
-      weightMaxRack: 80,
-      rackCapacity: 15,
-      rackStatus: 1,
-    },
-    {
-      idRack: "5",
-      rackName: "Rack E",
-      rackMaterial: "Steel",
-      weightMaxRack: 250,
-      rackCapacity: 60,
-      rackStatus: 0,
-    },
-    {
-      idRack: "6",
-      rackName: "Rack F",
-      rackMaterial: "Aluminum",
-      weightMaxRack: 120,
-      rackCapacity: 25,
-      rackStatus: 1,
-    },
-    {
-      idRack: "7",
-      rackName: "Rack G",
-      rackMaterial: "Wood",
-      weightMaxRack: 90,
-      rackCapacity: 18,
-      rackStatus: 0,
-    },
-    {
-      idRack: "8",
-      rackName: "Rack H",
-      rackMaterial: "Steel",
-      weightMaxRack: 300,
-      rackCapacity: 70,
-      rackStatus: 1,
-    },
-    {
-      idRack: "9",
-      rackName: "Rack I",
-      rackMaterial: "Plastic",
-      weightMaxRack: 70,
-      rackCapacity: 10,
-      rackStatus: 1,
-    },
-    {
-      idRack: "10",
-      rackName: "Rack J",
-      rackMaterial: "Steel",
-      weightMaxRack: 220,
-      rackCapacity: 55,
-      rackStatus: 0,
-    },
-    {
-      idRack: "11",
-      rackName: "Rack K",
-      rackMaterial: "Aluminum",
-      weightMaxRack: 140,
-      rackCapacity: 35,
-      rackStatus: 1,
-    },
-    {
-      idRack: "12",
-      rackName: "Rack L",
-      rackMaterial: "Wood",
-      weightMaxRack: 95,
-      rackCapacity: 22,
-      rackStatus: 0,
-    },
-    {
-      idRack: "13",
-      rackName: "Rack M",
-      rackMaterial: "Steel",
-      weightMaxRack: 280,
-      rackCapacity: 65,
-      rackStatus: 1,
-    },
-    {
-      idRack: "14",
-      rackName: "Rack N",
-      rackMaterial: "Plastic",
-      weightMaxRack: 75,
-      rackCapacity: 12,
-      rackStatus: 1,
-    },
-    {
-      idRack: "15",
-      rackName: "Rack O",
-      rackMaterial: "Steel",
-      weightMaxRack: 260,
-      rackCapacity: 58,
-      rackStatus: 0,
-    },
-    {
-      idRack: "16",
-      rackName: "Rack P",
-      rackMaterial: "Aluminum",
-      weightMaxRack: 160,
-      rackCapacity: 40,
-      rackStatus: 1,
-    },
-    {
-      idRack: "17",
-      rackName: "Rack Q",
-      rackMaterial: "Wood",
-      weightMaxRack: 110,
-      rackCapacity: 27,
-      rackStatus: 0,
-    },
-    {
-      idRack: "18",
-      rackName: "Rack R",
-      rackMaterial: "Steel",
-      weightMaxRack: 310,
-      rackCapacity: 75,
-      rackStatus: 1,
-    },
-    {
-      idRack: "19",
-      rackName: "Rack S",
-      rackMaterial: "Plastic",
-      weightMaxRack: 85,
-      rackCapacity: 13,
-      rackStatus: 1,
-    },
-    {
-      idRack: "20",
-      rackName: "Rack T",
-      rackMaterial: "Steel",
-      weightMaxRack: 240,
-      rackCapacity: 52,
-      rackStatus: 0,
-    },
-  ];
-  return data; // Simulasikan data seolah-olah diambil dari API
+  const response = await fetch('http://localhost:8000/api/racks');
+  if (!response.ok) {
+    throw new Error('Failed to fetch racks');
+  }
+  const data = await response.json();
+  return data;
 };
-
-
 
 const deleteRacks = async (idRack) => {
   const response = await fetch(`http://localhost:8000/api/racks-destroy/${idRack}`, {
@@ -204,6 +38,10 @@ const Rack = () => {
   const [weightMaxRack,setWeightMaxRack] = useState("");
   const [rackCapacity,setRackCapacity] = useState("");
   const [rackStatus,setRackStatus] = useState("");
+
+  // Handler untuk dropdown Capacity
+  const [selectedStatus, setSelectedStatus] = useState("active"); // Default status
+  const [selectedMaterial, setSelectedMaterial] = useState("all"); // Default material
 
   const fetchRacks = async () => {
     try {
@@ -232,8 +70,8 @@ const Rack = () => {
     setIsUpdateOpen(true);
   };
 
-  if (loading) return <p className="text-center">Loading...</p>;
-  if (error) return <p className="text-center text-red-500">{error}</p>;
+  //if (loading) return <p className="text-center">Loading...</p>;
+  //if (error) return <p className="text-center text-red-500">{error}</p>;
 
   const itemsPerPage = 10;
   const totalPages = Math.ceil(racks.length / itemsPerPage);
@@ -340,143 +178,176 @@ const Rack = () => {
     }
   };
 
+    // Handler untuk dropdown Status
+    const handleStatusChange = (event) => {
+      setSelectedStatus(event.target.value);
+    };
+  
+    // Handler untuk dropdown Material
+    const handleMaterialChange = (event) => {
+      setSelectedMaterial(event.target.value);
+    };
+
   return (
     <>
-      <div className="mt-4 mb-4 pl-1 pr-1 flex flex-wrap lg:flex-nowrap lg:pl-8  gap-4 w-full">
-        <div className="bg-white rounded-2xl w-full lg:1/3 h-32 p-2 shadow-lg flex flex-row items-start h-auto justify-between overflow-hidden">
-          {/* Gambar di sebelah kiri */}
-          <img
-            src="../src/assets/menuCRUD/storage.png"
-            alt="Storage Icon"
-            className="w-36 h-auto"
-          />
+      <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
+        {/* STATS */}
+        <motion.div
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Card Storage */}
+          <div className="col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around items-center p-6 shadow-lg border border-gray-700">
+            {/* Gambar di sebelah kiri */}
+            <img
+              src="../src/assets/menuCRUD/storage.png"
+              alt="Storage Icon"
+              className="w-20 md:w-36 h-auto"
+            />
 
-          {/* Bagian teks */}
-          <div className="flex flex-col justify-center">
-            <h3 className="font-poppins text-2xl font-semibold text-red-600 text-center mb-1">
-              Storage
-            </h3>
-            <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl text-red-600 text-center">
-              036
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-white rounded-2xl w-full lg:1/3 h-32 flex flex-row items-start h-auto justify-between items-center p-2 shadow-lg overflow-hidden">
-          {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-          <div className="flex flex-col space-y-3">
-            {/* Dropdown Status */}
-            <div className="flex items-center space-x-7">
-              <label className="text-gray-600 text-sm font-poppins">
-                Status
-              </label>
-              <select className="bg-red-500 text-white px-2 py-1 w-28 text-center rounded-lg focus:outline-none">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
-              </select>
-            </div>
-
-            {/* Dropdown Role */}
-            <div className="flex items-center space-x-3">
-              <label className="text-gray-600 text-sm font-poppins">
-                Capacity
-              </label>
-              <select className="bg-green-500 text-white px-2 w-28 text-center py-1 rounded-lg focus:outline-none">
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-                <option value="guest">Guest</option>
-              </select>
+            {/* Bagian teks */}
+            <div className="flex flex-col justify-center">
+              <h3 className="font-poppins text-lg md:text-2xl text-red-600 text-center font-semibold mb-1">
+                Rack
+              </h3>
+              <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl md:text-7xl text-red-600 text-center">
+                036
+              </h1>
             </div>
           </div>
 
-          {/* Gambar di sebelah kanan */}
-          <img
-            src="../src/assets/menuCRUD/filter.png"
-            alt="Icon"
-            className="w-32 h-auto ml-4"
-          />
-        </div>
-        <div className="flex items-center justify-center bg-white rounded-2xl w-full lg:1/3 h-auto p-2 shadow-lg overflow-hidden">
-          <button
+          {/* Card Filter */}
+          <div className=" col-span-1 bg-white rounded-2xl w-full h-32 flex justify-around shadow-lg border border-gray-700">
+            {/* Bagian Kiri - Dropdown untuk Status dan Role */}
+            <div className="flex flex-col space-y-2 ">
+              {/* Dropdown Status */}
+              <Dropdown
+                label="Status"
+                options={[
+                  { value: "active", label: "Active" },
+                  { value: "inactive", label: "Inactive" },
+                  { value: "suspended", label: "Suspended" },
+                ]}
+                className="bg-red-F81A1B text-white w-full+2 lg:w-full+3"
+                classStyle=""
+                onChange={handleStatusChange}
+                value={selectedStatus}
+              />
+
+              {/* Dropdown Material */}
+              <Dropdown
+                label="Material"
+                options={[
+                  { value: "material1", label: "Material 1" },
+                  { value: "material2", label: "Material 2" },
+                  { value: "material3", label: "Material 3" },
+                ]}
+                className="bg-green-500 text-white w-full+2 lg:w-full+3"
+                onChange={handleMaterialChange}
+                value={selectedMaterial}
+              />
+            </div>
+
+            {/* Gambar di sebelah kanan */}
+            <img
+              src="../src/assets/menuCRUD/storage2.png"
+              alt="Icon"
+              className="w-auto md:w-32 h-auto mt-4 md:-mt-5 md:h-36 md:ml-5"
+            />
+          </div>
+
+          {/* Card Add New Storage */}
+          <ImageButton
+            imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
+            imgAlt="Storage Icon"
+            buttonLabel="Add New Storage"
             onClick={toggleModal}
-            className="text-white bg-red-500 px-4 py-2 rounded-full"
-          >
-            Add New Rack
-          </button>
-        </div>
-      </div>  
-      <div className="w-full lg:pl-8 h-full">
-        <div className="rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
-          <table className="w-full bg-white border border-gray-200">
-            <thead>
-              <tr className="bg-red-E01414 text-white">
-                <th className="py-1 px-2 border-b border-r border-gray-300">
-                  NO
-                </th>
-                <th className="py-1 px-2 border-b border-r border-gray-300">
-                  Rack Name
-                </th>
-                <th className="py-1 px-2 border-b border-r border-gray-300">
-                  Rack Material
-                </th>
-                <th className="py-1 px-2 border-b border-r border-gray-300">
-                  Weight Max
-                </th>
-                <th className="py-1 px-2 border-b border-r border-gray-300">
-                  Capacity
-                </th>
-                <th className="py-1 px-2 border-b border-r border-gray-300">
-                  Status
-                </th>
-                <th className="py-1 px-2 border-b">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentRacks.map((rack, index) => (
-                <tr
-                  key={rack.idRack}
-                  className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                  style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-                >
-                  <td className="py-1 px-2 border-b">
-                    {(currentPage - 1) * itemsPerPage + index + 1}
-                  </td>
-                  <td className="py-1 px-2 border-b">{rack.rackName}</td>
-                  <td className="py-1 px-2 border-b">{rack.rackMaterial}</td>
-                  <td className="py-1 px-2 border-b">{rack.weightMaxRack}</td>
-                  <td className="py-1 px-2 border-b">{rack.rackCapacity}</td>
-                  <td className="py-1 px-2 border-b">
-                    {rack.rackStatus === 1 ? "Active" : "Non-Active"}
-                  </td>
-                  <td
-                    className="py-2 px-2 border-b"
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <a
-                      href="#"
-                      onClick={() => {
-                        toggleUpdate();
-                        handleRowClick(rack);
-                      }}
-                      className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                    >
-                      <FaEdit />
-                    </a>
-                    <a
-                      href="#"
-                      onClick={() => handleDelete(rack.idRack)}
-                      className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                    >
-                      <FaTrashAlt />
-                    </a>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            divClass="col-span-1 p-6 border border-gray-700"
+            buttonClass="" // Tambahan styling jika dibutuhkan
+          />
 
-          <div className="flex justify-left mt-2">
+        </motion.div>
+    
+        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+          {/* Table Wrapper */}
+          <div className="overflow-x-auto max-w-[22rem] sm:max-w-[42rem] md:max-w-full rounded-lg shadow border border-red-500">
+            <div className="inline-block min-w-full">
+              <div className="overflow-hidden">
+                <table className="w-full bg-white border border-gray-200">
+                  <thead>
+                    <tr className="bg-red-E01414 text-white">
+                      <th className="py-1 px-2 border-b border-r border-gray-300">
+                        NO
+                      </th>
+                      <th className="py-1 px-2 border-b border-r border-gray-300">
+                        Rack Name
+                      </th>
+                      <th className="py-1 px-2 border-b border-r border-gray-300">
+                        Rack Material
+                      </th>
+                      <th className="py-1 px-2 border-b border-r border-gray-300">
+                        Weight Max
+                      </th>
+                      <th className="py-1 px-2 border-b border-r border-gray-300">
+                        Capacity
+                      </th>
+                      <th className="py-1 px-2 border-b border-r border-gray-300">
+                        Status
+                      </th>
+                      <th className="py-1 px-2 border-b">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentRacks.map((rack, index) => (
+                      <tr
+                        key={rack.idRack}
+                        className={`text-center ${index % 2 === 1 ? "" : ""}`}
+                        style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
+                      >
+                        <td className="py-1 px-2 border-b">
+                          {(currentPage - 1) * itemsPerPage + index + 1}
+                        </td>
+                        <td className="py-1 px-2 border-b">{rack.rackName}</td>
+                        <td className="py-1 px-2 border-b">{rack.rackMaterial}</td>
+                        <td className="py-1 px-2 border-b">{rack.weightMaxRack}</td>
+                        <td className="py-1 px-2 border-b">{rack.rackCapacity}</td>
+                        <td className="py-1 px-2 border-b">
+                          {rack.rackStatus === 1 ? "Active" : "Non-Active"}
+                        </td>
+                        <td
+                          className="py-2 px-2 border-b"
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <a
+                            href="#"
+                            onClick={() => {
+                              toggleUpdate();
+                              handleRowClick(rack);
+                            }}
+                            className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                          >
+                            <FaEdit />
+                          </a>
+                          <a
+                            href="#"
+                            onClick={() => handleDelete(rack.idRack)}
+                            className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                          >
+                            <FaTrashAlt />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                </div>
+            </div>
+          </div>
+
+          {/* Pagination */}
+          <div className="flex justify-center mt-4 flex-wrap">
             {/* Tombol Previous */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -488,10 +359,7 @@ const Rack = () => {
 
             {/* Tombol halaman dinamis */}
             {Array.from({ length: 3 }, (_, index) => {
-              // Hitung halaman mulai berdasarkan halaman saat ini
               let pageNumber = currentPage + index;
-
-              // Pastikan halaman tidak di luar batas 1 dan totalPages
               if (pageNumber == 1) pageNumber = 1;
 
               return (
@@ -522,7 +390,9 @@ const Rack = () => {
           </div>
         </div>
       </div>
-       {/* Modal Pop-up Create Rack */}
+
+
+      {/* Modal Pop-up Create Rack */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl w-[90%] md:w-[60rem] lg:w-[50rem] h-auto md:h-[35rem] p-4 sm:p-6 relative">
