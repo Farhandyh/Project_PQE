@@ -194,7 +194,7 @@ const Users = () => {
 
   return (
     <>
-      <div className="p-5 mx-auto px-4 md:px-20  lg:px-32">
+      <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
         {/* STATS */}
         <motion.div
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
@@ -275,82 +275,88 @@ const Users = () => {
 
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           {/* Table Wrapper */}
-          <div className="overflow-auto rounded-lg shadow-custom-header">
-            <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
-              <thead className="tracking-wide text-center">
-                <tr className="bg-red-E01414 text-white">
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
-                    NO
-                  </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
-                    Name
-                  </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
-                    Username
-                  </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
-                    Password
-                  </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
-                    Email
-                  </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
-                    Role
-                  </th>
-                  <th className="py-2 px-2 border-b">Action</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-100">
-                {currentUsers.map((users, index) => (
-                  <tr
-                    key={users.idUsers}
-                    className={`text-center ${
-                      index % 2 === 1 ? "bg-gray-100" : ""
-                    }`}
-                  >
-                    <td className="py-2 px-2 border-b whitespace-nowrap">
-                      {(currentPage - 1) * itemsPerPage + index + 1}
-                    </td>
-                    <td className="py-2 px-2 border-b whitespace-nowrap">
-                      {users.name}
-                    </td>
-                    <td className="py-2 px-2 border-b whitespace-nowrap">
-                      {users.username}
-                    </td>
-                    <td className="py-2 px-2 border-b whitespace-nowrap">
-                      {users.password}
-                    </td>
-                    <td className="py-2 px-2 border-b whitespace-nowrap">
-                      {users.email}
-                    </td>
-                    <td className="py-2 px-2 border-b whitespace-nowrap">
-                      {users.role}
-                    </td>
-                    <td className="py-2 px-2 border-b whitespace-nowrap">
-                      <div className="flex justify-center">
-                        <a
-                          href="#"
-                          onClick={() => {
-                            toggleUpdate();
-                            handleRowClick(users);
-                          }}
-                          className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                        >
-                          <FaEdit />
-                        </a>
-                        <a
-                          href="#"
-                          onClick={() => handleDelete(users.idUsers)}
-                          className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                        >
-                          <FaTrashAlt />
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="overflow-x-auto max-w-[22rem] sm:max-w-[42rem] md:max-w-full rounded-lg shadow border border-red-500">
+            <div className="inline-block min-w-full">
+              <div className="overflow-hidden">
+                <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
+                  <thead className=" text-center">
+                    <tr className="bg-red-E01414 text-white">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        NO
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Name
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Username
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Password
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Email
+                      </th>
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                        Role
+                      </th>
+                      <th className="py-2 px-2 border-b tracking-wide">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-100">
+                    {currentUsers.map((users, index) => (
+                      <tr
+                        key={users.idUsers}
+                        className={`text-center ${
+                          index % 2 === 1 ? "bg-gray-100" : ""
+                        }`}
+                      >
+                        <td className="py-2 px-2 border-b whitespace-nowrap">
+                          {(currentPage - 1) * itemsPerPage + index + 1}
+                        </td>
+                        <td className="py-2 px-2 border-b whitespace-nowrap">
+                          {users.name}
+                        </td>
+                        <td className="py-2 px-2 border-b whitespace-nowrap">
+                          {users.username}
+                        </td>
+                        <td className=" py-2 px-2 border-b whitespace-nowrap">
+                          {users.password}
+                        </td>
+                        <td className=" py-2 px-2 border-b whitespace-nowrap">
+                          {users.email}
+                        </td>
+                        <td className=" py-2 px-2 border-b whitespace-nowrap">
+                          {users.role}
+                        </td>
+                        <td className=" py-2 px-2 border-b whitespace-nowrap">
+                          <div className="flex justify-center">
+                            <a
+                              href="#"
+                              onClick={() => {
+                                toggleUpdate();
+                                handleRowClick(users);
+                              }}
+                              className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                            >
+                              <FaEdit />
+                            </a>
+                            <a
+                              href="#"
+                              onClick={() => handleDelete(users.idUsers)}
+                              className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                            >
+                              <FaTrashAlt />
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
 
           {/* Pagination */}
