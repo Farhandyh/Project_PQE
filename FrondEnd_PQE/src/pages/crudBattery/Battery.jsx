@@ -286,36 +286,39 @@ const Battery = () => {
             buttonClass="" // Tambahan styling jika dibutuhkan
           />
         </motion.div>
+
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
-          <div className="overflow-auto rounded-lg shadow-custom-header">
-            <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
-              <thead className="tracking-wide text-center">
+          <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
+            <table className="w-full bg-white text-sm md:text-base">
+              <thead className="text-center">
                 <tr className="bg-red-E01414 text-white">
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     NO
                   </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     Seri Battery
                   </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     Merk
                   </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     Model
                   </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     Daya Max
                   </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     Charging Time
                   </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     Capacity
                   </th>
-                  <th className="py-2 px-2 border-b border-r border-gray-300">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                     Status
                   </th>
-                  <th className="py-2 px-2 border-b">Action</th>
+                  <th className="py-2 px-2 border-b tracking-wide whitespace-nowrap">
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -351,27 +354,26 @@ const Battery = () => {
                     <td className="py-2 px-2 border-b whitespace-nowrap">
                       {battery.batteryStatus === 1 ? "Active" : "Non-Active"}
                     </td>
-                    <td
-                      className="py-2 px-2 border-b whitespace-nowrap"
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <a
-                        href="#"
-                        onClick={() => {
-                          toggleUpdate();
-                          handleRowClick(battery);
-                        }}
-                        className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                      >
-                        <FaEdit />
-                      </a>
-                      <a
-                        href="#"
-                        onClick={() => handleDelete(battery.idBattery)}
-                        className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                      >
-                        <FaTrashAlt />
-                      </a>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      <div className="flex justify-center">
+                        <a
+                          href="#"
+                          onClick={() => {
+                            toggleUpdate();
+                            handleRowClick(battery);
+                          }}
+                          className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                        >
+                          <FaEdit />
+                        </a>
+                        <a
+                          href="#"
+                          onClick={() => handleDelete(battery.idBattery)}
+                          className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                        >
+                          <FaTrashAlt />
+                        </a>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -379,12 +381,12 @@ const Battery = () => {
             </table>
           </div>
 
-          <div className="flex justify-left mt-2">
+          <div className="flex justify-left mt-4 flex-wrap">
             {/* Tombol Previous */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &lt;
             </button>
@@ -418,7 +420,7 @@ const Battery = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &gt;
             </button>

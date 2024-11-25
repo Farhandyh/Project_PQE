@@ -208,7 +208,7 @@ const Users = () => {
             <img
               src="../src/assets/menuCRUD/user.png"
               alt="User Icon"
-              className="w-20 md:w-36 h-auto"
+              className="w-36 h-auto"
             />
 
             {/* Bagian teks */}
@@ -275,97 +275,93 @@ const Users = () => {
 
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           {/* Table Wrapper */}
-          <div className="overflow-x-auto max-w-[22rem] sm:max-w-[42rem] md:max-w-full rounded-lg shadow border border-red-500">
-            <div className="inline-block min-w-full">
-              <div className="overflow-hidden">
-                <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
-                  <thead className=" text-center">
-                    <tr className="bg-red-E01414 text-white">
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        NO
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Name
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Username
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Password
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Email
-                      </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
-                        Role
-                      </th>
-                      <th className="py-2 px-2 border-b tracking-wide">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    {currentUsers.map((users, index) => (
-                      <tr
-                        key={users.idUsers}
-                        className={`text-center ${
-                          index % 2 === 1 ? "bg-gray-100" : ""
-                        }`}
-                      >
-                        <td className="py-2 px-2 border-b whitespace-nowrap">
-                          {(currentPage - 1) * itemsPerPage + index + 1}
-                        </td>
-                        <td className="py-2 px-2 border-b whitespace-nowrap">
-                          {users.name}
-                        </td>
-                        <td className="py-2 px-2 border-b whitespace-nowrap">
-                          {users.username}
-                        </td>
-                        <td className=" py-2 px-2 border-b whitespace-nowrap">
-                          {users.password}
-                        </td>
-                        <td className=" py-2 px-2 border-b whitespace-nowrap">
-                          {users.email}
-                        </td>
-                        <td className=" py-2 px-2 border-b whitespace-nowrap">
-                          {users.role}
-                        </td>
-                        <td className=" py-2 px-2 border-b whitespace-nowrap">
-                          <div className="flex justify-center">
-                            <a
-                              href="#"
-                              onClick={() => {
-                                toggleUpdate();
-                                handleRowClick(users);
-                              }}
-                              className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                            >
-                              <FaEdit />
-                            </a>
-                            <a
-                              href="#"
-                              onClick={() => handleDelete(users.idUsers)}
-                              className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                            >
-                              <FaTrashAlt />
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div className="overflow-x-auto max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full rounded-lg shadow ">
+            <table className="w-full bg-white text-sm md:text-base">
+              <thead className=" text-center">
+                <tr className="bg-red-E01414 text-white">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    NO
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Name
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Username
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Password
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Email
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Role
+                  </th>
+                  <th className="py-2 px-2 border-b tracking-wide whitespace-nowrap">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {currentUsers.map((users, index) => (
+                  <tr
+                    key={users.idUsers}
+                    className={`text-center ${
+                      index % 2 === 1 ? "bg-gray-100" : ""
+                    }`}
+                  >
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {users.name}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {users.username}
+                    </td>
+                    <td className=" py-2 px-2 border-b whitespace-nowrap">
+                      {users.password}
+                    </td>
+                    <td className=" py-2 px-2 border-b whitespace-nowrap">
+                      {users.email}
+                    </td>
+                    <td className=" py-2 px-2 border-b whitespace-nowrap">
+                      {users.role}
+                    </td>
+                    <td className=" py-2 px-2 border-b whitespace-nowrap">
+                      <div className="flex justify-center">
+                        <a
+                          href="#"
+                          onClick={() => {
+                            toggleUpdate();
+                            handleRowClick(users);
+                          }}
+                          className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                        >
+                          <FaEdit />
+                        </a>
+                        <a
+                          href="#"
+                          onClick={() => handleDelete(users.idUsers)}
+                          className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                        >
+                          <FaTrashAlt />
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center mt-4 flex-wrap">
+          <div className="flex justify-left mt-4 flex-wrap">
             {/* Tombol Previous */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &lt;
             </button>
@@ -380,7 +376,7 @@ const Users = () => {
                   <button
                     key={pageNumber}
                     onClick={() => handlePageChange(pageNumber)}
-                    className={`px-3 py-1 mx-1 ${
+                    className={`mt-0 px-3 py-1 mx-1 ${
                       currentPage === pageNumber
                         ? "bg-red-E01414 text-white"
                         : "bg-gray-200"
@@ -396,7 +392,7 @@ const Users = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &gt;
             </button>
