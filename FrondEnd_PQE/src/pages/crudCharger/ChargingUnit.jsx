@@ -222,7 +222,7 @@ const ChargingUnit = () => {
 
             {/* Bagian teks */}
             <div className="flex flex-col justify-center">
-              <h3 className="font-poppins text-lg md:text-2xl text-red-600 text-center font-semibold mb-1">
+              <h3 className="font-poppins text-sm md:text-lg text-red-600 text-center font-semibold mb-1">
                 Charging Unit
               </h3>
               <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl md:text-7xl text-red-600 text-center">
