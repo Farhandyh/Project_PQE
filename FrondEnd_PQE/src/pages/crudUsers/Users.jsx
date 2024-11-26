@@ -117,12 +117,12 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUsers": idUsers,
-          "name": name,
-          "username": username,
-          "password": password,
-          "email": email,
-          "role": role,
+          idUsers: idUsers,
+          name: name,
+          username: username,
+          password: password,
+          email: email,
+          role: role,
         }),
       });
 
@@ -132,7 +132,7 @@ const Users = () => {
           icon: "success",
           title: "Your work has been saved",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         setIdUsers("");
         setName("");
@@ -161,12 +161,12 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUsers": idUsers,
-          "name": name,
-          "username": username,
-          "password": password,
-          "email": email,
-          "role": role,
+          idUsers: idUsers,
+          name: name,
+          username: username,
+          password: password,
+          email: email,
+          role: role,
         }),
       });
 
@@ -176,7 +176,7 @@ const Users = () => {
           icon: "success",
           title: "Your work has been saved",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         setIdUsers("");
         setName("");
@@ -271,7 +271,7 @@ const Users = () => {
             <img
               src="../src/assets/menuCRUD/filter.png"
               alt="Icon"
-              className="w-auto md:w-32 h-auto mt-4 md:-mt-5 md:h-36 md:ml-5"
+              className="w-auto md:w-32 h-auto mt-4 md:-mt-5 md:ml-5"
             />
           </div>
 
@@ -422,7 +422,6 @@ const Users = () => {
               <Header />
               <div className="mx-auto px-2 bg-white rounded-md w-full max-w-[42rem] h-auto mt-5 mb-6 border border-gray-700">
                 <form onSubmit={handleSubmit} className="w-full mb-2">
-                  {/* Grid container */}
                   {/* STATS */}
                   <motion.div
                     className="grid grid-cols-1 gap-5 sm:grid-cols-2 px-6 font-poppins font-extralight mt-5"
@@ -568,6 +567,7 @@ const Users = () => {
                         className="w-full mb-4"
                       />
                     </div>
+
                     <div className="flex flex-col">
                       <label
                         className="block font-medium text-black mb-1"
@@ -582,6 +582,7 @@ const Users = () => {
                         className="w-full mb-4"
                       />
                     </div>
+
                     <div className="flex flex-col">
                       <label
                         className="block font-medium text-black mb-1"
