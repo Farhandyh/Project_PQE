@@ -482,15 +482,15 @@ const ChargingUnit = () => {
       {/* Modal for Update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-full sm:w-[50rem] md:w-[55rem] lg:w-[60rem] bg-opacity-0 h-auto sm:h-[35rem] p-6 relative">
+          <div className="bg-white rounded-2xl w-[90%] sm:w-[50rem] h-[35rem] p-6 relative">
             {/* Form for Update Charger */}
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[90%] sm:w-[42rem] h-auto sm:h-5/6 mt-5 mb-6">
+              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[90%] sm:w-[42rem] h-5/6 mt-5 mb-6">
                 <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
                   {/* Id Unit and Unit Name Section */}
-                  <div className="flex flex-wrap sm:space-x-6 space-y-4 sm:space-y-0">
-                    <div className="flex flex-col w-full sm:w-1/2">
+                  <div className="flex space-x-6">
+                    <div className="flex flex-col w-1/2">
                       <label
                         className="block text-black mb-1"
                         htmlFor="id-unit"
@@ -504,7 +504,7 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-full sm:w-1/2">
+                    <div className="flex flex-col w-1/2">
                       <label
                         className="block text-black mb-1"
                         htmlFor="unit-name"
@@ -521,8 +521,8 @@ const ChargingUnit = () => {
                   </div>
 
                   {/* Seri Unit and Charging Time Section */}
-                  <div className="flex flex-wrap sm:space-x-6 space-y-4 sm:space-y-0">
-                    <div className="flex flex-col w-full sm:w-1/2">
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
                       <label
                         className="block text-black mb-1"
                         htmlFor="seri-unit"
@@ -536,7 +536,7 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-full sm:w-1/2">
+                    <div className="flex flex-col w-1/2">
                       <label
                         className="block text-black mb-1"
                         htmlFor="charging-time"
@@ -553,8 +553,8 @@ const ChargingUnit = () => {
                   </div>
 
                   {/* Connector and Unit Location Section */}
-                  <div className="flex flex-wrap sm:space-x-6 space-y-4 sm:space-y-0">
-                    <div className="flex flex-col w-full sm:w-1/2">
+                  <div className="flex space-x-4">
+                    <div className="flex flex-col w-1/2">
                       <label
                         className="block text-black mb-1"
                         htmlFor="connector-type"
@@ -568,7 +568,7 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-full sm:w-1/2">
+                    <div className="flex flex-col w-1/2">
                       <label
                         className="block text-black mb-1"
                         htmlFor="unit-location"
@@ -585,25 +585,23 @@ const ChargingUnit = () => {
                   </div>
 
                   {/* Unit Status Section */}
-                  <div className="flex flex-col sm:space-x-6 space-y-4 sm:space-y-0">
-                    <div className="flex flex-col w-full sm:w-1/2">
-                      <label
-                        className="block text-black mb-1"
-                        htmlFor="unit-status"
-                      >
-                        Unit Status
-                      </label>
-                      <TextField
-                        id="unit-status"
-                        value={unitStatus}
-                        onChange={(e) => setUnitStatus(e.target.value)}
-                        className="w-full mb-4"
-                      />
-                    </div>
+                  <div className="flex flex-col w-1/2">
+                    <label
+                      className="block text-black mb-1"
+                      htmlFor="unit-status"
+                    >
+                      Unit Status
+                    </label>
+                    <TextField
+                      id="unit-status"
+                      value={unitStatus}
+                      onChange={(e) => setUnitStatus(e.target.value)}
+                      className="w-full mb-4"
+                    />
                   </div>
 
                   {/* Buttons Section */}
-                  <div className="flex justify-center mt-10 space-x-6 sm:space-x-10">
+                  <div className="flex justify-center mt-10 space-x-10">
                     <button
                       type="submit"
                       className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
