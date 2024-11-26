@@ -117,12 +117,12 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUsers": idUsers,
-          "name": name,
-          "username": username,
-          "password": password,
-          "email": email,
-          "role": role,
+          idUsers: idUsers,
+          name: name,
+          username: username,
+          password: password,
+          email: email,
+          role: role,
         }),
       });
 
@@ -132,7 +132,7 @@ const Users = () => {
           icon: "success",
           title: "Your work has been saved",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         setIdUsers("");
         setName("");
@@ -161,12 +161,12 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idUsers": idUsers,
-          "name": name,
-          "username": username,
-          "password": password,
-          "email": email,
-          "role": role,
+          idUsers: idUsers,
+          name: name,
+          username: username,
+          password: password,
+          email: email,
+          role: role,
         }),
       });
 
@@ -176,7 +176,7 @@ const Users = () => {
           icon: "success",
           title: "Your work has been saved",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         setIdUsers("");
         setName("");
@@ -568,6 +568,7 @@ const Users = () => {
                         className="w-full mb-4"
                       />
                     </div>
+
                     <div className="flex flex-col">
                       <label
                         className="block font-medium text-black mb-1"
@@ -582,6 +583,7 @@ const Users = () => {
                         className="w-full mb-4"
                       />
                     </div>
+
                     <div className="flex flex-col">
                       <label
                         className="block font-medium text-black mb-1"
