@@ -93,7 +93,7 @@ const ChargingUnit = () => {
 
   const handleDelete = async (idUnitCharge) => {
     try {
-      await deleteUnits(idUnitCharge);
+      await deleteUnit(idUnitCharge);
       setChargingUnit((prevUnits) =>
         prevUnits.filter(
           (ChargingUnit) => ChargingUnit.idUnitCharge !== idUnitCharge
