@@ -13,6 +13,7 @@ import {
 import Navbar from "../../components/monitor/Navbar";
 import "../../index.css";
 import Image3D from "../../components/dashboard/image/Image3D";
+import { useState, useEffect } from "react";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -27,6 +28,8 @@ ChartJS.register(
 );
 
 const Monitor = () => {
+  const [storage, setStorage] = useState([]);
+
   const lineData = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
@@ -101,6 +104,23 @@ const Monitor = () => {
     },
   };
 
+  const fetchStorage = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/monitor");
+      if (!response.ok) {
+        throw new Error("Failed to fetch storage data");
+      }
+      const data = await response.json();
+      setStorage(data); // Pastikan 'data' adalah array
+    } catch (error) {
+      console.error(error);
+    }
+  };  
+
+  useEffect(() => {
+    fetchStorage();
+  }, []);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col md:flex-row justify-center gap-2 md:gap-0 md:ml-7">
@@ -170,10 +190,10 @@ const Monitor = () => {
                         No
                       </th>
                       <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white">
-                        Time In
+                        Name
                       </th>
                       <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white">
-                        Time Out
+                        Date
                       </th>
                       <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white">
                         Status
@@ -181,48 +201,22 @@ const Monitor = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b border-gray-200 bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        1
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        10:00
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        6:00
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Present
-                      </td>
-                    </tr>
-                    <tr className="border-b border-gray-200 bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        2
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11:00
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        7:00
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Late
-                      </td>
-                    </tr>
-                    <tr className="bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        3
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11:00
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        7:00
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Late
-                      </td>
-                    </tr>
+                    {storage.map((item, index) => (
+                      <tr key={index}>
+                        <td className="py-2 px-2 border-b whitespace-nowrap">
+                          {index + 1}
+                        </td>
+                        <td className="py-2 px-2 border-b whitespace-nowrap">
+                          {item.batteryMerk}
+                        </td>
+                        <td className="py-2 px-2 border-b whitespace-nowrap">
+                          {item.date}
+                        </td>
+                        <td className="py-1 px-2 border-b">
+                          {item.batteryStatus === 1 ? "In" : "Out"}
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
