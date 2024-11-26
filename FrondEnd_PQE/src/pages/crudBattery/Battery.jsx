@@ -325,10 +325,9 @@ const Battery = () => {
                 {currentBatteries.map((battery, index) => (
                   <tr
                     key={battery.idBattery}
-                    className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                    style={{
-                      backgroundColor: index % 2 === 1 ? "#EDD7D7" : "",
-                    }}
+                    className={`text-center ${
+                      index % 2 === 1 ? "bg-gray-100" : ""
+                    }`}
                   >
                     <td className="py-2 px-2 border-b whitespace-nowrap">
                       {(currentPage - 1) * itemsPerPage + index + 1}
