@@ -29,7 +29,6 @@ ChartJS.register(
 
 const Monitor = () => {
   const [storage, setStorage] = useState([]);
-
   const lineData = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
@@ -111,7 +110,7 @@ const Monitor = () => {
         throw new Error("Failed to fetch storage data");
       }
       const data = await response.json();
-      setStorage(data); // Pastikan 'data' adalah array
+      setStorage(data); 
     } catch (error) {
       console.error(error);
     }
@@ -173,7 +172,7 @@ const Monitor = () => {
                     fontSize: "clamp(6rem, 6vw, 6rem)", // Minimum 2rem, responsif, maksimum 5rem
                   }}
                 >
-                  036
+                  36
                 </h1>
               </div>
             </div>
