@@ -12,9 +12,12 @@ import MonitorTesting from "./pages/monitor/MonitorTesting";
 import MonitorStorage from "./pages/monitor/MonitorStorage";
 import LayoutMonitor from "./components/monitor/LayoutMonitor";
 import Rack from "./pages/crudStorage/Rack";
-import Storage from "./pages/transactionStorage/Storage";
 import OptionStorage from "./pages/transactionStorage/optionStorage";
 import CheckInBattery from "./pages/transactionStorage/CheckInBattery";
+import CheckOutBattery from "./pages/transactionStorage/CheckOutBattery";
+import Storage from "./pages/transactionStorage/Storage";
+import TestingBattery from "./pages/transactionTesting/TestingBattery";
+import ChargingBattery from "./pages/transactionCharging/ChargingBattery";
 
 function App() {
   return (
@@ -48,8 +51,18 @@ function App() {
           <Route path="chargingunit" element={<ChargingUnit />} />
           <Route path="testingmachine" element={<TestingMachine />} />
           <Route path="rack" element={<Rack />} />
+
+          {/* Halaman Transaksi Storage */}
           <Route path="storage" element={<OptionStorage />} />
           <Route path="storage-checkIn" element={<CheckInBattery />} />
+          <Route path="storage-checkOut" element={<CheckOutBattery />} />
+          <Route path="storage-history" element={<Storage />} />
+
+          {/* Halaman Transaksi Testing */}
+          <Route path="testing" element={<TestingBattery />} />
+          
+          {/* Halaman Transaksi Charging */}
+          <Route path="charging" element={<ChargingBattery />} />
         </Route>
 
         {/* Redirect ke halaman Monitor jika path tidak dikenali */}

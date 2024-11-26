@@ -116,17 +116,17 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idUsers: idUsers,
-          name: name,
-          username: username,
-          password: password,
-          email: email,
-          role: role,
+          "idUsers": idUsers,
+          "name": name,
+          "username": username,
+          "password": password,
+          "email": email,
+          "role": role,
         }),
       });
 
       if (response.ok) {
-        alert("Data berhasil disimpan!");
+        alert("Data Berhasil Disimpan!");
         setIdUsers("");
         setName("");
         setUsername("");
@@ -154,17 +154,17 @@ const Users = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idUsers: idUsers,
-          name: name,
-          username: username,
-          password: password,
-          email: email,
-          role: role,
+          "idUsers": idUsers,
+          "name": name,
+          "username": username,
+          "password": password,
+          "email": email,
+          "role": role,
         }),
       });
 
       if (response.ok) {
-        alert("Data berhasil disimpan!");
+        alert("Data Berhasil Disimpan!");
         setIdUsers("");
         setName("");
         setUsername("");

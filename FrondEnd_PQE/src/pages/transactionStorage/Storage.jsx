@@ -4,7 +4,7 @@ import TextField from '../../components/materialCRUD/TextField';
 import Header from '../../components/materialCRUD/Header';
 
 const getStorage = async () => {
-  const response = await fetch('http://localhost:8000/api/storage');
+  const response = await fetch('http://localhost:8000/api/storage-history');
   if (!response.ok) {
     throw new Error('Failed to fetch racks');
   }
@@ -33,7 +33,7 @@ const Storage = () => {
       const data = await getStorage();
       setStorage(data);
     } catch (error) {
-      setError("Error fetching racks data.");
+      setError("Error fetching storage history.");
       console.error(error);
     } finally {
       setLoading(false);
@@ -164,71 +164,25 @@ const Storage = () => {
 
   return (
     <>
-      <div className="mt-4 mb-4 ml-36 flex">
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Gambar di sebelah kiri */}
-          <img
-            src="../src/assets/menuCRUD/storage.png"
-            alt="Storage Icon"
-            className="w-36 h-auto"
-          />
-
-          {/* Bagian teks */}
-          <div className="flex flex-col justify-center">
-            <h3 className="font-poppins text-2xl font-semibold text-red-600 text-center mb-1">
-              Storage
-            </h3>
-            <h1 className="font-poppins text-shadow-custom font-extrabold text-7xl text-red-600 text-center">
-              036
-            </h1>
-          </div>
-        </div>
-
-        <div className="bg-white mr-8 rounded-2xl w-80 h-32 flex items-center p-2 shadow-lg">
-          {/* Bagian Kiri - Dropdown untuk Status dan Role */}
-          <div className="flex flex-col space-y-3">
-            {/* Dropdown Status */}
-            <div className="flex items-center space-x-7">
-              <label className="text-gray-600 text-sm font-poppins">
-                Status
-              </label>
-              <select className="bg-red-500 text-white px-2 py-1 w-28 text-center rounded-lg focus:outline-none">
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="suspended">Suspended</option>
-              </select>
-            </div>
-
-            {/* Dropdown Role */}
-            <div className="flex items-center space-x-3">
-              <label className="text-gray-600 text-sm font-poppins">
-                Capacity
-              </label>
-              <select className="bg-green-500 text-white px-2 w-28 text-center py-1 rounded-lg focus:outline-none">
-                <option value="admin">Admin</option>
-                <option value="user">User</option>
-                <option value="guest">Guest</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Gambar di sebelah kanan */}
-          <img
-            src="../src/assets/menuCRUD/filter.png"
-            alt="Icon"
-            className="w-32 h-auto ml-4"
-          />
-        </div>
-        <div className="flex items-center justify-center bg-white rounded-2xl w-80 h-32">
-          <button
-            onClick={toggleModal}
-            className="text-white bg-red-500 px-4 py-2 rounded-full"
-          >
-            Store Battery
-          </button>
-        </div>
-      </div>
       <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
+        <div className="flex justify-between items-center">
+          <h1 className="text-red-E01414 text-xl mb-5 font-poppins font-extrabold">History Transaction</h1>   
+            <div className="flex space-x-2">
+              <input
+                type="text"
+                placeholder="Searching...."
+                className="bg-white border-red-E01414 border text-center w-96 h-7 rounded-lg"
+              />
+              <div className="w-28 h-7 bg-red-E01414 justify-center rounded-lg">
+                <select className="bg-red-E01414 text-white text-xl font-semibold rounded-lg w-full h-full">
+                  <option value="" disabled selected className="text-center">Filter</option>
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </select>
+              </div>
+          </div>
+        </div>
         <table className="w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-red-E01414 text-white">
@@ -256,45 +210,36 @@ const Storage = () => {
               <th className="py-2 px-2 border-b border-r border-gray-300">
                 Date
               </th>
-              <th className="py-2 px-2 border-b">Action</th>
             </tr>
           </thead>
-          <tbody>
-            {currentStorage.map((storage, index) => (
-              <tr
-                key={storage.idStorage}
-                className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-              >
-                <td className="py-2 px-2 border-b">
-                  {(currentPage - 1) * itemsPerPage + index + 1}
-                </td>
-                <td className="py-2 px-2 border-b">{storage.idUsers}</td>
-                <td className="py-2 px-2 border-b">{storage.idBattery}</td>
-                <td className="py-2 px-2 border-b">{storage.idRack}</td>
-                <td className="py-2 px-2 border-b">{storage.timeIn}</td>
-                <td className="py-2 px-2 border-b">{storage.timeOut}</td>
-                <td className="py-2 px-2 border-b">
-                  {storage.batteryStatus === 1 ? "Active" : "Non-Active"}
-                </td>
-                <td className="py-2 px-2 border-b">{storage.date}</td>
-                <td
-                  className="py-2 px-2 border-b"
-                  style={{ display: "flex", justifyContent: "center" }}
+            <tbody>
+              {currentStorage
+              .sort((a, b) => {
+                // Mengonversi timeIn menjadi objek Date untuk perbandingan waktu
+                const timeA = new Date(`1970-01-01T${a.timeIn}`);
+                const timeB = new Date(`1970-01-01T${b.timeIn}`);
+                return timeB - timeA; // Urutkan descending berdasarkan timeIn
+              })
+              .map((storage, index) => (
+                <tr
+                  key={storage.idStorage}
+                  className={`text-center ${index % 2 === 1 ? "" : ""}`}
+                  style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
                 >
-                  <a
-                    href="#"
-                    onClick={() => {
-                      toggleUpdate();
-                      handleRowClick(storage);
-                    }}
-                    className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                  >
-                    <FaEdit />
-                  </a>
-                </td>
-              </tr>
-            ))}
+                  <td className="py-2 px-2 border-b">
+                    {(currentPage - 1) * itemsPerPage + index + 1}
+                  </td>
+                  <td className="py-2 px-2 border-b">{storage.idUsers}</td>
+                  <td className="py-2 px-2 border-b">{storage.idBattery}</td>
+                  <td className="py-2 px-2 border-b">{storage.idRack}</td>
+                  <td className="py-2 px-2 border-b">{storage.timeIn}</td>
+                  <td className="py-2 px-2 border-b">{storage.timeOut}</td>
+                  <td className="py-2 px-2 border-b">
+                    {storage.batteryStatus === 1 ? "Active" : "Non-Active"}
+                  </td>
+                  <td className="py-2 px-2 border-b">{storage.date}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
 
