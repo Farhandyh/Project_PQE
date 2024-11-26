@@ -421,16 +421,22 @@ const ChargingUnit = () => {
       {/* Modal Pop-up Create Charger */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[90%] sm:w-[50rem] h-[35rem] p-6 relative">
+          <div className="rounded-2xl w-full max-w-[50rem] h-auto p-6 relative">
             {/* Form for Add New Charger */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+            <div className="flex flex-col items-center justify-center bg-gray-F5F5F5 rounded-md w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[90%] sm:w-[42rem] h-5/6 mt-5 mb-6">
-                <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
-                  <div className="flex flex-col items-center">
-                    <div className="flex flex-col w-full sm:w-1/2">
+              <div className="mx-auto px-2 bg-white rounded-md w-full max-w-[42rem] h-auto mt-5 mb-6 border border-gray-7006">
+                <form onSubmit={handleSubmit} className="w-full mb-2">
+                  {/* STATS */}
+                  <motion.div
+                    className="grid grid-cols-1 gap-5 sm:grid-cols-2 px-6 font-poppins font-extralight mt-5"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                  >
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="id-unit"
                       >
                         Id Unit
@@ -442,9 +448,9 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-full sm:w-1/2">
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="unit-name"
                       >
                         Unit Name
@@ -456,18 +462,18 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
+                  </motion.div>
                   {/* More form fields here */}
-                  <div className="flex justify-center mt-10 space-x-10">
+                  <div className="flex justify-center mt-10 space-x-2 mb-3">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                      className="bg-blue-600 text-white px-0 w-full h-8 rounded-md hover:bg-blue-500 [box-shadow:0_6px_0_#1d4ed8] active:translate-y-[3px] active:[box-shadow:0_3px_0_#1d4ed8]"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleModal}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                      className="bg-red-600 text-white px-0 w-full h-8 rounded-md hover:bg-red-500 [box-shadow:0_6px_0_#b91c1c] active:translate-y-[3px] active:[box-shadow:0_3px_0_#b91c1c]"
                     >
                       Cancel
                     </button>
@@ -482,17 +488,22 @@ const ChargingUnit = () => {
       {/* Modal for Update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[90%] sm:w-[50rem] h-[35rem] p-6 relative">
+          <div className="rounded-2xl w-full max-w-[50rem] h-auto p-6 relative">
             {/* Form for Update Charger */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+            <div className="flex flex-col items-center justify-center bg-gray-F5F5F5 rounded-md w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[90%] sm:w-[42rem] h-5/6 mt-5 mb-6">
+              <div className="mx-auto px-2 bg-white rounded-md w-full max-w-[42rem] h-auto mt-5 mb-6 border border-gray-700">
                 <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
                   {/* Id Unit and Unit Name Section */}
-                  <div className="flex space-x-6">
-                    <div className="flex flex-col w-1/2">
+                  <motion.div
+                    className="grid grid-cols-1 gap-5 sm:grid-cols-2 px-6 font-poppins font-extralight mt-5"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                  >
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="id-unit"
                       >
                         Id Unit
@@ -504,9 +515,9 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="unit-name"
                       >
                         Unit Name
@@ -518,13 +529,11 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  {/* Seri Unit and Charging Time Section */}
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
+                    {/* Seri Unit and Charging Time Section */}
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="seri-unit"
                       >
                         Seri Unit
@@ -536,9 +545,9 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="charging-time"
                       >
                         Charging Time
@@ -550,13 +559,11 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  {/* Connector and Unit Location Section */}
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
+                    {/* Connector and Unit Location Section */}
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="connector-type"
                       >
                         Connector
@@ -568,9 +575,9 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col">
                       <label
-                        className="block text-black mb-1"
+                        className="block font-medium text-black mb-1"
                         htmlFor="unit-location"
                       >
                         Unit Location
@@ -582,35 +589,34 @@ const ChargingUnit = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  {/* Unit Status Section */}
-                  <div className="flex flex-col w-1/2">
-                    <label
-                      className="block text-black mb-1"
-                      htmlFor="unit-status"
-                    >
-                      Unit Status
-                    </label>
-                    <TextField
-                      id="unit-status"
-                      value={unitStatus}
-                      onChange={(e) => setUnitStatus(e.target.value)}
-                      className="w-full mb-4"
-                    />
-                  </div>
-
-                  {/* Buttons Section */}
-                  <div className="flex justify-center mt-10 space-x-10">
+                    {/* Unit Status Section */}
+                    <div className="flex flex-col">
+                      <label
+                        className="block font-medium text-black mb-1"
+                        htmlFor="unit-status"
+                      >
+                        Unit Status
+                      </label>
+                      <TextField
+                        id="unit-status"
+                        value={unitStatus}
+                        onChange={(e) => setUnitStatus(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                  </motion.div>
+                  {/* Buttons */}
+                  <div className="flex justify-center mt-10 space-x-2 mb-3">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                      className="bg-blue-600 text-white px-0 w-full h-8 rounded-md hover:bg-blue-500 [box-shadow:0_6px_0_#1d4ed8] active:translate-y-[3px] active:[box-shadow:0_3px_0_#1d4ed8]"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleUpdate}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                      className="bg-red-600 text-white px-0 w-full h-8 rounded-md hover:bg-red-500 [box-shadow:0_6px_0_#b91c1c] active:translate-y-[3px] active:[box-shadow:0_3px_0_#b91c1c]"
                     >
                       Cancel
                     </button>
