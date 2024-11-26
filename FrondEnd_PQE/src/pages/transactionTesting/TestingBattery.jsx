@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import TextField from '../../components/materialCRUD/TextField';
-import Header from '../../components/materialCRUD/Header';
+import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
+import TextField from "../../components/materialCRUD/TextField";
+import Header from "../../components/materialCRUD/Header";
+import DailyBatteryTrend from "../../components/dashboardTestingCharging/DailyBatteryTrend";
+import TestingGraphLine from "../../components/dashboardTestingCharging/TestingGraphLine";
+
+//Data Dummy
+import DailyBatteryTrendData from "../../dataDummy/dailyBatteryTrendData.json";
+import TestingGrapLine from "../../dataDummy/testingGrapLineData.json";
 
 const getDataTesting = async () => {
-  const response = await fetch('http://localhost:8000/api/testing');
+  const response = await fetch("http://localhost:8000/api/testing");
   if (!response.ok) {
-    throw new Error('Failed to fetch data testing');
+    throw new Error("Failed to fetch data testing");
   }
   const data = await response.json();
   return data;
@@ -19,14 +26,14 @@ const TestingBattery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idTesting,setIdTesting] = useState("");
-  const [idUsers,setIdUsers] = useState("");
-  const [idBattery,setIdBattery] = useState("");
-  const [idMachine,setIdMachine] = useState("");
-  const [dateTesting,setDateTesting] = useState("");
-  const [kWhUsed,setkWhUsed] = useState("");
-  const [timeStart,setTimeStart] = useState("");
-  const [timeFinish,setTimeFinish] = useState("");
+  const [idTesting, setIdTesting] = useState("");
+  const [idUsers, setIdUsers] = useState("");
+  const [idBattery, setIdBattery] = useState("");
+  const [idMachine, setIdMachine] = useState("");
+  const [dateTesting, setDateTesting] = useState("");
+  const [kWhUsed, setkWhUsed] = useState("");
+  const [timeStart, setTimeStart] = useState("");
+  const [timeFinish, setTimeFinish] = useState("");
 
   const fetchTesting = async () => {
     try {
@@ -43,12 +50,12 @@ const TestingBattery = () => {
   useEffect(() => {
     fetchTesting();
   }, []);
-  
+
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (testingData) => {
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('en-US', { hour12: false }); // Format: HH:mm:ss
-    const formattedDate = now.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
+    const formattedTime = now.toLocaleTimeString("en-US", { hour12: false }); // Format: HH:mm:ss
+    const formattedDate = now.toLocaleDateString("en-CA"); // Format: YYYY-MM-DD
 
     setIdTesting(testingData.idTesting);
     setIdUsers(testingData.idUsers);
@@ -73,17 +80,17 @@ const TestingBattery = () => {
     setCurrentPage(pageNumber);
   };
 
-   // Toggle modal open/close
-   const toggleModal = () =>{
+  // Toggle modal open/close
+  const toggleModal = () => {
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('en-US', { hour12: false }); // Format: HH:mm:ss
-    const formattedDate = now.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
-    
+    const formattedTime = now.toLocaleTimeString("en-US", { hour12: false }); // Format: HH:mm:ss
+    const formattedDate = now.toLocaleDateString("en-CA"); // Format: YYYY-MM-DD
+
     setDateTesting(formattedDate);
     setTimeStart(formattedTime);
     setIsModalOpen(!isModalOpen);
-   }
-   const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
+  };
+  const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,12 +102,12 @@ const TestingBattery = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idTesting" : idTesting,
-          "idUsers" : idUsers,
-          "idBattery" : idBattery,
-          "idMachine" : idMachine,
-          "dateTesting" : dateTesting,
-          "timeStart" : timeStart,
+          idTesting: idTesting,
+          idUsers: idUsers,
+          idBattery: idBattery,
+          idMachine: idMachine,
+          dateTesting: dateTesting,
+          timeStart: timeStart,
         }),
       });
 
@@ -114,8 +121,7 @@ const TestingBattery = () => {
         setTimeStart("");
         fetchTesting();
         toggleModal();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -134,11 +140,11 @@ const TestingBattery = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idTesting" : idTesting,
-          "idUsers" : idUsers,
-          "idBattery" : idBattery,
-          "kWhUsed" : kWhUsed,
-          "timeFinish" : timeFinish,
+          idTesting: idTesting,
+          idUsers: idUsers,
+          idBattery: idBattery,
+          kWhUsed: kWhUsed,
+          timeFinish: timeFinish,
         }),
       });
 
@@ -151,8 +157,7 @@ const TestingBattery = () => {
         setTimeFinish("");
         fetchTesting();
         toggleUpdate();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -163,20 +168,28 @@ const TestingBattery = () => {
 
   return (
     <>
-      <div className="mt-2 mb-4 ml-32 max-w-5xl flex">
-        <div className="bg-white mr-8 rounded-2xl w-1/2 h-48 flex items-center p-2 shadow-lg">
+      <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
+        {/* STATS */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <DailyBatteryTrend sourceData={DailyBatteryTrendData} />
+          <TestingGraphLine sourceData={TestingGrapLine} />
+
+          <motion.div
+            className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          ></motion.div>
         </div>
-        <div className="bg-white rounded-2xl w-1/2 h-48 flex items-center p-2 shadow-lg">
-        </div>
-      </div>
-      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pb-5 pr-10 bg-white">
-        <div className="flex justify-between items-center">
+
+        <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pb-5 pr-10 bg-white">
+          <div className="flex justify-between items-center">
             <button
-                onClick={toggleModal}
-                className="text-white bg-red-500 px-4 py-2 rounded-full"
+              onClick={toggleModal}
+              className="text-white bg-red-500 px-4 py-2 rounded-full"
             >
-            Testing Battery
-           </button>   
+              Testing Battery
+            </button>
             <div className="flex space-x-2">
               <input
                 type="text"
@@ -185,130 +198,136 @@ const TestingBattery = () => {
               />
               <div className="w-28 h-7 bg-red-E01414 justify-center rounded-lg mt-5">
                 <select className="bg-red-E01414 text-white text-xl font-semibold rounded-lg w-full h-full">
-                  <option value="" disabled selected className="text-center">Filter</option>
+                  <option value="" disabled selected className="text-center">
+                    Filter
+                  </option>
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
                 </select>
               </div>
+            </div>
+          </div>
+          <table className="w-full bg-white border mt-5 border-gray-200">
+            <thead>
+              <tr className="bg-red-E01414 text-white">
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  NO
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  Users ID
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  Battery ID
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  Machine ID
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  Testing Date
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  kWh Used
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  Time Start
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  Time Finish
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300">
+                  Duration
+                </th>
+                <th className="py-2 px-2 border-b">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentTesting.map((testing, index) => (
+                <tr
+                  key={testing.idTesting}
+                  className={`text-center ${index % 2 === 1 ? "" : ""}`}
+                  style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
+                >
+                  <td className="py-2 px-2 border-b">
+                    {(currentPage - 1) * itemsPerPage + index + 1}
+                  </td>
+                  <td className="py-2 px-2 border-b">{testing.idUsers}</td>
+                  <td className="py-2 px-2 border-b">{testing.idBattery}</td>
+                  <td className="py-2 px-2 border-b">{testing.idMachine}</td>
+                  <td className="py-2 px-2 border-b">{testing.dateTesting}</td>
+                  <td className="py-2 px-2 border-b">{testing.kWhUsed}</td>
+                  <td className="py-2 px-2 border-b">{testing.timeStart}</td>
+                  <td className="py-2 px-2 border-b">{testing.timeFinish}</td>
+                  <td className="py-2 px-2 border-b">
+                    {testing.testingDuration}
+                  </td>
+                  <td
+                    className="py-2 px-2 border-b"
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <a
+                      href="#"
+                      onClick={() => {
+                        toggleUpdate();
+                        handleRowClick(testing);
+                      }}
+                      className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                    >
+                      <FaEdit />
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="flex justify-left mt-2">
+            {/* Tombol Previous */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+            >
+              &lt;
+            </button>
+
+            {/* Tombol halaman dinamis */}
+            {Array.from({ length: 3 }, (_, index) => {
+              // Hitung halaman mulai berdasarkan halaman saat ini
+              let pageNumber = currentPage + index;
+
+              // Pastikan halaman tidak di luar batas 1 dan totalPages
+              if (pageNumber == 1) pageNumber = 1;
+
+              return (
+                pageNumber <= totalPages && (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={`px-3 py-1 mx-1 ${
+                      currentPage === pageNumber
+                        ? "bg-red-E01414 text-white"
+                        : "bg-gray-200"
+                    } rounded-md`}
+                  >
+                    {pageNumber}
+                  </button>
+                )
+              );
+            })}
+
+            {/* Tombol Next */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+            >
+              &gt;
+            </button>
           </div>
         </div>
-        <table className="w-full bg-white border mt-5 border-gray-200">
-          <thead>
-            <tr className="bg-red-E01414 text-white">
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                NO
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Users ID
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Battery ID
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Machine ID
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Testing Date
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                kWh Used
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Time Start
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Time Finish
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Duration
-              </th>
-              <th className="py-2 px-2 border-b">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentTesting.map((testing, index) => (
-              <tr
-                key={testing.idTesting}
-                className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-              >
-                <td className="py-2 px-2 border-b">
-                  {(currentPage - 1) * itemsPerPage + index + 1}
-                </td>
-                <td className="py-2 px-2 border-b">{testing.idUsers}</td>
-                <td className="py-2 px-2 border-b">{testing.idBattery}</td>
-                <td className="py-2 px-2 border-b">{testing.idMachine}</td>
-                <td className="py-2 px-2 border-b">{testing.dateTesting}</td>
-                <td className="py-2 px-2 border-b">{testing.kWhUsed}</td>
-                <td className="py-2 px-2 border-b">{testing.timeStart}</td>
-                <td className="py-2 px-2 border-b">{testing.timeFinish}</td>
-                <td className="py-2 px-2 border-b">{testing.testingDuration}</td>
-                <td
-                  className="py-2 px-2 border-b"
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <a
-                    href="#"
-                    onClick={() => {
-                      toggleUpdate();
-                      handleRowClick(testing);
-                    }}
-                    className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                  >
-                    <FaEdit />
-                  </a>                 
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        <div className="flex justify-left mt-2">
-          {/* Tombol Previous */}
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &lt;
-          </button>
-
-          {/* Tombol halaman dinamis */}
-          {Array.from({ length: 3 }, (_, index) => {
-            // Hitung halaman mulai berdasarkan halaman saat ini
-            let pageNumber = currentPage + index;
-
-            // Pastikan halaman tidak di luar batas 1 dan totalPages
-            if (pageNumber == 1) pageNumber = 1;
-
-            return (
-              pageNumber <= totalPages && (
-                <button
-                  key={pageNumber}
-                  onClick={() => handlePageChange(pageNumber)}
-                  className={`px-3 py-1 mx-1 ${
-                    currentPage === pageNumber
-                      ? "bg-red-E01414 text-white"
-                      : "bg-gray-200"
-                  } rounded-md`}
-                >
-                  {pageNumber}
-                </button>
-              )
-            );
-          })}
-
-          {/* Tombol Next */}
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
-          >
-            &gt;
-          </button>
-        </div>
       </div>
+
       {/* Modal Pop-up Testing Battery */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -320,7 +339,10 @@ const TestingBattery = () => {
                 <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
                   <div className="flex space-x-6">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-testing">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-testing"
+                      >
                         Testing ID
                       </label>
                       <TextField
@@ -331,7 +353,10 @@ const TestingBattery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-users">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-users"
+                      >
                         Users ID
                       </label>
                       <TextField
@@ -345,7 +370,10 @@ const TestingBattery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-battery">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-battery"
+                      >
                         Battery ID
                       </label>
                       <TextField
@@ -356,7 +384,10 @@ const TestingBattery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-machine">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-machine"
+                      >
                         Machine ID
                       </label>
                       <TextField
@@ -370,7 +401,10 @@ const TestingBattery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="date-testing">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="date-testing"
+                      >
                         Date Testing
                       </label>
                       <TextField
@@ -381,7 +415,10 @@ const TestingBattery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="time-start">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="time-start"
+                      >
                         Time Start
                       </label>
                       <TextField
@@ -421,7 +458,10 @@ const TestingBattery = () => {
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-96 h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-80 mt-5 mb-6">
-                <form onSubmit={handleUpdate} className="w-full ml-11 mr-4 mb-2">
+                <form
+                  onSubmit={handleUpdate}
+                  className="w-full ml-11 mr-4 mb-2"
+                >
                   <label
                     className="block text-black ml-2 mb-1 mt-1"
                     htmlFor="id-battery"
