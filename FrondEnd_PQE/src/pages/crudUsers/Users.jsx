@@ -6,6 +6,7 @@ import Header from "../../components/materialCRUD/Header";
 import Dropdown from "../../components/materialCRUD/Dropdown";
 import ImageButton from "../../components/materialCRUD/ImageButton";
 import "../../styleCss/CRUD/UsersCrud.css";
+import Swal from "sweetalert2";
 
 const getUsers = async () => {
   const response = await fetch("http://localhost:8000/api/users");
@@ -126,7 +127,13 @@ const Users = () => {
       });
 
       if (response.ok) {
-        alert("Data Berhasil Disimpan!");
+        Swal.fire({
+          position: "venter",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
         setIdUsers("");
         setName("");
         setUsername("");
@@ -164,7 +171,13 @@ const Users = () => {
       });
 
       if (response.ok) {
-        alert("Data Berhasil Disimpan!");
+        Swal.fire({
+          position: "venter",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
         setIdUsers("");
         setName("");
         setUsername("");
