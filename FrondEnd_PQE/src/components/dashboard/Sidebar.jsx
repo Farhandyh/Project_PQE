@@ -69,19 +69,19 @@ const Sidebar = () => {
     },
     {
       id: 9,
-      path: "/dashboard/storage",
+      path: "/dashboard/storage-checkIn",
       name: "Check-In",
       icon: TbHomeStats,
     },
     {
       id: 10,
-      path: "/dashboard/storage",
+      path: "/dashboard/storage-checkOut",
       name: "Check-Out",
       icon: TbHomeDown,
     },
     {
       id: 11,
-      path: "/dashboard/storage",
+      path: "/dashboard/storage-history",
       name: "History",
       icon: TbHomeSignal,
     },
