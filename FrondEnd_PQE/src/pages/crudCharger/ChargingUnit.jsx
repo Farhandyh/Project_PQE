@@ -93,7 +93,7 @@ const ChargingUnit = () => {
 
   const handleDelete = async (idUnitCharge) => {
     try {
-      await deleteUnits(idUnitCharge);
+      await deleteUnit(idUnitCharge);
       setChargingUnit((prevUnits) =>
         prevUnits.filter(
           (ChargingUnit) => ChargingUnit.idUnitCharge !== idUnitCharge
@@ -459,6 +459,76 @@ const ChargingUnit = () => {
                         id="unit-name"
                         value={unitName}
                         onChange={(e) => setUnitName(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label
+                        className="block font-medium text-black mb-1"
+                        htmlFor="unit-seri"
+                      >
+                        No Seri
+                      </label>
+                      <TextField
+                        id="unit-seri"
+                        value={unitName}
+                        onChange={(e) => setNoSeriUnit(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label
+                        className="block font-medium text-black mb-1"
+                        htmlFor="unit-time"
+                      >
+                        Charging Time
+                      </label>
+                      <TextField
+                        id="unit-time"
+                        value={unitName}
+                        onChange={(e) => setAverageChargingTime(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label
+                        className="block font-medium text-black mb-1"
+                        htmlFor="unit-connectortype"
+                      >
+                        Connector Type
+                      </label>
+                      <TextField
+                        id="unit-connectortype"
+                        value={unitName}
+                        onChange={(e) => setConnectorType(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label
+                        className="block font-medium text-black mb-1"
+                        htmlFor="unit-location"
+                      >
+                        Location
+                      </label>
+                      <TextField
+                        id="unit-location"
+                        value={unitName}
+                        onChange={(e) => setUnitLocation(e.target.value)}
+                        className="w-full mb-4"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <label
+                        className="block font-medium text-black mb-1"
+                        htmlFor="unit-status"
+                      >
+                        Status
+                      </label>
+                      <TextField
+                        id="unit-status"
+                        value={unitName}
+                        onChange={(e) => setUnitStatus(e.target.value)}
                         className="w-full mb-4"
                       />
                     </div>
