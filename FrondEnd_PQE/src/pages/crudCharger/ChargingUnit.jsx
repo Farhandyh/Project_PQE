@@ -427,7 +427,7 @@ const ChargingUnit = () => {
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[90%] sm:w-[42rem] h-5/6 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
-                  <div className="flex flex-wrap space-x-6">
+                  <div className="flex flex-col items-center">
                     <div className="flex flex-col w-full sm:w-1/2">
                       <label
                         className="block text-black mb-1"
