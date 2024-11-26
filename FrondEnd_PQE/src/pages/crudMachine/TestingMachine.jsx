@@ -281,34 +281,34 @@ const TestingMachine = () => {
         
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
-            <table className="w-full bg-white border border-gray-200">
-                  <thead>
+            <table className="w-full bg-white text-sm md:text-base">
+              <thead className="text-center">
                     <tr className="bg-red-E01414 text-white">
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         NO
                       </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         Machine Name
                       </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         Machine Type
                       </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         No Seri
                       </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         Arus Max
                       </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         Service Life
                       </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         Machine Status
                       </th>
-                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide">
+                      <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
                         Volt Max
                       </th>
-                      <th className="py-2 px-2 border-b tracking-wide">Action</th>
+                      <th className="py-2 px-2 border-b tracking-wide whitespace-nowrap">Action</th>
                     </tr>
                   </thead>
                   <tbody  className="divide-y divide-gray-100">
@@ -406,9 +406,9 @@ const TestingMachine = () => {
       {/* Modal Pop-up Create Machines */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-96 h-auto bg-opacity-0 p-6 sm:h-[30rem] relative">
+          <div className="rounded-2xl w-96 h-auto bg-opacity-0 p-6 sm:h-[30rem] relative">
             {/* Form untuk Add New Machine */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+            <div className="flex flex-col items-center justify-center bg-gray-F5F5F5 rounded-md w-full h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-80 h-94 mt-5 mb-6">
                 <form onSubmit={handleSubmit} className="w-full ml-11 mb-2">
