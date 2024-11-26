@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-import TextField from '../../components/materialCRUD/TextField';
-import Header from '../../components/materialCRUD/Header';
+import TextField from "../../components/materialCRUD/TextField";
+import Header from "../../components/materialCRUD/Header";
 import Dropdown from "../../components/materialCRUD/Dropdown";
 import ImageButton from "../../components/materialCRUD/ImageButton";
 
 const getRacks = async () => {
-  const response = await fetch('http://localhost:8000/api/racks');
+  const response = await fetch("http://localhost:8000/api/racks");
   if (!response.ok) {
-    throw new Error('Failed to fetch racks');
+    throw new Error("Failed to fetch racks");
   }
   const data = await response.json();
   return data;
 };
 
 const deleteRacks = async (idRack) => {
-  const response = await fetch(`http://localhost:8000/api/racks-destroy/${idRack}`, {
-    method: 'DELETE',
-  });
+  const response = await fetch(
+    `http://localhost:8000/api/racks-destroy/${idRack}`,
+    {
+      method: "DELETE",
+    }
+  );
   if (!response.ok) {
-    throw new Error('Failed to delete rack');
+    throw new Error("Failed to delete rack");
   }
   return await response.json();
 };
@@ -32,12 +35,12 @@ const Rack = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idRack,setIdRack] = useState("");
-  const [rackName,setRackName] = useState("");
-  const [rackMaterial,setRackMaterial] = useState("");
-  const [weightMaxRack,setWeightMaxRack] = useState("");
-  const [rackCapacity,setRackCapacity] = useState("");
-  const [rackStatus,setRackStatus] = useState("");
+  const [idRack, setIdRack] = useState("");
+  const [rackName, setRackName] = useState("");
+  const [rackMaterial, setRackMaterial] = useState("");
+  const [weightMaxRack, setWeightMaxRack] = useState("");
+  const [rackCapacity, setRackCapacity] = useState("");
+  const [rackStatus, setRackStatus] = useState("");
 
   // Handler untuk dropdown Capacity
   const [selectedStatus, setSelectedStatus] = useState("active"); // Default status
@@ -54,11 +57,11 @@ const Rack = () => {
       setLoading(false);
     }
   };
-  
+
   useEffect(() => {
     fetchRacks();
   }, []);
-  
+
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (rackData) => {
     setIdRack(rackData.idRack);
@@ -96,9 +99,9 @@ const Rack = () => {
     }
   };
 
-   // Toggle modal open/close
-   const toggleModal = () => setIsModalOpen(!isModalOpen);
-   const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
+  // Toggle modal open/close
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -110,12 +113,12 @@ const Rack = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idRack" : idRack,
-          "rackName" : rackName,
-          "rackMaterial" : rackMaterial,
-          "weighMaxRack" : weightMaxRack,
-          "rackCapacity" : rackCapacity,
-          "rackStatus" : rackStatus
+          idRack: idRack,
+          rackName: rackName,
+          rackMaterial: rackMaterial,
+          weighMaxRack: weightMaxRack,
+          rackCapacity: rackCapacity,
+          rackStatus: rackStatus,
         }),
       });
 
@@ -129,8 +132,7 @@ const Rack = () => {
         setRackStatus("");
         fetchRacks();
         toggleModal();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -149,12 +151,12 @@ const Rack = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "idRack" : idRack,
-          "rackName" : rackName,
-          "rackMaterial" : rackMaterial,
-          "weighMaxRack" : weightMaxRack,
-          "rackCapacity" : rackCapacity,
-          "rackStatus" : rackStatus
+          idRack: idRack,
+          rackName: rackName,
+          rackMaterial: rackMaterial,
+          weighMaxRack: weightMaxRack,
+          rackCapacity: rackCapacity,
+          rackStatus: rackStatus,
         }),
       });
 
@@ -168,8 +170,7 @@ const Rack = () => {
         setRackStatus("");
         fetchRacks();
         toggleUpdate();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -178,15 +179,15 @@ const Rack = () => {
     }
   };
 
-    // Handler untuk dropdown Status
-    const handleStatusChange = (event) => {
-      setSelectedStatus(event.target.value);
-    };
-  
-    // Handler untuk dropdown Material
-    const handleMaterialChange = (event) => {
-      setSelectedMaterial(event.target.value);
-    };
+  // Handler untuk dropdown Status
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  // Handler untuk dropdown Material
+  const handleMaterialChange = (event) => {
+    setSelectedMaterial(event.target.value);
+  };
 
   return (
     <>
@@ -204,7 +205,7 @@ const Rack = () => {
             <img
               src="../src/assets/menuCRUD/storage.png"
               alt="Storage Icon"
-              className="w-20 md:w-36 h-auto"
+              className="w-36 h-auto"
             />
 
             {/* Bagian teks */}
@@ -267,87 +268,97 @@ const Rack = () => {
             divClass="col-span-1 p-6 border border-gray-700"
             buttonClass="" // Tambahan styling jika dibutuhkan
           />
-
         </motion.div>
-    
+
         <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+          {/* Table Wrapper */}
           <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
-            <table className="w-full bg-white border border-gray-200">
-                  <thead>
-                    <tr className="bg-red-E01414 text-white">
-                      <th className="py-1 px-2 border-b border-r border-gray-300">
-                        NO
-                      </th>
-                      <th className="py-1 px-2 border-b border-r border-gray-300">
-                        Rack Name
-                      </th>
-                      <th className="py-1 px-2 border-b border-r border-gray-300">
-                        Rack Material
-                      </th>
-                      <th className="py-1 px-2 border-b border-r border-gray-300">
-                        Weight Max
-                      </th>
-                      <th className="py-1 px-2 border-b border-r border-gray-300">
-                        Capacity
-                      </th>
-                      <th className="py-1 px-2 border-b border-r border-gray-300">
-                        Status
-                      </th>
-                      <th className="py-1 px-2 border-b">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentRacks.map((rack, index) => (
-                      <tr
-                        key={rack.idRack}
-                        className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                        style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-                      >
-                        <td className="py-1 px-2 border-b">
-                          {(currentPage - 1) * itemsPerPage + index + 1}
-                        </td>
-                        <td className="py-1 px-2 border-b">{rack.rackName}</td>
-                        <td className="py-1 px-2 border-b">{rack.rackMaterial}</td>
-                        <td className="py-1 px-2 border-b">{rack.weightMaxRack}</td>
-                        <td className="py-1 px-2 border-b">{rack.rackCapacity}</td>
-                        <td className="py-1 px-2 border-b">
-                          {rack.rackStatus === 1 ? "Active" : "Non-Active"}
-                        </td>
-                        <td
-                          className="py-2 px-2 border-b"
-                          style={{ display: "flex", justifyContent: "center" }}
+            <table className="w-full bg-white text-sm md:text-base">
+              <thead className=" text-center">
+                <tr className="bg-red-E01414 text-white">
+                  <th className="py-1 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    NO
+                  </th>
+                  <th className="py-1 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Rack Name
+                  </th>
+                  <th className="py-1 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Rack Material
+                  </th>
+                  <th className="py-1 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Weight Max
+                  </th>
+                  <th className="py-1 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Capacity
+                  </th>
+                  <th className="py-1 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Status
+                  </th>
+                  <th className="py-1 px-2 border-b tracking-wide whitespace-nowrap">
+                    Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {currentRacks.map((rack, index) => (
+                  <tr
+                    key={rack.idRack}
+                    className={`text-center ${
+                      index % 2 === 1 ? "bg-gray-100" : ""
+                    }`}
+                  >
+                    <td className="py-1 px-2 border-b whitespace-nowrap">
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td className="py-1 px-2 border-b whitespace-nowrap">
+                      {rack.rackName}
+                    </td>
+                    <td className="py-1 px-2 border-b whitespace-nowrap">
+                      {rack.rackMaterial}
+                    </td>
+                    <td className="py-1 px-2 border-b whitespace-nowrap">
+                      {rack.weightMaxRack}
+                    </td>
+                    <td className="py-1 px-2 border-b whitespace-nowrap">
+                      {rack.rackCapacity}
+                    </td>
+                    <td className="py-1 px-2 border-b whitespace-nowrap">
+                      {rack.rackStatus === 1 ? "Active" : "Non-Active"}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      <div className="flex justify-center">
+                        <a
+                          href="#"
+                          onClick={() => {
+                            toggleUpdate();
+                            handleRowClick(rack);
+                          }}
+                          className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
                         >
-                          <a
-                            href="#"
-                            onClick={() => {
-                              toggleUpdate();
-                              handleRowClick(rack);
-                            }}
-                            className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                          >
-                            <FaEdit />
-                          </a>
-                          <a
-                            href="#"
-                            onClick={() => handleDelete(rack.idRack)}
-                            className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
-                          >
-                            <FaTrashAlt />
-                          </a>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
+                          <FaEdit />
+                        </a>
+                        <a
+                          href="#"
+                          onClick={() => handleDelete(rack.idRack)}
+                          className="mr-2 mt-2 text-red-E01414 hover:text-red-E01414"
+                        >
+                          <FaTrashAlt />
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center mt-4 flex-wrap">
+          <div className="flex justify-left mt-4 flex-wrap">
             {/* Tombol Previous */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &lt;
             </button>
@@ -378,7 +389,7 @@ const Rack = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-1 mx-1 bg-gray-200 rounded-md"
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &gt;
             </button>
@@ -386,19 +397,27 @@ const Rack = () => {
         </div>
       </div>
 
-
       {/* Modal Pop-up Create Rack */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[90%] md:w-[60rem] lg:w-[50rem] h-auto md:h-[35rem] p-4 sm:p-6 relative">
+          <div className=" rounded-2xl w-full max-w-[50rem] h-auto p-6 relative">
             {/* Form for Add New Rack */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+            <div className="flex flex-col items-center justify-center bg-gray-F5F5F5 rounded-md w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-full md:w-[42rem] h-auto md:h-5/6 mt-5 mb-6 p-4">
-                <form onSubmit={handleSubmit} className="w-full px-4 mb-2">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-rack">
+              <div className="mx-auto px-2 bg-white rounded-md w-full max-w-[42rem] h-auto mt-5 mb-6 border border-gray-700">
+                <form onSubmit={handleSubmit} className="w-full mb-2">
+                  {/* STATS */}
+                  <motion.div
+                    className="grid grid-cols-1 gap-5 sm:grid-cols-2 px-6 font-poppins font-extralight mt-5"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                  >
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-rack"
+                      >
                         Id Rack
                       </label>
                       <TextField
@@ -408,8 +427,11 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-name">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-name"
+                      >
                         Rack Name
                       </label>
                       <TextField
@@ -419,11 +441,12 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-material">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-material"
+                      >
                         Material
                       </label>
                       <TextField
@@ -433,8 +456,11 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="weight-max">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="weight-max"
+                      >
                         Weight Max
                       </label>
                       <TextField
@@ -444,11 +470,12 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-capacity">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-capacity"
+                      >
                         Capacity
                       </label>
                       <TextField
@@ -458,8 +485,11 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-status">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-status"
+                      >
                         Status
                       </label>
                       <TextField
@@ -469,18 +499,19 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="flex justify-center mt-10 space-x-10">
+                  {/* Buttons */}
+                  <div className="flex justify-center mt-10 space-x-2 mb-3">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                      className="bg-blue-600 text-white px-0 w-full h-8 rounded-md hover:bg-blue-500 [box-shadow:0_6px_0_#1d4ed8] active:translate-y-[3px] active:[box-shadow:0_3px_0_#1d4ed8]"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleModal}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                      className="bg-red-600 text-white px-0 w-full h-8 rounded-md hover:bg-red-500 [box-shadow:0_6px_0_#b91c1c] active:translate-y-[3px] active:[box-shadow:0_3px_0_#b91c1c]"
                     >
                       Cancel
                     </button>
@@ -492,18 +523,27 @@ const Rack = () => {
         </div>
       )}
 
-        {/* modal untuk update */}
+      {/* modal untuk update */}
       {isUpdateOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[50rem] bg-opacity-0 h-[35rem] p-6 relative">
+          <div className=" rounded-2xl w-full max-w-[50rem] h-auto p-6 relative">
             {/* Form for Add New Rack */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+            <div className="flex flex-col items-center justify-center bg-gray-F5F5F5 rounded-md w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
+              <div className="mx-auto px-2 bg-white rounded-md w-full max-w-[42rem] h-auto mt-5 mb-6 border border-gray-700">
                 <form onSubmit={handleUpdate} className="w-full px-6 mb-2">
-                  <div className="flex space-x-6">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-rack">
+                  {/* STATS */}
+                  <motion.div
+                    className="grid grid-cols-1 gap-5 sm:grid-cols-2 px-6 font-poppins font-extralight mt-5"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                  >
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-rack"
+                      >
                         Id Rack
                       </label>
                       <TextField
@@ -513,8 +553,11 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-name">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-name"
+                      >
                         Rack Name
                       </label>
                       <TextField
@@ -524,11 +567,12 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-material">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-material"
+                      >
                         Material
                       </label>
                       <TextField
@@ -538,8 +582,11 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="weight-max">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="weight-max"
+                      >
                         Weight Max
                       </label>
                       <TextField
@@ -549,11 +596,12 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-capacity">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-capacity"
+                      >
                         Capacity
                       </label>
                       <TextField
@@ -563,8 +611,11 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="rack-status">
+                    <div className="flex flex-col">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="rack-status"
+                      >
                         Status
                       </label>
                       <TextField
@@ -574,18 +625,19 @@ const Rack = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="flex justify-center mt-10 space-x-10">
+                  {/* Buttons */}
+                  <div className="flex justify-center mt-10 space-x-2 mb-3">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                      className="bg-blue-600 text-white px-0 w-full h-8 rounded-md hover:bg-blue-500 [box-shadow:0_6px_0_#1d4ed8] active:translate-y-[3px] active:[box-shadow:0_3px_0_#1d4ed8]"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleUpdate}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                      className="bg-red-600 text-white px-0 w-full h-8 rounded-md hover:bg-red-500 [box-shadow:0_6px_0_#b91c1c] active:translate-y-[3px] active:[box-shadow:0_3px_0_#b91c1c]"
                     >
                       Cancel
                     </button>
