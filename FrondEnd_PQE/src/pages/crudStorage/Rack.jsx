@@ -191,7 +191,7 @@ const Rack = () => {
 
   return (
     <>
-      <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
+      <div className="p-5 px-4 mx-auto lg:px-8">
         {/* STATS */}
         <motion.div
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
@@ -270,7 +270,7 @@ const Rack = () => {
           />
         </motion.div>
 
-        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+        <div className="max-w-full pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           {/* Table Wrapper */}
           <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
             <table className="w-full bg-white text-sm md:text-base">

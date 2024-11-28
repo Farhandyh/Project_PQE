@@ -1,0 +1,19 @@
+/* Tombol utama */
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Warna latar putih */
+  border: 1px solid #e01414; /* Warna border merah */
+  padding: 0 16px; /* Padding horizontal */
+  font-weight: 600; /* Font tebal */
+  color: #e01414; /* Warna teks merah */
+  border-radius: 0 8px 8px 0; /* Rounded hanya di sisi kanan */
+  transition: all 0.3s ease-in-out; /* Transisi untuk hover */
+  cursor: pointer; /* Ubah kursor menjadi pointer */
+}
+
+.button:hover {
+  background-color: #e01414; /* Latar belakang merah saat hover */
+  color: #ffffff; /* Warna teks putih saat hover */
+}

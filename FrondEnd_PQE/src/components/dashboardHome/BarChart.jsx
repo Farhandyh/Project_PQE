@@ -53,6 +53,9 @@ const BarChart = ({ sourceData }) => {
           color: "#E01414",
         },
       },
+      datalabels: {
+        display: false, // Menonaktifkan data labels
+      },
     },
     scales: {
       x: {
