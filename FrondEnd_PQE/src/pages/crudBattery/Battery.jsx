@@ -210,7 +210,7 @@ const Battery = () => {
 
   return (
     <>
-      <div className="p-5 mx-auto px-4 md:px-20  lg:px-32">
+      <div className="p-5 mx-auto px-4 lg:px-8">
         {/* STATS */}
         <motion.div
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
@@ -287,7 +287,7 @@ const Battery = () => {
           />
         </motion.div>
 
-        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+        <div className="grid grid-cols-1 max-w-full pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
             <table className="w-full bg-white text-sm md:text-base">
               <thead className="text-center">

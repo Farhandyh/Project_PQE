@@ -1,51 +1,39 @@
 import React, { useState } from "react";
+import { FaFilter } from "react-icons/fa";
 
-const FilterComponent = ({ filters, onFilterChange }) => {
-  const [selectedFilter, setSelectedFilter] = useState("");
+const FilterButton = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleFilterChange = (filter) => {
-    setSelectedFilter(filter);
-    onFilterChange(filter);
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
   };
 
   return (
-    <div className="relative w-full mt-5">
-      {/* Dropdown utama */}
-      <select
-        className="bg-red-E01414 text-white text-lg font-semibold rounded-lg h-10 px-4"
-        value={selectedFilter}
-        onChange={(e) => handleFilterChange(e.target.value)}
+    <div className="relative inline-block text-left">
+      <button
+        className="flex items-center justify-between mt-5 gap-2 px-4 py-2 h-8 w-full max-w-xs bg-red-E01414 text-white rounded-md hover:bg-red-800 transition"
+        onClick={toggleDropdown}
       >
-        <option value="" disabled>
+        <span className="flex items-center gap-2">
+          <FaFilter className="text-lg" />
           Filter
-        </option>
-        {filters.map((filter) => (
-          <option key={filter.category} value={filter.category}>
-            {filter.label}
-          </option>
-        ))}
-      </select>
+        </span>
+        <span
+          className={`transform transition-transform text-13px ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+        >
+          ▼
+        </span>
+      </button>
 
-      {/* Sub-filter berdasarkan kategori yang dipilih */}
-      {selectedFilter && (
-        <div className="absolute top-full left-0 w-full bg-white border border-red-E01414 mt-1 rounded-lg shadow-lg">
-          <ul className="p-2">
-            {filters
-              .find((filter) => filter.category === selectedFilter)
-              ?.options.map((option) => (
-                <li
-                  key={option.value}
-                  className="hover:bg-gray-100 px-2 py-1 cursor-pointer"
-                  onClick={() => handleFilterChange(option.value)}
-                >
-                  {option.label}
-                </li>
-              ))}
-          </ul>
+      {isOpen && (
+        <div className="absolute right-0 md:left-0 mt-2 w-48 bg-white border border-gray-200 shadow-lg rounded-md">
+          <div className="h-24">{children}</div>
         </div>
       )}
     </div>
   );
 };
 
-export default FilterComponent;
+export default FilterButton;
