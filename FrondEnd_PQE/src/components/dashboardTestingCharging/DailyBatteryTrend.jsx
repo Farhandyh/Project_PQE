@@ -27,8 +27,8 @@ const DailyBatteryTrend = ({ sourceData }) => {
       {
         label: "Daily Battery",
         data: sourceData.map((data) => data.sales),
-        backgroundColor: "rgba(255, 255, 255, 0.7)", // Tailwind green-500
-        borderColor: "rgba(255, 255, 255, 0.7)", // Tailwind green-800
+        backgroundColor: "rgba(255, 48, 48, 0.2)", // Tailwind green-500
+        borderColor: "#FF3030",
         borderWidth: 1,
       },
     ],
@@ -41,7 +41,7 @@ const DailyBatteryTrend = ({ sourceData }) => {
       legend: {
         position: "top",
         labels: {
-          color: "#FFFFFF",
+          color: "#E01414",
         },
       },
       tooltip: {
@@ -51,26 +51,29 @@ const DailyBatteryTrend = ({ sourceData }) => {
         borderColor: "#4B5563", // Tailwind gray-600
         borderWidth: 1,
       },
+      datalabels: {
+        display: false, // Menonaktifkan data labels
+      },
     },
     scales: {
       x: {
-        ticks: { color: "#FFFFFF" },
-        grid: { color: "#C48080" },
+        ticks: { color: "#000000" },
+        grid: { color: "#F6DEDE" },
       },
       y: {
-        ticks: { color: "#FFFFFF" },
-        grid: { color: "#C48080" },
+        ticks: { color: "#000000" },
+        grid: { color: "#F6DEDE" },
       },
     },
   };
   return (
     <motion.div
-      className="bg-red-E01414 bg-opacity-100 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700"
+      className="bg-white bg-opacity-100 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
     >
-      <h2 className="text-lg font-medium mb-4 text-white">
+      <h2 className="text-lg font-medium mb-4 text-red-E01414">
         Weekly Battery Trend
       </h2>
 

@@ -9,6 +9,9 @@ import TestingGraphLine from "../../components/dashboardTestingCharging/TestingG
 //Data Dummy
 import DailyBatteryTrendData from "../../dataDummy/dailyBatteryTrendData.json";
 import TestingGrapLine from "../../dataDummy/testingGrapLineData.json";
+import ImageButton from "../../components/materialTransaksi/ImageButton";
+import SearchComponent from "../../components/materialTransaksi/SearchFilter";
+import FilterComponent from "../../components/materialTransaksi/FilterComponent";
 
 const getDataTesting = async () => {
   const response = await fetch("http://localhost:8000/api/testing");
@@ -34,6 +37,23 @@ const TestingBattery = () => {
   const [kWhUsed, setkWhUsed] = useState("");
   const [timeStart, setTimeStart] = useState("");
   const [timeFinish, setTimeFinish] = useState("");
+
+  //Filter Table
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("");
+  //Filter Table
+
+  //Fungsi Filter Table
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    console.log("Search Query:", query);
+  };
+
+  const handleFilterChange = (filter) => {
+    setSelectedFilter(filter);
+    console.log("Selected Filter:", filter);
+  };
+  //Fungsi Filter Table
 
   const fetchTesting = async () => {
     try {
@@ -166,6 +186,34 @@ const TestingBattery = () => {
     }
   };
 
+  const filters = [
+    {
+      category: "category1",
+      label: "Category 1",
+      options: [
+        { value: "option1", label: "Option 1" },
+        { value: "option2", label: "Option 2" },
+      ],
+    },
+    {
+      category: "category2",
+      label: "Category 2",
+      options: [
+        { value: "option3", label: "Option 3" },
+        { value: "option4", label: "Option 4" },
+      ],
+    },
+    {
+      category: "category3",
+      label: "Category 3",
+      options: [
+        { value: "option5", label: "Option 5" },
+        { value: "option6", label: "Option 6" },
+        { value: "option7", label: "Option 7" },
+      ],
+    },
+  ];
+
   return (
     <>
       <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
@@ -182,104 +230,122 @@ const TestingBattery = () => {
           ></motion.div>
         </div>
 
-        <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pb-5 pr-10 bg-white">
-          <div className="flex justify-between items-center">
-            <button
+        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+          <div className="grid grid-cols-1 gap-5">
+            {/* Card Add New Users */}
+            <ImageButton
+              imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
+              imgAlt="User Icon"
+              buttonLabel="Add New Battery"
               onClick={toggleModal}
-              className="text-white bg-red-500 px-4 py-2 rounded-full"
-            >
-              Testing Battery
-            </button>
+              divClass="-mt-10"
+              buttonClass="" // Tambahan styling jika dibutuhkan
+            />
+
             <div className="flex space-x-2">
-              <input
-                type="text"
+              <SearchComponent
                 placeholder="Searching...."
-                className="bg-white border-red-E01414 border text-center mt-5 w-96 h-7 rounded-lg"
+                onSearch={handleSearch}
+                buttonLabel="Search"
+              >
+                {" "}
+              </SearchComponent>
+              <FilterComponent
+                filters={filters}
+                onFilterChange={handleFilterChange}
               />
-              <div className="w-28 h-7 bg-red-E01414 justify-center rounded-lg mt-5">
-                <select className="bg-red-E01414 text-white text-xl font-semibold rounded-lg w-full h-full">
-                  <option value="" disabled selected className="text-center">
-                    Filter
-                  </option>
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </select>
-              </div>
             </div>
           </div>
-          <table className="w-full bg-white border mt-5 border-gray-200">
-            <thead>
-              <tr className="bg-red-E01414 text-white">
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  NO
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Users ID
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Battery ID
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Machine ID
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Testing Date
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  kWh Used
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Time Start
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Time Finish
-                </th>
-                <th className="py-2 px-2 border-b border-r border-gray-300">
-                  Duration
-                </th>
-                <th className="py-2 px-2 border-b">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentTesting.map((testing, index) => (
-                <tr
-                  key={testing.idTesting}
-                  className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                  style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-                >
-                  <td className="py-2 px-2 border-b">
-                    {(currentPage - 1) * itemsPerPage + index + 1}
-                  </td>
-                  <td className="py-2 px-2 border-b">{testing.idUsers}</td>
-                  <td className="py-2 px-2 border-b">{testing.idBattery}</td>
-                  <td className="py-2 px-2 border-b">{testing.idMachine}</td>
-                  <td className="py-2 px-2 border-b">{testing.dateTesting}</td>
-                  <td className="py-2 px-2 border-b">{testing.kWhUsed}</td>
-                  <td className="py-2 px-2 border-b">{testing.timeStart}</td>
-                  <td className="py-2 px-2 border-b">{testing.timeFinish}</td>
-                  <td className="py-2 px-2 border-b">
-                    {testing.testingDuration}
-                  </td>
-                  <td
-                    className="py-2 px-2 border-b"
-                    style={{ display: "flex", justifyContent: "center" }}
-                  >
-                    <a
-                      href="#"
-                      onClick={() => {
-                        toggleUpdate();
-                        handleRowClick(testing);
-                      }}
-                      className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
-                    >
-                      <FaEdit />
-                    </a>
-                  </td>
+          <div className="overflow-x-auto rounded-lg  max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full shadow">
+            <table className="w-full bg-white mt-5 text-sm md:text-base">
+              <thead className="text-center">
+                <tr className="bg-red-E01414 text-white">
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    NO
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Users ID
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Battery ID
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Machine ID
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Testing Date
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    kWh Used
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Time Start
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Time Finish
+                  </th>
+                  <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">
+                    Duration
+                  </th>
+                  <th className="py-2 px-2 border-b tracking-wide whitespace-nowrap">
+                    Action
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {currentTesting.map((testing, index) => (
+                  <tr
+                    key={testing.idTesting}
+                    className={`text-center ${
+                      index % 2 === 1 ? "bg-gray-100" : ""
+                    }`}
+                  >
+                    <td className="py-2 px-2 border-b">
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.idUsers}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.idBattery}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.idMachine}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.dateTesting}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.kWhUsed}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.timeStart}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.timeFinish}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      {testing.testingDuration}
+                    </td>
+                    <td className="py-2 px-2 border-b whitespace-nowrap">
+                      <div className="flex justify-center">
+                        <a
+                          href="#"
+                          onClick={() => {
+                            toggleUpdate();
+                            handleRowClick(testing);
+                          }}
+                          className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
+                        >
+                          <FaEdit />
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="flex justify-left mt-2">
             {/* Tombol Previous */}

@@ -29,12 +29,13 @@ const TestingGraphLine = ({ sourceData }) => {
       {
         label: "Daily Orders",
         data: sourceData.map((data) => data.orders), // Y-axis data
-        borderColor: "#8B5CF6", // Tailwind purple-500
-        backgroundColor: "rgba(139, 92, 246, 0.2)", // Semi-transparent fill
+        borderColor: "#FF3030", // Tailwind purple-500
+        backgroundColor: "rgba(255, 48, 48, 0.2)", // Semi-transparent fill
         tension: 0.4, // Curve smoothing
-        pointBackgroundColor: "#8B5CF6",
-        pointBorderColor: "#8B5CF6",
+        pointBackgroundColor: "#FF3030",
+        pointBorderColor: "#FF3030",
         pointRadius: 4,
+        borderWidth: 1,
       },
     ],
   };
@@ -44,8 +45,9 @@ const TestingGraphLine = ({ sourceData }) => {
     maintainAspectRatio: false,
     plugins: {
       legend: {
+        position: "top",
         labels: {
-          color: "#E5E7EB", // Tailwind gray-200
+          color: "#E01414", // Tailwind gray-200
         },
       },
       tooltip: {
@@ -55,23 +57,18 @@ const TestingGraphLine = ({ sourceData }) => {
         borderColor: "#4B5563", // Tailwind gray-600
         borderWidth: 1,
       },
+      datalabels: {
+        display: false, // Menonaktifkan data labels
+      },
     },
     scales: {
       x: {
-        ticks: {
-          color: "#9CA3AF", // Tailwind gray-400
-        },
-        grid: {
-          color: "#374151", // Tailwind gray-700
-        },
+        ticks: { color: "#00000" },
+        grid: { color: "#F6DEDE" },
       },
       y: {
-        ticks: {
-          color: "#9CA3AF", // Tailwind gray-400
-        },
-        grid: {
-          color: "#374151", // Tailwind gray-700
-        },
+        ticks: { color: "#00000" },
+        grid: { color: "#F6DEDE" },
       },
     },
   };
@@ -82,7 +79,7 @@ const TestingGraphLine = ({ sourceData }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
     >
-      <h2 className="text-xl font-semibold text-gray-100 mb-4">Daily Orders</h2>
+      <h2 className="text-lg font-medium text-red-E01414 mb-4">Daily Orders</h2>
 
       <div className="h-60 w-full">
         <Line data={chartData} options={chartOptions} />
