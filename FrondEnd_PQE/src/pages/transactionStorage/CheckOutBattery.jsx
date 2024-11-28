@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TextField from "../../components/materialCRUD/TextField";
 import Header from "../../components/materialCRUD/Header";
+import { motion } from "framer-motion";
 
 const CheckOutBattery = () => {
   // State untuk menyimpan data racks yang diambil
@@ -95,52 +96,55 @@ const CheckOutBattery = () => {
 
   return (
     <>
-        <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 mt-8 bg-white">
-            <div className="flex justify-between items-center">
-                <h1 className="text-red-E01414 text-xl mb-5 font-poppins font-extrabold">Battery List</h1>
+      <div className="max-w-5xl mx-auto pl-4 pt-4 pr-4 pb-4 mt-8 bg-white rounded-2xl"> 
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <h1 className="text-red-E01414 text-lg sm:text-xl mb-3 md:mb-0 font-poppins font-extrabold text-center md:text-left">Battery List</h1>
                 
-                <div className="flex space-x-2">
-                    <input
-                        type="text"
-                        placeholder="Searching...."
-                        className="bg-white border-red-E01414 border text-center w-96 h-7 rounded-lg"
-                    />
-                    <div className="w-28 h-7 bg-red-E01414 justify-center rounded-lg">
-                        <select className="bg-red-E01414 text-white text-xl font-semibold rounded-lg w-full h-full">
-                            <option value="" disabled selected className="text-center">Filter</option>
-                            <option value="option1">Option 1</option>
-                            <option value="option2">Option 2</option>
-                            <option value="option3">Option 3</option>
-                        </select>
-                    </div>
+            <div className="flex flex-row space-x-2 md:space-y-0 items-center">
+              <input
+                type="text"
+                placeholder="Searching...."
+                 className="bg-white border-red-E01414 border text-center w-full md:w-96 h-7 rounded-lg px-2"
+                />
+                <div className="h-7 bg-red-E01414 flex items-center justify-center rounded-lg">
+                  <select className="bg-red-E01414 text-white text-sm font-semibold rounded-lg W-20 h-full"> 
+                    <option value="" disabled selected className="text-center">Filter</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </select>
                 </div>
             </div>
+        </div>
 
-        <table className="w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-red-E01414 text-white">
-              <th className="py-2 px-2 border-b border-r border-gray-300">No</th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">Seri Battery</th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">Battery Status</th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">Action</th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            {currentData.map((checkOut,index) => (
-              <tr key={index}>
-                <td className="py-2 px-2 border-b">{index+1}</td>
-                <td className="py-2 px-2 border-b">{checkOut.idBattery}</td>
-                <td className="py-2 px-2 border-b">{checkOut.batteryStatus}</td>
-                <td className="border-b py-1">
-                    <button onClick={() => {
-                        toggleModal();
-                        handleRowClick(index+1);
-                    }} className="px-2 py-2 bg-red-E01414 rounded-lg text-white w-28">Check Out</button>
-                </td>
+        <div className="overflow-x-auto max-w-[21.6rem] sm:max-w-[60rem] lg:max-w-full rounded-lg shadow mt-6">
+        <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
+            <thead>
+              <tr className="bg-red-E01414 text-white">
+                <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">No</th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">Seri Battery</th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">Battery Status</th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 tracking-wide whitespace-nowrap">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="text-center">
+              {currentData.map((checkOut,index) => (
+                <tr key={index}>
+                  <td className="py-2 px-2 border-b">{index+1}</td>
+                  <td className="py-2 px-2 border-b">{checkOut.idBattery}</td>
+                  <td className="py-2 px-2 border-b">{checkOut.batteryStatus}</td>
+                  <td className="border-b py-1">
+                      <button onClick={() => {
+                          toggleModal();
+                          handleRowClick(index+1);
+                      }} className="px-2 py-2 bg-red-E01414 rounded-lg text-white w-28">Check Out</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
 
         <div className="flex justify-left mt-2">
           {/* Tombol Previous */}
@@ -181,14 +185,14 @@ const CheckOutBattery = () => {
       {/* Modal Pop-up CheckIn */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl w-[40rem] bg-opacity-0 h-[25rem] p-6 relative">
+          <div className="rounded-2xl w-full max-w-[50rem] h-auto p-6 relative">
             {/* Form for checkIn battery */}
-            <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
+            <div className="flex flex-col items-center justify-center bg-gray-F5F5F5 rounded-md w-full h-full">
               <Header />
-              <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[32rem] h-5/6 mt-5 mb-6">
-                <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
-                  <div className="flex space-x-6">
-                   <div className="flex flex-col w-1/2">
+              <div className="mx-auto px-2 bg-white rounded-md w-full max-w-[42rem] h-auto mt-5 mb-6 border border-gray-700">
+                <form onSubmit={handleSubmit} className="w-full mb-2">
+                  
+                    <div className="flex flex-col">
                       <label className="block text-black mb-1" htmlFor="date">
                         Date
                       </label>
@@ -199,7 +203,8 @@ const CheckOutBattery = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                    <div className="flex flex-col w-1/2">
+
+                    <div className="flex flex-col">
                       <label className="block text-black mb-1" htmlFor="id-battery">
                         Battery ID
                       </label>
@@ -210,10 +215,8 @@ const CheckOutBattery = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
 
-                  <div className="flex space-x-4">
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col">
                       <label className="block text-black mb-1" htmlFor="time-out">
                         Time Out
                       </label>
@@ -224,18 +227,19 @@ const CheckOutBattery = () => {
                         className="w-full mb-4"
                       />
                     </div>
-                  </div>
+                  
 
-                  <div className="flex justify-center mt-10 space-x-10">
+                  {/* Buttons */}
+                  <div className="flex justify-center mt-10 space-x-2 mb-3">
                     <button
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                      className="bg-blue-600 text-white px-0 w-full h-8 rounded-md hover:bg-blue-500 [box-shadow:0_6px_0_#1d4ed8] active:translate-y-[3px] active:[box-shadow:0_3px_0_#1d4ed8]"
                     >
                       Save
                     </button>
                     <button
                       onClick={toggleModal}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                      className="bg-red-600 text-white px-0 w-full h-8 rounded-md hover:bg-red-500 [box-shadow:0_6px_0_#b91c1c] active:translate-y-[3px] active:[box-shadow:0_3px_0_#b91c1c]"
                     >
                       Cancel
                     </button>

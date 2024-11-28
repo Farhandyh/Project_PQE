@@ -164,84 +164,88 @@ const Storage = () => {
 
   return (
     <>
-      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pt-10 pb-5 pr-10 bg-white">
-        <div className="flex justify-between items-center">
-          <h1 className="text-red-E01414 text-xl mb-5 font-poppins font-extrabold">History Transaction</h1>   
-            <div className="flex space-x-2">
+      <div className="max-w-5xl mx-auto pl-4 pt-4 pr-4 pb-4 mt-8 bg-white rounded-2xl"> 
+        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <h1 className="text-red-E01414 text-lg sm:text-xl mb-3 md:mb-0 font-poppins font-extrabold text-center md:text-left">History Transaction</h1> 
+
+            <div className="flex flex-row space-x-2 md:space-y-0 items-center">
               <input
                 type="text"
                 placeholder="Searching...."
-                className="bg-white border-red-E01414 border text-center w-96 h-7 rounded-lg"
+                className="bg-white border-red-E01414 border text-center w-full md:w-96 h-7 rounded-lg px-2"
               />
-              <div className="w-28 h-7 bg-red-E01414 justify-center rounded-lg">
-                <select className="bg-red-E01414 text-white text-xl font-semibold rounded-lg w-full h-full">
+              <div className="h-7 bg-red-E01414 flex items-center justify-center rounded-lg">
+              <select className="bg-red-E01414 text-white text-sm font-semibold rounded-lg w-20 h-full">
                   <option value="" disabled selected className="text-center">Filter</option>
                   <option value="option1">Option 1</option>
                   <option value="option2">Option 2</option>
                   <option value="option3">Option 3</option>
                 </select>
               </div>
-          </div>
+            </div>
         </div>
-        <table className="w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-red-E01414 text-white">
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                NO
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Id User
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Id Battery
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Id Rack
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Time In
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Time Out
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Battery Status
-              </th>
-              <th className="py-2 px-2 border-b border-r border-gray-300">
-                Date
-              </th>
-            </tr>
-          </thead>
-            <tbody>
-              {currentStorage
-              .sort((a, b) => {
-                // Mengonversi timeIn menjadi objek Date untuk perbandingan waktu
-                const timeA = new Date(`1970-01-01T${a.timeIn}`);
-                const timeB = new Date(`1970-01-01T${b.timeIn}`);
-                return timeB - timeA; // Urutkan descending berdasarkan timeIn
-              })
-              .map((storage, index) => (
-                <tr
-                  key={storage.idStorage}
-                  className={`text-center ${index % 2 === 1 ? "" : ""}`}
-                  style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
-                >
-                  <td className="py-2 px-2 border-b">
-                    {(currentPage - 1) * itemsPerPage + index + 1}
-                  </td>
-                  <td className="py-2 px-2 border-b">{storage.idUsers}</td>
-                  <td className="py-2 px-2 border-b">{storage.idBattery}</td>
-                  <td className="py-2 px-2 border-b">{storage.idRack}</td>
-                  <td className="py-2 px-2 border-b">{storage.timeIn}</td>
-                  <td className="py-2 px-2 border-b">{storage.timeOut}</td>
-                  <td className="py-2 px-2 border-b">
-                    {storage.batteryStatus === 1 ? "Active" : "Non-Active"}
-                  </td>
-                  <td className="py-2 px-2 border-b">{storage.date}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <div className="overflow-x-auto max-w-[21.6rem] sm:max-w-[60rem] lg:max-w-full rounded-lg shadow mt-6">
+        <table className="w-full bg-white border border-gray-200 text-sm md:text-base">
+            <thead>
+              <tr className="bg-red-E01414 text-white">
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  NO
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  Id User
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  Id Battery
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  Id Rack
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  Time In
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  Time Out
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  Battery Status
+                </th>
+                <th className="py-2 px-2 border-b border-r border-gray-300 whitespace-nowrap">
+                  Date
+                </th>
+              </tr>
+            </thead>
+              <tbody>
+                {currentStorage
+                .sort((a, b) => {
+                  // Mengonversi timeIn menjadi objek Date untuk perbandingan waktu
+                  const timeA = new Date(`1970-01-01T${a.timeIn}`);
+                  const timeB = new Date(`1970-01-01T${b.timeIn}`);
+                  return timeB - timeA; // Urutkan descending berdasarkan timeIn
+                })
+                .map((storage, index) => (
+                  <tr
+                    key={storage.idStorage}
+                    className={`text-center ${index % 2 === 1 ? "" : ""}`}
+                    style={{ backgroundColor: index % 2 === 1 ? "#EDD7D7" : "" }}
+                  >
+                    <td className="py-2 px-2 border-b">
+                      {(currentPage - 1) * itemsPerPage + index + 1}
+                    </td>
+                    <td className="py-2 px-2 border-b">{storage.idUsers}</td>
+                    <td className="py-2 px-2 border-b">{storage.idBattery}</td>
+                    <td className="py-2 px-2 border-b">{storage.idRack}</td>
+                    <td className="py-2 px-2 border-b">{storage.timeIn}</td>
+                    <td className="py-2 px-2 border-b">{storage.timeOut}</td>
+                    <td className="py-2 px-2 border-b">
+                      {storage.batteryStatus === 1 ? "Active" : "Non-Active"}
+                    </td>
+                    <td className="py-2 px-2 border-b">{storage.date}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
+        
 
         <div className="flex justify-left mt-2">
           {/* Tombol Previous */}
