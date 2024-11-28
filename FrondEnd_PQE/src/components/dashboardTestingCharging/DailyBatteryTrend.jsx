@@ -27,8 +27,8 @@ const DailyBatteryTrend = ({ sourceData }) => {
       {
         label: "Daily Battery",
         data: sourceData.map((data) => data.sales),
-        backgroundColor: "#FFEA00", // Tailwind green-500
-        borderColor: "#065F46", // Tailwind green-800
+        backgroundColor: "rgba(255, 255, 255, 0.7)", // Tailwind green-500
+        borderColor: "rgba(255, 255, 255, 0.7)", // Tailwind green-800
         borderWidth: 1,
       },
     ],
@@ -55,22 +55,17 @@ const DailyBatteryTrend = ({ sourceData }) => {
     scales: {
       x: {
         ticks: { color: "#FFFFFF" },
-        grid: { color: "#DFA7A7" },
+        grid: { color: "#C48080" },
       },
       y: {
         ticks: { color: "#FFFFFF" },
-        grid: { color: "#DFA7A7" },
+        grid: { color: "#C48080" },
       },
     },
   };
   return (
     <motion.div
-      className="shadow-lg rounded-xl p-6 border border-gray-700"
-      style={{
-        background:
-          "linear-gradient(to right, #CF0920 0%, #E01418 30%, #EDD7D7 100%)",
-        backdropFilter: "blur(10px)", // Untuk efek blur seperti bg-opacity
-      }}
+      className="bg-red-E01414 bg-opacity-100 backdrop-blur-md shadow-lg rounded-xl p-6 border border-gray-700"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
