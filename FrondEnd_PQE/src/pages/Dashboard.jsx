@@ -1,13 +1,9 @@
-import Platforms from "../components/dashboard/Platforms";
-import ProjetStatic from "../components/dashboard/ProjectStatic";
-import ProjectCard from "../components/dashboard/cardDashboard/ProjectCard";
-import ClientCard from "../components/dashboard/cardDashboard/ClientCard";
-import MemberCard from "../components/dashboard/cardDashboard/MemberCard";
-import { Chart as ChartJS, defaults } from "chart.js/auto";
-
 import { motion } from "framer-motion";
 import { FiZap, FiShoppingBag, FiUsers, FiBarChart2 } from "react-icons/fi";
 import { Bar, Doughnut, Line } from "react-chartjs-2";
+import { IoIosCheckmarkCircleOutline } from "react-icons/io";
+import { RxCrossCircled } from "react-icons/rx";
+import { PiBatteryVerticalFull } from "react-icons/pi";
 import revenueData from "../dataDummy/revenueData.json";
 import sourceData from "../dataDummy/sourceData.json";
 
@@ -103,31 +99,31 @@ const Dashboard = () => {
         >
           <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
-              name="Total Sales"
-              icon={FiZap}
-              value="$12,345"
+              name="Total Battery"
+              icon={PiBatteryVerticalFull}
+              value="345"
               color="#6366F1"
             />
           </div>
           <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
-              name="New Users"
-              icon={FiUsers}
-              value="1,234"
+              name="Battery OK"
+              icon={IoIosCheckmarkCircleOutline}
+              value="306"
               color="#8B5CF6"
             />
           </div>
           <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
-              name="Total Products"
-              icon={FiShoppingBag}
-              value="567"
+              name="Battery NG"
+              icon={RxCrossCircled}
+              value="39"
               color="#EC4899"
             />
           </div>
           <div className="col-span-1 bg-white p-6 rounded-lg shadow-md border border-gray-700">
             <StatCard
-              name="Conversion Rate"
+              name="kWh Used"
               icon={FiBarChart2}
               value="12.5%"
               color="#10B981"
