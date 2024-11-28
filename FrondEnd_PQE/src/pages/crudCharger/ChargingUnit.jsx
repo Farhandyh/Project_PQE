@@ -203,7 +203,7 @@ const ChargingUnit = () => {
 
   return (
     <>
-      <div className="p-5 px-4 mx-auto md:px-20 lg:px-32">
+      <div className="p-5 px-4 mx-auto lg:px-8">
         {/* STATS */}
         <motion.div
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8"
@@ -281,7 +281,7 @@ const ChargingUnit = () => {
           />
         </motion.div>
 
-        <div className="max-w-7xl mx-auto pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
+        <div className="max-w-full pl-4 pr-4 pt-4 pb-4 bg-white rounded-2xl border border-gray-700">
           {/* Table Wrapper */}
           <div className="overflow-x-auto max-w-[19.8rem] sm:max-w-[40rem] md:max-w-full rounded-lg shadow">
             <table className="w-full bg-white text-sm md:text-base">
@@ -375,30 +375,33 @@ const ChargingUnit = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className={`px-3 py-1 mx-1 rounded-md ${
-                currentPage === 1
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-gray-200 hover:bg-gray-300"
-              } [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]`}
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &lt;
             </button>
 
-            {/* Dynamic Page Buttons */}
-            {Array.from({ length: totalPages }, (_, index) => {
-              const pageNumber = index + 1;
+            {/* Tombol halaman dinamis */}
+            {Array.from({ length: 3 }, (_, index) => {
+              // Hitung halaman mulai berdasarkan halaman saat ini
+              let pageNumber = currentPage + index;
+
+              // Pastikan halaman tidak di luar batas 1 dan totalPages
+              if (pageNumber == 1) pageNumber = 1;
+
               return (
-                <button
-                  key={pageNumber}
-                  onClick={() => handlePageChange(pageNumber)}
-                  className={`px-3 py-1 mx-1 rounded-md ${
-                    currentPage === pageNumber
-                      ? "bg-red-600 text-white"
-                      : "bg-gray-200 hover:bg-gray-300"
-                  }`}
-                >
-                  {pageNumber}
-                </button>
+                pageNumber <= totalPages && (
+                  <button
+                    key={pageNumber}
+                    onClick={() => handlePageChange(pageNumber)}
+                    className={`px-3 py-1 mx-1 ${
+                      currentPage === pageNumber
+                        ? "bg-red-E01414 text-white"
+                        : "bg-gray-200"
+                    } rounded-md`}
+                  >
+                    {pageNumber}
+                  </button>
+                )
               );
             })}
 
@@ -406,11 +409,7 @@ const ChargingUnit = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className={`px-3 py-1 mx-1 rounded-md ${
-                currentPage === totalPages
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-gray-200 hover:bg-gray-300"
-              } [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]`}
+              className="px-3 py-1 mx-1 bg-gray-200 rounded-md [box-shadow:0_8px_0_#D2D2D4] active:translate-y-[4px] active:[box-shadow:0_4px_0_#D5D6D9]"
             >
               &gt;
             </button>
