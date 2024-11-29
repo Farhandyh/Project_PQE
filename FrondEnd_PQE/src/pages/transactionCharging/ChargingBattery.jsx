@@ -31,7 +31,6 @@ import TestingGrapLine from "../../dataDummy/testingGrapLineData.json";
 import ImageButton from "../../components/materialTransaksi/ImageButton";
 import SearchComponent from "../../components/materialTransaksi/SearchFilter";
 import FilterComponent from "../../components/materialTransaksi/FilterComponent";
-import CategoryDistributionChart from "../../components/dashboardHome/CategoryDistributionChart copy";
 
 
 const getDataCharging = async () => {
