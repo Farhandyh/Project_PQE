@@ -1,4 +1,4 @@
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -108,6 +108,7 @@ const MonitorTesting = () => {
       },
     },
   };
+  
 
   const options = {
     indexAxis: "y", // Display bars horizontally
@@ -139,6 +140,48 @@ const MonitorTesting = () => {
       },
     },
   };
+
+  const lineData = {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [
+      {
+        label: "Total",
+        data: [124, 98, 176, 140, 132, 154, 143, 135, 121, 145, 110, 165],
+        fill: false,
+        backgroundColor: "rgba(75,192,192,0.2)",
+        borderColor: "rgba(75,192,192,1)",
+        tension: 0.1,
+      },
+    ],
+  };
+
+  const lineOptions = {
+    responsive: true,
+    maintainAspectRatio: false, // Agar grafik tidak memaksakan rasio tetap
+    plugins: {
+      
+      legend: {
+        position: "top",
+        labels: {
+          color: "#E01414",
+        },
+      },
+      datalabels: {
+        display: false, // Menonaktifkan data labels
+      },
+    },
+    scales: {
+      x: {
+        ticks: { color: "#00000" },
+        grid: { color: "#F6DEDE" },
+      },
+      y: {
+        ticks: { color: "#00000" },
+        grid: { color: "#F6DEDE" },
+      },
+    },
+  };
+  
 
   return (
     <>
@@ -178,11 +221,11 @@ const MonitorTesting = () => {
             <div className="absolute top-2 left-3 w-5 h-5 bg-white rounded-full"></div>
             <div className="absolute top-2 right-3 w-5 h-5 bg-white rounded-full"></div>
             <h1 className="text-center font-poppins text-white text-lg lg:text-xl font-black">
-              Battery Testing: kWh Graph
+              Battery Testing 2024
             </h1>
             <div className="flex h-auto lg:h-full">
               <div className="bg-white w-full h-48 mt-2 rounded-2xl">
-                <Bar data={kwhGraph} options={kwhGraphOptions} />
+                <Line data={lineData} options={lineOptions} />
               </div>
             </div>
           </div>
