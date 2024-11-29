@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import TextField from '../../components/materialCRUD/TextField';
-import Header from '../../components/materialCRUD/Header';
+import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
+import TextField from "../../components/materialCRUD/TextField";
+import Header from "../../components/materialCRUD/Header";
+
+import ImageButton from "../../components/materialTransaksi/ImageButton";
+import SearchComponent from "../../components/materialTransaksi/SearchFilter";
+import FilterComponent from "../../components/materialTransaksi/FilterComponent";
 
 const getDataCharging = async () => {
-  const response = await fetch('http://localhost:8000/api/charging');
+  const response = await fetch("http://localhost:8000/api/charging");
   if (!response.ok) {
-    throw new Error('Failed to fetch units charging');
+    throw new Error("Failed to fetch units charging");
   }
   const data = await response.json();
   return data;
@@ -19,15 +24,26 @@ const ChargingBattery = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateOpen, setIsUpdateOpen] = useState(false);
-  const [idCharging,setIdCharging] = useState("");
-  const [idUsers,setIdUsers] = useState("");
-  const [idBattery,setIdBattery] = useState("");
-  const [idUnitCharge,setIdUnitCharge] = useState("");;
-  const [noMotor,setNoMotor] = useState("");
-  const [dateCharging,setDateCharging] = useState("");
-  const [startTime,setStartTime] = useState("");
-  const [finishTime,setFinishTime] = useState("");
-  const [kWhUsed,setkWhUsed] = useState("");
+  const [idCharging, setIdCharging] = useState("");
+  const [idUsers, setIdUsers] = useState("");
+  const [idBattery, setIdBattery] = useState("");
+  const [idUnitCharge, setIdUnitCharge] = useState("");
+  const [noMotor, setNoMotor] = useState("");
+  const [dateCharging, setDateCharging] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [finishTime, setFinishTime] = useState("");
+  const [kWhUsed, setkWhUsed] = useState("");
+
+  //Filter Table
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("");
+  //Filter Table
+
+  //Fungsi Filter Table
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    console.log("Search Query:", query);
+  };
 
   const fetchDataCharging = async () => {
     try {
@@ -44,12 +60,12 @@ const ChargingBattery = () => {
   useEffect(() => {
     fetchDataCharging();
   }, []);
-  
+
   // Event untuk menampilkan data row yang dipilih dalam form update
   const handleRowClick = (chargingBattery) => {
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('en-US', { hour12: false }); // Format: HH:mm:ss
-    const formattedDate = now.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
+    const formattedTime = now.toLocaleTimeString("en-US", { hour12: false }); // Format: HH:mm:ss
+    const formattedDate = now.toLocaleDateString("en-CA"); // Format: YYYY-MM-DD
 
     setIdCharging(chargingBattery.idCharging);
     setIdUsers(chargingBattery.idUsers);
@@ -74,38 +90,40 @@ const ChargingBattery = () => {
     setCurrentPage(pageNumber);
   };
 
-
-  const toggleModal = () =>{
+  const toggleModal = () => {
     const now = new Date();
-    const formattedTime = now.toLocaleTimeString('en-US', { hour12: false }); // Format: HH:mm:ss
-    const formattedDate = now.toLocaleDateString('en-CA'); // Format: YYYY-MM-DD
-    
+    const formattedTime = now.toLocaleTimeString("en-US", { hour12: false }); // Format: HH:mm:ss
+    const formattedDate = now.toLocaleDateString("en-CA"); // Format: YYYY-MM-DD
+
     setDateCharging(formattedDate);
     setStartTime(formattedTime);
     setIsModalOpen(!isModalOpen);
-   };
+  };
 
-   const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
+  const toggleUpdate = () => setIsUpdateOpen(!isUpdateOpen);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/charging-create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "idCharging" : idCharging,
-          "idUsers" : idUsers,
-          "idBattery" : idBattery,
-          "idUnitCharge" : idUnitCharge,
-          "noMotor" : noMotor,
-          "dateCharging" : dateCharging,
-          "startTime" : startTime,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/charging-create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idCharging: idCharging,
+            idUsers: idUsers,
+            idBattery: idBattery,
+            idUnitCharge: idUnitCharge,
+            noMotor: noMotor,
+            dateCharging: dateCharging,
+            startTime: startTime,
+          }),
+        }
+      );
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
@@ -118,8 +136,7 @@ const ChargingBattery = () => {
         setStartTime("");
         fetchDataCharging();
         toggleModal();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -132,19 +149,22 @@ const ChargingBattery = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/api/charging-update", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "idCharging" : idCharging,
-          "idUsers" : idUsers,
-          "idBattery" : idBattery,
-          "kWhUsed" : kWhUsed,
-          "finishTime" : finishTime,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:8000/api/charging-update",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idCharging: idCharging,
+            idUsers: idUsers,
+            idBattery: idBattery,
+            kWhUsed: kWhUsed,
+            finishTime: finishTime,
+          }),
+        }
+      );
 
       if (response.ok) {
         alert("Data berhasil disimpan!");
@@ -155,8 +175,7 @@ const ChargingBattery = () => {
         setFinishTime("");
         fetchDataCharging();
         toggleUpdate();
-      }
-       else {
+      } else {
         alert("Terjadi kesalahan saat menyimpan data.");
       }
     } catch (error) {
@@ -167,37 +186,100 @@ const ChargingBattery = () => {
 
   return (
     <>
-      <div className="mt-4 mb-4 ml-32 max-w-5xl flex">
-        <div className="bg-white mr-4 rounded-2xl w-4/6 h-48 flex items-center p-2 shadow-lg">
-        </div>
+      <div className="mt-4 mb-4 ml-0 max-w-7xl flex">
+        {/* STATS */}
+        <motion.div
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        ></motion.div>
+        <div className="bg-white mr-4 rounded-2xl w-[1200px] h-48 flex items-center p-2 shadow-lg border border-gray-700"></div>
 
-        <div className="bg-white mr-4 rounded-2xl w-3/6 h-48 flex items-center p-2 shadow-lg">
+        <div className="bg-white w-[60%] custom-landscape:w-[85%] h-auto mx-auto mr-4 rounded-2xl shadow-lg border border-gray-700">
+          <div className="overflow-x-auto">
+            <table className="w-full text-center bg-white rounded-2xl overflow-hidden">
+              <thead>
+                <tr>
+                  <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border border-red-700 py-2">
+                    No
+                  </th>
+                  <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border border-red-700 py-2">
+                    Name
+                  </th>
+                  <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border border-red-700 py-2">
+                    Date
+                  </th>
+                  <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border border-red-700 py-2">
+                    Time In
+                  </th>
+                  <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border border-red-700 py-2">
+                    Time Out
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* Contoh data statis untuk tabel */}
+                <tr className="bg-gray-100 border-b border-gray-200">
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    1
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    Battery A
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    2024-11-29
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    08:00 AM
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    05:00 PM
+                  </td>
+                </tr>
+                <tr className="bg-white border-b border-gray-200">
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    2
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    Battery B
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    2024-11-29
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    09:00 AM
+                  </td>
+                  <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                    06:00 PM
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="bg-white rounded-2xl w-2/6 h-48 flex items-center p-2 shadow-lg">
-        </div>
+        <div className="bg-white mr-4 rounded-2xl w-[400px] h-48 flex items-center p-2 shadow-lg border border-gray-700"></div>
       </div>
-      <div className="container max-w-5xl rounded-2xl mx-auto pl-10 pb-5 pr-10 bg-white">
-        <div className="flex justify-between items-center">
-            <button
-                onClick={toggleModal}
-                className="text-white bg-red-500 px-4 py-2 rounded-full"
-            >
-            Testing Battery
-           </button>   
-            <div className="flex space-x-2">
-              <input
-                type="text"
-                placeholder="Searching...."
-                className="bg-white border-red-E01414 border text-center mt-5 w-96 h-7 rounded-lg"
-              />
-              <div className="w-28 h-7 bg-red-E01414 justify-center rounded-lg mt-5">
-                <select className="bg-red-E01414 text-white text-xl font-semibold rounded-lg w-full h-full">
-                  <option value="" disabled selected className="text-center">Filter</option>
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
-                </select>
-              </div>
+
+      <div className="grid grid-cols-1 max-w-full mx-8 my-11 p-4 bg-white rounded-2xl border border-gray-700">
+        <div className="grid grid-cols-1 gap-5">
+          {/* Card Add New Users */}
+          <ImageButton
+            imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
+            imgAlt="User Icon"
+            buttonLabel="Add New Battery"
+            onClick={toggleModal}
+            divClass="-mt-10"
+            buttonClass="" // Tambahan styling jika dibutuhkan
+          />
+
+          <div className="grid grid-cols-1 sm:flex space-x-2">
+            <SearchComponent
+              placeholder="Searching...."
+              onSearch={handleSearch}
+              buttonLabel="Search"
+            />
+            <FilterComponent />
           </div>
         </div>
         <table className="w-full bg-white border border-gray-200 mt-5">
@@ -329,10 +411,13 @@ const ChargingBattery = () => {
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
-              <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
+                <form onSubmit={handleSubmit} className="w-full px-6 mb-2">
                   <div className="flex space-x-6">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-charging">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-charging"
+                      >
                         Charging ID
                       </label>
                       <TextField
@@ -343,7 +428,10 @@ const ChargingBattery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-users">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-users"
+                      >
                         Users ID
                       </label>
                       <TextField
@@ -357,7 +445,10 @@ const ChargingBattery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-battery">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-battery"
+                      >
                         Battery ID
                       </label>
                       <TextField
@@ -368,7 +459,10 @@ const ChargingBattery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="id-charger">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="id-charger"
+                      >
                         Charger ID
                       </label>
                       <TextField
@@ -382,7 +476,10 @@ const ChargingBattery = () => {
 
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="date-charging">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="date-charging"
+                      >
                         Date Charging
                       </label>
                       <TextField
@@ -393,7 +490,10 @@ const ChargingBattery = () => {
                       />
                     </div>
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="no-motor">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="no-motor"
+                      >
                         No Motor
                       </label>
                       <TextField
@@ -406,7 +506,10 @@ const ChargingBattery = () => {
                   </div>
                   <div className="flex space-x-4">
                     <div className="flex flex-col w-1/2">
-                      <label className="block text-black mb-1" htmlFor="start-time">
+                      <label
+                        className="block text-black mb-1"
+                        htmlFor="start-time"
+                      >
                         Start Time
                       </label>
                       <TextField
@@ -446,7 +549,10 @@ const ChargingBattery = () => {
             <div className="flex flex-col items-center justify-center bg-red-600 rounded-lg w-full h-full">
               <Header />
               <div className="flex flex-col items-center justify-center bg-white rounded-2xl w-[42rem] h-5/6 mt-5 mb-6">
-              <form onSubmit={handleUpdate} className="w-full ml-11 mr-4 mb-2">
+                <form
+                  onSubmit={handleUpdate}
+                  className="w-full ml-11 mr-4 mb-2"
+                >
                   <label
                     className="block text-black ml-2 mb-1 mt-1"
                     htmlFor="id-battery"
