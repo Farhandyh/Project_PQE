@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Battery from "../../components/monitor/Battery";
 import "../../styleCss/MonitorCharging.css";
 
@@ -27,6 +27,8 @@ ChartJS.register(
 );
 
 const MonitorCharging = () => {
+  const [chargingTable,setChargingTable] = useState([]);
+
   const [attendanceData, setAttendanceData] = useState([
     { id: 1, timeIn: "10:00", timeOut: "6:00", status: "Present" },
     { id: 2, timeIn: "11:00", timeOut: "7:00", status: "Late" },
@@ -113,6 +115,23 @@ const MonitorCharging = () => {
       },
     },
   };
+
+  const fetchTableCharging = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/monitorCharging");
+      if (!response.ok) {
+        throw new Error("Failed to fetch charging data");
+      }
+      const data = await response.json();
+      setChargingTable(data); 
+    } catch (error) {
+      console.error(error);
+    }
+  };  
+
+  useEffect(() => {
+    fetchTableCharging();
+  }, []);
 
   return (
     <>
@@ -219,33 +238,33 @@ const MonitorCharging = () => {
                       No
                     </th>
                     <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
+                      Name
+                    </th>
+                    <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
                       Time In
                     </th>
                     <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
                       Time Out
                     </th>
-                    <th className="bg-red-700 text-xs font-poppins font-bold text-white uppercase tracking-wider border-b border-white py-2">
-                      Status
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {attendanceData.map((entry) => (
+                  {chargingTable.map((items,index) => (
                     <tr
-                      key={entry.id}
+                      key={index}
                       className="border-b border-gray-200 bg-gray-100"
                     >
                       <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        {entry.id}
+                        {index + 1}
                       </td>
                       <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        {entry.timeIn}
+                        {items.batteryMerk}
                       </td>
                       <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        {entry.timeOut}
+                        {items.startTime}
                       </td>
                       <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        {entry.status}
+                        {items.finishTime}
                       </td>
                     </tr>
                   ))}

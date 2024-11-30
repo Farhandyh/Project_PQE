@@ -13,6 +13,7 @@ import {
 import Navbar from "../../components/monitor/Navbar";
 import Testing from "../../components/monitor/Testing";
 import "../../styleCss/MonitorTesting.css"; // Import CSS yang sudah diperbaiki
+import { useState } from "react";
 
 // Register the required Chart.js components
 ChartJS.register(

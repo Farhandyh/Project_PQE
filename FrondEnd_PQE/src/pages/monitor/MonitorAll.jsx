@@ -28,8 +28,7 @@ ChartJS.register(
 );
 
 const Monitor = () => {
-  const [storage, setStorage] = useState([]);
-
+  const [storageTable, setStorageTable] = useState([]);
   const lineData = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
@@ -104,21 +103,21 @@ const Monitor = () => {
     },
   };
 
-  const fetchStorage = async () => {
+  const fetchTableStorage = async () => {
     try {
       const response = await fetch("http://localhost:8000/api/monitor");
       if (!response.ok) {
         throw new Error("Failed to fetch storage data");
       }
       const data = await response.json();
-      setStorage(data); // Pastikan 'data' adalah array
+      setStorageTable(data); 
     } catch (error) {
       console.error(error);
     }
   };  
 
   useEffect(() => {
-    fetchStorage();
+    fetchTableStorage();
   }, []);
 
   return (
@@ -173,7 +172,7 @@ const Monitor = () => {
                     fontSize: "clamp(6rem, 6vw, 6rem)", // Minimum 2rem, responsif, maksimum 5rem
                   }}
                 >
-                  036
+                  36
                 </h1>
               </div>
             </div>
@@ -201,7 +200,7 @@ const Monitor = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {storage.map((item, index) => (
+                    {storageTable.map((item, index) => (
                       <tr key={index}>
                         <td className="py-2 px-2 border-b whitespace-nowrap">
                           {index + 1}
