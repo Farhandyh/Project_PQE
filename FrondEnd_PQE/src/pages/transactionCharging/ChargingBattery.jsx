@@ -412,7 +412,7 @@ const ChargingBattery = () => {
                           href="#"
                           onClick={() => {
                             toggleUpdate();
-                            handleRowClick(testing);
+                            handleRowClick(chargingBattery);
                           }}
                           className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
                         >
