@@ -274,7 +274,7 @@ const ChargingUnit = () => {
           <ImageButton
             imgSrc="../src/assets/menuCRUD/CRUDUser/user3D.png"
             imgAlt="User Icon"
-            buttonLabel="Add New Users"
+            buttonLabel="Add New Motor"
             onClick={toggleModal}
             divClass="col-span-1 p-6 border border-gray-700"
             buttonClass="" // Tambahan styling jika dibutuhkan
@@ -470,7 +470,7 @@ const ChargingUnit = () => {
                       </label>
                       <TextField
                         id="unit-seri"
-                        value={unitName}
+                        value={noSeriUnit}
                         onChange={(e) => setNoSeriUnit(e.target.value)}
                         className="w-full mb-4"
                       />
@@ -484,7 +484,7 @@ const ChargingUnit = () => {
                       </label>
                       <TextField
                         id="unit-time"
-                        value={unitName}
+                        value={averageChargingTime}
                         onChange={(e) => setAverageChargingTime(e.target.value)}
                         className="w-full mb-4"
                       />
@@ -498,7 +498,7 @@ const ChargingUnit = () => {
                       </label>
                       <TextField
                         id="unit-connectortype"
-                        value={unitName}
+                        value={connectorTypeUnit}
                         onChange={(e) => setConnectorType(e.target.value)}
                         className="w-full mb-4"
                       />
@@ -512,7 +512,7 @@ const ChargingUnit = () => {
                       </label>
                       <TextField
                         id="unit-location"
-                        value={unitName}
+                        value={unitLocation}
                         onChange={(e) => setUnitLocation(e.target.value)}
                         className="w-full mb-4"
                       />
@@ -526,7 +526,7 @@ const ChargingUnit = () => {
                       </label>
                       <TextField
                         id="unit-status"
-                        value={unitName}
+                        value={unitStatus}
                         onChange={(e) => setUnitStatus(e.target.value)}
                         className="w-full mb-4"
                       />
