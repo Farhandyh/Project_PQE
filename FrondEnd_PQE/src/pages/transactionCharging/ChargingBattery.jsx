@@ -3,12 +3,9 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import TextField from "../../components/materialCRUD/TextField";
 import Header from "../../components/materialCRUD/Header";
-import { Line, Bar } from "react-chartjs-2";
-import DailyBatteryTrend from "../../components/dashboardTestingCharging/DailyBatteryTrend";
 import BatteryUsage from "../../components/dashboardChargingBattery/BatteryUsage";
 import BatteryInOut from "../../components/dashboardChargingBattery/BatteryInOut";
 import BatteryStatus from "../../components/dashboardChargingBattery/BatteryStatus";
-import TestingGraphLine from "../../components/dashboardTestingCharging/TestingGraphLine";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -27,10 +24,10 @@ import "../../styleCss/DashboardHome/DashboardHome.css";
 import DailyBatteryUsage from "../../dataDummy/dailyBatteryUsage.json";
 import DailyBatteryInOut from "../../dataDummy/dailyBatteryInOut.json";
 import DailyBatteryStatus from "../../dataDummy/dailyBatteryStatus.json";
-import TestingGrapLine from "../../dataDummy/testingGrapLineData.json";
 import ImageButton from "../../components/materialTransaksi/ImageButton";
 import SearchComponent from "../../components/materialTransaksi/SearchFilter";
 import FilterComponent from "../../components/materialTransaksi/FilterComponent";
+import ChargingUnit from "../crudCharger/ChargingUnit";
 
 
 const getDataCharging = async () => {
@@ -169,7 +166,10 @@ const ChargingBattery = () => {
     setIdCharging(chargingBattery.idCharging);
     setIdUsers(chargingBattery.idUsers);
     setIdBattery(chargingBattery.idBattery);
+    setIdUnitCharge(chargingBattery.idUnitCharge);
+    setNoMotor(chargingBattery.noMotor);
     setDateCharging(formattedDate);
+    setStartTime(chargingBattery.startTime)
     setFinishTime(formattedTime);
     setIsUpdateOpen(true);
   };
@@ -412,7 +412,7 @@ const ChargingBattery = () => {
                           href="#"
                           onClick={() => {
                             toggleUpdate();
-                            handleRowClick(testing);
+                            handleRowClick(ChargingBattery);
                           }}
                           className="mr-2 mt-2 text-green-700 hover:text-red-E01414"
                         >
