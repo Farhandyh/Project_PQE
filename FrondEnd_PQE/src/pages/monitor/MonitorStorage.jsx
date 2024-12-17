@@ -12,6 +12,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useEffect, useState } from "react";
 
 // Register the required Chart.js components
 ChartJS.register(
@@ -27,6 +28,8 @@ ChartJS.register(
 );
 
 const MonitorStorage = () => {
+  const [storageTable, setStorageTable] = useState([]);
+
   const data = {
     labels: ["Check-in", "Check-out"],
     datasets: [
@@ -51,7 +54,22 @@ const MonitorStorage = () => {
     },
   };
 
-  
+  const fetchTableStorage = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/monitorStorage");
+      if (!response.ok) {
+        throw new Error("Failed to fetch storage data");
+      }
+      const data = await response.json();
+      setStorageTable(data); 
+    } catch (error) {
+      console.error(error);
+    }
+  };  
+
+  useEffect(() => {
+    fetchTableStorage();
+  }, []);
   
   return (
     <>
@@ -229,91 +247,28 @@ const MonitorStorage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="border-b border-gray-200 bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        1
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Battery A
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11/10/2024
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        -
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11:39 AM
-                      </td>
-                    </tr>
-                    <tr className="border-b border-gray-200 bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        2
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Battery A
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11/10/2024
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        10:39 PM
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        -
-                      </td>
-                    </tr>
-                    <tr className="border-b border-gray-200 bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        3
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Battery B
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11/10/2024
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        -
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        03:39 AM
-                      </td>
-                    </tr>
-                    <tr className="border-b border-gray-200 bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        4
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Battery C
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11/10/2024
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        -
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        03:39 AM
-                      </td>
-                    </tr>
-                    <tr className="border-b border-gray-200 bg-gray-100">
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        5
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        Battery D
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        11/10/2024
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        -
-                      </td>
-                      <td className="px-2 py-1 text-xs font-poppins font-light text-black">
-                        03:39 AM
-                      </td>
-                    </tr>
+                    {storageTable.map((items,index) => (
+                      <tr
+                        key={index}
+                        className="border-b border-gray-200 bg-gray-100"
+                      >
+                        <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                          {index + 1}
+                        </td>
+                        <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                          {items.batteryMerk}
+                        </td>
+                        <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                          {items.date}
+                        </td>
+                        <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                          {items.timeIn}
+                        </td>
+                        <td className="px-2 py-1 text-xs font-poppins font-light text-black">
+                          {items.timeOut}
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
             </div>
@@ -351,10 +306,7 @@ const MonitorStorage = () => {
                 </div>
               </div>
             </div>
-              
-
-      </div>
-          
+        </div> 
       </div>
     </>
   );

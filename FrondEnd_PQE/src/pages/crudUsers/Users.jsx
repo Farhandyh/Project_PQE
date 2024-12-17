@@ -666,4 +666,105 @@ const Users = () => {
   );
 };
 
+function validateForm(event) {
+  event.preventDefault(); // Mencegah form submit jika validasi gagal
+
+  let isValid = true;
+  const errors = {};
+
+  // Mengambil nilai input
+  const idUsers = document.getElementById("id-users").value.trim();
+  const name = document.getElementById("users-name").value.trim();
+  const username = document.getElementById("users-username").value.trim();
+  const password = document.getElementById("users-password").value.trim();
+  const email = document.getElementById("users-email").value.trim();
+  const role = document.getElementById("users-role").value.trim();
+
+  // Validasi idUsers
+  if (!idUsers) {
+    isValid = false;
+    errors.idUsers = "ID Users harus diisi.";
+  } else if (!/^\d+$/.test(idUsers)) {
+    isValid = false;
+    errors.idUsers = "ID Users harus berupa angka.";
+  }
+
+  // Validasi name
+  if (!name) {
+    isValid = false;
+    errors.name = "Nama harus diisi.";
+  } else if (name.length < 3) {
+    isValid = false;
+    errors.name = "Nama minimal 3 karakter.";
+  }
+
+  // Validasi username
+  if (!username) {
+    isValid = false;
+    errors.username = "Username harus diisi.";
+  } else if (username.length < 5) {
+    isValid = false;
+    errors.username = "Username minimal 5 karakter.";
+  }
+
+  // Validasi password
+  if (!password) {
+    isValid = false;
+    errors.password = "Password harus diisi.";
+  } else if (password.length < 8) {
+    isValid = false;
+    errors.password = "Password minimal 8 karakter.";
+  } else if (!/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+    isValid = false;
+    errors.password = "Password harus mengandung huruf besar dan angka.";
+  }
+
+  // Validasi email
+  if (!email) {
+    isValid = false;
+    errors.email = "Email harus diisi.";
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    isValid = false;
+    errors.email = "Format email tidak valid.";
+  }
+
+  // Validasi role
+  if (!role) {
+    isValid = false;
+    errors.role = "Role harus diisi.";
+  }
+
+  // Tampilkan pesan error
+  document.querySelectorAll(".error-message").forEach((el) => el.remove());
+  Object.keys(errors).forEach((key) => {
+    const inputField = document.getElementById(key.replace(/([A-Z])/g, "-$1").toLowerCase());
+    const errorMessage = document.createElement("div");
+    errorMessage.textContent = errors[key];
+    errorMessage.className = "error-message text-red-600 text-sm mt-1";
+    inputField.parentNode.appendChild(errorMessage);
+  });
+
+  if (isValid) {
+    // Jika validasi berhasil
+    Swal.fire({
+      title: "Berhasil!",
+      text: "Form validasi berhasil! Data dapat dikirim ke server.",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        event.target.submit(); // Submit form setelah konfirmasi
+      }
+    });
+  } else {
+    // Jika validasi gagal
+    Swal.fire({
+      title: "Gagal!",
+      text: "Terdapat kesalahan dalam form. Mohon periksa kembali input Anda.",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+  }
+}
+
 export default Users;
